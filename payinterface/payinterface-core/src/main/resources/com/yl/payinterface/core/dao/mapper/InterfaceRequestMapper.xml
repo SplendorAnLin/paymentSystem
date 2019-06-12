@@ -1,0 +1,450 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yl.payinterface.core.dao.mapper.InterfaceRequestMapper">
+
+	<resultMap id="InterfaceRequestMap" type="com.yl.payinterface.core.model.InterfaceRequest">
+		<id 	property="id" 					 		column="ID"></id>
+		<result property="code" 				 		column="CODE"></result>
+		<result property="version" 				 		column="VERSION"></result>
+		<result property="createTime" 			 		column="CREATE_TIME"></result>
+		<result property="interfaceProviderCode" 		column="INTERFACE_PROVIDER_CODE"></result>
+		<result property="interfaceInfoCode" 	 		column="INTERFACE_INFO_CODE"></result>
+		<result property="bussinessOrderID" 	 		column="BUSSINESS_ORDER_ID"></result>
+		<result property="bussinessFlowID" 	 	 		column="BUSSINESS_FLOW_ID"></result>
+		<result property="interfaceRequestID" 	 		column="INTERFACE_REQUEST_ID"></result>
+		<result property="interfaceOrderID" 	 		column="INTERFACE_ORDER_ID"></result>
+		<result property="amount" 				 		column="AMOUNT"></result>
+		<result property="fee" 					 		column="INTERFACE_FEE"></result>
+		<result property="requestTime" 			 		column="REQUEST_TIME"></result>
+		<result property="originalInterfaceRequestID" 	column="ORIGINAL_INTERFACE_REQUEST_ID"></result>
+		<result property="status" 						column="STATUS"></result>
+		<result property="cardType" 					column="CARD_TYPE"></result>
+		<result property="clientIP" 					column="CLIENT_IP"></result>
+		<result property="clientRefer" 					column="CLIENT_REFER"></result>
+		<result property="responseCode" 				column="RESPONSE_CODE"></result>
+		<result property="responseMessage" 				column="RESPONSE_MESSAGE"></result>
+		<result property="completeTime" 				column="COMPLETE_TIME"></result>
+		<result property="businessCompleteType" 		column="BUSINESS_COMPLETE_TYPE"></result>
+		<result property="ownerID" 						column="OWNER_ID"></result>
+		<result property="remark" 						column="REMARK"></result>
+	</resultMap>
+
+
+	<sql id="interfaceRequestColumns">
+		ID,CODE,VERSION,CREATE_TIME,INTERFACE_PROVIDER_CODE,INTERFACE_INFO_CODE,BUSSINESS_ORDER_ID,BUSSINESS_FLOW_ID,
+		INTERFACE_REQUEST_ID,INTERFACE_ORDER_ID,AMOUNT,INTERFACE_FEE,REQUEST_TIME,ORIGINAL_INTERFACE_REQUEST_ID,STATUS,CARD_TYPE,
+		CLIENT_IP,CLIENT_REFER,RESPONSE_CODE,RESPONSE_MESSAGE,COMPLETE_TIME,BUSINESS_COMPLETE_TYPE,OWNER_ID,REMARK
+	</sql>
+
+
+	<insert id="create" parameterType="com.yl.payinterface.core.model.InterfaceRequest"
+		useGeneratedKeys="true" keyProperty="id">
+		INSERT INTO INTERFACE_REQUEST (
+		CODE,VERSION,CREATE_TIME,INTERFACE_PROVIDER_CODE,INTERFACE_INFO_CODE,BUSSINESS_ORDER_ID,BUSSINESS_FLOW_ID,
+		INTERFACE_REQUEST_ID,INTERFACE_ORDER_ID,AMOUNT,INTERFACE_FEE,REQUEST_TIME,ORIGINAL_INTERFACE_REQUEST_ID,STATUS,CARD_TYPE,
+		CLIENT_IP,CLIENT_REFER,RESPONSE_CODE,RESPONSE_MESSAGE,COMPLETE_TIME,BUSINESS_COMPLETE_TYPE,OWNER_ID,REMARK)
+		VALUES
+		(#{code},#{version},#{createTime},#{interfaceProviderCode},#{interfaceInfoCode},#{bussinessOrderID},
+		#{bussinessFlowID},#{interfaceRequestID},#{interfaceOrderID},#{amount},#{fee},#{requestTime},
+		#{originalInterfaceRequestID},#{status},#{cardType},#{clientIP},#{clientRefer},#{responseCode},#{responseMessage},
+		#{completeTime},#{businessCompleteType},#{ownerID}, #{remark})
+	</insert>
+	
+	<update id="update">
+		UPDATE INTERFACE_REQUEST 
+		SET STATUS = #{interfaceRequest.status},INTERFACE_ORDER_ID = #{interfaceRequest.interfaceOrderID},
+		INTERFACE_FEE = #{interfaceRequest.fee},RESPONSE_CODE=#{interfaceRequest.responseCode},
+		RESPONSE_MESSAGE=#{interfaceRequest.responseMessage},
+		COMPLETE_TIME=#{interfaceRequest.completeTime},BUSINESS_COMPLETE_TYPE=#{interfaceRequest.businessCompleteType},
+		REMARK=#{interfaceRequest.remark},
+		VERSION = #{newVersion}
+		where CODE = #{interfaceRequest.code} and VERSION = #{interfaceRequest.version}
+	</update>
+
+	<select id="findByInterfaceRequestID" resultMap="InterfaceRequestMap"
+		parameterType="Map">
+		SELECT
+		<include refid="interfaceRequestColumns" />
+		FROM INTERFACE_REQUEST
+		WHERE INTERFACE_REQUEST_ID = #{interfaceRequestID}
+	</select>
+
+	<select id="queryByInterfaceCodeAndRequestId" resultMap="InterfaceRequestMap"
+			parameterType="Map">
+		SELECT
+		<include refid="interfaceRequestColumns" />
+		FROM INTERFACE_REQUEST
+		WHERE INTERFACE_REQUEST_ID = #{interfaceRequestID} and INTERFACE_INFO_CODE = #{interfaceCode}
+	</select>
+	
+	<select id="findByInterfaceOrderId" resultMap="InterfaceRequestMap" parameterType="java.lang.String">
+        SELECT
+        <include refid="interfaceRequestColumns" />
+        FROM INTERFACE_REQUEST
+        WHERE INTERFACE_ORDER_ID = #{interfaceOrderID}
+    </select>
+
+	<select id="queryByBusinessOrderID" resultMap="InterfaceRequestMap"
+		parameterType="Map">
+		SELECT
+		<include refid="interfaceRequestColumns" />
+		FROM INTERFACE_REQUEST
+		WHERE BUSSINESS_ORDER_ID = #{businessOrderID}
+	</select>
+	
+	<select id="queryNeedReverseOrderInterfaceRequest" resultMap="InterfaceRequestMap"
+		parameterType="Map">
+		SELECT
+		<include refid="interfaceRequestColumns" />
+		FROM INTERFACE_REQUEST
+		WHERE STATUS = 'UNKNOW' limit #{page.showCount}
+		ORDER BY ID ASC
+	</select>
+	
+	<update id="updateQueryInterfaceRequest">
+		UPDATE INTERFACE_REQUEST 
+		SET STATUS = #{queryInterfaceRequest.status}
+		RESPONSE_CODE=#{queryInterfaceRequest.responseCode},
+		RESPONSE_MESSAGE=#{queryInterfaceRequest.responseMessage},
+		BUSINESS_COMPLETE_TYPE=#{queryInterfaceRequest.businessCompleteType}
+		where CODE = #{queryInterfaceRequest.code}
+	</update>
+	
+	<select id="findAllInterfaceRequest" resultMap="InterfaceRequestMap"
+		parameterType="Map">
+		SELECT 
+		    req.ID,
+		    req.CODE,
+		    req.VERSION,
+		    req.CREATE_TIME,
+		    INTERFACE_PROVIDER_CODE,
+		    inf.NAME INTERFACE_INFO_CODE,
+		    BUSSINESS_ORDER_ID,
+		    BUSSINESS_FLOW_ID,
+		    INTERFACE_REQUEST_ID,
+		    INTERFACE_ORDER_ID,
+		    AMOUNT,
+		    INTERFACE_FEE,
+		    REQUEST_TIME,
+		    ORIGINAL_INTERFACE_REQUEST_ID,
+		    req.STATUS,
+		    req.CARD_TYPE,
+		    CLIENT_IP,
+		    CLIENT_REFER,
+		    RESPONSE_CODE,
+		    RESPONSE_MESSAGE,
+		    COMPLETE_TIME,
+		    BUSINESS_COMPLETE_TYPE,
+		    OWNER_ID
+		FROM
+    		payinterface.interface_request req left join payinterface.interface_info inf on req.interface_info_code = inf.code
+		WHERE 1 = 1
+		<if test="params.remark != null and params.remark !='' ">
+			AND inf.TYPE = #{params.remark}
+		</if>
+		<if test="params.bussinessOrderID != null and params.bussinessOrderID !='' ">
+			AND req.BUSSINESS_ORDER_ID = #{params.bussinessOrderID}
+		</if>
+		<if test="params.interfaceRequestID != null and params.interfaceRequestID !='' ">
+			AND req.INTERFACE_REQUEST_ID = #{params.interfaceRequestID}
+		</if>
+		<if test="params.interfaceOrderID != null and params.interfaceOrderID !='' ">
+			AND req.INTERFACE_ORDER_ID = #{params.interfaceOrderID}
+		</if>
+		<if test="params.status != null and params.status !='' ">
+			AND req.STATUS = #{params.status}
+		</if>
+		<if test="params.interfaceProviderCode != null and params.interfaceProviderCode !='' ">
+			AND req.INTERFACE_PROVIDER_CODE = #{params.interfaceProviderCode}
+		</if>
+		<if test="params.interfaceInfoCode != null and params.interfaceInfoCode !='' ">
+			AND req.INTERFACE_INFO_CODE = #{params.interfaceInfoCode}
+		</if>
+		<if test="params.cardType != null and params.cardType !='' ">
+			AND req.CARD_TYPE = #{params.cardType}
+		</if>
+		<if test="params.ownerID != null and params.ownerID !='' ">
+			AND req.OWNER_ID = #{params.ownerID}
+		</if>
+		
+		<if test="params.amountStart != null and params.amountStart !='' ">
+			<if test="params.amountEnd != null and params.amountEnd !='' ">
+				AND AMOUNT BETWEEN #{params.amountStart} AND #{params.amountEnd}
+			</if>
+			<if test="params.amountEnd == null or params.amountEnd =='' ">
+				AND AMOUNT &gt;= #{params.amountStart}
+			</if>
+		</if>
+		<if test="params.amountEnd != null and params.amountEnd !='' ">
+			<if test="params.amountStart == null or params.amountStart =='' ">
+				AND AMOUNT &lt;= #{params.amountEnd}
+			</if>
+		</if>
+		
+		<if test="params.createTimeStart != null and params.createTimeStart !='' ">
+			<if test="params.createTimeEnd != null and params.createTimeEnd !='' ">
+				AND req.CREATE_TIME BETWEEN #{params.createTimeStart} AND #{params.createTimeEnd}
+			</if>
+			<if test="params.createTimeEnd == null or params.createTimeEnd =='' ">
+				AND req.CREATE_TIME &gt;= #{params.createTimeStart}
+			</if>
+		</if>
+		<if test="params.createTimeEnd != null and params.createTimeEnd !='' ">
+			<if test="params.createTimeStart == null or params.createTimeStart =='' ">
+				AND req.CREATE_TIME &lt;= #{params.createTimeEnd}
+			</if>
+		</if>
+		
+		<if test="params.completeTimeStart != null and params.completeTimeStart !='' ">
+			<if test="params.completeTimeEnd != null and params.completeTimeEnd !='' ">
+				AND COMPLETE_TIME BETWEEN #{params.completeTimeStart} AND #{params.completeTimeEnd}
+			</if>
+			<if test="params.completeTimeEnd == null or params.completeTimeEnd =='' ">
+				AND COMPLETE_TIME &gt;= #{params.completeTimeStart}
+			</if>
+		</if>
+		<if test="params.completeTimeEnd != null and params.completeTimeEnd !='' ">
+			<if test="params.completeTimeStart == null or params.completeTimeStart =='' ">
+				AND COMPLETE_TIME &lt;= #{params.completeTimeEnd}
+			</if>
+		</if>
+		ORDER BY ID DESC
+	</select>
+	
+	<select id="queryOneInterfaceRequestByInterfaceCode" resultMap="InterfaceRequestMap">
+		SELECT 
+			<include refid="interfaceRequestColumns" />
+		FROM
+    		payinterface.interface_request
+    	WHERE INTERFACE_INFO_CODE=#{code} and STATUS=#{status}
+		ORDER BY ID DESC LIMIT 0,1
+	</select>
+	
+	<select id="queryInterfaceRequestQuery" resultType="Map"
+		parameterType="Map">
+		SELECT 
+		    BUSSINESS_ORDER_ID as bussinessOrderID,
+		    INTERFACE_REQUEST_ID as interfaceRequestID,
+		    INTERFACE_ORDER_ID as interfaceOrderID,
+		    OWNER_ID as ownerID,
+		    AMOUNT as amount,
+		    STATUS as status,
+		    RESPONSE_CODE as responseCode,
+		    RESPONSE_MESSAGE as responseMessage,
+		    INTERFACE_INFO_CODE as interfaceInfoCode,
+		    INTERFACE_FEE as fee,
+		    CREATE_TIME as createTime,
+		    COMPLETE_TIME as completeTime
+		FROM
+    		payinterface.interface_request
+		WHERE 1 = 1
+		<if test="params.bussinessOrderID != null and params.bussinessOrderID !='' ">
+			AND BUSSINESS_ORDER_ID = #{params.bussinessOrderID}
+		</if>
+		<if test="params.interfaceRequestID != null and params.interfaceRequestID !='' ">
+			AND INTERFACE_REQUEST_ID = #{params.interfaceRequestID}
+		</if>
+		<if test="params.interfaceOrderID != null and params.interfaceOrderID !='' ">
+			AND INTERFACE_ORDER_ID = #{params.interfaceOrderID}
+		</if>
+		<if test="params.status != null and params.status !='' ">
+			AND STATUS = #{params.status}
+		</if>
+		<if test="params.interfaceProviderCode != null and params.interfaceProviderCode !='' ">
+			AND INTERFACE_PROVIDER_CODE = #{params.interfaceProviderCode}
+		</if>
+		<if test="params.interfaceInfoCode != null and params.interfaceInfoCode !='' ">
+			AND INTERFACE_INFO_CODE = #{params.interfaceInfoCode}
+		</if>
+		<if test="params.cardType != null and params.cardType !='' ">
+			AND CARD_TYPE = #{params.cardType}
+		</if>
+		<if test="params.ownerID != null and params.ownerID !='' ">
+			AND OWNER_ID = #{params.ownerID}
+		</if>
+		
+		<if test="params.amountStart != null and params.amountStart !='' ">
+			<if test="params.amountEnd != null and params.amountEnd !='' ">
+				AND AMOUNT BETWEEN #{params.amountStart} AND #{params.amountEnd}
+			</if>
+			<if test="params.amountEnd == null or params.amountEnd =='' ">
+				AND AMOUNT &gt; #{params.amountStart}
+			</if>
+		</if>
+		<if test="params.amountEnd != null and params.amountEnd !='' ">
+			<if test="params.amountStart == null or params.amountStart =='' ">
+				AND AMOUNT &lt; #{params.amountEnd}
+			</if>
+		</if>
+		
+		<if test="params.createTimeStart != null and params.createTimeStart !='' ">
+			<if test="params.createTimeEnd != null and params.createTimeEnd !='' ">
+				AND CREATE_TIME BETWEEN #{params.createTimeStart} AND #{params.createTimeEnd}
+			</if>
+			<if test="params.createTimeEnd == null or params.createTimeEnd =='' ">
+				AND CREATE_TIME &gt; #{params.createTimeStart}
+			</if>
+		</if>
+		<if test="params.createTimeEnd != null and params.createTimeEnd !='' ">
+			<if test="params.createTimeStart == null or params.createTimeStart =='' ">
+				AND CREATE_TIME &lt; #{params.createTimeEnd}
+			</if>
+		</if>
+		
+		<if test="params.completeTimeStart != null and params.completeTimeStart !='' ">
+			<if test="params.completeTimeEnd != null and params.completeTimeEnd !='' ">
+				AND COMPLETE_TIME BETWEEN #{params.completeTimeStart} AND #{params.completeTimeEnd}
+			</if>
+			<if test="params.completeTimeEnd == null or params.completeTimeEnd =='' ">
+				AND COMPLETE_TIME &gt; #{params.completeTimeStart}
+			</if>
+		</if>
+		<if test="params.completeTimeEnd != null and params.completeTimeEnd !='' ">
+			<if test="params.completeTimeStart == null or params.completeTimeStart =='' ">
+				AND COMPLETE_TIME &lt; #{params.completeTimeEnd}
+			</if>
+		</if>
+		ORDER BY ID DESC
+	</select>
+	
+	<select id="queryAllSum" resultType="java.util.HashMap"
+		parameterType="Map">
+		SELECT 
+		    COUNT(1) al, SUM(AMOUNT) am, SUM(INTERFACE_FEE) rf
+		FROM
+		    payinterface.interface_request req left join payinterface.interface_info inf on req.interface_info_code = inf.code
+		WHERE 1 = 1
+		<if test="params.remark != null and params.remark !='' ">
+			AND inf.TYPE = #{params.remark}
+		</if>
+		<if test="params.bussinessOrderID != null and params.bussinessOrderID !='' ">
+			AND req.BUSSINESS_ORDER_ID = #{params.bussinessOrderID}
+		</if>
+		<if test="params.interfaceRequestID != null and params.interfaceRequestID !='' ">
+			AND req.INTERFACE_REQUEST_ID = #{params.interfaceRequestID}
+		</if>
+		<if test="params.interfaceOrderID != null and params.interfaceOrderID !='' ">
+			AND req.INTERFACE_ORDER_ID = #{params.interfaceOrderID}
+		</if>
+		<if test="params.status != null and params.status !='' ">
+			AND req.STATUS = #{params.status}
+		</if>
+		<if test="params.interfaceProviderCode != null and params.interfaceProviderCode !='' ">
+			AND req.INTERFACE_PROVIDER_CODE = #{params.interfaceProviderCode}
+		</if>
+		<if test="params.interfaceInfoCode != null and params.interfaceInfoCode !='' ">
+			AND req.INTERFACE_INFO_CODE = #{params.interfaceInfoCode}
+		</if>
+		<if test="params.cardType != null and params.cardType !='' ">
+			AND req.CARD_TYPE = #{params.cardType}
+		</if>
+		<if test="params.cardType != null and params.cardType !='' ">
+			AND req.CARD_TYPE = #{params.cardType}
+		</if>
+		<if test="params.ownerID != null and params.ownerID !='' ">
+			AND req.OWNER_ID = #{params.ownerID}
+		</if>
+		<if test="params.amountStart != null and params.amountStart !='' ">
+			<if test="params.amountEnd != null and params.amountEnd !='' ">
+				AND AMOUNT BETWEEN #{params.amountStart} AND #{params.amountEnd}
+			</if>
+			<if test="params.amountEnd == null or params.amountEnd =='' ">
+				AND AMOUNT &gt; #{params.amountStart}
+			</if>
+		</if>
+		<if test="params.amountEnd != null and params.amountEnd !='' ">
+			<if test="params.amountStart == null or params.amountStart =='' ">
+				AND AMOUNT &lt; #{params.amountEnd}
+			</if>
+		</if>
+		
+		<if test="params.createTimeStart != null and params.createTimeStart !='' ">
+			<if test="params.createTimeEnd != null and params.createTimeEnd !='' ">
+				AND req.CREATE_TIME BETWEEN #{params.createTimeStart} AND #{params.createTimeEnd}
+			</if>
+			<if test="params.createTimeEnd == null or params.createTimeEnd =='' ">
+				AND req.CREATE_TIME &gt; #{params.createTimeStart}
+			</if>
+		</if>
+		<if test="params.createTimeEnd != null and params.createTimeEnd !='' ">
+			<if test="params.createTimeStart == null or params.createTimeStart =='' ">
+				AND req.CREATE_TIME &lt; #{params.createTimeEnd}
+			</if>
+		</if>
+		
+		<if test="params.completeTimeStart != null and params.completeTimeStart !='' ">
+			<if test="params.completeTimeEnd != null and params.completeTimeEnd !='' ">
+				AND COMPLETE_TIME BETWEEN #{params.completeTimeStart} AND #{params.completeTimeEnd}
+			</if>
+			<if test="params.completeTimeEnd == null or params.completeTimeEnd =='' ">
+				AND COMPLETE_TIME &gt; #{params.completeTimeStart}
+			</if>
+		</if>
+		<if test="params.completeTimeEnd != null and params.completeTimeEnd !='' ">
+			<if test="params.completeTimeStart == null or params.completeTimeStart =='' ">
+				AND COMPLETE_TIME &lt; #{params.completeTimeEnd}
+			</if>
+		</if>
+	</select>
+
+	<select id="totalByJob" resultType="java.util.HashMap" parameterType="Map">
+		SELECT COUNT(CODE) AS COUNT,SUM(AMOUNT) AS SUM
+		FROM
+    		payinterface.interface_request req
+		WHERE req.STATUS = 'SUCCESS'
+			<if test="params != null">
+				<if test="params.createStartTime != null and params.createEndTime == null">
+					and req.CREATE_TIME &gt;= #{params.createStartTime}
+				</if>
+				<if test="params.createStartTime == null and params.createEndTime != null">
+					and req.CREATE_TIME &lt;= #{params.createEndTime}
+				</if>
+				<if test="params.createStartTime != null and params.createEndTime != null">
+					and req.CREATE_TIME BETWEEN #{params.createStartTime} AND #{params.createEndTime}
+				</if>
+			</if>
+	</select>
+
+	<select id="allByDate" resultMap="InterfaceRequestMap" parameterType="Map">
+		SELECT 
+		    req.ID,
+		    req.CODE,
+		    req.VERSION,
+		    req.CREATE_TIME,
+		    INTERFACE_PROVIDER_CODE,
+		    inf.TYPE INTERFACE_INFO_CODE,
+		    BUSSINESS_ORDER_ID,
+		    BUSSINESS_FLOW_ID,
+		    INTERFACE_REQUEST_ID,
+		    INTERFACE_ORDER_ID,
+		    AMOUNT,
+		    INTERFACE_FEE,
+		    REQUEST_TIME,
+		    ORIGINAL_INTERFACE_REQUEST_ID,
+		    req.STATUS,
+		    req.CARD_TYPE,
+		    CLIENT_IP,
+		    CLIENT_REFER,
+		    RESPONSE_CODE,
+		    RESPONSE_MESSAGE,
+		    COMPLETE_TIME,
+		    BUSINESS_COMPLETE_TYPE,
+		    OWNER_ID
+		FROM
+    		payinterface.interface_request req left join payinterface.interface_info inf on req.interface_info_code = inf.code
+		WHERE req.STATUS = 'SUCCESS'
+			<if test="params != null">
+				<if test="params.createStartTime != null and params.createEndTime == null">
+					and req.CREATE_TIME &gt;= #{params.createStartTime}
+				</if>
+				<if test="params.createStartTime == null and params.createEndTime != null">
+					and req.CREATE_TIME &lt;= #{params.createEndTime}
+				</if>
+				<if test="params.createStartTime != null and params.createEndTime != null">
+					and req.CREATE_TIME BETWEEN #{params.createStartTime} AND #{params.createEndTime}
+				</if>
+			</if>
+	</select>
+</mapper> 

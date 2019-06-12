@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.yl.risk.core.dao.RiskRuleConfigDao">
+
+    <resultMap id="riskRuleConfigMap" type="com.yl.risk.core.entity.RiskRuleConfig">
+        <result column="ID" 						property="id"></result>
+        <result column="OPTIMISTIC" 	 			property="optimistic"></result>
+        <result column="CREATE_TIME" 				property="createTime"></result>
+        <result column="VALIDATION_RULES"           property="validationRules"></result>
+        <result column="INTERFACE_CODE"             property="interfaceCode"></result>
+        <result column="INTERFACE_IMPL_CLASS_NAME"  property="interfaceImplClassName"></result>
+        <result column="NAME"                       property="name"></result>
+        <result column="VALIDATION_CONFIG"          property="validationConfig"></result>
+    </resultMap>
+
+    <!-- 账户数据库模型字段 -->
+    <sql id="commonColumn">
+        ID, OPTIMISTIC, CREATE_TIME, VALIDATION_RULES, INTERFACE_CODE, INTERFACE_IMPL_CLASS_NAME, NAME, VALIDATION_CONFIG
+    </sql>
+
+    <insert id="create" parameterType="com.yl.risk.core.entity.RiskRuleConfig" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO
+            RISK_RULE_CONFIG(OPTIMISTIC, CREATE_TIME, VALIDATION_RULES, INTERFACE_CODE, INTERFACE_IMPL_CLASS_NAME, NAME, VALIDATION_CONFIG)
+        VALUES
+            (#{optimistic}, #{createTime}, #{validationRules}, #{interfaceCode}, #{interfaceImplClassName}, #{name}, #{validationConfig})
+    </insert>
+
+    <update id="update" parameterType="com.yl.risk.core.entity.RiskRuleConfig">
+        UPDATE
+		  RISK_RULE_CONFIG
+		SET
+		  VALIDATION_RULES = #{validationRules}, INTERFACE_CODE = #{interfaceCode}, INTERFACE_IMPL_CLASS_NAME = #{interfaceImplClassName},
+		  NAME = #{name}, VALIDATION_CONFIG = #{validationConfig}, OPTIMISTIC = #{optimistic} + 1
+		WHERE
+		  ID = #{id} AND OPTIMISTIC = #{optimistic}
+    </update>
+
+    <select id="findByInterfaceCode" resultMap="riskRuleConfigMap" parameterType="java.lang.String">
+        SELECT <include refid="commonColumn"/>
+        FROM RISK_RULE_CONFIG
+        WHERE INTERFACE_CODE = #{interfaceCode}
+    </select>
+
+    <select id="findById" resultMap="riskRuleConfigMap" parameterType="java.lang.Integer">
+        SELECT <include refid="commonColumn"/>
+        FROM RISK_RULE_CONFIG
+        WHERE ID = #{id}
+    </select>
+
+    <select id="getRiskRuleJson" resultType="java.util.Map">
+        SELECT
+            r.ID,r.NAME
+        FROM RISK_RULE_CONFIG r
+        WHERE 1 = 1
+        ORDER BY r.ID DESC
+    </select>
+
+    <select id="findAllByParams" resultMap="riskRuleConfigMap" parameterType="java.util.Map">
+        SELECT
+            r.ID                          AS    ID,
+            r.OPTIMISTIC                  AS    OPTIMISTIC,
+            r.CREATE_TIME                 AS    CREATE_TIME,
+            r.VALIDATION_RULES            AS    VALIDATION_RULES,
+            r.INTERFACE_CODE              AS    INTERFACE_CODE,
+            r.INTERFACE_IMPL_CLASS_NAME   AS    INTERFACE_IMPL_CLASS_NAME,
+            r.NAME                        AS    NAME,
+            r.VALIDATION_CONFIG           AS    VALIDATION_CONFIG
+        FROM RISK_RULE_CONFIG r
+        WHERE 1 = 1
+            <if test="params.validationRules != null and params.validationRules != '' ">
+                AND r.VALIDATION_RULES = #{params.validationRules}
+            </if>
+            <if test="params.interfaceCode != null and params.interfaceCode != '' ">
+                AND r.INTERFACE_CODE = #{params.interfaceCode}
+            </if>
+            <if test="params.interfaceImplClassName != null and params.interfaceImplClassName != '' ">
+                AND r.INTERFACE_IMPL_CLASS_NAME = #{params.interfaceImplClassName}
+            </if>
+            <if test="params.name != null and params.name != '' ">
+                AND r.NAME = #{params.name}
+            </if>
+            <if test="params.validationConfig != null and params.validationConfig != '' ">
+                AND r.VALIDATION_CONFIG = #{params.validationConfig}
+            </if>
+            <if test="params.timeStart != null and params.timeStart != '' ">
+                <if test="params.timeEnd != null and params.timeEnd != '' ">
+                    AND r.CREATE_TIME BETWEEN #{params.timeStart} AND
+                    #{params.timeEnd}
+                </if>
+                <if test="params.timeEnd == null or params.timeEnd == '' ">
+                    AND r.CREATE_TIME &gt; #{params.timeStart}
+                </if>
+            </if>
+            <if test="params.timeEnd != null and params.timeEnd != '' ">
+                <if test="params.timeStart == null or params.timeStart == '' ">
+                    AND r.CREATE_TIME &lt; #{params.timeEnd}
+                </if>
+            </if>
+        ORDER BY r.ID DESC
+    </select>
+</mapper>

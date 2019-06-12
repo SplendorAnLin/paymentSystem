@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.yl</groupId>
+    <artifactId>posp</artifactId>
+    <packaging>pom</packaging>
+    <version>1.0.0</version>
+    <name>收单系统</name>
+    <modules>
+        <module>trans-core</module>
+        <module>trans-front</module>
+        <module>trans-api</module>
+        <module>sign-server</module>
+    </modules>
+    <properties>
+        <trans-core.version>1.0.0</trans-core.version>
+        <trans-front.version>1.0.0</trans-front.version>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <maven.test.skip>true</maven.test.skip>
+        <java.version>1.7</java.version>
+        <junit.version>4.10</junit.version>
+        <slf4j.version>1.6.4</slf4j.version>
+        <maven.compiler.source>1.7</maven.compiler.source>
+        <maven.compiler.target>1.7</maven.compiler.target>
+    </properties>
+
+    <distributionManagement>
+        <repository>
+            <id>releases</id>
+            <name>releases</name>
+            <url>http://m.bank-pay.com:8081/nexus/content/repositories/releases/</url>
+        </repository>
+        <snapshotRepository>
+            <id>snapshots</id>
+            <name>snapshots</name>
+            <url>http://m.bank-pay.com:8081/nexus/content/repositories/snapshots/</url>
+        </snapshotRepository>
+    </distributionManagement>
+
+</project>

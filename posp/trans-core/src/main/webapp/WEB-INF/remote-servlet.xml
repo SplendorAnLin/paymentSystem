@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN"         ":/spring-beans.dtd">
+<beans default-autowire="byName">
+
+	<bean name="/infoSync" class="org.springframework.remoting.caucho.HessianServiceExporter">   
+		<property name="service">
+			<ref bean="infoSync"/>
+		</property>   
+		<property name="serviceInterface">
+			<value>com.yl.pay.pos.api.interfaces.InfoSync</value>
+		</property>
+	</bean>
+	<bean name="/posOrder" class="org.springframework.remoting.caucho.HessianServiceExporter">   
+		<property name="service">
+			<ref bean="posOrder"/>
+		</property>   
+		<property name="serviceInterface">
+			<value>com.yl.pay.pos.api.interfaces.PosOrderHessianService</value>
+		</property>
+	</bean>
+	<bean name="/vlhQuery" class="org.springframework.remoting.caucho.HessianServiceExporter">   
+		<property name="service">
+			<ref bean="vlhQuery"/>
+		</property>   
+		<property name="serviceInterface">
+			<value>com.yl.pay.pos.api.interfaces.VlhQuery</value>
+		</property>
+	</bean>
+</beans>

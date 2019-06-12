@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" ":/spring-beans.dtd">
+
+<beans default-autowire="byName">
+
+	<!-- transaction factory -->
+   	<bean id="transactionFactory" class="com.yl.pay.pos.action.trans.TransactionFactory">
+		<property name="serviceMap">
+			<map>
+				<entry key="PURCHASE"><ref bean="purchase" /></entry>				
+				<entry key="BALANCE_INQUIRY"><ref bean="balanceInquiry"/></entry>
+				<entry key="PURCHASE_REVERSAL"><ref bean="purchaseReversal"/></entry>
+				<entry key="PURCHASE_VOID"><ref bean="purchaseVoid"/></entry>
+				<entry key="PURCHASE_VOID_REVERSAL"><ref bean="purchaseVoidReversal"/></entry>								
+				<entry key="PURCHASE_REFUND"><ref bean="purchaseRefund"/></entry>
+				
+				<entry key="SETTLE"><ref bean="settle"/></entry>
+				<entry key="SIGN_IN"><ref bean="signIn"/></entry>
+				<entry key="SIGN_OFF"><ref bean="signOff"/></entry>	
+				<entry key="BATCH_UP"><ref bean="batchUp"/></entry>
+				<entry key="DOWNLOAD_MAIN_KEY"><ref bean="downLoadMainKey"/></entry>
+				<entry key="DOWNLOAD_IC_REQUEST"><ref bean="downLoadIcRequest"/></entry>
+				<entry key="DOWNLOAD_IC_TRANSFER"><ref bean="downLoadIcTransfer"/></entry>
+				<entry key="DOWNLOAD_IC_END"><ref bean="downLoadIcEnd"/></entry>	
+				
+			</map>
+		</property>
+	</bean> 
+	
+	<!-- transaction -->
+	<bean id="internalReversalService" class="com.yl.pay.pos.action.trans.InternalReversalService"></bean>
+	<bean id="balanceInquiry" class="com.yl.pay.pos.action.trans.BalanceInquiry"></bean>
+	<bean id="purchase" class="com.yl.pay.pos.action.trans.Purchase"></bean>
+	<bean id="purchaseRefund" class="com.yl.pay.pos.action.trans.PurchaseRefund"></bean>
+	<bean id="purchaseReversal" class="com.yl.pay.pos.action.trans.PurchaseReversal"></bean>
+	<bean id="purchaseVoid" class="com.yl.pay.pos.action.trans.PurchaseVoid"></bean>
+	<bean id="purchaseVoidReversal" class="com.yl.pay.pos.action.trans.PurchaseVoidReversal"></bean>
+	<!-- transaction manage-->
+	<bean id="settle" class="com.yl.pay.pos.action.trans.Settle"></bean>
+	<bean id="signIn" class="com.yl.pay.pos.action.trans.SignIn"></bean>
+	<bean id="signOff" class="com.yl.pay.pos.action.trans.SignOff"></bean>
+	<bean id="batchUp" class="com.yl.pay.pos.action.trans.BatchUp"></bean>	
+
+	<!-- service -->
+	<bean id="mccInfoService" class="com.yl.pay.pos.service.impl.MccInfoServiceImpl"></bean>
+	<bean id="shopService" class="com.yl.pay.pos.service.impl.ShopServiceImpl"></bean>
+	<bean id="customerService" class="com.yl.pay.pos.service.impl.CustomerServiceImpl"></bean>
+	<bean id="posMessageService" class="com.yl.pay.pos.service.impl.PosMessageServiceImpl"></bean>
+	<bean id="bankRequestService" class="com.yl.pay.pos.service.impl.BankRequestServiceImpl"></bean>	
+	<bean id="cardInfoService" class="com.yl.pay.pos.service.impl.CardInfoServiceImpl"></bean>	
+	<bean id="cardMatchService" class="com.yl.pay.pos.service.impl.CardMatchServiceImpl"></bean>	
+	<bean id="extendPayBeanService" class="com.yl.pay.pos.service.impl.ExtendPayBeanServiceImpl"></bean>	
+	<bean id="permissionCheckService" class="com.yl.pay.pos.service.impl.PermissionCheckServiceImpl"></bean>	
+	<bean id="posRequestService" class="com.yl.pay.pos.service.impl.PosRequestServiceImpl"></bean>	
+	<bean id="orderService" class="com.yl.pay.pos.service.impl.OrderServiceImpl"></bean>
+	<bean id="paymentService" class="com.yl.pay.pos.service.impl.PaymentServiceImpl"></bean>	
+	<bean id="bankChannelCustomerConfigService" class="com.yl.pay.pos.service.impl.BankChannelCustomerConfigServiceImpl"></bean> 
+	<bean id="bankChannelFeeService" class="com.yl.pay.pos.service.impl.BankChannelFeeServiceImpl"></bean>            
+	<bean id="bankChannelRouteService" class="com.yl.pay.pos.service.impl.BankChannelRouteServiceImpl"></bean>          
+	<bean id="bankChannelService" class="com.yl.pay.pos.service.impl.BankChannelServiceImpl"></bean>               
+	<bean id="bankInterfaceTerminalService" class="com.yl.pay.pos.service.impl.BankInterfaceTerminalServiceImpl"></bean> 	  
+	<bean id="customerFeeService" class="com.yl.pay.pos.service.impl.CustomerFeeServiceImpl"></bean>
+	<bean id="transAmountLimitService" class="com.yl.pay.pos.service.impl.TransAmountLimitServiceImpl"></bean>
+	<bean id="parameterService" class="com.yl.pay.pos.service.impl.ParameterServiceImpl"></bean>
+	<bean id="bankReversalTaskService" class="com.yl.pay.pos.service.impl.BankReversalTaskServiceImpl"></bean>
+	<bean id="bankCustomerConfigService" class="com.yl.pay.pos.service.impl.BankCustomerConfigServiceImpl"></bean>
+	<bean id="transRouteConfigService" class="com.yl.pay.pos.service.impl.TransRouteConfigServiceImpl"></bean>
+	<bean id="lefuOrg2UnionPayOrgService" class="com.yl.pay.pos.service.impl.LefuOrg2UnionPayOrgServiceImpl"/>
+	<bean id="unionPayBCN32ConfigService" class="com.yl.pay.pos.service.impl.UnionPayBCN32ConfigServiceImpl"/>
+	<bean id="organizationService" class="com.yl.pay.pos.service.impl.OrganizationServiceImpl"/>
+	<bean id="iTransRouteConfigService" class="com.yl.pay.pos.service.impl.TransRouteConfigServiceImpl" />
+	<bean id="secretKeyService" class="com.yl.pay.pos.service.impl.SecretKeyServiceImpl"/>
+	<bean id="oemOrderService" class="com.yl.pay.pos.service.impl.OemOrderServiceImpl"/>
+		
+	<!-- task service -->
+	<bean id="bankTerminalRecoverService" class="com.yl.pay.pos.task.BankTerminalRecoverService"></bean>
+	<bean id="bankReversalTaskManage" class="com.yl.pay.pos.task.BankReversalTaskManage"></bean>
+	<bean id="proxyPayRepairService" class="com.yl.pay.pos.task.ProxyPayRepairService"></bean>
+	
+	<!-- IC -->
+	<bean id="iIcKeyService" class="com.yl.pay.pos.service.impl.IcKeyServiceImpl"></bean>
+	<bean id="iIcParamsService" class="com.yl.pay.pos.service.impl.IcParamsServiceImpl"></bean>
+	
+	<bean id="sysRouteCustomerConfigDetailService" class="com.yl.pay.pos.service.impl.SysRouteCustomerConfigDetailServiceImpl"></bean>
+	
+	<bean id="foreignCardFeeService" class="com.yl.pay.pos.service.impl.ForeignCardFeeServiceImpl"></bean>
+	
+	<bean id="transCheckProfileService" class="com.yl.pay.pos.service.impl.TransCheckProfileServiceImpl"></bean>
+	
+	<bean id="posService" class="com.yl.pay.pos.service.impl.PosServiceImpl"></bean>
+	
+	<bean id="accountBussinessService" class="com.yl.pay.pos.service.impl.AccountBussinessServiceImpl"></bean>
+	
+	<bean id="proxyPayInfoService" class="com.yl.pay.pos.service.impl.ProxyPayInfoServiceImpl"></bean>
+	
+	<bean id="shareProfitService" class="com.yl.pay.pos.service.impl.ShareProfitServiceImpl"></bean>
+	
+	<bean id="locationQueryService" class="com.yl.pay.pos.service.impl.LocationQueryService"/>
+	<bean id="esscUtils" class="com.yl.pay.pos.util.EsscUtils">
+		<property name="secretKeyService">
+			<ref bean="secretKeyService" />
+		</property>   
+	</bean>
+
+	<bean id="downLoadMainKey" class="com.yl.pay.pos.action.trans.DownLoadMainKey"></bean>
+		<bean id="downLoadIcRequest" class="com.yl.pay.pos.action.trans.DownLoadIcRequest"></bean>
+	<bean id="downLoadIcTransfer" class="com.yl.pay.pos.action.trans.DownLoadIcTransfer"></bean>
+	<bean id="downLoadIcEnd" class="com.yl.pay.pos.action.trans.DownLoadIcEnd"></bean>
+	
+</beans>

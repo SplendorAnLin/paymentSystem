@@ -1,0 +1,42 @@
+package com.yl.receive.core.context;
+
+import javax.annotation.Resource;
+import javax.sql.DataSource;
+
+import org.apache.ibatis.session.SqlSessionFactory;
+import org.mybatis.spring.SqlSessionFactoryBean;
+import org.mybatis.spring.annotation.MapperScan;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Import;
+import org.springframework.jdbc.datasource.DataSourceTransactionManager;
+import org.springframework.transaction.annotation.EnableTransactionManagement;
+
+/**
+ * MyBatis配置
+ * 
+ * @author 聚合支付有限公司
+ * @since 2016年8月25日
+ * @version V1.0.0
+ */
+@Configuration
+@Import(MariaDBConfig.class)
+@MapperScan("com.yl.receive.core.mybatis.mapper")
+@EnableTransactionManagement(proxyTargetClass = true)
+public class MyBatisConfig {
+	@Resource
+	private DataSource dataSource;
+
+	@Bean
+	public SqlSessionFactory sqlSessionFactory() throws Exception {
+		SqlSessionFactoryBean bean = new SqlSessionFactoryBean();
+		bean.setDataSource(dataSource);
+		return bean.getObject();
+	}
+
+	@Bean
+	public DataSourceTransactionManager dataSourceTransactionManager() {
+		return new DataSourceTransactionManager(dataSource);
+	}
+	
+}

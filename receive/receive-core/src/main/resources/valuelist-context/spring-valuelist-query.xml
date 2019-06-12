@@ -1,0 +1,502 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+		http://www.springframework.org/schema/beans/spring-beans-4.0.xsd">
+
+	<bean id="valueListHandler" scope="prototype" class="net.mlw.vlh.DefaultValueListHandlerImpl">
+		<property name="config.adapters">
+			<map>
+				<!-- 白名单导出 -->
+				<entry key="nameListRequestExport">
+					<bean parent="defConfig">
+						<property name="defaultNumberPerPage">
+							<value>999999999</value>
+						</property>
+						<property name="sql">
+							<value>
+								<![CDATA[
+								select	n.id						as	id,
+										n.USER_NAME					as	user_name,
+										n.TYPE_OF_CERTIFICATE		as	type_of_certificate,
+										n.LICENSE_NUMBER			as	license_number,
+										n.CARD_TYPE					as	card_type,
+										n.ACCOUNT					as	account,
+										n.PHONE_NUMBER				as	phone_number,
+										n.STATUS					as	status,
+										n.FAILURE					as	failure,
+										n.CREATE_TIME				as	create_time,
+										n.SUCCESS_TIME				as	success_time,
+										n.OWNER_ID					as	owner_id
+								from name_list n
+									where 1=1
+										/~userName: and n.USER_NAME = '[userName]'~/
+										/~licenseNumber: and n.LICENSE_NUMBER = '[licenseNumber]'~/
+										/~account: and n.ACCOUNT = '[account]'~/
+										/~phoneNumber: and n.PHONE_NUMBER = '[phoneNumber]'~/
+										/~typeOfCertificate: and n.TYPE_OF_CERTIFICATE = '[typeOfCertificate]'~/
+										/~cardType: and n.CARD_TYPE = '[cardType]'~/
+										/~createTimeStart: and n.CREATE_TIME >= to_date('[createTimeStart] 00:00:00','yyyy-mm-dd hh24:mi:ss') ~/
+							    		/~createTimeEnd: and n.CREATE_TIME <= to_date('[createTimeEnd] 23:59:59','yyyy-mm-dd hh24:mi:ss')~/
+										/~ownerId: and n.OWNER_ID = '[ownerId]'~/
+								]]>
+							</value>
+						</property>
+					</bean>
+				</entry>			
+				<!-- 白名单查询 -->
+				<entry key="nameListRequest">
+					<bean parent="defConfig">
+						<property name="defaultNumberPerPage">
+							<value>10</value>
+						</property>
+						<property name="sql">
+							<value>
+								<![CDATA[
+								select	n.id						as	id,
+										n.USER_NAME					as	user_name,
+										n.TYPE_OF_CERTIFICATE		as	type_of_certificate,
+										n.LICENSE_NUMBER			as	license_number,
+										n.CARD_TYPE					as	card_type,
+										n.ACCOUNT					as	account,
+										n.PHONE_NUMBER				as	phone_number,
+										n.STATUS					as	status,
+										n.FAILURE					as	failure,
+										n.CREATE_TIME				as	create_time,
+										n.SUCCESS_TIME				as	success_time,
+										n.OWNER_ID					as	owner_id
+								from name_list n
+									where 1=1
+										/~userName: and n.USER_NAME = '[userName]'~/
+										/~licenseNumber: and n.LICENSE_NUMBER = '[licenseNumber]'~/
+										/~account: and n.ACCOUNT = '[account]'~/
+										/~phoneNumber: and n.PHONE_NUMBER = '[phoneNumber]'~/
+										/~ownerId: and n.OWNER_ID = '[ownerId]'~/
+										/~typeOfCertificate: and n.TYPE_OF_CERTIFICATE = '[typeOfCertificate]'~/
+										/~cardType: and n.CARD_TYPE = '[cardType]'~/
+										/~createTimeStart: and n.CREATE_TIME >= to_date('[createTimeStart] 00:00:00','yyyy-mm-dd hh24:mi:ss') ~/
+							    		/~createTimeEnd: and n.CREATE_TIME <= to_date('[createTimeEnd] 23:59:59','yyyy-mm-dd hh24:mi:ss')~/
+								]]>
+							</value>
+						</property>
+					</bean>
+				</entry>
+				<!-- 代收订单查询，不分页 -->
+				<entry key="receiveOrderExport">
+					<bean parent="defConfig">
+						<property name="sql">
+							<value>
+								<![CDATA[
+									SELECT
+										r.PAYER_BANK_NO			as				payer_bank_no,
+										r.OWNER_ID				as 				customer_no,
+										r.RECEIVE_ID			as				receive_id,
+										r.ACCOUNT_NO			as				account_no,
+										r.ACCOUNT_NAME			as				account_name,
+										r.ACC_TYPE				as				acc_type,
+										r.ACC_NO_TYPE			as				acc_no_type,
+										r.AMOUNT				as				amount,
+										r.FEE					as				fee,
+										r.COST					as				cost,
+										r.CREATE_TIME			as				create_time,
+										r.LAST_UPDATE_TIME		as				last_update_time,
+										r.CERTIFICATES_TYPE		as				certificates_type,
+										r.CERTIFICATES_CODE		as				certificates_code,
+										r.ORDER_STATUS			as				order_status,
+										r.CLEARING_STATUS		as				clear_status
+									FROM
+										RECEIVE_REQUEST r
+									WHERE
+										1 = 1
+										/~payer_bank_no: and r.PAYER_BANK_NO = '[payer_bank_no]' ~/
+										/~customer_no: and r.OWNER_ID = '[customer_no]' ~/
+										/~receive_id: and r.RECEIVE_ID = '[receive_id]' ~/
+										/~account_no: and r.ACCOUNT_NO = '[account_no]' ~/
+										/~account_name: and r.ACCOUNT_NAME = '[account_name]' ~/
+										/~acc_type: and r.ACC_TYPE = '[acc_type]' ~/
+										/~acc_no_type: and r.ACC_NO_TYPE = '[acc_no_type]' ~/
+										/~amount_start: and r.AMOUNT >= [amount_start] ~/
+										/~amount_end: and r.AMOUNT <= [amount_end] ~/
+										/~fee_start: and r.FEE >= [fee_start] ~/
+										/~fee_end: and r.FEE <= [fee_end] ~/
+										/~cost_start: and r.COST >= [cost_start] ~/
+										/~cost_end: and r.COST <= [cost_end] ~/
+										/~create_time_start: and r.create_time >= str_to_date('[create_time_start] 00:00:00','%Y-%m-%d %H:%i:%s') ~/
+										/~create_time_end: and r.create_time <= str_to_date('[create_time_end] 23:59:59','%Y-%m-%d %H:%i:%s')~/
+										/~last_update_time_start: and r.LAST_UPDATE_TIME >= str_to_date('[last_update_time_start] 00:00:00','%Y-%m-%d %H:%i:%s') ~/
+										/~last_update_time_end: and r.LAST_UPDATE_TIME <= str_to_date('[last_update_time_end] 23:59:59','%Y-%m-%d %H:%i:%s') ~/
+										/~certificates_type: and r.CERTIFICATES_TYPE = '[certificates_type]' ~/
+										/~certificates_code: and r.CERTIFICATES_CODE = '[CERTIFICATES_CODE]' ~/
+										/~order_status: and r.ORDER_STATUS = '[order_status]' ~/
+										/~clear_status: and r.CLEARING_STATUS = '[clear_status]' ~/
+									ORDER BY
+										r.CREATE_TIME DESC
+								]]>
+							</value>
+						</property>
+					</bean>
+				</entry>
+			<!-- 代收订单合计查询 -->
+				<entry key="receiveOrderSum">
+					<bean parent="defConfig">
+						<property name="defaultNumberPerPage">
+							<value>999999999</value>
+						</property>
+						<property name="sql">
+							<value>
+								<![CDATA[
+									SELECT                   
+										sum(r.AMOUNT)       as   	amount ,           
+										sum(r.FEE) 			as   	fee ,
+										sum(r.COST)			as		cost,
+										count(*)            as 		ordercount
+									FROM
+										RECEIVE_REQUEST r
+									WHERE
+										1=1
+										/~payer_bank_no: and r.PAYER_BANK_NO = '[payer_bank_no]' ~/
+										/~customer_no: and r.OWNER_ID = '[customer_no]' ~/
+										/~receive_id: and r.RECEIVE_ID = '[receive_id]' ~/
+										/~account_no: and r.ACCOUNT_NO = '[account_no]' ~/
+										/~account_name: and r.ACCOUNT_NAME = '[account_name]' ~/
+										/~acc_type: and r.ACC_TYPE = '[acc_type]' ~/
+										/~acc_no_type: and r.ACC_NO_TYPE = '[acc_no_type]' ~/
+										/~amount_start: and r.AMOUNT >= [amount_start] ~/
+										/~amount_end: and r.AMOUNT <= [amount_end] ~/
+										/~fee_start: and r.FEE >= [fee_start] ~/
+										/~fee_end: and r.FEE <= [fee_end] ~/
+										/~cost_start: and r.COST >= [cost_start] ~/
+										/~cost_end: and r.COST <= [cost_end] ~/
+										/~create_time_start: and r.create_time >= str_to_date('[create_time_start] 00:00:00','%Y-%m-%d %H:%i:%s') ~/
+										/~create_time_end: and r.create_time <= str_to_date('[create_time_end] 23:59:59','%Y-%m-%d %H:%i:%s')~/
+										/~last_update_time_start: and r.LAST_UPDATE_TIME >= str_to_date('[last_update_time_start] 00:00:00','%Y-%m-%d %H:%i:%s') ~/
+										/~last_update_time_end: and r.LAST_UPDATE_TIME <= str_to_date('[last_update_time_end] 23:59:59','%Y-%m-%d %H:%i:%s') ~/
+										/~certificates_type: and r.CERTIFICATES_TYPE = '[certificates_type]' ~/
+										/~certificates_code: and r.CERTIFICATES_CODE = '[CERTIFICATES_CODE]' ~/
+										/~order_status: and r.ORDER_STATUS = '[order_status]' ~/
+										/~clear_status: and r.CLEARING_STATUS = '[clear_status]' ~/
+								]]>
+							</value>
+						</property>
+					</bean>
+				</entry>
+			<!-- 代收订单查询 -->
+				<entry key="receiveOrderQuery">
+					<bean parent="spExport">
+						<property name="defaultNumberPerPage">
+							<value>10</value>
+						</property>
+						<property name="sql">
+							<value>
+								<![CDATA[
+									SELECT
+										r.PAYER_BANK_NO			as				payer_bank_no,
+										r.OWNER_ID				as 				customer_no,
+										r.RECEIVE_ID			as				receive_id,
+										r.ACCOUNT_NO			as				account_no,
+										r.ACCOUNT_NAME			as				account_name,
+										r.ACC_TYPE				as				acc_type,
+										r.ACC_NO_TYPE			as				acc_no_type,
+										r.AMOUNT				as				amount,
+										r.FEE					as				fee,
+										r.CREATE_TIME			as				create_time,
+										r.LAST_UPDATE_TIME		as				last_update_time,
+										r.CERTIFICATES_TYPE		as				certificates_type,
+										r.CERTIFICATES_CODE		as				certificates_code,
+										r.ORDER_STATUS			as				order_status,
+										r.CLEARING_STATUS		as				clear_status
+									FROM
+										RECEIVE_REQUEST r
+									WHERE
+										1 = 1
+										/~payer_bank_no: and r.PAYER_BANK_NO = '[payer_bank_no]' ~/
+										/~customer_no: and r.OWNER_ID = '[customer_no]' ~/
+										/~receive_id: and r.RECEIVE_ID = '[receive_id]' ~/
+										/~account_no: and r.ACCOUNT_NO = '[account_no]' ~/
+										/~account_name: and r.ACCOUNT_NAME = '[account_name]' ~/
+										/~acc_type: and r.ACC_TYPE = '[acc_type]' ~/
+										/~acc_no_type: and r.ACC_NO_TYPE = '[acc_no_type]' ~/
+										/~amount_start: and r.AMOUNT >= [amount_start] ~/
+										/~amount_end: and r.AMOUNT <= [amount_end] ~/
+										/~fee_start: and r.FEE >= [fee_start] ~/
+										/~fee_end: and r.FEE <= [fee_end] ~/
+										/~create_time_start: and r.create_time >= str_to_date('[create_time_start] 00:00:00','%Y-%m-%d %H:%i:%s') ~/
+										/~create_time_end: and r.create_time <= str_to_date('[create_time_end] 23:59:59','%Y-%m-%d %H:%i:%s')~/
+										/~last_update_time_start: and r.LAST_UPDATE_TIME >= str_to_date('[last_update_time_start] 00:00:00','%Y-%m-%d %H:%i:%s') ~/
+										/~last_update_time_end: and r.LAST_UPDATE_TIME <= str_to_date('[last_update_time_end] 23:59:59','%Y-%m-%d %H:%i:%s') ~/
+										/~certificates_type: and r.CERTIFICATES_TYPE = '[certificates_type]' ~/
+										/~certificates_code: and r.CERTIFICATES_CODE = '[CERTIFICATES_CODE]' ~/
+										/~order_status: and r.ORDER_STATUS = '[order_status]' ~/
+										/~clear_status: and r.CLEARING_STATUS = '[clear_status]' ~/
+									ORDER BY
+										r.CREATE_TIME DESC
+								]]>
+							</value>
+						</property>
+					</bean>
+				</entry>
+				<entry key="receiveConfigQuery">
+					<bean parent="defConfig">
+						<property name="defaultNumberPerPage">
+							<value>10</value>
+						</property>
+						<property name="sql">
+							<value>
+								<![CDATA[
+										SELECT
+										r.OWNER_ID					as				owner_id,
+										r.DAILY_MAX_AMOUNT			as				daily_max_amount,
+										r.SINGLE_BATCH_MAX_NUM		as				single_batch_max_num,
+										r.SINGLE_MAX_AMOUNT			as				single_max_amount,
+										r.PRIVATE_CER				as				private_cer,
+										r.PUBLIC_CER				as				public_cer,
+										r.IS_CHECK_CONTRACT			as				is_check_contract,
+										r.CREATE_TIME				as				create_time,
+										r.STATUS					as				status,
+										r.REMARK					as				remark,
+										r.VERSION					as				version,
+										r.DOMAIN					as				domain,
+										r.CUST_IP					as				cust_ip,
+										r.OPER						as				oper
+									FROM
+										RECEIVE_CONFIG r
+									WHERE
+										1 = 1
+										/~owner_id: and r.OWNER_ID  = '[owner_id]' ~/
+										/~status: and r.STATUS  = '[status]' ~/
+										/~applyDate1: AND Date(r.CREATE_TIME) >= str_to_date('[applyDate1] 00:00:00','%Y-%m-%d %H:%i:%s')~/
+										/~applyDate2: AND Date(r.CREATE_TIME) <= str_to_date('[applyDate2] 23:59:59','%Y-%m-%d %H:%i:%s')~/
+									ORDER BY
+										r.id DESC
+								]]>
+							</value>
+						</property>
+					</bean>
+				</entry>
+				<entry key="receiveConfigHistoryQuery">
+					<bean parent="defConfig">
+						<property name="sql">
+							<value>
+								<![CDATA[
+										SELECT
+										r.OWNER_ID					as				owner_id,
+										r.DAILY_MAX_AMOUNT			as				daily_max_amount,
+										r.SINGLE_BATCH_MAX_NUM		as				single_batch_max_num,
+										r.SINGLE_MAX_AMOUNT			as				single_max_amount,
+										r.PRIVATE_CER				as				private_cer,
+										r.PUBLIC_CER				as				public_cer,
+										r.IS_CHECK_CONTRACT			as				is_check_contract,
+										r.CREATE_TIME				as				create_time,
+										r.STATUS					as				status,
+										r.REMARK					as				remark,
+										r.VERSION					as				version,
+										r.DOMAIN					as				domain,
+										r.CUST_IP					as				cust_ip,
+										r.OPER						as				oper
+									FROM
+										RECEIVE_CONFIG_HISTORY r
+									WHERE
+										1 = 1
+										/~owner_id: and r.OWNER_ID  = '[owner_id]' ~/
+										/~status: and r.STATUS  = '[status]' ~/
+										/~applyDate1: AND Date(r.CREATE_TIME) >= str_to_date('[applyDate1] 00:00:00','%Y-%m-%d %H:%i:%s')~/
+										/~applyDate2: AND Date(r.CREATE_TIME) <= str_to_date('[applyDate2] 23:59:59','%Y-%m-%d %H:%i:%s')~/
+									ORDER BY
+										r.id DESC
+								]]>
+							</value>
+						</property>
+					</bean>
+				</entry>
+				<!-- 代收订单查询 -->
+				<entry key="receiveOrderQuery">
+					<bean parent="defConfig">
+						<property name="defaultNumberPerPage">
+							<value>10</value>
+						</property>
+						<property name="sql">
+							<value>
+								<![CDATA[
+									SELECT
+										r.PAYER_BANK_NO			as				payer_bank_no,
+										r.OWNER_ID				as 				customer_no,
+										r.RECEIVE_ID			as				receive_id,
+										r.ACCOUNT_NO			as				account_no,
+										r.ACCOUNT_NAME			as				account_name,
+										r.ACC_TYPE				as				acc_type,
+										r.ACC_NO_TYPE			as				acc_no_type,
+										r.AMOUNT				as				amount,
+										r.FEE					as				fee,
+										r.COST					as				cost,
+										r.CREATE_TIME			as				create_time,
+										r.LAST_UPDATE_TIME		as				last_update_time,
+										r.CERTIFICATES_TYPE		as				certificates_type,
+										r.CERTIFICATES_CODE		as				certificates_code,
+										r.ORDER_STATUS			as				order_status,
+										r.CLEARING_STATUS		as				clear_status
+									FROM
+										RECEIVE_REQUEST r
+									WHERE
+										1 = 1
+										/~payer_bank_no: and r.PAYER_BANK_NO = '[payer_bank_no]' ~/
+										/~customer_no: and r.OWNER_ID = '[customer_no]' ~/
+										/~receive_id: and r.RECEIVE_ID = '[receive_id]' ~/
+										/~account_no: and r.ACCOUNT_NO = '[account_no]' ~/
+										/~account_name: and r.ACCOUNT_NAME = '[account_name]' ~/
+										/~acc_type: and r.ACC_TYPE = '[acc_type]' ~/
+										/~acc_no_type: and r.ACC_NO_TYPE = '[acc_no_type]' ~/
+										/~amount_start: and r.AMOUNT >= [amount_start] ~/
+										/~amount_end: and r.AMOUNT <= [amount_end] ~/
+										/~fee_start: and r.FEE >= [fee_start] ~/
+										/~fee_end: and r.FEE <= [fee_end] ~/
+										/~cost_start: and r.COST >= [cost_start] ~/
+										/~cost_end: and r.COST <= [cost_end] ~/
+										/~create_time_start: and r.CREATE_TIME >= str_to_date('[create_time_start] 00:00:00','%Y-%m-%d %H:%i:%s') ~/
+										/~create_time_end: and r.CREATE_TIME <= str_to_date('[create_time_end] 23:59:59','%Y-%m-%d %H:%i:%s') ~/
+										/~last_update_time_start: and r.LAST_UPDATE_TIME >= str_to_date('[last_update_time_start] 00:00:00','%Y-%m-%d %H:%i:%s') ~/
+										/~last_update_time_end: and r.LAST_UPDATE_TIME <= str_to_date('[last_update_time_end] 23:59:59','%Y-%m-%d %H:%i:%s') ~/
+										/~certificates_type: and r.CERTIFICATES_TYPE = '[certificates_type]' ~/
+										/~certificates_code: and r.CERTIFICATES_CODE = '[CERTIFICATES_CODE]' ~/
+										/~order_status: and r.ORDER_STATUS = '[order_status]' ~/
+										/~clear_status: and r.CLEARING_STATUS = '[clear_status]' ~/
+									ORDER BY
+										r.CREATE_TIME DESC
+								]]>
+							</value>
+						</property>
+					</bean>
+				</entry>
+				
+				<!-- 代收订单合计查询 -->
+				<entry key="receiveOrderSum">
+					<bean parent="defConfig">
+						<property name="sql">
+							<value>
+								<![CDATA[
+									SELECT                   
+										sum(r.AMOUNT)       as   	amount ,           
+										sum(r.FEE) 			as   	fee ,
+										sum(r.COST)			as		cost,
+										count(*)            as 		ordercount
+									FROM
+										RECEIVE_REQUEST r
+									WHERE
+										1=1
+										/~payer_bank_no: and r.PAYER_BANK_NO = '[payer_bank_no]' ~/
+										/~customer_no: and r.OWNER_ID = '[customer_no]' ~/
+										/~receive_id: and r.RECEIVE_ID = '[receive_id]' ~/
+										/~account_no: and r.ACCOUNT_NO = '[account_no]' ~/
+										/~account_name: and r.ACCOUNT_NAME = '[account_name]' ~/
+										/~acc_type: and r.ACC_TYPE = '[acc_type]' ~/
+										/~acc_no_type: and r.ACC_NO_TYPE = '[acc_no_type]' ~/
+										/~amount_start: and r.AMOUNT >= [amount_start] ~/
+										/~amount_end: and r.AMOUNT <= [amount_end] ~/
+										/~fee_start: and r.FEE >= [fee_start] ~/
+										/~fee_end: and r.FEE <= [fee_end] ~/
+										/~cost_start: and r.COST >= [cost_start] ~/
+										/~cost_end: and r.COST <= [cost_end] ~/
+										/~create_time_start: and r.CREATE_TIME >= str_to_date('[create_time_start] 00:00:00','%Y-%m-%d %H:%i:%s') ~/
+										/~create_time_end: and r.CREATE_TIME <= str_to_date('[create_time_end] 23:59:59','%Y-%m-%d %H:%i:%s') ~/
+										/~last_update_time_start: and r.LAST_UPDATE_TIME >= str_to_date('[last_update_time_start] 00:00:00','%Y-%m-%d %H:%i:%s') ~/
+										/~last_update_time_end: and r.LAST_UPDATE_TIME <= str_to_date('[last_update_time_end] 23:59:59','%Y-%m-%d %H:%i:%s') ~/
+										/~certificates_type: and r.CERTIFICATES_TYPE = '[certificates_type]' ~/
+										/~certificates_code: and r.CERTIFICATES_CODE = '[CERTIFICATES_CODE]' ~/
+										/~order_status: and r.ORDER_STATUS = '[order_status]' ~/
+										/~clear_status: and r.CLEARING_STATUS = '[clear_status]' ~/
+								]]>
+							</value>
+						</property>
+					</bean>
+				</entry>
+				
+				<!-- 代收订单查询，不分页 -->
+				<entry key="receiveOrderExport">
+					<bean parent="defConfig">
+						<property name="defaultNumberPerPage">
+							<value>999999999</value>
+						</property>
+						<property name="sql">
+							<value>
+								<![CDATA[
+									SELECT
+										r.PAYER_BANK_NO			as				payer_bank_no,
+										r.OWNER_ID				as 				customer_no,
+										r.RECEIVE_ID			as				receive_id,
+										r.ACCOUNT_NO			as				account_no,
+										r.ACCOUNT_NAME			as				account_name,
+										r.ACC_TYPE				as				acc_type,
+										r.ACC_NO_TYPE			as				acc_no_type,
+										r.AMOUNT				as				amount,
+										r.FEE					as				fee,
+										r.COST					as				cost,
+										r.CREATE_TIME			as				create_time,
+										r.LAST_UPDATE_TIME		as				last_update_time,
+										r.CERTIFICATES_TYPE		as				certificates_type,
+										r.CERTIFICATES_CODE		as				certificates_code,
+										r.ORDER_STATUS			as				order_status,
+										r.CLEARING_STATUS		as				clear_status
+									FROM
+										RECEIVE_REQUEST r
+									WHERE
+										1 = 1
+										/~payer_bank_no: and r.PAYER_BANK_NO = '[payer_bank_no]' ~/
+										/~customer_no: and r.OWNER_ID = '[customer_no]' ~/
+										/~receive_id: and r.RECEIVE_ID = '[receive_id]' ~/
+										/~account_no: and r.ACCOUNT_NO = '[account_no]' ~/
+										/~account_name: and r.ACCOUNT_NAME = '[account_name]' ~/
+										/~acc_type: and r.ACC_TYPE = '[acc_type]' ~/
+										/~acc_no_type: and r.ACC_NO_TYPE = '[acc_no_type]' ~/
+										/~amount_start: and r.AMOUNT >= [amount_start] ~/
+										/~amount_end: and r.AMOUNT <= [amount_end] ~/
+										/~fee_start: and r.FEE >= [fee_start] ~/
+										/~fee_end: and r.FEE <= [fee_end] ~/
+										/~cost_start: and r.COST >= [cost_start] ~/
+										/~cost_end: and r.COST <= [cost_end] ~/
+										/~create_time_start: and r.create_time >= str_to_date('[create_time_start] 00:00:00','%Y-%m-%d %H:%i:%s') ~/
+										/~create_time_end: and r.create_time <= str_to_date('[create_time_end] 23:59:59','%Y-%m-%d %H:%i:%s')~/
+										/~last_update_time_start: and r.LAST_UPDATE_TIME >= str_to_date('[last_update_time_start] 00:00:00','%Y-%m-%d %H:%i:%s') ~/
+										/~last_update_time_end: and r.LAST_UPDATE_TIME <= str_to_date('[last_update_time_end] 23:59:59','%Y-%m-%d %H:%i:%s') ~/
+										/~certificates_type: and r.CERTIFICATES_TYPE = '[certificates_type]' ~/
+										/~certificates_code: and r.CERTIFICATES_CODE = '[CERTIFICATES_CODE]' ~/
+										/~order_status: and r.ORDER_STATUS = '[order_status]' ~/
+										/~clear_status: and r.CLEARING_STATUS = '[clear_status]' ~/
+									ORDER BY
+										r.CREATE_TIME DESC
+								]]>
+							</value>
+						</property>
+					</bean>
+				</entry>
+				
+				<!-- 代收路由查询 -->
+				<entry key="routeConfig">
+					<bean parent="defConfig">
+							<property name="defaultNumberPerPage">
+							<value>5</value>
+						</property>
+						<property name="sql">
+							<value>
+							<![CDATA[
+								 SELECT
+								 	rc.ID as id,
+								 	rc.CREATE_DATE as create_date,
+								 	rc.CODE as code,
+								 	rc.NAME as name,
+								 	rc.ROUTE_INFO as route_info,
+									rc.STATUS as status
+								 FROM ROUTE_CONFIG rc
+								 where 1=1
+								 /~code:and rc.CODE = '[code]' ~/
+								 /~name:and rc.NAME = '[name]' ~/
+								 /~status:and rc.STATUS = '[status]' ~/
+								 order by rc.ID desc
+							]]>
+							</value>
+						</property>
+					</bean>
+				</entry>
+
+			</map>
+		</property>
+	</bean>
+</beans>

@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.yl.risk.core.dao.RiskProcessorDao">
+
+    <resultMap id="RiskProcessorMap" type="com.yl.risk.core.entity.RiskProcessor">
+        <result column="ID" 						property="id" />
+        <result column="OPTIMISTIC" 	 			property="optimistic" />
+        <result column="CREATE_TIME" 				property="createTime" />
+        <result column="RESPONSE_CODE"              property="responseCode" />
+        <result column="RISK_PROCESSOR_NAME"        property="riskProcessorName" />
+        <result column="REMARK"                     property="remark" />
+    </resultMap>
+
+    <!-- 账户数据库模型字段 -->
+    <sql id="commonColumn">
+        ID, OPTIMISTIC, CREATE_TIME, RESPONSE_CODE, RISK_PROCESSOR_NAME, REMARK
+    </sql>
+
+    <insert id="create" parameterType="com.yl.risk.core.entity.RiskProcessor" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO
+            RISK_PROCESSOR(OPTIMISTIC, CREATE_TIME, RESPONSE_CODE, RISK_PROCESSOR_NAME, REMARK)
+        VALUES
+            (#{optimistic}, #{createTime}, #{responseCode}, #{riskProcessorName}, #{remark})
+    </insert>
+
+    <update id="update" parameterType="com.yl.risk.core.entity.RiskProcessor">
+        UPDATE
+            RISK_PROCESSOR
+        SET
+            OPTIMISTIC = #{optimistic} + 1, RISK_PROCESSOR_NAME = #{riskProcessorName}, REMARK = #{remark},
+            RESPONSE_CODE = #{responseCode}
+        WHERE ID = #{id}
+    </update>
+
+    <select id="findById" resultMap="RiskProcessorMap" parameterType="java.lang.Integer">
+        SELECT <include refid="commonColumn"/>
+        FROM RISK_PROCESSOR
+        WHERE ID = #{id}
+    </select>
+
+    <select id="findAllRiskProcessor" resultMap="RiskProcessorMap" parameterType="java.util.Map">
+        SELECT <include refid="commonColumn"/>
+        FROM RISK_PROCESSOR
+        WHERE 1 = 1
+        <if test="params.createTimeStart != null and params.createTimeStart != '' ">
+            AND CREATE_TIME &gt;= #{params.createTimeStart}
+        </if>
+        <if test="params.createTimeEnd != null and params.createTimeEnd != '' ">
+            AND CREATE_TIME &lt;= #{params.createTimeEnd}
+        </if>
+        <if test="params.responseCode != null and params.responseCode != '' ">
+            AND RESPONSE_CODE = #{params.responseCode}
+        </if>
+        <if test="params.riskProcessorName != null and params.riskProcessorName != '' ">
+            AND RISK_PROCESSOR_NAME = #{params.riskProcessorName}
+        </if>
+        <if test="params.remark != null and params.remark != '' ">
+            AND REMARK = #{params.remark}
+        </if>
+    </select>
+
+    <select id="queryAllName" resultType="java.util.Map">
+        SELECT ID, RISK_PROCESSOR_NAME FROM risk_processor
+    </select>
+
+    <select id="queryProcessorCode" resultType="java.lang.Integer" parameterType="java.lang.String">
+        SELECT COUNT(1) FROM risk_processor WHERE RESPONSE_CODE = #{responseCode}
+    </select>
+</mapper>

@@ -1,0 +1,104 @@
+﻿<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE hibernate-configuration PUBLIC
+          "-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+          "http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd">
+
+<hibernate-configuration>
+	<session-factory>	
+		<property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>	
+		<property name="hibernate.use_outer_join">true</property>
+		<property name="hibernate.jdbc.fetch_size">50</property>
+		<property name="hibernate.jdbc.batch_size">25</property>
+		<property name="hibernate.show_sql">false</property>
+		<property name="hibernate.connection.release_mode">auto</property>
+		
+		<!--<property name="hibernate.hbm2ddl.auto">update</property>-->
+		
+		<property name="javax.persistence.validation.mode">none</property>
+		<property name="hibernate.temp.use_jdbc_metadata_defaults">false</property>
+	
+		<!-- 基础框架 -->		
+		<mapping class="com.yl.boss.entity.Organization"/>		
+		<mapping class="com.yl.boss.entity.Operator"/>	
+		<mapping class="com.yl.boss.entity.LoginLog"/>	
+		<mapping class="com.yl.boss.entity.OperateLog"/> 
+		<mapping class="com.yl.boss.entity.Role"/>
+		<mapping class="com.yl.boss.entity.Function"/>
+		<mapping class="com.yl.boss.entity.Menu"/>			
+		<mapping class="com.yl.boss.entity.AdviceFeedBack"/>
+		
+		<!-- 商户信息 -->
+		<mapping class="com.yl.boss.entity.Customer"/>
+		<mapping class="com.yl.boss.entity.CustomerCert"/>
+		<mapping class="com.yl.boss.entity.CustomerCertHistory"/>
+		<mapping class="com.yl.boss.entity.CustomerFee"/>
+		<mapping class="com.yl.boss.entity.CustomerFeeHistory"/>
+		<mapping class="com.yl.boss.entity.CustomerHistory"/>
+		<mapping class="com.yl.boss.entity.CustomerKey"/>
+		<mapping class="com.yl.boss.entity.CustomerKeyHistory"/>
+		<mapping class="com.yl.boss.entity.CustomerSettle"/>
+		<mapping class="com.yl.boss.entity.CustomerSettleHistory"/>
+		<mapping class="com.yl.boss.entity.License"/>
+		
+		<!-- 服务商信息 -->
+		<mapping class="com.yl.boss.entity.Agent"/>
+		<mapping class="com.yl.boss.entity.AgentCert"/>
+		<mapping class="com.yl.boss.entity.AgentCertHistory"/>
+		<mapping class="com.yl.boss.entity.AgentFee"/>
+		<mapping class="com.yl.boss.entity.AgentFeeHistory"/>
+		<mapping class="com.yl.boss.entity.AgentHistory"/>
+		<mapping class="com.yl.boss.entity.AgentSettle"/>
+		<mapping class="com.yl.boss.entity.AgentSettleHistory"/>
+		
+		<!-- 公告 -->
+		<mapping class="com.yl.boss.entity.Bulletin"/>
+		<!-- 服务商采购订单 -->
+		<mapping class="com.yl.boss.entity.AgentDeviceOrder"/>
+		<mapping class="com.yl.boss.entity.AgentDeviceOrderHistory"/>
+		<mapping class="com.yl.boss.entity.DeviceType"/>	
+		<mapping class="com.yl.boss.entity.Device"/>	
+		<mapping class="com.yl.boss.entity.DevicePurch"/>
+		<mapping class="com.yl.boss.entity.DevicePurchHistory"/>	
+		<!-- 分润、经营分析 -->
+		<mapping class="com.yl.boss.entity.ShareProfit"/>
+		<!-- 接口对账单配置 -->
+		<mapping class="com.yl.boss.entity.InterfaceReconBillConfig"/>
+		
+		<mapping class="com.yl.boss.entity.DeviceType"/>
+		<!-- 公告管理 -->
+		<mapping class="com.yl.boss.entity.ProtocolManagement"/>
+		
+		
+		<mapping class="com.yl.boss.entity.Ad"/>
+		<mapping class="com.yl.boss.entity.AdType"/>
+		
+		<mapping class="com.yl.boss.entity.DeviceConfig"/>
+		<mapping class="com.yl.boss.entity.DeviceConfigHistory"/>
+		
+		<mapping class="com.yl.boss.entity.UserFeedback"/>
+		<mapping class="com.yl.boss.entity.AppVersion"/>
+		<mapping class="com.yl.boss.entity.AppVersionHistory"/>
+		<mapping class="com.yl.boss.entity.MccInfo"/>
+		
+		<mapping class="com.yl.boss.entity.SecretKey"/>
+		
+		<mapping class="com.yl.boss.entity.Shop"/>
+		
+		<mapping class="com.yl.boss.entity.Pos" />
+		<!-- 信息同步 -->
+		<mapping class="com.yl.boss.entity.SyncInfo" />
+		
+		<!-- 交易卡管理 -->
+		<mapping class="com.yl.boss.entity.TransCard" />
+		<mapping class="com.yl.boss.entity.TransCardHistory" />
+		<!-- 商户报备信息 -->
+		<mapping class="com.yl.boss.entity.ReportCustomer" />
+		
+		<!-- POS申请 -->
+		<mapping class="com.yl.boss.entity.PosPurchase"/>
+		<!-- POS绑定 -->
+		<mapping class="com.yl.boss.entity.PosSynchronization"/>
+		<!-- 银行商户 -->
+		<mapping class="com.yl.boss.entity.BankCustomer"/>
+	</session-factory>
+</hibernate-configuration>

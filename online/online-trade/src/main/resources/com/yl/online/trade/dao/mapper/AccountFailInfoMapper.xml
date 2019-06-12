@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yl.online.trade.dao.mapper.AccountFailInfoMapper">
+
+	<resultMap id="accountFailInfoMap" type="com.yl.online.model.model.AccountFailInfo">
+		<id 	property="id" 					column="ID"></id>
+		<result property="code" 				column="CODE"></result>
+		<result property="version" 				column="VERSION"></result>
+		<result property="createTime" 			column="CREATE_TIME"></result>
+		<result property="accountStatus" 		column="ACCOUNT_STATUS"></result>
+		<result property="accountCount" 		column="ACCOUNT_COUNT"></result>
+		<result property="orderCode" 			column="ORDER_CODE"></result>
+		<result property="amount" 				column="AMOUNT"></result>
+		<result property="accountFacadeTime" 	column="ACCOUNT_FACADE_TIME"></result>
+		<result property="nextFireTime" 		column="NEXT_FIRE_TIME"></result>
+	</resultMap>
+
+	<sql id="accountFailInfoColumns">
+		ID,CODE,VERSION,CREATE_TIME,ACCOUNT_STATUS,ACCOUNT_COUNT,ORDER_CODE,AMOUNT,ACCOUNT_FACADE_TIME,NEXT_FIRE_TIME
+	</sql>
+
+
+	<insert id="createAccountInfo" parameterType="com.yl.online.model.model.AccountFailInfo"
+		useGeneratedKeys="true" keyProperty="id">
+		INSERT INTO ACC_FAIL (
+		CODE,VERSION,CREATE_TIME,ACCOUNT_STATUS,ACCOUNT_COUNT,ORDER_CODE,AMOUNT,ACCOUNT_FACADE_TIME,NEXT_FIRE_TIME)
+		VALUES
+		(#{code},#{version},#{createTime},#{accountStatus},#{accountCount},#{orderCode},#{amount},#{accountFacadeTime},
+		#{nextFireTime})
+	</insert>
+	
+	<select id="queryAccountFacadeInfo" resultMap="accountFailInfoMap" parameterType="Map">
+		SELECT
+		<include refid="accountFailInfoColumns" />
+		FROM ACC_FAIL
+		WHERE ACCOUNT_COUNT &lt; #{maxCount} and ACCOUNT_STATUS = 'FAILED' and (NEXT_FIRE_TIME is null or NEXT_FIRE_TIME &lt; NOW())
+		ORDER BY ID ASC LIMIT #{maxNums}
+	</select>
+	
+	<update id="modifyAccountInfo">
+		update ACC_FAIL
+		set ACCOUNT_STATUS = #{accountFacadeInfo.accountStatus},
+		ACCOUNT_FACADE_TIME = #{accountFacadeInfo.accountFacadeTime},
+		NEXT_FIRE_TIME = #{accountFacadeInfo.nextFireTime}
+		where ORDER_CODE = #{accountFacadeInfo.orderCode}
+	</update>
+
+</mapper> 

@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yl.payinterface.core.dao.mapper.InterfaceInfoMapper">
+
+	<resultMap id="interfaceInfoMap" type="com.yl.payinterface.core.model.InterfaceInfo">
+		<id 	property="id" 					column="ID"></id>
+		<result property="code" 				column="CODE"></result>
+		<result property="version" 				column="VERSION"></result>
+		<result property="createTime" 			column="CREATE_TIME"></result>
+		<result property="provider" 			column="PROVIDER_CODE"></result>
+		<result property="name" 				column="NAME"></result>
+		<result property="type" 				column="TYPE"></result>
+		<result property="cardType" 			column="CARD_TYPE"></result>
+		<result property="singleAmountLimit" 	column="SINGLE_AMOUNT_LIMIT"></result>
+		<result property="singleAmountLimitSmall" column="SINGLE_AMOUNT_LIMIT_SMALL"></result>
+		<result property="startTime" 			column="START_TIME"></result>
+		<result property="endTime" 				column="END_TIME"></result>
+		<result property="status" 				column="STATUS"></result>
+		<result property="tradeConfigs" 		column="TRADE_CONFIGS"></result>
+		<result property="description" 			column="DESCRIPTION"></result>
+		<result property="lastModifyTime" 		column="LAST_MODIFY_TIME"></result>
+		<result property="feeType" 				column="FEE_TYPE"></result>
+		<result property="fee" 					column="FEE"></result>
+		<result property="isReal" 				column="IS_REAL"></result>
+	</resultMap>
+
+
+	<sql id="interfaceInfoColumns">
+		ID,CODE,VERSION,CREATE_TIME,PROVIDER_CODE,NAME,TYPE,CARD_TYPE,SINGLE_AMOUNT_LIMIT,SINGLE_AMOUNT_LIMIT_SMALL,START_TIME,END_TIME,STATUS,
+		TRADE_CONFIGS,DESCRIPTION,FEE_TYPE,FEE,LAST_MODIFY_TIME,IS_REAL
+	</sql>
+
+
+	<insert id="create" parameterType="com.yl.payinterface.core.model.InterfaceInfo"
+		useGeneratedKeys="true" keyProperty="id">
+		INSERT INTO INTERFACE_INFO (
+		CODE, VERSION, CREATE_TIME, PROVIDER_CODE, NAME, TYPE, CARD_TYPE,SINGLE_AMOUNT_LIMIT,SINGLE_AMOUNT_LIMIT_SMALL,START_TIME,END_TIME,STATUS,
+		TRADE_CONFIGS, DESCRIPTION, FEE_TYPE,FEE, LAST_MODIFY_TIME, IS_REAL)
+		VALUES
+		(#{code},#{version},#{createTime},#{provider},#{name},#{type},#{cardType},
+		#{singleAmountLimit},#{singleAmountLimitSmall},#{startTime},#{endTime},#{status},#{tradeConfigs},#{description},#{feeType},#{fee},#{lastModifyTime},#{isReal})
+	</insert>
+
+	<select id="findByCode" resultMap="interfaceInfoMap" parameterType="java.lang.String">
+		SELECT
+		<include refid="interfaceInfoColumns" />
+		FROM INTERFACE_INFO
+		WHERE CODE = #{code}
+		ORDER BY ID DESC
+	</select>
+	<select id="findByName"  resultMap="interfaceInfoMap" parameterType="java.lang.String">
+		SELECT
+		<include refid="interfaceInfoColumns" />
+		FROM INTERFACE_INFO
+		WHERE NAME = #{name}
+		ORDER BY ID DESC
+	</select>
+	<select id="findByCodeToShow" resultMap="interfaceInfoMap" parameterType="java.lang.String">
+		SELECT 
+		    inf.ID,
+		    inf.CODE,
+		    inf.VERSION,
+		    inf.CREATE_TIME,
+		    pr.short_name PROVIDER_CODE,
+		    NAME,
+		    TYPE,
+		    CARD_TYPE,
+		    SINGLE_AMOUNT_LIMIT,
+		    SINGLE_AMOUNT_LIMIT_SMALL,
+		    START_TIME,
+		    END_TIME,
+		    STATUS,
+		    TRADE_CONFIGS,
+		    DESCRIPTION,
+		    FEE_TYPE,
+		    FEE,
+		    pr.LAST_MODIFY_TIME,
+		    IS_REAL
+		FROM
+		    interface_info inf
+		        LEFT JOIN
+		    interface_provide pr ON inf.PROVIDER_CODE = pr.code
+		WHERE inf.CODE = #{code}
+		ORDER BY ID DESC
+	</select>
+	
+	<update id="update">
+		UPDATE INTERFACE_INFO SET CARD_TYPE = #{interfaceInfo.cardType},SINGLE_AMOUNT_LIMIT = #{interfaceInfo.singleAmountLimit},
+		SINGLE_AMOUNT_LIMIT_SMALL=#{interfaceInfo.singleAmountLimitSmall},
+		START_TIME=#{interfaceInfo.startTime},END_TIME=#{interfaceInfo.endTime},
+		TYPE = #{interfaceInfo.type}, PROVIDER_CODE = #{interfaceInfo.provider}, NAME = #{interfaceInfo.name},
+		STATUS = #{interfaceInfo.status}, TRADE_CONFIGS = #{interfaceInfo.tradeConfigs}, DESCRIPTION = #{interfaceInfo.description}, FEE_TYPE = #{interfaceInfo.feeType},
+		FEE = #{interfaceInfo.fee}, LAST_MODIFY_TIME = #{interfaceInfo.lastModifyTime}, VERSION = #{newVersion},IS_REAL = #{interfaceInfo.isReal}
+		where CODE = #{interfaceInfo.code} and VERSION = #{interfaceInfo.version}
+	</update>
+	
+	<select id="findInterfaceInfo" resultMap="interfaceInfoMap">
+		SELECT
+		<include refid="interfaceInfoColumns" />
+		FROM INTERFACE_INFO
+		ORDER BY ID DESC
+	</select>
+	
+	<select id="findInterfaceProviderBy" resultMap="interfaceInfoMap">
+		SELECT
+		<include refid="interfaceInfoColumns" />
+		FROM INTERFACE_INFO
+		WHERE TYPE = #{interfaceType} and CARD_TYPE = #{cardType}
+		ORDER BY ID DESC
+	</select>
+	
+	<select id="findInterfaceInfoBySupProviderCode" resultMap="interfaceInfoMap">
+		SELECT
+		<include refid="interfaceInfoColumns" />
+		FROM INTERFACE_INFO
+		WHERE TYPE = #{interfaceType} and CARD_TYPE = #{cardType} and PROVIDER_CODE = #{providerCode}
+		ORDER BY ID DESC
+	</select>
+	
+	<select id="queryAllEnableByInterfaceType" resultMap="interfaceInfoMap">
+		SELECT
+		<include refid="interfaceInfoColumns" />
+		FROM INTERFACE_INFO
+		WHERE STATUS = 'TRUE' and TYPE in (#{interfaceTypes})
+		ORDER BY ID DESC
+	</select>
+	
+	<select id="findValidateInterfaceInfo" resultMap="interfaceInfoMap">
+		SELECT
+		<include refid="interfaceInfoColumns" />
+		FROM INTERFACE_INFO
+		WHERE STATUS = 'TRUE' and interfaceType = #{interfaceTypes}
+		ORDER BY ID DESC
+	</select>
+	<select id="findAll" resultMap="interfaceInfoMap">
+		SELECT
+		<include refid="interfaceInfoColumns" />
+		FROM INTERFACE_INFO
+		WHERE 1 = 1
+		<if test="params.code != null and params.code !='' ">
+			AND CODE = #{params.code}
+		</if>
+		<if test="params.name != null and params.name !='' ">
+			AND NAME like "%"#{params.name}"%"
+		</if>
+		<if test="params.type != null and params.type !='' ">
+			AND TYPE = #{params.type}
+		</if>
+		<if test="params.status != null and params.status !='' ">
+			AND STATUS = #{params.status}
+		</if>
+		
+		<if test="params.createTimeStart != null and params.createTimeStart !='' ">
+			<if test="params.createTimeEnd != null and params.createTimeEnd !='' ">
+				AND CREATE_TIME BETWEEN #{params.createTimeStart} AND #{params.createTimeEnd}
+			</if>
+			<if test="params.createTimeEnd == null or params.createTimeEnd =='' ">
+				AND CREATE_TIME &gt; #{params.createTimeStart}
+			</if>
+		</if>
+		<if test="params.createTimeEnd != null and params.createTimeEnd !='' ">
+			<if test="params.createTimeStart == null or params.createTimeStart =='' ">
+				AND CREATE_TIME &lt; #{params.createTimeEnd}
+			</if>
+		</if>
+		
+		ORDER BY ID DESC
+	</select>
+</mapper>

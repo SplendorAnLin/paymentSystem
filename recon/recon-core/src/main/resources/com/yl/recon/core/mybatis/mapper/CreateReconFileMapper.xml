@@ -1,0 +1,345 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.yl.recon.core.mybatis.mapper.CreateReconFileMapper">
+    <!--订单-->
+    <resultMap id="BaseOrderResultMap" type="com.yl.recon.core.entity.other.order.BaseOrder">
+        <result column="order_code" property="orderCode" jdbcType="VARCHAR"/>
+        <result column="type" property="type" jdbcType="VARCHAR"/>
+        <result column="pay_type" property="payType" jdbcType="VARCHAR"/>
+        <result column="amount" property="amount" jdbcType="DOUBLE"/>
+        <result column="fee" property="fee" jdbcType="DOUBLE"/>
+        <result column="cost" property="cost" jdbcType="DOUBLE"/>
+        <result column="finish_time" property="finishTime" jdbcType="TIMESTAMP"/>
+        <result column="interface_code" property="interfaceCode" jdbcType="VARCHAR"/>
+        <result column="interface_request_id" property="interfaceRequestId" jdbcType="VARCHAR"/>
+        <result column="system_code" property="systemCode" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <!--账户-->
+    <resultMap id="BaseAccountResultMap" type="com.yl.recon.core.entity.other.account.BaseAccount">
+        <result column="account_no" property="accountNo" jdbcType="VARCHAR"/>
+        <result column="order_code" property="orderCode" jdbcType="VARCHAR"/>
+        <result column="amount" property="amount" jdbcType="DOUBLE"/>
+        <result column="symbol" property="symbol" jdbcType="VARCHAR"/>
+        <result column="trans_time" property="transTime" jdbcType="TIMESTAMP"/>
+        <result column="bussiness_code" property="bussinessCode" jdbcType="VARCHAR"/>
+        <result column="system_code" property="systemCode" jdbcType="VARCHAR"/>
+    </resultMap>
+
+
+    <!--支付接口-->
+    <resultMap id="BasePayInterfaceResultMap" type="com.yl.recon.core.entity.other.payinterface.BasePayInterface">
+        <result column="interface_info_code" property="interfaceInfoCode" jdbcType="VARCHAR"/>
+        <result column="pay_type" property="payType" jdbcType="VARCHAR"/>
+        <result column="interface_order_id" property="interfaceOrderId" jdbcType="VARCHAR"/>
+        <result column="interface_request_id" property="interfaceRequestId" jdbcType="VARCHAR"/>
+        <result column="trade_order_code" property="tradeOrderCode" jdbcType="VARCHAR"/>
+        <result column="amount" property="amount" jdbcType="DOUBLE"/>
+        <result column="fee" property="fee" jdbcType="DOUBLE"/>
+        <result column="complete_time" property="completeTime" jdbcType="TIMESTAMP"/>
+        <result column="system_code" property="systemCode" jdbcType="VARCHAR"/>
+    </resultMap>
+
+
+    <resultMap id="ReconCom" type="com.yl.recon.core.entity.other.ReconCom">
+        <result property="totalNum" column="COUNT"></result>
+        <result property="totalAmount" column="AMOUNT"></result>
+        <result property="totalFee" column="FEE"></result>
+    </resultMap>
+    <!--代付start-->
+    <!-- 对账:查代付所有订单,如果不传参数就不查询 -->
+    <select id="queryCompleteRemitOrder" resultMap="BaseOrderResultMap">
+        SELECT
+        FLOW_NO AS order_code,
+        'DPAY' AS type,
+        'REMIT' AS pay_type,
+        AMOUNT AS amount,
+        IFNULL(FEE,0) AS fee,
+        IFNULL(cost,0) AS cost,
+        COMPLETE_DATE AS finish_time,
+        INTERFACE_INFO_CODE AS interface_code,
+        REQUEST_NO AS interface_request_id,
+        'DPAY' AS system_code
+        FROM REQUEST
+        WHERE 1=1
+        AND STATUS = 'SUCCESS'
+        <choose>
+            <when test="params != null">
+                <if test="params.createStartTime != null and params.createEndTime == null">
+                    and COMPLETE_DATE &gt;= #{params.createStartTime}
+                </if>
+                <if test="params.createStartTime == null and params.createEndTime != null">
+                    and COMPLETE_DATE &lt;= #{params.createEndTime}
+                </if>
+                <if test="params.createStartTime != null and params.createEndTime != null">
+                    and COMPLETE_DATE BETWEEN #{params.createStartTime} AND #{params.createEndTime}
+                </if>
+            </when>
+            <otherwise>
+                AND 1=2
+            </otherwise>
+        </choose>
+    </select>
+
+
+    <!-- 对账:查代付所有订单,如果不传参数就不查询 -->
+    <select id="queryRemitSumCountAndFee" resultMap="ReconCom"
+            parameterType="Map">
+        SELECT count(1) AS COUNT, IFNULL(SUM(amount),'0.0') AS AMOUNT, IFNULL(SUM(FEE),'0.0') AS FEE
+        FROM REQUEST
+        WHERE 1=1
+        AND STATUS = 'SUCCESS'
+        <choose>
+            <when test="params != null">
+                <if test="params.createStartTime != null and params.createEndTime == null">
+                    and COMPLETE_DATE &gt;= #{params.createStartTime}
+                </if>
+                <if test="params.createStartTime == null and params.createEndTime != null">
+                    and COMPLETE_DATE &lt;= #{params.createEndTime}
+                </if>
+                <if test="params.createStartTime != null and params.createEndTime != null">
+                    and COMPLETE_DATE BETWEEN #{params.createStartTime} AND #{params.createEndTime}
+                </if>
+            </when>
+            <otherwise>
+                AND 1=2
+            </otherwise>
+        </choose>
+    </select>
+    <!--代付end-->
+
+
+    <!--Online start-->
+    <select id="queryCompleteOnlineOrder" resultMap="BaseOrderResultMap">
+        SELECT
+        CODE AS order_code,
+        BUSINESS_TYPE AS type,
+        pay_type AS pay_type,
+        AMOUNT AS amount,
+        IFNULL(cost,0) AS cost,
+        IFNULL(RECEIVER_FEE,0) AS fee,
+        SUCCESS_PAY_TIME AS finish_time,
+        '' AS interface_code,
+        '' AS interface_request_id,
+        'ONLINE' AS system_code
+        FROM TRADE_ORDER
+        WHERE 1=1
+        AND STATUS = 'SUCCESS'
+        <choose>
+            <when test="params != null">
+                <if test="params.createStartTime != null and params.createEndTime == null">
+                    and SUCCESS_PAY_TIME &gt;= #{params.createStartTime}
+                </if>
+                <if test="params.createStartTime == null and params.createEndTime != null">
+                    and SUCCESS_PAY_TIME &lt;= #{params.createEndTime}
+                </if>
+                <if test="params.createStartTime != null and params.createEndTime != null">
+                    and SUCCESS_PAY_TIME BETWEEN #{params.createStartTime} AND #{params.createEndTime}
+                </if>
+            </when>
+            <otherwise>
+                AND 1=2
+            </otherwise>
+        </choose>
+    </select>
+    <select id="queryOnlineSumCountAndFee" resultMap="ReconCom"
+            parameterType="Map">
+        SELECT count(1) AS COUNT, IFNULL(SUM(amount),'0.0') AS AMOUNT, IFNULL(SUM(RECEIVER_FEE),'0.0') AS FEE
+        FROM TRADE_ORDER
+        WHERE 1=1
+        AND STATUS = 'SUCCESS'
+        <choose>
+            <when test="params != null">
+                <if test="params.createStartTime != null and params.createEndTime == null">
+                    and SUCCESS_PAY_TIME &gt;= #{params.createStartTime}
+                </if>
+                <if test="params.createStartTime == null and params.createEndTime != null">
+                    and SUCCESS_PAY_TIME &lt;= #{params.createEndTime}
+                </if>
+                <if test="params.createStartTime != null and params.createEndTime != null">
+                    and SUCCESS_PAY_TIME BETWEEN #{params.createStartTime} AND #{params.createEndTime}
+                </if>
+            </when>
+            <otherwise>
+                AND 1=2
+            </otherwise>
+        </choose>
+    </select>
+    <!--Online end-->
+
+
+    <!--RealAuth start-->
+    <select id="queryCompleteRealAuthOrder" resultMap="BaseOrderResultMap">
+        SELECT
+        CODE AS order_code,
+        BUSI_TYPE AS type,
+        'AUTHPAY' AS pay_type,
+        0 AS amount,
+        IFNULL(cost,0) AS cost,
+        IFNULL(fee,0) AS fee,
+        COMPLETE_TIME AS finish_time,
+        INTERFACE_CODE AS interface_code,
+        INTERFACE_REQUEST_ID AS interface_request_id,
+        'REALAUTH' AS system_code
+        FROM REAL_NAME_AUTH_ORDER
+        WHERE 1=1
+        AND AUTH_ORDER_STATUS = 'SUCCESS'
+        <choose>
+            <when test="params != null">
+                <if test="params.createStartTime != null and params.createEndTime == null">
+                    and COMPLETE_TIME &gt;= #{params.createStartTime}
+                </if>
+                <if test="params.createStartTime == null and params.createEndTime != null">
+                    and COMPLETE_TIME &lt;= #{params.createEndTime}
+                </if>
+                <if test="params.createStartTime != null and params.createEndTime != null">
+                    and COMPLETE_TIME BETWEEN #{params.createStartTime} AND #{params.createEndTime}
+                </if>
+            </when>
+            <otherwise>
+                AND 1=2
+            </otherwise>
+        </choose>
+    </select>
+    <select id="queryRealAuthSumCountAndFee" resultMap="ReconCom"
+            parameterType="Map">
+        SELECT count(1) AS COUNT, IFNULL(SUM(0),'0.0') AS AMOUNT, IFNULL(SUM(FEE),'0.0') AS FEE
+        FROM REAL_NAME_AUTH_ORDER
+        WHERE 1=1
+        AND AUTH_ORDER_STATUS = 'SUCCESS'
+        <choose>
+            <when test="params != null">
+                <if test="params.createStartTime != null and params.createEndTime == null">
+                    and COMPLETE_TIME &gt;= #{params.createStartTime}
+                </if>
+                <if test="params.createStartTime == null and params.createEndTime != null">
+                    and COMPLETE_TIME &lt;= #{params.createEndTime}
+                </if>
+                <if test="params.createStartTime != null and params.createEndTime != null">
+                    and COMPLETE_TIME BETWEEN #{params.createStartTime} AND #{params.createEndTime}
+                </if>
+            </when>
+            <otherwise>
+                AND 1=2
+            </otherwise>
+        </choose>
+    </select>
+    <!--RealAuth end-->
+
+
+    <!--payinterface start-->
+    <select id="queryCompletePayInterface" resultMap="BasePayInterfaceResultMap">
+        SELECT
+        IR.INTERFACE_INFO_CODE AS INTERFACE_INFO_CODE,
+        II.TYPE AS PAY_TYPE,
+        IR.INTERFACE_ORDER_ID AS INTERFACE_ORDER_ID,
+        IR.INTERFACE_REQUEST_ID AS INTERFACE_REQUEST_ID,
+        IR.BUSSINESS_ORDER_ID AS TRADE_ORDER_CODE,
+        IR.AMOUNT AS AMOUNT,
+        IFNULL(IR.INTERFACE_FEE, 0) AS FEE,
+        IR.COMPLETE_TIME AS COMPLETE_TIME,
+        'PAYINTERFACE' AS SYSTEM_CODE
+        FROM
+        INTERFACE_REQUEST IR
+        LEFT JOIN INTERFACE_INFO II ON IR.INTERFACE_INFO_CODE = II.`CODE`
+        WHERE
+        1 = 1
+        AND IR.STATUS = 'SUCCESS'
+        <choose>
+            <when test="params != null">
+                <if test="params.createStartTime != null and params.createEndTime == null">
+                    and IR.COMPLETE_TIME &gt;= #{params.createStartTime}
+                </if>
+                <if test="params.createStartTime == null and params.createEndTime != null">
+                    and IR.COMPLETE_TIME &lt;= #{params.createEndTime}
+                </if>
+                <if test="params.createStartTime != null and params.createEndTime != null">
+                    and IR.COMPLETE_TIME BETWEEN #{params.createStartTime} AND #{params.createEndTime}
+                </if>
+            </when>
+            <otherwise>
+                AND 1=2
+            </otherwise>
+        </choose>
+    </select>
+    <select id="queryPayInterfaceSumCountAndFee" resultMap="ReconCom"
+            parameterType="Map">
+        SELECT count(1) AS COUNT, IFNULL(SUM(AMOUNT),'0.0') AS AMOUNT, IFNULL(SUM(INTERFACE_FEE),'0.0') AS FEE
+        FROM INTERFACE_REQUEST
+        WHERE 1=1
+        AND STATUS = 'SUCCESS'
+        <choose>
+            <when test="params != null">
+                <if test="params.createStartTime != null and params.createEndTime == null">
+                    and COMPLETE_TIME &gt;= #{params.createStartTime}
+                </if>
+                <if test="params.createStartTime == null and params.createEndTime != null">
+                    and COMPLETE_TIME &lt;= #{params.createEndTime}
+                </if>
+                <if test="params.createStartTime != null and params.createEndTime != null">
+                    and COMPLETE_TIME BETWEEN #{params.createStartTime} AND #{params.createEndTime}
+                </if>
+            </when>
+            <otherwise>
+                AND 1=2
+            </otherwise>
+        </choose>
+    </select>
+    <!--payinterface end-->
+
+
+    <!--account start-->
+    <select id="queryCompleteAccountOrder" resultMap="BaseAccountResultMap">
+        SELECT
+        ACC_NO AS account_no,
+        TRANS_FLOW AS order_code,
+        TRANS_AMT AS amount,
+        FUND_SYMBOL AS symbol,
+        TRANS_TIME AS trans_time,
+        BUSI_CODE AS bussiness_code,
+        SYS_CODE AS system_code
+        FROM T_ACC_VOUC_DET
+        WHERE 1=1
+        <choose>
+            <when test="params != null">
+                <if test="params.createStartTime != null and params.createEndTime == null">
+                    and TRANS_TIME &gt;= #{params.createStartTime}
+                </if>
+                <if test="params.createStartTime == null and params.createEndTime != null">
+                    and TRANS_TIME &lt;= #{params.createEndTime}
+                </if>
+                <if test="params.createStartTime != null and params.createEndTime != null">
+                    and TRANS_TIME BETWEEN #{params.createStartTime} AND #{params.createEndTime}
+                </if>
+            </when>
+            <otherwise>
+                AND 1=2
+            </otherwise>
+        </choose>
+    </select>
+    <select id="queryAccountSumCountAndFee" resultMap="ReconCom"
+            parameterType="Map">
+        SELECT count(1) AS COUNT, IFNULL(SUM(TRANS_AMT),'0.0') AS AMOUNT, IFNULL(SUM(0),'0.0') AS FEE
+        FROM T_ACC_VOUC_DET
+        WHERE 1=1
+        <choose>
+            <when test="params != null">
+                <if test="params.createStartTime != null and params.createEndTime == null">
+                    and TRANS_TIME &gt;= #{params.createStartTime}
+                </if>
+                <if test="params.createStartTime == null and params.createEndTime != null">
+                    and TRANS_TIME &lt;= #{params.createEndTime}
+                </if>
+                <if test="params.createStartTime != null and params.createEndTime != null">
+                    and TRANS_TIME BETWEEN #{params.createStartTime} AND #{params.createEndTime}
+                </if>
+            </when>
+            <otherwise>
+                AND 1=2
+            </otherwise>
+        </choose>
+    </select>
+    <!--account end-->
+
+
+</mapper>

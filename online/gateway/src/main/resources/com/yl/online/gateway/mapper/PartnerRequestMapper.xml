@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yl.online.gateway.mapper.PartnerRequestMapper">
+
+	<resultMap id="partnerRequestMap" type="com.yl.online.model.model.PartnerRequest">
+		<id property="id" 					column="ID"></id>
+		<result property="code" 			column="CODE"></result>
+		<result property="version" 			column="VERSION"></result>
+		<result property="createTime" 		column="CREATE_TIME"></result>
+		<result property="apiCode" 			column="API_CODE"></result>
+		<result property="inputCharset" 	column="INPUT_CHARSET"></result>
+		<result property="signType" 		column="SIGN_TYPE"></result>
+		<result property="sign" 			column="SIGN"></result>
+		<result property="partner" 			column="PARTNER"></result>
+		<result property="outOrderId" 		column="OUT_ORDER_ID"></result>
+		<result property="amount" 			column="AMOUNT"></result>
+		<result property="extParam" 		column="EXT_PARAM"></result>
+		<result property="returnParam" 		column="RETURN_PARAM"></result>
+		
+		<result property="ip" 				column="IP"></result>
+		<result property="referer" 			column="REFERER"></result>
+		
+		<result property="originalRequest" 	column="ORIGINAL_REQUEST"></result>
+		<result property="info" 			column="INFO"></result>
+		
+		<result property="bankCardNo" 		column="BANK_CARD_NO"></result>
+		<result property="valDate" 			column="VAL_DATE"></result>
+		<result property="cvv" 				column="CVV"></result>
+		<result property="payerName" 		column="PAYER_NAME"></result>
+		<result property="certNo" 			column="CERT_NO"></result>
+		<result property="payerMobNo" 		column="PAYER_MOB_NO"></result>
+		<result property="verifycode" 		column="VERIFY_CODE"></result>
+		
+		<result property="openId" 			column="OPEN_ID"></result>
+		<result property="interfaceCode" 	column="INTERFACE_CODE"></result>
+		<result property="notifyUrl" 		column="NOTIFY_URL"></result>
+		<result property="payType" 			column="PAY_TYPE"></result>
+		<result property="accMode" 			column="ACC_MODE"></result>
+		<result property="wxNativeType" 	column="WX_NATIVE_TYPE"></result>
+		
+		<result property="pageNotifyUrl" 	column="PAGE_NOTIFY_URL"></result>
+		<result property="settleAmount" 	column="SETTLE_AMOUNT"></result>
+		<result property="settleType" 	column="SETTLE_TYPE"></result>
+		<result property="remitFee" 	column="REMIT_FEE"></result>
+		<result property="quickPayFee" 	column="QUICK_PAY_FEE"></result>
+		
+	</resultMap>
+
+	<sql id="partnerRequestColumns">
+		ID,CODE,VERSION,CREATE_TIME,API_CODE,INPUT_CHARSET,SIGN_TYPE,SIGN,PARTNER,OUT_ORDER_ID,AMOUNT,EXT_PARAM,RETURN_PARAM,
+		IP,REFERER,BANK_CARD_NO,VAL_DATE,CVV,PAYER_NAME,CERT_NO,PAYER_MOB_NO,VERIFY_CODE,OPEN_ID,INTERFACE_CODE,NOTIFY_URL,PAY_TYPE,ACC_MODE,
+		WX_NATIVE_TYPE,PAGE_NOTIFY_URL,SETTLE_AMOUNT,SETTLE_TYPE,REMIT_FEE,QUICK_PAY_FEE
+	</sql>
+
+	<insert id="create" parameterType="com.yl.online.model.model.PartnerRequest"
+		useGeneratedKeys="true" keyProperty="id">
+		INSERT INTO PARTNER_REQ (
+		CODE,VERSION,CREATE_TIME,API_CODE,INPUT_CHARSET,SIGN_TYPE,SIGN,PARTNER,OUT_ORDER_ID,AMOUNT,EXT_PARAM,RETURN_PARAM,
+		IP,REFERER,BANK_CARD_NO,VAL_DATE,CVV,PAYER_NAME,CERT_NO,PAYER_MOB_NO,VERIFY_CODE,OPEN_ID,INTERFACE_CODE,NOTIFY_URL,PAY_TYPE,ACC_MODE,
+		WX_NATIVE_TYPE,PAGE_NOTIFY_URL,SETTLE_AMOUNT,SETTLE_CARD_NO,SETTLE_NAME,SETTLE_TYPE,REMIT_FEE,QUICK_PAY_FEE)
+		VALUES
+		(#{code},#{version},#{createTime},#{apiCode},#{inputCharset},#{signType},#{sign},#{partner},#{outOrderId},#{amount},#{extParam},#{returnParam},
+		#{ip},#{referer},#{bankCardNo},#{valDate},#{cvv},#{payerName},#{certNo},#{payerMobNo},#{verifycode},#{openId},#{interfaceCode},#{notifyUrl},
+		#{payType},#{accMode},#{wxNativeType},#{pageNotifyUrl},#{settleAmount},#{settleCardNo},#{settleName},#{settleType},#{remitFee},#{quickPayFee})
+	</insert>
+
+	<select id="findByOutOrderId" resultMap="partnerRequestMap"
+		parameterType="Map">
+		SELECT
+		<include refid="partnerRequestColumns" />
+		FROM PARTNER_REQ
+		WHERE OUT_ORDER_ID = #{outOrderId} and partner = #{receiver}
+		ORDER BY ID DESC limit 1
+	</select>
+
+</mapper> 

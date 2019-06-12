@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" ":/spring-beans.dtd">
+
+<beans default-autowire="byName">
+
+	<!--<bean id="consumerConfig" class="com.yl.boss.context.ConsumerConfig" init-method="consumer"></bean>-->
+	<!-- <bean id="consumerClient" class=" com.yl.mq.consumer.client.ConsumerClient"></bean> -->
+	<!--<bean id="shareMessageListener" class="com.yl.boss.listener.ShareMessageListener"></bean>-->
+
+</beans>
+

@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yl.payinterface.core.dao.mapper.AliPayCollectionCodeMapper">
+
+    <resultMap id="interfaceInfoMap" type="com.yl.payinterface.core.model.AliPayCollectionCode">
+        <id 	property="id" 					column="ID"></id>
+        <result property="code" 				column="CODE"></result>
+        <result property="version" 				column="VERSION"></result>
+        <result property="createTime" 			column="CREATE_TIME"></result>
+        <result property="url"                  column="URL"></result>
+        <result property="aliPayAcc"            column="ALIPAY_ACC"></result>
+        <result property="amount"               column="AMOUNT"></result>
+        <result property="remarks"              column="REMARKS"></result>
+        <result property="status"               column="STATUS"></result>
+        <result property="count"                column="COUNT"></result>
+        <result property="lastTime"             column="LAST_TIME"></result>
+    </resultMap>
+
+    <sql id="AliPayCodeColumns">
+		ID, CODE, VERSION, CREATE_TIME, URL, ALIPAY_ACC, AMOUNT, REMARKS, STATUS, COUNT, LAST_TIME
+	</sql>
+
+    <insert id="save" parameterType="com.yl.payinterface.core.model.AliPayCollectionCode"
+            useGeneratedKeys="true" keyProperty="id">
+		INSERT INTO ALIPAY_CODE (CODE, VERSION, CREATE_TIME, URL,
+		 ALIPAY_ACC, AMOUNT, REMARKS, STATUS, COUNT, LAST_TIME)
+		VALUES
+		(#{code}, #{version}, #{createTime}, #{url}, #{aliPayAcc}, #{amount}, #{remarks}, #{status}, #{count}, #{lastTime})
+	</insert>
+
+    <update id="update">
+		UPDATE ALIPAY_CODE SET COUNT = #{aliPayCollectionCode.count},
+		LAST_TIME = #{aliPayCollectionCode.lastTime}
+		WHERE ID = #{aliPayCollectionCode.id}
+	</update>
+
+    <update id="updateStatus">
+        UPDATE ALIPAY_CODE SET STATUS = #{status}
+        WHERE ALIPAY_ACC = #{aliPayAcc}
+    </update>
+
+    <select id="queryCode" resultMap="interfaceInfoMap">
+        SELECT
+        <include refid="AliPayCodeColumns" />
+        FROM ALIPAY_CODE
+        WHERE AMOUNT = #{amount} AND STATUS = 'YES'
+        ORDER BY COUNT ASC
+    </select>
+</mapper>

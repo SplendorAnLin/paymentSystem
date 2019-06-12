@@ -1,0 +1,656 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.yl.recon.core.mybatis.mapper.ReconOrderMapper">
+    <!--auto generated Code-->
+    <resultMap id="BaseResultMap" type="com.yl.recon.core.entity.ReconOrder">
+        <result column="recon_date" property="reconDate" jdbcType="DATE"/>
+        <result column="recon_type" property="reconType" jdbcType="VARCHAR"/>
+        <result column="recon_status" property="reconStatus" jdbcType="VARCHAR"/>
+        <result column="match_a" property="matchA" jdbcType="VARCHAR"/>
+        <result column="repeat_num_a" property="repeatNumA" jdbcType="INTEGER"/>
+        <result column="nums_a" property="numsA" jdbcType="INTEGER"/>
+        <result column="amount_a" property="amountA" jdbcType="DOUBLE"/>
+        <result column="fail_nums_a" property="failNumsA" jdbcType="INTEGER"/>
+        <result column="fail_amount_a" property="failAmountA" jdbcType="DOUBLE"/>
+        <result column="match_b" property="matchB" jdbcType="VARCHAR"/>
+        <result column="repeat_num_b" property="repeatNumB" jdbcType="INTEGER"/>
+        <result column="nums_b" property="numsB" jdbcType="INTEGER"/>
+        <result column="amount_b" property="amountB" jdbcType="DOUBLE"/>
+        <result column="fail_nums_b" property="failNumsB" jdbcType="INTEGER"/>
+        <result column="fail_amount_b" property="failAmountB" jdbcType="DOUBLE"/>
+        <result column="msg" property="msg" jdbcType="VARCHAR"/>
+        <result column="failure_reason" property="failureReason" jdbcType="VARCHAR"/>
+        <result column="amount_err_num" property="amountErrNum" jdbcType="INTEGER"/>
+        <result column="code" property="code" jdbcType="VARCHAR"/>
+        <result column="version" property="version" jdbcType="BIGINT"/>
+        <result column="create_time" property="createTime" jdbcType="TIMESTAMP"/>
+    </resultMap>
+
+    <!--auto generated Code-->
+    <sql id="Base_Column_List">
+        recon_date,
+        recon_type,
+        recon_status,
+        match_a,
+        repeat_num_a,
+        nums_a,
+        amount_a,
+        fail_nums_a,
+        fail_amount_a,
+        match_b,
+        repeat_num_b,
+        nums_b,
+        amount_b,
+        fail_nums_b,
+        fail_amount_b,
+        msg,
+        failure_reason,
+        amount_err_num,
+        code,
+        version,
+        create_time
+    </sql>
+
+    <!--auto generated Code-->
+    <insert id="insert" useGeneratedKeys="true" keyProperty="reconOrder.code">
+        INSERT INTO recon_order (
+            recon_date,
+            recon_type,
+            recon_status,
+            match_a,
+            repeat_num_a,
+            nums_a,
+            amount_a,
+            fail_nums_a,
+            fail_amount_a,
+            match_b,
+            repeat_num_b,
+            nums_b,
+            amount_b,
+            fail_nums_b,
+            fail_amount_b,
+            msg,
+            failure_reason,
+            amount_err_num,
+            code,
+            version,
+            create_time
+        ) VALUES (
+            #{reconOrder.reconDate,jdbcType=DATE},
+            #{reconOrder.reconType,jdbcType=VARCHAR},
+            #{reconOrder.reconStatus,jdbcType=VARCHAR},
+            #{reconOrder.matchA,jdbcType=VARCHAR},
+            #{reconOrder.repeatNumA,jdbcType=INTEGER},
+            #{reconOrder.numsA,jdbcType=INTEGER},
+            #{reconOrder.amountA,jdbcType=DOUBLE},
+            #{reconOrder.failNumsA,jdbcType=INTEGER},
+            #{reconOrder.failAmountA,jdbcType=DOUBLE},
+            #{reconOrder.matchB,jdbcType=VARCHAR},
+            #{reconOrder.repeatNumB,jdbcType=INTEGER},
+            #{reconOrder.numsB,jdbcType=INTEGER},
+            #{reconOrder.amountB,jdbcType=DOUBLE},
+            #{reconOrder.failNumsB,jdbcType=INTEGER},
+            #{reconOrder.failAmountB,jdbcType=DOUBLE},
+            #{reconOrder.msg,jdbcType=VARCHAR},
+            #{reconOrder.failureReason,jdbcType=VARCHAR},
+            #{reconOrder.amountErrNum,jdbcType=INTEGER},
+            #{reconOrder.code,jdbcType=VARCHAR},
+            #{reconOrder.version,jdbcType=BIGINT},
+            #{reconOrder.createTime,jdbcType=TIMESTAMP}
+        )
+    </insert>
+
+    <!--auto generated Code-->
+    <insert id="insertSelective" useGeneratedKeys="true" keyProperty="reconOrder.code">
+        INSERT INTO recon_order
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="reconOrder.reconDate!=null">recon_date,</if>
+            <if test="reconOrder.reconType!=null">recon_type,</if>
+            <if test="reconOrder.reconStatus!=null">recon_status,</if>
+            <if test="reconOrder.matchA!=null">match_a,</if>
+            <if test="reconOrder.repeatNumA!=null">repeat_num_a,</if>
+            <if test="reconOrder.numsA!=null">nums_a,</if>
+            <if test="reconOrder.amountA!=null">amount_a,</if>
+            <if test="reconOrder.failNumsA!=null">fail_nums_a,</if>
+            <if test="reconOrder.failAmountA!=null">fail_amount_a,</if>
+            <if test="reconOrder.matchB!=null">match_b,</if>
+            <if test="reconOrder.repeatNumB!=null">repeat_num_b,</if>
+            <if test="reconOrder.numsB!=null">nums_b,</if>
+            <if test="reconOrder.amountB!=null">amount_b,</if>
+            <if test="reconOrder.failNumsB!=null">fail_nums_b,</if>
+            <if test="reconOrder.failAmountB!=null">fail_amount_b,</if>
+            <if test="reconOrder.msg!=null">msg,</if>
+            <if test="reconOrder.failureReason!=null">failure_reason,</if>
+            <if test="reconOrder.amountErrNum!=null">amount_err_num,</if>
+            <if test="reconOrder.code!=null">code,</if>
+            <if test="reconOrder.version!=null">version,</if>
+            <if test="reconOrder.createTime!=null">create_time,</if>
+        </trim>
+        VALUES
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="reconOrder.reconDate!=null">#{reconOrder.reconDate,jdbcType=DATE},
+            </if>
+            <if test="reconOrder.reconType!=null">#{reconOrder.reconType,jdbcType=VARCHAR},
+            </if>
+            <if test="reconOrder.reconStatus!=null">#{reconOrder.reconStatus,jdbcType=VARCHAR},
+            </if>
+            <if test="reconOrder.matchA!=null">#{reconOrder.matchA,jdbcType=VARCHAR},
+            </if>
+            <if test="reconOrder.repeatNumA!=null">#{reconOrder.repeatNumA,jdbcType=INTEGER},
+            </if>
+            <if test="reconOrder.numsA!=null">#{reconOrder.numsA,jdbcType=INTEGER},
+            </if>
+            <if test="reconOrder.amountA!=null">#{reconOrder.amountA,jdbcType=DOUBLE},
+            </if>
+            <if test="reconOrder.failNumsA!=null">#{reconOrder.failNumsA,jdbcType=INTEGER},
+            </if>
+            <if test="reconOrder.failAmountA!=null">#{reconOrder.failAmountA,jdbcType=DOUBLE},
+            </if>
+            <if test="reconOrder.matchB!=null">#{reconOrder.matchB,jdbcType=VARCHAR},
+            </if>
+            <if test="reconOrder.repeatNumB!=null">#{reconOrder.repeatNumB,jdbcType=INTEGER},
+            </if>
+            <if test="reconOrder.numsB!=null">#{reconOrder.numsB,jdbcType=INTEGER},
+            </if>
+            <if test="reconOrder.amountB!=null">#{reconOrder.amountB,jdbcType=DOUBLE},
+            </if>
+            <if test="reconOrder.failNumsB!=null">#{reconOrder.failNumsB,jdbcType=INTEGER},
+            </if>
+            <if test="reconOrder.failAmountB!=null">#{reconOrder.failAmountB,jdbcType=DOUBLE},
+            </if>
+            <if test="reconOrder.msg!=null">#{reconOrder.msg,jdbcType=VARCHAR},
+            </if>
+            <if test="reconOrder.failureReason!=null">#{reconOrder.failureReason,jdbcType=VARCHAR},
+            </if>
+            <if test="reconOrder.amountErrNum!=null">#{reconOrder.amountErrNum,jdbcType=INTEGER},
+            </if>
+            <if test="reconOrder.code!=null">#{reconOrder.code,jdbcType=VARCHAR},
+            </if>
+            <if test="reconOrder.version!=null">#{reconOrder.version,jdbcType=BIGINT},
+            </if>
+            <if test="reconOrder.createTime!=null">#{reconOrder.createTime,jdbcType=TIMESTAMP},
+            </if>
+        </trim>
+    </insert>
+
+    <!--auto generated Code-->
+    <insert id="insertList">
+        INSERT INTO recon_order (
+        <include refid="Base_Column_List"/>
+        )VALUES
+        <foreach collection="reconOrders" item="reconOrder" index="index" separator=",">
+            (
+            #{reconOrder.reconDate,jdbcType=DATE},
+            #{reconOrder.reconType,jdbcType=VARCHAR},
+            #{reconOrder.reconStatus,jdbcType=VARCHAR},
+            #{reconOrder.matchA,jdbcType=VARCHAR},
+            #{reconOrder.repeatNumA,jdbcType=INTEGER},
+            #{reconOrder.numsA,jdbcType=INTEGER},
+            #{reconOrder.amountA,jdbcType=DOUBLE},
+            #{reconOrder.failNumsA,jdbcType=INTEGER},
+            #{reconOrder.failAmountA,jdbcType=DOUBLE},
+            #{reconOrder.matchB,jdbcType=VARCHAR},
+            #{reconOrder.repeatNumB,jdbcType=INTEGER},
+            #{reconOrder.numsB,jdbcType=INTEGER},
+            #{reconOrder.amountB,jdbcType=DOUBLE},
+            #{reconOrder.failNumsB,jdbcType=INTEGER},
+            #{reconOrder.failAmountB,jdbcType=DOUBLE},
+            #{reconOrder.msg,jdbcType=VARCHAR},
+            #{reconOrder.failureReason,jdbcType=VARCHAR},
+            #{reconOrder.amountErrNum,jdbcType=INTEGER},
+            #{reconOrder.code,jdbcType=VARCHAR},
+            #{reconOrder.version,jdbcType=BIGINT},
+            #{reconOrder.createTime,jdbcType=TIMESTAMP}
+            )
+        </foreach>
+    </insert>
+
+    <!--auto generated Code-->
+    <update id="update">
+        UPDATE recon_order
+        <set>
+            <if test="reconOrder.reconDate != null">recon_date= #{reconOrder.reconDate,jdbcType=DATE},</if>
+            <if test="reconOrder.reconType != null">recon_type= #{reconOrder.reconType,jdbcType=VARCHAR},</if>
+            <if test="reconOrder.reconStatus != null">recon_status= #{reconOrder.reconStatus,jdbcType=VARCHAR},</if>
+            <if test="reconOrder.matchA != null">match_a= #{reconOrder.matchA,jdbcType=VARCHAR},</if>
+            <if test="reconOrder.repeatNumA != null">repeat_num_a= #{reconOrder.repeatNumA,jdbcType=INTEGER},</if>
+            <if test="reconOrder.numsA != null">nums_a= #{reconOrder.numsA,jdbcType=INTEGER},</if>
+            <if test="reconOrder.amountA != null">amount_a= #{reconOrder.amountA,jdbcType=DOUBLE},</if>
+            <if test="reconOrder.failNumsA != null">fail_nums_a= #{reconOrder.failNumsA,jdbcType=INTEGER},</if>
+            <if test="reconOrder.failAmountA != null">fail_amount_a= #{reconOrder.failAmountA,jdbcType=DOUBLE},</if>
+            <if test="reconOrder.matchB != null">match_b= #{reconOrder.matchB,jdbcType=VARCHAR},</if>
+            <if test="reconOrder.repeatNumB != null">repeat_num_b= #{reconOrder.repeatNumB,jdbcType=INTEGER},</if>
+            <if test="reconOrder.numsB != null">nums_b= #{reconOrder.numsB,jdbcType=INTEGER},</if>
+            <if test="reconOrder.amountB != null">amount_b= #{reconOrder.amountB,jdbcType=DOUBLE},</if>
+            <if test="reconOrder.failNumsB != null">fail_nums_b= #{reconOrder.failNumsB,jdbcType=INTEGER},</if>
+            <if test="reconOrder.failAmountB != null">fail_amount_b= #{reconOrder.failAmountB,jdbcType=DOUBLE},</if>
+            <if test="reconOrder.msg != null">msg= #{reconOrder.msg,jdbcType=VARCHAR},</if>
+            <if test="reconOrder.failureReason != null">failure_reason= #{reconOrder.failureReason,jdbcType=VARCHAR},
+            </if>
+            <if test="reconOrder.amountErrNum != null">amount_err_num= #{reconOrder.amountErrNum,jdbcType=INTEGER},</if>
+            <if test="reconOrder.code != null">code= #{reconOrder.code,jdbcType=VARCHAR},</if>
+            <if test="reconOrder.version != null">version= #{reconOrder.version,jdbcType=BIGINT},</if>
+            <if test="reconOrder.createTime != null">create_time= #{reconOrder.createTime,jdbcType=TIMESTAMP}</if>
+        </set>
+        WHERE code = #{reconOrder.code,jdbcType=VARCHAR}
+    </update>
+
+    <!--Mybatis自动生成代码-->
+    <sql id="Example_Where_Clause">
+        <!--
+          WARNING - @mbggenerated
+          This element is automatically generated by MyBatis Generator, do not modify.
+          This element was generated on Tue Jan 09 15:44:52 CST 2018.
+        -->
+        <where>
+            <foreach collection="oredCriteria" item="criteria" separator="or">
+                <if test="criteria.valid">
+                    <trim prefix="(" suffix=")" prefixOverrides="and">
+                        <foreach collection="criteria.criteria" item="criterion">
+                            <choose>
+                                <when test="criterion.noValue">
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue">
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue">
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue">
+                                    and ${criterion.condition}
+                                    <foreach collection="criterion.value" item="listItem" open="(" close=")"
+                                             separator=",">
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+    <sql id="Update_By_Example_Where_Clause">
+        <!--
+          WARNING - @mbggenerated
+          This element is automatically generated by MyBatis Generator, do not modify.
+          This element was generated on Tue Jan 09 15:44:52 CST 2018.
+        -->
+        <where>
+            <foreach collection="example.oredCriteria" item="criteria" separator="or">
+                <if test="criteria.valid">
+                    <trim prefix="(" suffix=")" prefixOverrides="and">
+                        <foreach collection="criteria.criteria" item="criterion">
+                            <choose>
+                                <when test="criterion.noValue">
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue">
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue">
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue">
+                                    and ${criterion.condition}
+                                    <foreach collection="criterion.value" item="listItem" open="(" close=")"
+                                             separator=",">
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+
+    <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.yl.recon.core.entity.ReconOrderExample">
+        <!--
+          WARNING - @mbggenerated
+          This element is automatically generated by MyBatis Generator, do not modify.
+          This element was generated on Tue Jan 09 15:44:52 CST 2018.
+        -->
+        select
+        <if test="distinct">
+            distinct
+        </if>
+        <include refid="Base_Column_List"/>
+        from recon_order
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+        <if test="orderByClause != null">
+            order by ${orderByClause}
+        </if>
+    </select>
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long">
+        <!--
+          WARNING - @mbggenerated
+          This element is automatically generated by MyBatis Generator, do not modify.
+          This element was generated on Tue Jan 09 15:44:52 CST 2018.
+        -->
+        select
+        <include refid="Base_Column_List"/>
+        from recon_order
+        where code = #{code,jdbcType=BIGINT}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+        <!--
+          WARNING - @mbggenerated
+          This element is automatically generated by MyBatis Generator, do not modify.
+          This element was generated on Tue Jan 09 15:44:52 CST 2018.
+        -->
+        DELETE FROM recon_order
+        WHERE code = #{code,jdbcType=BIGINT}
+    </delete>
+    <delete id="deleteByExample" parameterType="com.yl.recon.core.entity.ReconOrderExample">
+        <!--
+          WARNING - @mbggenerated
+          This element is automatically generated by MyBatis Generator, do not modify.
+          This element was generated on Tue Jan 09 15:44:52 CST 2018.
+        -->
+        delete from recon_order
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+    </delete>
+    <select id="countByExample" parameterType="com.yl.recon.core.entity.ReconOrderExample"
+            resultType="java.lang.Integer">
+        <!--
+          WARNING - @mbggenerated
+          This element is automatically generated by MyBatis Generator, do not modify.
+          This element was generated on Tue Jan 09 15:44:52 CST 2018.
+        -->
+        select count(*) from recon_order
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+    </select>
+    <update id="updateByExampleSelective" parameterType="map">
+        <!--
+          WARNING - @mbggenerated
+          This element is automatically generated by MyBatis Generator, do not modify.
+          This element was generated on Tue Jan 09 15:44:52 CST 2018.
+        -->
+        update recon_order
+        <set>
+            <if test="record.code != null">
+                code = #{record.code,jdbcType=BIGINT},
+            </if>
+            <if test="record.version != null">
+                version = #{record.version,jdbcType=INTEGER},
+            </if>
+            <if test="record.createTime != null">
+                create_time = #{record.createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="record.reconDate != null">
+                recon_date = #{record.reconDate,jdbcType=DATE},
+            </if>
+            <if test="record.reconType != null">
+                recon_Type = #{record.reconType,jdbcType=VARCHAR},
+            </if>
+            <if test="record.reconStatus != null">
+                recon_status = #{record.reconStatus,jdbcType=VARCHAR},
+            </if>
+            <if test="record.matchA != null">
+                match_a = #{record.matchA,jdbcType=VARCHAR},
+            </if>
+            <if test="record.matchB != null">
+                match_b = #{record.matchB,jdbcType=VARCHAR},
+            </if>
+            <if test="record.msg != null">
+                msg = #{record.msg,jdbcType=VARCHAR},
+            </if>
+            <if test="record.failureReason != null">
+                failure_reason = #{record.failureReason,jdbcType=VARCHAR},
+            </if>
+            <if test="record.repeatNumA != null">
+                repeat_num_a = #{record.repeatNumA,jdbcType=INTEGER},
+            </if>
+            <if test="record.numsA != null">
+                nums_a = #{record.numsA,jdbcType=INTEGER},
+            </if>
+            <if test="record.amountA != null">
+                amount_a = #{record.amountA,jdbcType=DOUBLE},
+            </if>
+            <if test="record.failNumsA != null">
+                fail_nums_a = #{record.failNumsA,jdbcType=INTEGER},
+            </if>
+            <if test="record.failAmountA != null">
+                fail_amount_a = #{record.failAmountA,jdbcType=DOUBLE},
+            </if>
+            <if test="record.repeatNumB != null">
+                repeat_num_b = #{record.repeatNumB,jdbcType=INTEGER},
+            </if>
+            <if test="record.numsB != null">
+                nums_b = #{record.numsB,jdbcType=INTEGER},
+            </if>
+            <if test="record.amountB != null">
+                amount_b = #{record.amountB,jdbcType=DOUBLE},
+            </if>
+            <if test="record.failNumsB != null">
+                fail_nums_b = #{record.failNumsB,jdbcType=INTEGER},
+            </if>
+            <if test="record.failAmountB != null">
+                fail_amount_b = #{record.failAmountB,jdbcType=DOUBLE},
+            </if>
+            <if test="record.amountErrNum != null">
+                amount_err_num = #{record.amountErrNum,jdbcType=INTEGER},
+            </if>
+        </set>
+        <if test="_parameter != null">
+            <include refid="Update_By_Example_Where_Clause"/>
+        </if>
+    </update>
+    <update id="updateByExample" parameterType="map">
+        <!--
+          WARNING - @mbggenerated
+          This element is automatically generated by MyBatis Generator, do not modify.
+          This element was generated on Tue Jan 09 15:44:52 CST 2018.
+        -->
+        update recon_order
+        set code = #{record.code,jdbcType=BIGINT},
+        version = #{record.version,jdbcType=INTEGER},
+        create_time = #{record.createTime,jdbcType=TIMESTAMP},
+        recon_date = #{record.reconDate,jdbcType=DATE},
+        recon_Type = #{record.reconType,jdbcType=VARCHAR},
+        recon_status = #{record.reconStatus,jdbcType=VARCHAR},
+        match_a = #{record.matchA,jdbcType=VARCHAR},
+        match_b = #{record.matchB,jdbcType=VARCHAR},
+        msg = #{record.msg,jdbcType=VARCHAR},
+        failure_reason = #{record.failureReason,jdbcType=VARCHAR},
+        repeat_num_a = #{record.repeatNumA,jdbcType=INTEGER},
+        nums_a = #{record.numsA,jdbcType=INTEGER},
+        amount_a = #{record.amountA,jdbcType=DOUBLE},
+        fail_nums_a = #{record.failNumsA,jdbcType=INTEGER},
+        fail_amount_a = #{record.failAmountA,jdbcType=DOUBLE},
+        repeat_num_b = #{record.repeatNumB,jdbcType=INTEGER},
+        nums_b = #{record.numsB,jdbcType=INTEGER},
+        amount_b = #{record.amountB,jdbcType=DOUBLE},
+        fail_nums_b = #{record.failNumsB,jdbcType=INTEGER},
+        fail_amount_b = #{record.failAmountB,jdbcType=DOUBLE},
+        amount_err_num = #{record.amountErrNum,jdbcType=INTEGER}
+        <if test="_parameter != null">
+            <include refid="Update_By_Example_Where_Clause"/>
+        </if>
+    </update>
+    <update id="updateByPrimaryKeySelective" parameterType="com.yl.recon.core.entity.ReconOrder">
+        <!--
+          WARNING - @mbggenerated
+          This element is automatically generated by MyBatis Generator, do not modify.
+          This element was generated on Tue Jan 09 15:44:52 CST 2018.
+        -->
+        update recon_order
+        <set>
+            <if test="version != null">
+                version = #{version,jdbcType=INTEGER},
+            </if>
+            <if test="createTime != null">
+                create_time = #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="reconDate != null">
+                recon_date = #{reconDate,jdbcType=DATE},
+            </if>
+            <if test="reconType != null">
+                recon_Type = #{reconType,jdbcType=VARCHAR},
+            </if>
+            <if test="reconStatus != null">
+                recon_status = #{reconStatus,jdbcType=VARCHAR},
+            </if>
+            <if test="matchA != null">
+                match_a = #{matchA,jdbcType=VARCHAR},
+            </if>
+            <if test="matchB != null">
+                match_b = #{matchB,jdbcType=VARCHAR},
+            </if>
+            <if test="msg != null">
+                msg = #{msg,jdbcType=VARCHAR},
+            </if>
+            <if test="failureReason != null">
+                failure_reason = #{failureReason,jdbcType=VARCHAR},
+            </if>
+            <if test="repeatNumA != null">
+                repeat_num_a = #{repeatNumA,jdbcType=INTEGER},
+            </if>
+            <if test="numsA != null">
+                nums_a = #{numsA,jdbcType=INTEGER},
+            </if>
+            <if test="amountA != null">
+                amount_a = #{amountA,jdbcType=DOUBLE},
+            </if>
+            <if test="failNumsA != null">
+                fail_nums_a = #{failNumsA,jdbcType=INTEGER},
+            </if>
+            <if test="failAmountA != null">
+                fail_amount_a = #{failAmountA,jdbcType=DOUBLE},
+            </if>
+            <if test="repeatNumB != null">
+                repeat_num_b = #{repeatNumB,jdbcType=INTEGER},
+            </if>
+            <if test="numsB != null">
+                nums_b = #{numsB,jdbcType=INTEGER},
+            </if>
+            <if test="amountB != null">
+                amount_b = #{amountB,jdbcType=DOUBLE},
+            </if>
+            <if test="failNumsB != null">
+                fail_nums_b = #{failNumsB,jdbcType=INTEGER},
+            </if>
+            <if test="failAmountB != null">
+                fail_amount_b = #{failAmountB,jdbcType=DOUBLE},
+            </if>
+            <if test="amountErrNum != null">
+                amount_err_num = #{amountErrNum,jdbcType=INTEGER},
+            </if>
+        </set>
+        where code = #{code,jdbcType=BIGINT}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.yl.recon.core.entity.ReconOrder">
+        <!--
+          WARNING - @mbggenerated
+          This element is automatically generated by MyBatis Generator, do not modify.
+          This element was generated on Tue Jan 09 15:44:52 CST 2018.
+        -->
+        UPDATE recon_order
+        SET version = #{version,jdbcType=INTEGER},
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+        recon_date = #{reconDate,jdbcType=DATE},
+        recon_Type = #{reconType,jdbcType=VARCHAR},
+        recon_status = #{reconStatus,jdbcType=VARCHAR},
+        match_a = #{matchA,jdbcType=VARCHAR},
+        match_b = #{matchB,jdbcType=VARCHAR},
+        msg = #{msg,jdbcType=VARCHAR},
+        failure_reason = #{failureReason,jdbcType=VARCHAR},
+        repeat_num_a = #{repeatNumA,jdbcType=INTEGER},
+        nums_a = #{numsA,jdbcType=INTEGER},
+        amount_a = #{amountA,jdbcType=DOUBLE},
+        fail_nums_a = #{failNumsA,jdbcType=INTEGER},
+        fail_amount_a = #{failAmountA,jdbcType=DOUBLE},
+        repeat_num_b = #{repeatNumB,jdbcType=INTEGER},
+        nums_b = #{numsB,jdbcType=INTEGER},
+        amount_b = #{amountB,jdbcType=DOUBLE},
+        fail_nums_b = #{failNumsB,jdbcType=INTEGER},
+        fail_amount_b = #{failAmountB,jdbcType=DOUBLE},
+        amount_err_num = #{amountErrNum,jdbcType=INTEGER}
+        WHERE code = #{code,jdbcType=BIGINT}
+    </update>
+
+
+    <!--自定义 start-->
+
+    <resultMap id="BeanBaseResultMap" type="com.yl.recon.api.core.bean.ReconOrder">
+        <result column="recon_date" property="reconDate" jdbcType="DATE"/>
+        <result column="recon_type" property="reconType" jdbcType="VARCHAR"/>
+        <result column="recon_status" property="reconStatus" jdbcType="VARCHAR"/>
+        <result column="match_a" property="matchA" jdbcType="VARCHAR"/>
+        <result column="repeat_num_a" property="repeatNumA" jdbcType="INTEGER"/>
+        <result column="nums_a" property="numsA" jdbcType="INTEGER"/>
+        <result column="amount_a" property="amountA" jdbcType="DOUBLE"/>
+        <result column="fail_nums_a" property="failNumsA" jdbcType="INTEGER"/>
+        <result column="fail_amount_a" property="failAmountA" jdbcType="DOUBLE"/>
+        <result column="match_b" property="matchB" jdbcType="VARCHAR"/>
+        <result column="repeat_num_b" property="repeatNumB" jdbcType="INTEGER"/>
+        <result column="nums_b" property="numsB" jdbcType="INTEGER"/>
+        <result column="amount_b" property="amountB" jdbcType="DOUBLE"/>
+        <result column="fail_nums_b" property="failNumsB" jdbcType="INTEGER"/>
+        <result column="fail_amount_b" property="failAmountB" jdbcType="DOUBLE"/>
+        <result column="msg" property="msg" jdbcType="VARCHAR"/>
+        <result column="failure_reason" property="failureReason" jdbcType="VARCHAR"/>
+        <result column="amount_err_num" property="amountErrNum" jdbcType="INTEGER"/>
+        <result column="code" property="code" jdbcType="VARCHAR"/>
+        <result column="version" property="version" jdbcType="BIGINT"/>
+        <result column="create_time" property="createTime" jdbcType="TIMESTAMP"/>
+    </resultMap>
+
+    <sql id="findSql">
+        select
+        <include refid="Base_Column_List"/>
+        from recon_order
+        WHERE 1=1
+        <choose>
+            <when test="params.reconOrder != null">
+                <choose>
+                    <when test="params.reconOrder.reconType != null">
+                        AND recon_type = #{params.reconOrder.reconType}
+                    </when>
+                    <otherwise>
+                        <!--内部对账-->
+                        AND recon_type &lt;&gt; 'INTERFACE_BANK'
+                    </otherwise>
+                </choose>
+                <if test="params.reconOrder.reconStatus != null">
+                    AND recon_status = #{params.reconOrder.reconStatus}
+                </if>
+                <if test="params.reconOrder.reconDate != null">
+                    AND recon_date = #{params.reconOrder.reconDate,jdbcType=DATE}
+                </if>
+            </when>
+            <otherwise>
+                <!--内部对账-->
+                AND recon_type &lt;&gt; 'INTERFACE_BANK'
+            </otherwise>
+        </choose>
+        <if test="params.startTime != null and params.startTime != ''">
+            AND create_time &gt;=#{params.startTime,jdbcType=TIMESTAMP}
+        </if>
+        <if test="params.endTime != null and params.startTime != ''">
+            AND create_time &lt;=#{params.endTime,jdbcType=TIMESTAMP}
+        </if>
+        order by create_time DESC
+    </sql>
+    <!--分页查询所有-->
+    <select id="findAll" resultMap="BeanBaseResultMap" parameterType="Map">
+        <include refid="findSql"></include>
+    </select>
+    <!--不分页查询所有-->
+    <select id="queryAll" resultMap="BeanBaseResultMap" parameterType="Map">
+        <include refid="findSql"/>
+    </select>
+
+    <!--自定义 end-->
+
+
+</mapper>

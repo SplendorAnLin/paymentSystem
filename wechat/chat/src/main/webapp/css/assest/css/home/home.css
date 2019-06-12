@@ -1,0 +1,30 @@
+/*轮播图片大小*/
+body{
+    width: 100%;
+    overflow: hidden;
+	background: #fff;
+}
+.topimg {
+	width: 100%;
+}
+.tuceng21 {
+	width: 100%;
+	display: block;
+}
+/*主菜单*/
+.menu_lo3 ul li{
+     list-style-type: none;
+     display: block;
+     padding: 0.4rem 0;
+     text-align: center;
+     float: left;
+      width: calc(100% / 3);
+      font-size: 0.25rem;
+}
+.menu_lo3 ul li img{
+	width: 0.4rem;
+	margin-bottom: 0.1rem;
+}
+.menu_lo3 ul li:hover{
+   background: #DAF1FE;
+   }

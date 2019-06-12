@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN"         ":/spring-beans.dtd">
+<beans default-autowire="byName">
+
+	<bean name="/customerInterface" class="org.springframework.remoting.caucho.HessianServiceExporter">   
+		<property name="service">
+			<ref bean="customerInterface"/>
+		</property>   
+		<property name="serviceInterface">
+			<value>com.yl.boss.api.interfaces.CustomerInterface</value>
+		</property>
+	</bean>
+	<bean name="/oemInterface" class="org.springframework.remoting.caucho.HessianServiceExporter">
+		<property name="service">
+			<ref bean="oemInterface"/>
+		</property>
+		<property name="serviceInterface">
+			<value>com.yl.boss.api.interfaces.OemInterface</value>
+		</property>
+	</bean>
+	<bean name="/agentInterface" class="org.springframework.remoting.caucho.HessianServiceExporter">   
+		<property name="service">
+			<ref bean="agentInterface"/>
+		</property>   
+		<property name="serviceInterface">
+			<value>com.yl.boss.api.interfaces.AgentInterface</value>
+		</property>
+	</bean>
+	
+	<bean name="/shareProfitInterface" class="org.springframework.remoting.caucho.HessianServiceExporter">   
+		<property name="service">
+			<ref bean="shareProfitInterface"/>
+		</property>   
+		<property name="serviceInterface">
+			<value>com.yl.boss.api.interfaces.ShareProfitInterface</value>
+		</property>
+	</bean>
+	
+	<bean name="/bulletinInterface" class="org.springframework.remoting.caucho.HessianServiceExporter">   
+		<property name="service">
+			<ref bean="bulletinInterface"/>
+		</property>   
+		<property name="serviceInterface">
+			<value>com.yl.boss.api.interfaces.BulletinInterface</value>
+		</property>
+	</bean>
+	
+	<bean name="/protocolInterface" class="org.springframework.remoting.caucho.HessianServiceExporter">   
+		<property name="service">
+			<ref bean="protocolInterface"/>
+		</property>   
+		<property name="serviceInterface">
+			<value>com.yl.boss.api.interfaces.ProtocolInterface</value>
+		</property>
+	</bean>
+	
+	<bean name="/qRCodeInterface" class="org.springframework.remoting.caucho.HessianServiceExporter">   
+		<property name="service">
+			<ref bean="qRCodeInterface"/>
+		</property>   
+		<property name="serviceInterface">
+			<value>com.yl.boss.api.interfaces.QRCodeInterface</value>
+		</property>
+	</bean>
+	
+	<bean name="/deviceInterface" class="org.springframework.remoting.caucho.HessianServiceExporter">
+		<property name="service">
+			<ref bean="deviceInterface"/>
+		</property>   
+		<property name="serviceInterface">
+			<value>com.yl.boss.api.interfaces.DeviceInterface</value>
+		</property>
+	</bean>
+	
+	<bean name="/adInterface" class="org.springframework.remoting.caucho.HessianServiceExporter">
+		<property name="service">
+			<ref bean="adInterface"/>
+		</property>   
+		<property name="serviceInterface">
+			<value>com.yl.boss.api.interfaces.AdInterface</value>
+		</property>
+	</bean>
+	
+	<bean name="/mccInterface" class="org.springframework.remoting.caucho.HessianServiceExporter">
+		<property name="service">
+			<ref bean="mccInterface"/>
+		</property>   
+		<property name="serviceInterface">
+			<value>com.yl.boss.api.interfaces.MccInterface</value>
+		</property>
+	</bean>
+	
+	<bean name="/secretKeyInterface" class="org.springframework.remoting.caucho.HessianServiceExporter">
+		<property name="service">
+			<ref bean="secretKeyInterface"/>
+		</property>   
+		<property name="serviceInterface">
+			<value>com.yl.boss.api.interfaces.SecretKeyInterface</value>
+		</property>
+	</bean>
+	
+	<bean name="/shopInterface" class="org.springframework.remoting.caucho.HessianServiceExporter">
+		<property name="service">
+			<ref bean="shopInterface"/>
+		</property>   
+		<property name="serviceInterface">
+			<value>com.yl.boss.api.interfaces.ShopInterface</value>
+		</property>
+	</bean>
+	
+	<bean name="/posInterface" class="org.springframework.remoting.caucho.HessianServiceExporter">
+		<property name="service">
+			<ref bean="posInterface"/>
+		</property>   
+		<property name="serviceInterface">
+			<value>com.yl.boss.api.interfaces.PosInterface</value>
+		</property>
+	</bean>
+	
+	<bean name="/oneCustomerMultiCodeInterface" class="org.springframework.remoting.caucho.HessianServiceExporter">
+		<property name="service">
+			<ref bean="oneCustomerMultiCodeInterface"/>
+		</property>   
+		<property name="serviceInterface">
+			<value>com.yl.boss.api.interfaces.OneCustomerMultiCodeInterface</value>
+		</property>
+	</bean>
+</beans>

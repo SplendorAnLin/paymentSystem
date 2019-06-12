@@ -1,0 +1,133 @@
+body{
+	font-size: 0.26rem;
+	overflow-x: hidden;
+}
+section{
+	width: 100%;
+	overflow-x: hidden;
+}
+.card_bg{
+	margin: 0.2rem;
+	border-radius: 10px;
+	color: white;
+	padding: 0.2rem;
+	height: 2.4rem;
+}
+.bg_blue{
+	background: #0170E3;
+}
+.bg_crimson{
+	background: #9F0121;
+} 
+.fon_28{
+	font-size: 0.28rem;
+}
+.po_re{
+	position: relative;
+}
+.po_ab{
+	position: absolute;
+}
+.left{
+  left: 0;
+}
+.right{
+	right: 0;
+	
+}
+
+.line_height_5{
+	height: 0.5rem;
+	line-height: 0.5rem;
+}
+.border_bottom{
+	border-bottom: 1px solid white;
+}
+.fon_18{
+	font-size: 0.18rem;
+}
+.font_normal{
+	font-style: normal;
+}
+.height_100{
+	height: 1rem;
+}
+.dis_box{
+	display: -webkit-box;
+  -webkit-box-orient:horizontal;
+}
+.flex_1{
+	-webkit-box-flex:1 ;
+}
+.line_height_100{
+	line-height: 1rem;
+}
+.w-80{
+	width: 0.8rem;
+}
+.w-50{
+	width: 0.5rem;
+}
+.text_right{
+	text-align: right;
+}
+.top_10{
+	margin-top: 0.1rem;
+}
+.fon_30{
+	font-size: 0.3rem;
+}
+.bg_white{
+	background: white;
+}
+.hidden_o{
+	width: 80%;
+	 overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+.hidden{
+	display: none;
+}
+.fon_14{
+	font-size: 0.16rem!important;
+}
+.f-gray{
+	color: #888;;
+}
+.radius_50{
+	border-radius: 50%;
+}
+.height_80{
+	height: 0.8rem;
+	border: 2px solid white;
+}
+.text_center{
+	text-align: center;
+}
+.logo{
+	right: 0.4rem;
+	position: relative;
+}
+.center{
+	left: 1rem;
+}
+.bg_gray{
+	background: #AAAAAA;
+}
+.re_top_10{
+	top: 0.1rem;
+}
+.ver_200{
+	height: 2rem;
+	line-height: 2rem;
+}
+.font_orange{
+color: orange;	
+}
+.wi47{
+	max-width: 47%;
+	overflow: hidden;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+}

@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="com.yl.payinterface.core.dao.mapper.AliPayReconAccDaoMapper">
+
+    <resultMap id="BaseResultMap" type="com.yl.payinterface.core.model.AliPayReconAcc">
+        <id column="ID" property="id"/>
+        <result column="OPTIMISTIC" property="optimistic"/>
+        <result column="USER_NAME" property="userName"/>
+        <result column="TOKEN" property="token"/>
+        <result column="BILL_USER_ID" property="billUserId"/>
+        <result column="COOKIES" property="cookies"/>
+        <result column="STATUS" property="status"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        ID, OPTIMISTIC, USER_NAME, TOKEN, BILL_USER_ID, COOKIES, STATUS
+    </sql>
+
+    <insert id="save" parameterType="com.yl.payinterface.core.model.AliPayReconAcc"
+            useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO alipay_acc(OPTIMISTIC, USER_NAME, TOKEN, BILL_USER_ID, COOKIES, STATUS)
+        VALUES
+        (#{optimistic}, #{userName}, #{token}, #{billUserId}, #{cookies}, #{status})
+    </insert>
+
+    <update id="update">
+        UPDATE alipay_acc SET TOKEN = #{token}, COOKIES = #{cookies}, STATUS = #{status}
+        WHERE ID = {id}
+    </update>
+
+    <select id="findByTask" resultMap="BaseResultMap">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM alipay_acc
+        WHERE STATUS = 'YES'
+    </select>
+
+    <update id="updateStatus">
+        UPDATE alipay_acc SET STATUS = #{status}
+        WHERE USER_NAME = #{acc}
+    </update>
+
+    <select id="queryAll" resultMap="BaseResultMap">
+        SELECT
+        <include refid="Base_Column_List" />
+        FROM alipay_acc
+        WHERE 1 = 1
+        <if test="params.userName != null and params.userName !='' ">
+            AND USER_NAME = #{params.userName}
+        </if>
+        ORDER BY ID DESC
+    </select>
+</mapper>

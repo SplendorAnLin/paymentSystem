@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.yl.rate.core.dao.RateTemplateHistoryMapper">
+    <!--auto generated Code-->
+    <resultMap id="BaseResultMap" type="com.yl.rate.core.entity.RateTemplateHistory">
+        <result column="name" property="name" jdbcType="VARCHAR"/>
+        <result column="status" property="status" jdbcType="VARCHAR"/>
+        <result column="rate_code" property="rateCode" jdbcType="VARCHAR"/>
+        <result column="default_rate" property="defaultRate" jdbcType="VARCHAR"/>
+        <result column="product_type" property="productType" jdbcType="VARCHAR"/>
+        <result column="owner_role" property="ownerRole" jdbcType="VARCHAR"/>
+        <result column="id" property="id" jdbcType="BIGINT"/>
+        <result column="code" property="code" jdbcType="VARCHAR"/>
+        <result column="create_time" property="createTime"/>
+        <result column="update_time" property="updateTime"/>
+        <result column="remarks" property="remarks" jdbcType="VARCHAR"/>
+        <result column="oper" property="oper" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <!--auto generated Code-->
+    <sql id="Base_Column_List">
+        name,
+        status,
+        rate_code,
+        default_rate,
+        product_type,
+        owner_role,
+        id,
+        code,
+        create_time,
+        update_time,
+        remarks,
+        oper
+    </sql>
+
+    <insert id="insert" parameterType="com.yl.rate.core.entity.RateTemplateHistory">
+        INSERT INTO rate_template_history (
+        name,
+        status,
+        rate_code,
+        default_rate,
+        product_type,
+        owner_role,
+        id,
+        code,
+        create_time,
+        update_time,
+        remarks,
+        oper
+        ) VALUES (
+        #{rateTemplate.name,jdbcType=VARCHAR},
+        #{rateTemplate.status,jdbcType=VARCHAR},
+        #{rateTemplate.rateCode,jdbcType=VARCHAR},
+        #{rateTemplate.defaultRate,jdbcType=VARCHAR},
+        #{rateTemplate.productType,jdbcType=VARCHAR},
+        #{rateTemplate.ownerRole,jdbcType=VARCHAR},
+        #{rateTemplate.id,jdbcType=BIGINT},
+        #{rateTemplate.code,jdbcType=VARCHAR},
+        #{rateTemplate.createTime},
+        #{rateTemplate.updateTime},
+        #{rateTemplate.remarks,jdbcType=VARCHAR},
+        #{rateTemplate.oper,jdbcType=VARCHAR}
+        )
+    </insert>
+
+    <select id="queryRateTemplate" resultMap="BaseResultMap">
+        SELECT
+        <include refid="Base_Column_List" />
+        FROM rate_template_history
+        WHERE code = #{code}
+        AND product_type = #{productType}
+    </select>
+
+    <select id="queryDefaultRateTemplate" resultMap="BaseResultMap">
+        SELECT
+        <include refid="Base_Column_List" />
+        FROM rate_template_history
+        WHERE product_type = #{productType}
+        AND owner_role = #{ownerRole}
+    </select>
+
+    <select id="findAllRateTemplateHistoryByCode" resultMap="BaseResultMap">
+        SELECT
+        <include refid="Base_Column_List" />
+        FROM rate_template_history
+        WHERE code = #{code}
+        ORDER BY create_time DESC
+    </select>
+
+    <select id="queryRateTemplateByCodeAndDate" resultMap="BaseResultMap">
+        SELECT
+        <include refid="Base_Column_List" />
+        FROM rate_template_history
+        WHERE rate_rule_code = #{rateRuleCode}
+        AND create_time BETWEEN #{startTime} AND #{endTime}
+    </select>
+
+    <select id="queryRateTemplateById" resultMap="BaseResultMap">
+        SELECT
+        <include refid="Base_Column_List" />
+        FROM rate_template_history
+        WHERE id = #{id}
+    </select>
+</mapper>

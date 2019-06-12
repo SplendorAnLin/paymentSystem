@@ -1,0 +1,1901 @@
+<?xml version="1.0" encoding="UTF-8"?>  
+  
+<!DOCTYPE struts PUBLIC   
+    "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"  
+    "http://struts.apache.org/dtds/struts-2.0.dtd">   
+  
+<struts>
+	<constant name="struts.multipart.maxSize" value="10240000" />
+	<package name="manage" extends="default">
+		<default-action-ref name="simpleJSPAction"/>
+		<!--<result-types>
+			<result-type name="json" class="org.apache.struts2.json.JSONResult"></result-type>
+		</result-types>
+            <interceptor name="json" class="org.apache.struts2.json.JSONInterceptor"></interceptor>
+        </interceptors>
+		 通用jsp转发 -->
+		<action name="simpleJSPAction" class="com.yl.boss.action.SimpleJSPAction">			
+			<result name="login">/jsp/login.jsp</result>
+			<result name="toLogin">/jsp/lefu_login.jsp</result>
+			<result name="welcomeQuery">/jsp/welcome.jsp</result>
+			<result name="toOperatorPasswordUpdate">/jsp/operator/operatorPasswordUpdate.jsp</result>
+			<result name="toOperatorAuditPasswordUpdate">/jsp/operator/operatorAuditPasswordUpdate.jsp</result>
+			<result name="toCustomerQuery">/jsp/customer/customerQuery.jsp</result>
+			<result name="toCustomerAuditQuery">/jsp/customer/customerAuditQuery.jsp</result>
+			<result name="toOrderQuery">/jsp/order/orderQuery.jsp</result>
+			<result name="toCommissionRecordQuery">/jsp/commissionRecord/commissionRecordQuery.jsp</result>
+			<result name="toSettleBillQuery">/jsp/settlebill/settleBillQuery.jsp</result>
+			<result name="toAdviceFeedBackAdd">/jsp/adviceFeedBack/adviceFeedBackAdd.jsp</result>	
+			<result name="toOrderCountQuery">/jsp/orderCount/orderQuery.jsp</result>
+			<!-- 代收 -->
+			<result name="toReceiveConfigQuery">/jsp/receive/receiveConfigQuery.jsp</result>
+			<result name="toReceiveConfigAdd">/jsp/receive/receiveConfigAdd.jsp</result>
+			<result name="toReceiveOrderQuery">/jsp/receive/receiveOrderQuery.jsp</result>
+			<result name="toReceiveConfigHistory">/jsp/receive/receiveConfigHistory.jsp</result>
+			<result name="toReceiveConfigUpdate">/jsp/receive/receiveConfigUpdate.jsp</result>
+			
+			<!-- 功能管理 -->
+			<result name="toFunctionQuery">/jsp/function/functionQuery.jsp</result>
+			<result name="toFunctionAdd">/jsp/function/functionAdd.jsp</result>
+			<result name="toNameQuery">/jsp/nameList/nameListQuery.jsp</result>
+			<result name="toAgentFunctionQuery">/jsp/function/agentFunctionQuery.jsp</result>	
+			<result name="toAgentFunctionAdd">/jsp/function/agentFunctionAdd.jsp</result>
+			
+			<result name="toCustFunctionQuery">/jsp/function/custFunctionQuery.jsp</result>	
+			<result name="toCustFunctionAdd">/jsp/function/custFunctionAdd.jsp</result>	
+			
+			<result name="toRoleQuery">/jsp/role/roleQuery.jsp</result>
+			<result name="toDfQuery">/jsp/df/dfQuery.jsp</result>
+			<result name="toDfSingle">/jsp/df/dfSingleApply.jsp</result>
+			<result name="toDfBatch">/jsp/df/dfBatchApply.jsp</result>
+			<result name="toDfPayeeQuery">/jsp/df/dfPayeeQuery.jsp</result>
+			<result name="toDfComplexPWDModify">/jsp/df/dfComplexPWDModify.jsp</result>
+			<result name="toDfServiceConfigAdd">/jsp/df/serviceConfigAdd.jsp</result>
+			
+			<!-- 操作员管理 -->
+			<result name="toOperatorQuery">/jsp/operator/operatorQuery.jsp</result>
+			<result name="toOperatorAdd">/jsp/operator/operatorAdd.jsp</result>
+			<result name="toPermisAdd">/jsp/operator/permisAdd.jsp</result>
+			<result name="toOperatorLoginHistoryQuery">/jsp/operator/operatorLoginHistoryQuery.jsp</result>
+			<!-- 商户管理 -->
+			<result name="toAddCustomer">/jsp/customer/customerAdd.jsp</result>
+			<result name="toAddAggent">/jsp/agent/agentAdd.jsp</result>
+			<result name="customerConfigQuery">/jsp/customer/customerConfigQuery.jsp</result>
+			<result name="toCustomerConfigAdd">/jsp/customer/customerConfigAdd.jsp</result>
+			<!-- 服务商信息查询 -->
+			<result name="toAgentQuery">/jsp/agent/agentQuery.jsp</result>
+			<!-- 服务商费率查询 -->
+			<result name="toAgentFeeQuery">/jsp/agentFee/agentFeeQuery.jsp</result>
+			<result name="toAgentFeeAdd">/jsp/agentFee/agentFeeAdd.jsp</result>	
+			<!-- 服务商结算信息 -->
+			<result name="toAgentSettlementQuery">/jsp/agent/agentSettlementQuery.jsp</result>
+			<!-- 服务商审核 -->
+			<result name="toAgentAuditQuery">/jsp/agent/agentAuditQuery.jsp</result>
+			
+			<!-- 路由管理 -->
+ 			<result name="toAddRouter">/jsp/online/routerService/routerAdd.jsp</result>
+			<!-- 商户路由管理 -->
+			<result name="toPartnerRouter">/jsp/online/partnerRouterService/partnerRouterAdd.jsp</result>
+			<!-- 接口提供方管理 -->
+			<result name="toInterfaceProvider">/jsp/payinterface/interfaceProvider/interfaceProviderQuery.jsp</result>
+			<result name="toAddInterfaceProvider">/jsp/payinterface/interfaceProvider/interfaceProviderAdd.jsp</result>
+			<!-- 接口信息管理 -->
+			<result name="toInterfaceInfo">/jsp/payinterface/interfaceInfo/interfaceInfoAdd.jsp</result>
+			<!-- 订单查询 -->
+			<!-- 接口请求查询 -->
+			<result name="toInterfaceRequestQuery">/jsp/payinterface/interfaceRequest/interfaceRequestQuery.jsp</result>
+			<!-- 接口信息 -->
+			<result name="toInterfaceInfoQuery">/jsp/payinterface/interfaceInfo/interfaceInfoQuery.jsp</result>
+			<result name="toPayOrderQuery">/jsp/online/payOrderService/payOrderQuery.jsp</result>
+			<!-- 商户路由查询 -->
+			<result name="toPartnerRouterQuery">/jsp/online/partnerRouterService/partnerRouterQuery.jsp</result>
+			<!-- 路由模板查询 -->
+			<result name="toRouterQuery">/jsp/online/routerService/routerQuery.jsp</result>
+ 			<!-- 代收路由查询 -->
+ 			<result name="toReceiveRouteQuery">/jsp/receive/receiveRouteQuery.jsp</result>
+ 			<!-- 代付路由查询 -->
+ 			<result name="toDfRouteQuery">/jsp/df/dfRouteQuery.jsp</result>
+ 			
+			<!-- 接口请求查询 -->
+			<result name="toInterfaceRequestQuery">/jsp/payinterface/interfaceRequest/interfaceRequestQuery.jsp</result>
+			<!-- 接口信息 -->
+			<result name="toInterfaceInfoQuery">/jsp/payinterface/interfaceInfo/interfaceInfoQuery.jsp</result>
+			<!--商户费率  -->
+			<result name="toCustomerFeeQuery">/jsp/customerFee/customerFeeQuery.jsp</result>
+			<result name="toAddCustomerFee">/jsp/customerFee/customerFeeAdd.jsp</result>
+			<!--商户秘钥  -->
+			<result name="toCustomerKeyQuery">/jsp/customerKey/customerKeyQuery.jsp</result>
+			<!--账户  -->
+			<result name="toAccountInofQuery">/jsp/account/accountInfoQuery.jsp</result>
+			<!-- 公告 -->
+			<result name="toBulletinQuery">/jsp/bulletin/bulletinQuery.jsp</result>
+			<result name="toBulletinAdd">/jsp/bulletin/bulletinAdd.jsp</result>
+			<!-- 经营分析 -->
+			<result name="toShareProfitQuery">/jsp/shareProfit/shareProfitQuery.jsp</result>
+			<!-- 账户历史查询 -->
+			<result name="toAccountHistoryInfoQuery">/jsp/account/accountHistory/accountHistoryInfoQuery.jsp</result>
+			<!-- 账户调帐页面 -->
+			<result name="toAccountAdjustA">/jsp/account/accountAdjust/accountAdjust.jsp</result>
+			<!-- 账户资金冻结 -->
+			<result name="toAccountFrozenA">/jsp/account/accountFrozen/accountFrozen.jsp</result>
+			<result name="toAccountFrozenB">/jsp/account/accountFrozen/accountJCFrozen.jsp</result>
+			<!-- 账户调帐查询页面-->
+			<result name="toAccountAdjust">/jsp/account/accountAdjust/accountInfoQuery.jsp</result>
+			<!-- 账户冻结查询页面 -->
+			<result name="toAccountFrozen">/jsp/account/accountFrozen/accountInfoQuery.jsp</result>
+			<!-- 代付 -->
+			<result name="toDfAuditQuery">/jsp/df/dfAuditQuery.jsp</result>
+			<result name="toDfCustomerConfigQuery">/jsp/df/dfCustomerConfigQuery.jsp</result>
+			<result name="toServiceConfigQuery">/jsp/df/serviceConfigQuery.jsp</result>
+			<!-- 角色添加 -->
+			<result name="toRoleFind">/jsp/role/roleQuery.jsp</result>
+			<!-- 加载协议管理页面 -->
+			<result name="toProtocolManagementQuery">/jsp/Management/ProtocolManagementQuery.jsp</result>
+			<result name="toProtocolManagementAdd">/jsp/Management/protocolManagementAdd.jsp</result>
+			<!-- 商户结算信息 -->
+			<result name="toCustomerSettleQuery">/jsp/customer/customerSettleQuery.jsp</result>
+			<!-- 字典管理 -->
+			<result name="toDictionaryQuery">/jsp/dictionary/dictionaryQuery.jsp</result>
+			<result name="toDictionaryTypeQuery">/jsp/dictionary/dictionaryTypeQuery.jsp</result>
+			<!-- 会员管理 -->
+			<result name="toApparatus">/jsp/member/apparatusQuery.jsp</result>
+			<result name="toApparatusList">/jsp/member/apparatusQueryResult.jsp</result>
+			<result name="toAddApparatus">/jsp/member/apparatusQuery.jsp</result>
+			<result name="toEditApparatus">/jsp/member/apparatusEdit.jsp</result>
+			<result name="toAddApparatus">/jsp/member/apparatusAdd.jsp</result>
+			
+			<!-- 终端end -->
+			<result name="toMember">/jsp/member/vipQuery.jsp</result>
+			<result name="toMemberList">/jsp/member/vipQueryResult.jsp</result>
+			<result name="tovipDetail">/jsp/member/vipDetail.jsp</result>
+			<result name="toLowVipQueryResult">/jsp/member/lowVipQueryResult.jsp</result>
+			<result name="toVipStatus">/jsp/member/vipStatus.jsp</result>
+			
+			<!-- 会员end -->
+			<!-- 设备采购查询 -->
+			<result name="toDeviceQuery">/jsp/device/deviceQuery.jsp</result>
+			<result name="toAgentDeviceOrderQuery">/jsp/device/agentDeviceOrderAuditQuery.jsp</result>
+			<result name="toDeviceType">/jsp/device/deviceTypeQuery.jsp</result>
+			<result name="deviceTypeParentAdd">/jsp/device/deviceTypeParentAdd.jsp</result>
+			<result name="toAdQuery">/jsp/systemSettings/adQuery.jsp</result>
+			<!-- app 帮助 -->
+			<result name="toShowAppHelp">/jsp/word/appHelpIndex.jsp</result>
+			
+			<result name="toUserFeedBackQuery">/jsp/feedBack/feedBackQuery.jsp</result>	
+			<!-- 微信 -->
+			<result name="toWeChatMenu">/jsp/wechat/wxMenu.jsp</result>
+			<!-- app版本更新 -->
+			<result name="toClientVersion">/jsp/client/clientVersionQuery.jsp</result>
+
+			<result name="toMccQuery">/jsp/mcc/mccQuery.jsp</result>
+			
+			<result name="toSecretKeyQuery">/jsp/rasioManagement/secretKey/secretKeyQuery.jsp</result>
+			
+			<result name="toShopQuery">/jsp/rasioManagement/shop/shopQuery.jsp</result>
+			
+			<result name="toPosQuery">/jsp/pos/posQuery.jsp</result>
+			<!-- pos 请求记录查询 -->
+			<result name="toPosRequestQuery">/jsp/pos/posRequestQuery.jsp</result>
+			<!-- pos 交易订单查询-->
+			<result name="toPosOrderQuery">/jsp/pos/posOrderQuery.jsp</result>
+			<!-- POS分配 -->
+			<result name="toPosAssignQuery">/jsp/pos/posAssignQuery.jsp</result>
+			
+			<!-- 交易卡查询 -->
+			<result name="toTransCardQuery">/jsp/transCard/transCardQuery.jsp</result>
+			<!-- 实名认证开通 -->
+			<result name="toRealMangerQuery">/jsp/RealIdentify/RealMangerQuery.jsp</result>
+			<result name="toRealIdQuery">/jsp/RealIdentify/RealIdQuery.jsp</result>
+			<result name="toRealFaceQuery">/jsp/RealIdentify/RealFaceQuery.jsp</result>
+			<!-- 报备信息查询 -->
+			<result name="toReportCustomerQuery">/jsp/reportCustomer/reportCustomerQuery.jsp</result>
+			<result name="toReportCustomerAdd">/jsp/reportCustomer/reportCustomerAdd.jsp</result>
+			<!-- POS申请查询 -->
+			<result name="toPosStockQuery">/jsp/pos/posStockQuery.jsp</result>
+			
+			<!-- 客户端配置管理 -->
+			<result name="toNoticeConfigQuery">/jsp/noticeManage/noticeManageQuery.jsp</result>
+
+            <!-- 对账start -->
+            <result name="toReconQuery">/jsp/recon/reconInfoQuery.jsp</result>
+            <result name="toOutReconQuery">/jsp/recon/outReconInfoQuery.jsp</result>
+            <result name="toReconFileInfo">/jsp/recon/reconFileInfoQuery.jsp</result>
+            <result name="toExceptionOrder">/jsp/recon/reconExceptionQuery.jsp</result>
+            <!-- 对账end -->
+		</action>
+		
+		<action name="posStockQuery" class="defaultValueListAction">
+			<param name="queryId">posStockQuery</param>
+			<result>/jsp/pos/posStockQueryResult.jsp</result>
+		</action>
+		
+		
+		<action name="transCardQuery" class="defaultValueListAction">
+			<param name="queryId">transQuery</param>
+			<result>/jsp/transCard/transCardQueryResult.jsp</result>
+		</action>
+		
+		<action name="updateTransStatus" class="com.yl.boss.action.TransCardAction" method="updateStatus">
+			<result name="success" type="json" >
+				<param name="root">code</param>
+			</result>                                                                        
+		</action>
+		
+		<action name="transCardHistoryQuery" class="com.yl.boss.action.TransCardAction" method="findTransHistory">
+			<result name="success">/jsp/transCard/transCardHistory.jsp</result>
+		</action>
+		
+		<action name="wxMenu" class="com.yl.boss.action.WeChatAction" method="wxMenu">
+			<result name="success" type="json" >
+				<param name="root">msg</param>
+			</result>                                                                        
+		</action>
+		<action name="wxMenuSave" class="com.yl.boss.action.WeChatAction" method="createMenu">
+			<result name="success" type="json" >
+				<param name="root">msg</param>
+			</result>                                                                        
+		</action>
+		<!-- 查询意见反馈 -->
+		<action name="userFeedBackQuery" class="defaultValueListAction">
+			<param name="queryId">userFeedBackQuery</param>
+			<result>/jsp/feedBack/feedBackQueryResult.jsp</result>
+		</action>
+		<!-- 广告管理 Start -->
+		<action name="findAgentByOem" class="com.yl.boss.action.AdAction" method="findAgentByOem">
+			<result name="success" type="json" >
+				<param name="root">msg</param>
+			</result>
+		</action>
+		<action name="findAgentByAgentNo" class="com.yl.boss.action.AdAction" method="findAgentByAgentNo">
+			<result name="success" type="json" >
+				<param name="root">msg</param>
+			</result>
+		</action>
+		<action name="adQuery" class="defaultValueListAction">
+			<param name="queryId">adQuery</param>
+			<result>/jsp/systemSettings/adQueryResult.jsp</result>
+		</action>
+		<action name="adQueryMap" class="com.yl.boss.action.AdAction" method="adQueryMap">
+			<result name="success">/jsp/systemSettings/adQueryResult.jsp</result>
+		</action>
+		<action name="adAdd" class="com.yl.boss.action.AdAction" method="adAdd">
+			<result name="success" type="redirect">/toAdQuery.action</result>
+		</action>
+		<action name="adUpdate" class="com.yl.boss.action.AdAction" method="adUpdate">
+			<result name="success" type="redirect">/toAdQuery.action</result>
+		</action>
+		<action name="adQueryById" class="com.yl.boss.action.AdAction" method="adQueryById">
+			<result name="success">/jsp/systemSettings/adUpdate.jsp</result>
+		</action>
+		<action name="findAdDocumentImg" class="com.yl.boss.action.AdAction" method="findAdDocumentImg">
+			<result name="success" type="stream">
+				<param name="contentType">image/jpeg</param>       
+		        <param name="inputName">fileOutput</param>   
+			</result>
+		</action>
+		<action name="openAdd" class="com.yl.boss.action.AdAction" method="openAdd">
+			<result name="success">/jsp/systemSettings/adAdd.jsp
+			</result>
+		</action>
+		<!-- 广告管理 End -->
+		<!-- 首页信息 -->
+			<!-- 公告 -->
+		<action name="bulletinList" class="welcomeAction" method="bulletinList">
+			<result name="success">/jsp/bulletin/bulletinList.jsp</result>	
+			<!-- <param name="queryId">bulletin</param>
+			<result>/jsp/bulletin/bulletinList.jsp</result> -->
+		</action>
+			<!-- 上次登录信息 -->
+		<action name="lastloginInfo" class="welcomeAction" method="lastloginInfo">
+			<result name="success" type="json" >
+				<param name="root">lastloginInfo</param>
+			</result>
+		</action>
+			<!-- 分类余额 -->
+		<action name="countAccBalance" class="welcomeAction" method="countAccBalance">
+			<result name="success" type="json" >
+				<param name="root">countAccBalance</param>
+			</result>
+		</action>
+		<!-- 初始数据加载 -->
+		<action name="initRD" class="welcomeAction" method="initRD"></action>
+		<action name="initOrder" class="welcomeAction" method="initOrder" ></action>
+		<action name="initDate" class="welcomeAction" method="initDate"></action>
+		<action name="initDayDate" class="welcomeAction" method="initDayDate"></action>
+		<action name="getIndex" class="welcomeAction" method="getIndex"></action>
+		<action name="initYear" class="welcomeAction" method="initYear"></action>
+		<!-- 权限代理 -->
+		<action name="authorityProxy" class="com.yl.boss.action.AuthorityProxyAction">		
+			<result name="success">/jsp/error.jsp</result>	
+			<result name="error">/jsp/error.jsp</result>									
+		</action>
+
+		<!-- 角色查询 -->
+		<action name="roleQuery" class="defaultValueListAction">
+			<param name="queryId">roleInfo</param>
+			<result>/jsp/role/roleQueryResult.jsp</result>                                                                           
+		</action>
+		<action name="checkRoleName" class="roleAction" method="checkRoleName">
+			<result name="success" type="json" >
+				<param name="root">msg</param>
+			</result>                                                                        
+		</action>
+		<action name="getRole" class="operatorAction" method="getRole">
+			<result name="success" type="json" >
+				<param name="root">msg</param>
+			</result>                                                                        
+		</action>
+		<action name="roleQueryById" class="roleAction" method="roleQueryById">
+			<result>/jsp/role/roleDetail.jsp</result>
+		</action>
+		<action name="toRoleAdd" class="roleAction" method="getMenuAndFun">
+			<result>/jsp/role/roleAdd.jsp</result>
+		</action>
+		<action name="roleAdd" class="roleAction" method="addRole">	
+			<result name="success" type="json" >
+				<param name="root">msg</param>
+			</result>			
+		</action>
+		<action name="toUpdateRole" class="roleAction" method="roleQueryAndAll">
+			<result>/jsp/role/roleUpdate.jsp</result>
+		</action>
+		<action name="roleUpdate" class="roleAction" method="roleUpdate">
+			<result name="success" type="redirect">toRoleQuery.action?success=true</result>
+			<result name="error" type="chain">toUpdateRole.action?success=false</result>
+		</action>
+		<action name="roleUpdateStatus" class="roleAction" method="roleUpdateStatus">
+			<result name="success" type="redirect">toRoleQuery.action?success=true</result>
+			<result name="error" type="chain">toRoleQuery.action?success=false</result>
+		</action>
+		
+<!-- 		<action name="roleFunctionQuery" class="roleAction" method="findRoleFunctionByRoleId">
+			<result>/jsp/role/roleFunction.jsp</result>                                                                           
+		</action>
+		<action name="updateRoleFunction" class="roleAction" method="updateRoleFunction">
+			<result>/jsp/role/roleFunction.jsp</result>
+		</action>
+		<action name="roleMenuQuery" class="roleAction" method="queryRoleMenu">
+			<result>/jsp/role/roleMenu.jsp</result>
+		</action>
+		<action name="roleMenuUpdate" class="roleAction" method="updateRoleMenu">
+			<result type="redirect">roleMenuQuery.action?role.id=${id}</result>
+		</action> -->
+		
+		<action name="roleDelete" class="roleAction" method="deleteRole"/>
+		
+
+
+		<!-- 运营菜单管理 -->
+		<action name="toMenuQuery" class="com.yl.boss.action.MenuAction" method="toMenuQuery">
+			<result>/jsp/menu/menuTree.jsp</result>
+		</action>
+		<action name="toMenuEdit" class="com.yl.boss.action.MenuAction" method="toMenuEdit">
+			<result>/jsp/menu/menuEdit.jsp</result>
+		</action>
+		<action name="modifyMenu" class="com.yl.boss.action.MenuAction" method="modifyMenu">
+			<result type="redirect">toMenuEdit.action?menuId=${menu.id}</result>
+		</action>
+		<action name="addChildMenu" class="com.yl.boss.action.MenuAction" method="addChildMenu">
+			<result type="redirect">toMenuEdit.action?menuId=${menu.parentId}</result>
+		</action>	
+		<action name="findMenuByName" class="com.yl.boss.action.MenuAction" method="findMenuByName">
+			<result name="success" type="json" >
+				<param name="root">msg</param>
+			</result>   
+		</action>
+		<action name="findMenuName" class="com.yl.boss.action.MenuAction" method="findMenuName">
+			<result name="success" type="json" >
+				<param name="root">msg</param>
+			</result>   
+		</action>
+			
+		<!-- 服务商菜单管理 -->
+		<action name="agentMenuQuery" class="com.yl.boss.action.AgentAction" method="agentMenuQuery">
+			<result>/jsp/menu/agentMenuTree.jsp</result>
+		</action>
+		<action name="toagentMenuEdit" class="com.yl.boss.action.AgentAction" method="toagentMenuEdit">
+			<result>/jsp/menu/agentMenuEdit.jsp</result>
+		</action>
+		<action name="agentModifyMenu" class="com.yl.boss.action.AgentAction" method="agentModifyMenu">
+			<result type="redirect">toagentMenuEdit.action?menuId=${menu.id}</result>
+		</action>
+		<action name="agentAddChildMenu" class="com.yl.boss.action.AgentAction" method="agentAddChildMenu">
+			<result type="redirect">toagentMenuEdit.action?menuId=${menu.parentId}</result>
+		</action>
+		<action name="agentFindMenuByName" class="com.yl.boss.action.AgentAction" method="findMenuByName">
+			<result name="success" type="json" >
+				<param name="root">msg</param>
+			</result>   
+		</action>
+		<action name="agentFindMenuName" class="com.yl.boss.action.AgentAction" method="findMenuName">
+			<result name="success" type="json" >
+				<param name="root">msg</param>
+			</result>   
+		</action>
+		<action name="agentAuditQuery" class="com.yl.boss.action.AgentAction" method="agentAuditQuery">
+			<result name="success">/jsp/agent/agentAuditQueryResult.jsp</result>
+		</action>
+		<action name="checkAgentName" class="agentAction" method="checkAgentName">
+			<result name="success" type="json">
+				<param name="root">msg</param>
+			</result>
+		</action>
+		<action name="queryAgentExistsAndLevelOne" class="agentAction" method="queryAgentExistsAndLevelOne">
+			<result name="success" type="json">
+				<param name="root">msg</param>
+			</result>
+		</action>
+		<action name="queryAgentShortNameByAgentNo" class="agentAction" method="queryAgentShortNameByAgentNo">
+			<result name="success" type="json">
+				<param name="root">msg</param>
+			</result>
+		</action>
+		<!-- 商户菜单管理 -->
+		<action name="custMenuQuery" class="com.yl.boss.action.CustomerAction" method="custMenuQuery">
+			<result>/jsp/menu/customerMenuTree.jsp</result>
+		</action>
+		<action name="toCustomerMenuEdit" class="com.yl.boss.action.CustomerAction" method="toCustomerMenuEdit">
+			<result>/jsp/menu/customerMenuEdit.jsp</result>
+		</action>
+		<action name="customerModifyMenu" class="com.yl.boss.action.CustomerAction" method="customerModifyMenu">
+			<result type="redirect">toCustomerMenuEdit.action?menuId=${menu.id}</result>
+		</action>
+		<action name="customerAddChildMenu" class="com.yl.boss.action.CustomerAction" method="customerAddChildMenu">
+			<result type="redirect">toCustomerMenuEdit.action?menuId=${menu.parentId}</result>
+		</action>
+		<action name="custFindMenuByName" class="com.yl.boss.action.CustomerAction" method="findMenuByName">
+			<result name="success" type="json" >
+				<param name="root">msg</param>
+			</result>   
+		</action>
+		<action name="custFindMenuName" class="com.yl.boss.action.CustomerAction" method="findMenuName">
+			<result name="success" type="json" >
+				<param name="root">msg</param>
+			</result>   
+		</action>
+		<action name="checkCustomerName" class="customerAction" method="checkCustomerName">
+			<result name="success" type="json">
+				<param name="root">msg</param>
+			</result>
+		</action>
+		<action name="customerCheckPhone" class="customerAction" method="checkPhone">
+			<result name="success" type="json">
+				<param name="root">msg</param>
+			</result>
+		</action>
+		<action name="findShortNameByCustomerNo" class="customerAction" method="findShortNameByCustomerNo">
+			<result name="success" type="json">
+				<param name="root">msg</param>
+			</result>
+		</action>
+		<action name="customerNoBool" class="customerAction" method="customerNoBool">
+			<result name="success" type="json">
+				<param name="root">msg</param>
+			</result>
+		</action>
+		<action name="fullNameByCustNo" class="customerAction" method="fullNameByCustNo">
+			<result name="success"  type="json">
+				<param name="root">msg</param>
+			</result>
+		</action>
+		<action name="queryCustomerExistsAndNotSuperior" class="customerAction" method="queryCustomerExistsAndNotSuperior">
+			<result name="success" type="json">
+				<param name="root">msg</param>
+			</result>
+		</action>
+		<!-- 字典菜单管理开始 -->
+		<action name="dictionaryQuery" class="com.yl.boss.action.DictionaryAction" method="queryDictionaryByPay">
+			<result name="success">jsp/dictionary/dictionaryQueryResult.jsp</result>
+		</action>
+		<action name="dictionarySaveOrUpdate" class="com.yl.boss.action.DictionaryAction" method="dictionaryRangedByKeyCrud">
+			<result name="success" type="redirect">toDictionaryQuery.action</result>
+		</action>
+		<action name="dictionaryDel" class="com.yl.boss.action.DictionaryAction" method="dictionaryDelete">
+			<result name="success" type="redirect">toDictionaryQuery.action</result>
+		</action>
+		<action name="dictionaryRangedByKeyCrud" class="com.yl.boss.action.DictionaryAction" method="dictionaryRangedByKeyCrud">
+			<result name="success">jsp/dictionary/dictionaryUpdate.jsp</result>
+		</action>
+		<action name="ajaxQueryDictionaryByTypeCode" class="com.yl.boss.action.DictionaryAction" method="ajaxQueryDictionaryByTypeCode">
+			<result name="success" type="json">
+				<param name="root">msg</param>
+			</result>
+		</action>
+		
+		<!-- 字典类型开始 -->
+		<action name="dictionaryTypeQuery" class="com.yl.boss.action.DictionaryAction" method="queryDictionaryTypeByPay">
+			<result name="success">jsp/dictionary/dictionaryTypeQueryResult.jsp</result>
+		</action>
+		<action name="dictionaryTypeSaveOrUpdate" class="com.yl.boss.action.DictionaryAction" method="dictionaryTypeSaveOrUpdate">
+			<result name="success" type="redirect">toDictionaryTypeQuery.action</result>
+		</action>
+		<action name="dictionaryTypeDel" class="com.yl.boss.action.DictionaryAction" method="dictionaryTypeDelete">
+			<result name="success" type="redirect">toDictionaryTypeQuery.action</result>
+		</action>
+		<action name="queryDictionaryTypeByCodeAjax" class="com.yl.boss.action.DictionaryAction" method="queryDictionaryTypeByCodeAjax">
+			<result name="success" type="json">
+				<param name="root">msg</param>
+			</result>
+		</action>
+		<action name="queryDictionaryTypeByCode" class="com.yl.boss.action.DictionaryAction" method="queryDictionaryTypeByCode">
+			<result name="success">jsp/dictionary/dictionaryTypeUpdate.jsp</result>
+		</action>
+		<!-- 字典类型结束 -->
+		
+		<!-- 字典菜单管理结束 -->
+		
+		
+		<!-- 功能管理-->
+		<action name="functionQuery" class="defaultValueListAction">
+			<param name="queryId">function</param>
+			<result>/jsp/function/functionQueryResult.jsp</result>
+		</action>
+		<action name="functionAdd" class="com.yl.boss.action.FunctionAction" method="addFunction">
+			<result type="redirect">toFunctionQuery.action</result>
+		</action>
+		<action name="tofunctionModify" class="defaultValueListAction">
+			<param name="queryId">function</param>
+			<result>/jsp/function/functionModify.jsp</result>
+		</action>	
+		<action name="functionModify" class="com.yl.boss.action.FunctionAction" method="modify">
+			<result>/jsp/function/functionModify.jsp</result>
+		</action>
+		<action name="deleteFunction" class="com.yl.boss.action.FunctionAction" method="delete">
+			<result>/jsp/function/functionQueryResult.jsp</result>
+		</action>
+
+		<!--服务商功能管理 -->
+		<action name="agentFunctionQuery" class="com.yl.boss.action.AgentAction" method="findAll">
+			<result>/jsp/function/agentFunctionQueryResult.jsp</result>
+		</action>
+		<action name="toagentFunctionModify" class="com.yl.boss.action.AgentAction" method="findFunctionById">
+			<result>/jsp/function/agentFunctionModify.jsp</result>
+		</action>	
+		<action name="agentFunctionAdd" class="com.yl.boss.action.AgentAction" method="addFunction">
+			<result type="redirect">toAgentFunctionQuery.action</result>
+		</action>
+		<action name="agentFunctionModify" class="com.yl.boss.action.AgentAction" method="modify">
+			<result>/jsp/function/agentFunctionModify.jsp</result>
+		</action>
+		<action name="agentDeleteFunction" class="com.yl.boss.action.AgentAction" method="delete">
+			<result>/jsp/function/agentFunctionQueryResult.jsp</result>
+		</action>
+		
+		<!-- 商户功能管理 -->
+		<action name="custFunctionQuery" class="com.yl.boss.action.CustomerAction" method="findAll">
+			<result>/jsp/function/custFunctionQueryResult.jsp</result>
+		</action>
+		<action name="tocustFunctionModify" class="com.yl.boss.action.CustomerAction" method="findFunctionById">
+			<result>/jsp/function/custFunctionModify.jsp</result>
+		</action>	
+		<action name="custFunctionAdd" class="com.yl.boss.action.CustomerAction" method="addFunction">
+			<result>/jsp/function/custFunctionQuery.jsp</result>
+		</action>
+		<action name="custFunctionModify" class="com.yl.boss.action.CustomerAction" method="modify">
+			<result>/jsp/function/custFunctionModify.jsp</result>
+		</action>
+		<action name="custDeleteFunction" class="com.yl.boss.action.CustomerAction" method="delete">
+			<result>/jsp/function/custFunctionQueryResult.jsp</result>
+		</action>
+		<action name="queryCustomerByCustNo" class="com.yl.boss.action.CustomerAction" method="queryCustomerByCustNo">
+			<result name="success" type="json" >
+				<param name="root">msg</param>
+			</result>
+		</action>
+		
+		<!-- 意见反馈 -->
+		<action name="adviceFeedBackAdd" class="adviceFeedBackAction" method="addAdvice">
+			<result>/jsp/adviceFeedBack/adviceFeedBackAdd.jsp?success=true</result>
+		</action>
+		<action name="memberInfoQuery" class="cmValueListAction">
+	   		<param name="queryId">memberInfoQuery</param>
+	  	 	<result>/jsp/memberInfo/memberInfoQueryResult.jsp</result>
+	   </action>
+	   <action name="memberInfoModify" class="memberInfoAction" method="memberInfoEdit">
+	   		<result name="success">/jsp/memberInfo/memberInfoModify.jsp?success=true</result>
+	   		<result name="error">/jsp/memberInfo/memberInfoModify.jsp?error=true</result>
+	   </action>
+	   <action name="toMemberInfoModify" class="memberInfoAction" method="toMemberInfoEdit">
+	  	 	<result>/jsp/memberInfo/memberInfoModify.jsp</result>
+	   </action>
+	   
+	   <action name="memberInfoDetail" class="cmValueListAction">
+	   		<param name="queryId">memberInfoDetail,memberCard,couponInfo</param>
+	  	 	<result type="chain">memberJiFenoDetail</result>
+	   </action>
+	
+	 	<action name="memberJiFenoDetail" class="memberInfoAction" method="getMemberJiFenoDetail">
+	   		<result>/jsp/memberInfo/memberInfoDetailReault.jsp</result>
+	   </action>
+	   
+	   <!-- 公告展示 -->
+	   <action name="bulletinAdd" class="bulletinAction" method="bulletinAdd">
+			<result>/jsp/bulletin/bulletinQuery.jsp</result>
+		</action>
+		<action name="bulletinDetail" class="bulletinAction" method="bulletinDetail">
+			<result>/jsp/bulletin/bulletinDetail.jsp</result>
+		</action>
+		<action name="bulletinFindById" class="bulletinAction" method="bulletinFindById">
+			<result>/jsp/bulletin/bulletinUpdate.jsp</result>
+		</action>
+		<action name="bulletinUpdate" class="bulletinAction" method="bulletinUpdate">
+			<result>/jsp/bulletin/bulletinQuery.jsp</result>
+		</action>
+		<action name="bulletinQuery" class="defaultValueListAction">
+			<param name="queryId">bulletin</param>
+			<result>/jsp/bulletin/bulletinQueryResult.jsp</result>
+		</action>
+		<!-- 经营分析查询 -->
+		<action name="shareProfitQuery" class="defaultValueListAction">
+			<param name="queryId">shareProfit</param>
+			<result>/jsp/shareProfit/shareProfitQueryResult.jsp</result>
+		</action>
+		<!-- 经营导出 -->
+		<action name="spExport" class="shareProfitAction" method="spExport">
+			<result name="success" type="stream">
+                <param name="contentType">application/vnd.ms-excel</param>
+                <param name="inputName">inputStream</param>
+                <param name="contentDisposition">attachment;filename="${msg}"</param>  
+        		<param name="bufferSize">1024</param>
+            </result>
+		</action>
+		
+		<!-- 查询合计 -->
+		<action name="shareProfitCount" class="shareProfitAction" method="shareProfitCount">
+			<result name="success" type="json" >
+				<param name="root">msg</param>
+			</result>   
+		</action>
+		<!-- 操作员 -->
+		<action name="operatorDetail" class="operatorAction" method="findByUserName">
+			<result>/jsp/operator/operatorDetail.jsp</result>
+		</action>
+		<action name="operVerifymsg" class="operatorAction" method="checkOper">
+			<result name="success" type="json" >
+				<param name="root">msg</param>
+			</result>
+		</action>
+		<action name="operatorQuery" class="operatorAction" method="operatorQuery">
+			<param name="queryId">operator</param>
+			<result>/jsp/operator/operatorQueryResult.jsp</result>
+		</action>
+		<action name="operatorAdd" class="operatorAction" method="operatorAdd">
+			<result>/jsp/operator/operatorQuery.jsp</result>
+		</action>
+		<action name="passwordUpdateAction" class="operatorAction" method="passwordUpdate">
+			<result type="json" name="success">
+				<param name="root">msg</param>
+			</result>
+		</action>
+		<action name="auditPasswordUpdateAction" class="operatorAction" method="auditPasswordUpdate">
+			<result type="json" name="success">
+				<param name="root">msg</param>
+			</result>
+		</action>
+		<action name="operatorUpdate" class="operatorAction" method="operatorUpdate">
+			<result name="success">/jsp/operator/operatorQuery.jsp</result>
+		</action>
+		<!-- 用户登陆日志查询 -->
+		<action name="operatorLoginHistoryQuery" class="operatorAction" method="operatorLoginHistoryQuery">
+			<result name="success">/jsp/operator/operatorLoginHistoryQueryResult.jsp</result>
+		</action>
+		
+		<!-- 支付接口 -->
+		<action name="savePayinterface" class="payinterfaceAction" method="save">
+			<result name="save">/jsp/payinterface/interfaceInfo/interfaceInfoQuery.jsp</result>
+		</action>
+		<action name="findAllInterfaceInfo" class="payinterfaceAction" method="findAll">
+			<result name="findAllInterfaceInfo">/jsp/payinterface/interfaceInfo/interfaceInfoQueryResult.jsp</result>
+		</action>
+		<action name="interfaceInfoDetail" class="payinterfaceAction" method="toDetail">
+			<result name="interfaceInfoDetail">/jsp/payinterface/interfaceInfo/interfaceInfoDetail.jsp</result>
+		</action>
+		<action name="updateInterfaceInfoAction" class="payinterfaceAction" method="update">
+			<result name="updateInterfaceInfo">/jsp/payinterface/interfaceInfo/interfaceInfoQueryResult.jsp</result>
+		</action>
+		<action name="tocheckInterfaceName" class="payinterfaceAction" method="checkInterfaceName">
+			<result name="success" type="json" >
+				<param name="root">msg</param>
+			</result>  
+		</action>	
+		<action name="queryInterfaceResult" class="interfaceResultAction" method="findAll">
+			<result name="query">/jsp/payinterface/interfaceRequest/interfaceRequestQueryResult.jsp</result>
+		</action>
+		<action name="toRequestDetail" class="interfaceResultAction" method="toDetail">
+			<result name="toRequestDetail">/jsp/payinterface/interfaceRequest/interfaceRequestDetail.jsp</result>
+		</action>
+		<action name="interfaceInfoCodeQueryBy" class="payinterfaceAction" method="interfaceInfoCodeQueryBy">
+			<result type="json" name="success">
+				<param name="root">msg</param>
+			</result>
+		</action>
+		
+		<action name="findInterfaceRequestExport" class="interfaceResultAction" method="findInterfaceRequestExport">
+            <result name="success" type="stream">
+                <param name="contentType">application/vnd.ms-excel</param>
+                <param name="inputName">inputStream</param>
+                <param name="contentDisposition">attachment;filename="${msg}"</param>  
+        		<param name="bufferSize">1024</param>
+            </result>
+		</action>
+		
+		<!-- 接口提供方 -->
+		<action name="toUpdateInterfaceProvider" class="interfaceProviderAction" method="toUpdate">
+			<result name="toUpdate">/jsp/payinterface/interfaceProvider/interfaceProviderModify.jsp</result>
+		</action>
+		<action name="findAllInterfaceProvider" class="interfaceProviderAction" method="findAll">
+			<result name="query">/jsp/payinterface/interfaceProvider/interfaceProviderQueryResult.jsp</result>
+		</action>
+		<action name="updateInterfaceProvider" class="interfaceProviderAction" method="update">
+			<result name="update">/jsp/payinterface/interfaceProvider/interfaceProviderQueryResult.jsp</result>
+		</action>
+		<action name="saveInterfaceProvider" class="interfaceProviderAction" method="save">
+			<result name="save">/jsp/payinterface/interfaceProvider/interfaceProviderQuery.jsp</result>
+		</action>
+		<action name="toHistory" class="interfaceProviderAction" method="history">
+			<result name="history">/jsp/payinterface/interfaceProvider/interfaceProviderHistory.jsp</result>
+		</action>
+		<action name="findAllProvider" class="interfaceProviderAction" method="findAllProvider">
+			<result name="success" type="json">
+				<param name="root">msg</param>
+			</result>
+		</action>
+		
+		
+		<action name="openCustomerAction" class="customerAction" method="openCustomer">
+	        <interceptor-ref name="authorityStack" />
+			<interceptor-ref name="fileUpload">
+				<param name="maximumSize">1024000</param>
+				<param name="allowedTypes">image/*</param>
+			</interceptor-ref>
+			
+			<result name="success" type="redirect">toAddCustomer.action?status=true</result>
+      <result name="error" type="redirect">toAddCustomer.action?status=false</result>      
+			
+		</action>
+		<!-- 商户  -->
+		<action name="toCachecenterCnaps" class="customerAction" method="toCachecenterCnaps"></action>
+		<action name="toCachecenterIin" class="customerAction" method="toCachecenterIin"></action>
+		
+		<action name="customerAuditQuery" class="defaultValueListAction">
+			<param name="queryId">customerAuditQuery</param>
+			<result>/jsp/customer/customerAuditQueryResult.jsp</result>                                                                           
+		</action>
+		<action name="customerQuery" class="defaultValueListAction">
+			<param name="queryId">customerInfo</param>
+			<result>/jsp/customer/customerQueryResult.jsp</result>                                                                           
+		</action>
+		<action name="coustomerToAudit" class="customerAction" method="toAudit">
+			<result name="toAudit" >/jsp/customer/customerAudit.jsp</result>                                                                           
+		</action>
+		<action name="auditCustomerAction" class="customerAction" method="auditCustomer">
+			<result name="auditCustomer" type="redirect" >customerAuditQuery.action</result>                                                                           
+		</action>
+		<action name="customerDetail" class="customerAction" method="findByCustNo">
+			<result name="success" >/jsp/customer/customerDetail.jsp</result>                                                                           
+		</action>
+		<action name="findByCustNoAction" class="customerAction" method="findByCustNo">
+			<result type="json" name="success">
+				<param name="root">customer</param>
+			</result>
+		</action>
+		<action name="customerSettleQuery" class="defaultValueListAction">
+			<param name="queryId">customerSettle</param>
+			<result>/jsp/customer/customerSettleQueryResult.jsp</result>                                                                           
+		</action>
+		<action name="toUpdateCustomerSettle" class="customerSettleAction" method="findByCustNo">
+			<result>/jsp/customer/customerSettleDetail.jsp</result>
+		</action>
+		<action name="updateCustomerSettle" class="customerSettleAction" method="update">
+			<result>/jsp/customer/customerSettleQueryResult.jsp</result>                                                                           
+		</action>
+		<action name="customerSettleHistByCustNo" class="defaultValueListAction">
+			<param name="queryId">customerSettleHist</param>
+			<result>/jsp/customer/customerSettleHistQueryResult.jsp</result>
+		</action>
+		<!-- 商户密码重置 -->
+		<action name="toresetPassWordAction" class="customerAction" method="resetPassword">
+			<result name="success" type="json">
+				<param name="root">msg</param>
+			</result>
+		</action>
+		<action name="auditUrging" class="customerAction" method="auditUrging">
+			<result name="success" type="redirect">toCustomerAuditQuery.action</result>
+		</action>
+		<action name="toUpdateCustomerAction" class="customerAction" method="toUpdateCustomer">
+			<result name="success" >/jsp/customer/customerUpdate.jsp</result>                                                                           
+		</action>
+		<action name="updateCustomerAction" class="customerAction" method="update">
+			<result name="success" type="redirect" >customerQuery.action</result>                                                                           
+		</action>
+		<!-- 商户获取文档图片流  start-->  
+		<action name="findCustomerDocumentImg" class="customerAction" method="findCustomerDocumentImg">
+		    <result name="success" type="stream">       
+		        <param name="contentType">image/jpeg</param>       
+		        <param name="inputName">fileOutput</param>   
+		    </result>    
+		</action>
+		<!-- 商户获取文档图片流  end-->  
+		<!-- 商户结束 -->
+		<!-- 商户费率 -->
+		<action name="customerFeeQueryAction" class="defaultValueListAction">
+			<param name="queryId">customerFeeQuery</param>
+			<result>/jsp/customerFee/customerFeeQueryResult.jsp</result>                                                                           
+		</action>
+		<action name="customerFeeDetailAction" class="customerFeeAction" method="findById">
+			<result name="success" >/jsp/customerFee/customerFeeDetail.jsp</result>                                                                           
+		</action>
+		<action name="toUpdateCustomerFeeAction" class="customerFeeAction" method="toUpdateCustomerFee">
+			<result name="success" >/jsp/customerFee/customerFeeUpdate.jsp</result>                                                                           
+		</action>
+		<action name="updateCustomerFeeAction" class="customerFeeAction" method="update">
+			<result name="success" type="redirect" >customerFeeQueryAction.action</result>                                                                           
+		</action>
+		<action name="checkCustomerFeeAction" class="customerFeeAction" method="checkCustomerFee">
+			<result name="success" type="json" >
+				<param name="root">msg</param>
+			</result>                                                                           
+		</action>
+		<action name="createCustomerFeeAction" class="customerFeeAction" method="create">
+			<result name="success" type="redirect" >toCustomerFeeQuery.action</result>                                                                           
+		</action>
+		<action name="queryAgentNoByCustomerNo" class="customerAction" method="queryAgentNoByCustomerNo">
+      <result name="success" type="json">
+        <param name="root">msg</param>
+      </result>
+    </action>
+		<!-- 商户费率结束  -->
+		<!-- 商户秘钥 -->
+		<action name="customerKeyQueryAction" class="defaultValueListAction">
+			<param name="queryId">customerKeyQuery</param>
+			<result>/jsp/customerKey/customerKeyQueryResult.jsp</result>                                                                           
+		</action>
+		<!-- 商户秘钥结束  -->
+		<action name="interfaceFeeSumAction" class="interfaceResultAction" method="interfaceFeeSum">
+			<result type="json" name="interfaceFeeSum">
+				<param name="root">sumInfo</param>
+			</result>
+		</action>
+		
+		
+		<!-- 交易系统 -->
+		<!-- 商户交易配置开始 -->
+		<action name="toCustomerConfigQuery" class="onlineAction" method="customerConfigQuery">
+			<result name="ConfigQuery">/jsp/customer/customerConfigQueryResult.jsp</result>
+		</action>
+		<action name="customeConfigAdd" class="onlineAction" method="createConfig">
+			<result name="success" type="redirect">/jsp/customer/customerConfigQuery.jsp</result>                                                                           
+		</action>
+		<action name="customerConfigHistory" class="onlineAction" method="customerConfigHistory">
+			<result name="ConfigHistory">/jsp/customer/customerConfigHistory.jsp</result>
+		</action>
+		<action name="customerConfigUpdata" class="onlineAction" method="customerConfigUpdata">
+			<result name="success" type="redirect">customerConfigQuery.action</result>    
+		</action>
+		<action name="findCustomerConfigById" class="onlineAction" method="findConfigById">
+			<result name="ConfigUpdata">/jsp/customer/customerConfigUpdata.jsp</result>
+		</action>
+		<action name="checkCustomerNoOfFullName" class="onlineAction" method="checkCustomerNo">
+			<result name="success" type="json">
+				<param name="root">msg</param>
+			</result>		
+		</action>
+		<action name="queryProductTypeExistsByCustNo" class="onlineAction" method="queryProductTypeExistsByCustNo">
+		  <result name="success" type="json">
+		    <param name="root">msg</param>
+		  </result>
+		</action>
+		<!-- 商户交易配置结束 -->
+		<action name="findAllProviderAction" class="onlineAction" method="findAllProvider">
+			<result type="json" name="findAllProvider">
+				<param name="root">interfaceProviderQueryBeans</param>
+			</result>
+		</action>
+		<action name="findAllInterfaceInfoAction" class="onlineAction" method="findAllInterfaceInfo">
+			<result type="json" name="findAllInterfaceInfo">
+				<param name="root">interfaceInfoBeans</param>
+			</result>
+		</action>
+		<action name="routerAddAction" class="onlineAction" method="routerAdd">
+			<result name="routerAdd">/jsp/online/routerService/routerAdd.jsp
+			</result>
+		</action>
+		<action name="findRouterTemplates" class="onlineAction" method="findRouterTemplates">
+			<result type="json" name="findRouterTemplates">
+				<param name="root">interfacePolicyBeans</param>
+			</result>
+			<result type="json" name="success">
+				<param name="root">result</param>
+			</result>
+		</action>
+		<action name="findAllRouterTemplates" class="onlineAction" method="queryInterfacePolicyAll">
+			<result type="json" name="findRouterTemplates">
+				<param name="root">interfacePolicyBeans</param>
+			</result>
+		</action>
+		<action name="partnerRouterAddAction" class="onlineAction" method="partnerRouterAdd">
+			<result name="partnerRouterAdd">/jsp/online/partnerRouterService/partnerRouterAdd.jsp
+			</result>
+		</action>
+		<action name="findAllTradeOrderAndFeeAction" class="onlineAction" method="findAllTradeOrderAndFee">
+			<result name="findAllTradeOrderAndFee">/jsp/online/payOrderService/payOrderQueryResult.jsp
+			</result>
+		</action>
+		<action name="findOrderByCodeAction" class="onlineAction" method="findOrderByCode">
+			<result name="findOrderByCode">/jsp/online/payOrderService/payOrderQueryDetail.jsp
+			</result>
+		</action>
+		<action name="reNotifyMerOrder" class="onlineAction" method="reNotifyMerOrder">
+			<result type="json">
+				<param name="root">notifyParams</param>
+			</result>
+		</action>
+		<action name="findAllPartnerRouterAction" class="onlineAction" method="findAllPartnerRouter">
+			<result name="findAllPartnerRouter">/jsp/online/partnerRouterService/partnerRouterQueryResult.jsp
+			</result>
+		</action>
+		
+		<action name="payOrderSumAction" class="onlineAction" method="payOrderSum">
+			<result type="json" name="payOrderSum">
+				<param name="root">sumInfo</param>
+			</result>
+		</action>
+		<action name="payOrderExportAction" class="onlineAction" method="payOrderExport">
+			<result name="payOrderExport">/jsp/online/payOrderService/payOrderQueryResultExport.jsp
+			</result>
+		</action>
+		<action name="ajaxQueryCustRouteByCustomerNo" class="onlineAction" method="ajaxQueryCustRouteByCustomerNo">
+      <result name="success" type="json">
+        <param name="root">msg</param>
+      </result>
+     </action>
+		<!-- 商户路由 start--> 
+		<!-- 商户路由详细、修改信息 -->
+		<action name="toPartnerRouterMofidyOrDetail" class="onlineAction" method="toPartnerRouterMofidyOrDetail">
+			<result name="toPartnerRouterDetail">/jsp/online/partnerRouterService/partnerRouterQueryDetail.jsp</result>
+			<result name="toPartnerRouterMofidy">/jsp/online/partnerRouterService/partnerRouterModify.jsp</result>
+			<result name="toPartnerRouterQuery">/jsp/online/partnerRouterService/partnerRouterQuery.jsp</result>
+		</action> 
+		<!-- 商户路由信息修改 -->
+		<action name="partnerRouterModify" class="onlineAction" method="partnerRouterModify">
+ 		 	<result name="toPartnerRouterMofidy">/jsp/online/partnerRouterService/partnerRouterModify.jsp</result>
+		</action> 
+		<!-- 商户路由 end-->
+		
+		
+		<!-- 路由模板 start-->
+		<!-- 路由模板查询-->
+		<action name="findAllInterfacePolicy" class="onlineAction" method="findAllInterfacePolicy">
+			<result name="findAllInterfacePolicy">/jsp/online/routerService/routerQueryResult.jsp
+			</result>
+		</action>
+		<action name="findRouterNamesAction" class="onlineAction" method="findRouterNames">
+			<result name="findRouterNames" type="json">
+				<param name="root">interfacePolicyBean</param>
+			</result>
+		</action>
+		<!-- 路由模板详细、修改信息 -->
+		<action name="toRouterMofidyOrDetail" class="onlineAction" method="toRouterMofidyOrDetail">
+			<result name="toRouterMofidy">/jsp/online/routerService/routerModify.jsp</result>
+			<result name="toRouterDetail">/jsp/online/routerService/routerQueryDetail.jsp</result>
+			<result name="toRouterQuery">/jsp/online/routerService/routerQuery.jsp</result>
+		</action> 
+		<!-- 路由模板修改 -->
+		<action name="routerModify" class="onlineAction" method="routerModify">
+ 		 	<result name="success" type="json" >
+				<param name="root">msg</param>
+			</result>
+		</action> 
+		<!-- 路由模板 end-->
+		
+		
+		<!-- core -->
+		<action name="saveInterfaceProviderAction" class="interfaceProviderAction" method="save">
+			<result name="save">/jsp/payinterface/interfaceProvider/interfaceProviderAdd.jsp
+			</result>
+		</action>
+		<action name="savePayinterfaceAction" class="payinterfaceAction" method="save">
+			<result name="save">/jsp/payinterface/interfaceInfo/interfaceInfoAdd.jsp
+			</result>
+		</action>
+ 		
+		<action name="queryAllInterfaceInfoAction" class="payinterfaceAction" method="findAll">
+			<result name="findAllInterfaceInfo">/jsp/payinterface/interfaceInfo/interfaceInfoQueryResult.jsp
+			</result>
+		</action>
+		<action name="findAllInterfaceRequestAction" class="interfaceResultAction" method="findAll">
+			<result name="query">/jsp/payinterface/interfaceRequest/interfaceRequestQueryResult.jsp</result>
+		</action><!-- 接口信息 -->
+		<action name="findAllInterface" class="payinterfaceAction" method="findAllInterface">
+			<result name="interfaceInfoBeanList" type="json">
+				<param name="root">interfaceInfoBeanList</param>
+			</result>
+		</action>
+		<action name="toDetailInterfaceInfoAction" class="payinterfaceAction" method="toDetail">
+			<result name="interfaceInfoDetail">/jsp/payinterface/interfaceInfo/interfaceInfoDetail.jsp
+			</result>
+		</action>
+		<action name="toUpdateInterfaceInfoAction" class="payinterfaceAction" method="toUpdate">
+			<result name="toUpdateInterfaceInfo">/jsp/payinterface/interfaceInfo/interfaceInfoModify.jsp
+			</result>
+		</action>
+		
+		<!-- 设备 开始 -->
+		<action name="allotCustDevice" class="deviceAction" method="allotCustDevice">
+			<result name="success" type="json" >
+				<param name="root">msg</param>
+			</result>                                                          
+		</action>
+		<action name="toAllotCustDevice" class="deviceAction" method="getDeviceType">
+			<result name="success">/jsp/device/allotCustDevice.jsp</result>                                                                   
+		</action>
+		
+		<action name="deviceSum" class="deviceAction" method="deviceSum">
+			<result name="success" type="json" >
+				<param name="root">msg</param>
+			</result>                                                        
+		</action>
+		
+		<action name="getQRcode" class="deviceAction" method="getQRcode">
+			<result name="success" type="json" >
+				<param name="root">msg</param>
+			</result>                                                        
+		</action>
+		<action name="upDeviceType" class="deviceAction" method="upDeviceType">
+			<result name="success" type="json" >
+				<param name="root">msg</param>
+			</result>                                                        
+		</action>
+		<action name="toUpDeviceType" class="deviceAction" method="toUpDeviceType">
+			<result name="success">/jsp/device/deviceTypeUpdate.jsp</result>
+		</action>
+		<action name="deviceExportByPsn" class="deviceAction" method="deviceExportByPsn">
+			<param name="queryId">deviceType</param>
+			<result>/jsp/device/export.jsp</result>                                                                           
+		</action>
+		<action name="deviceTypeQuery" class="defaultValueListAction">
+			<param name="queryId">deviceType</param>
+			<result>/jsp/device/deviceTypeQueryResult.jsp</result>                                                                           
+		</action>
+		<action name="addDeviceType" class="deviceAction" method="addDeviceType">
+			<result name="success" type="json" >
+				<param name="root">msg</param>
+			</result>                                                                         
+		</action>
+		<action name="deviceQuery" class="defaultValueListAction">
+			<param name="queryId">deviceInfo</param>
+			<result>/jsp/device/deviceQueryResult.jsp</result>                                                                           
+		</action>
+		<action name="deviceOrderQuery" class="defaultValueListAction">
+			<param name="queryId">deviceOrderInfo</param>
+			<result>/jsp/device/deviceOrderQueryResult.jsp</result>                                                                           
+		</action>
+		<action name="allotDevice" class="deviceAction" method="allotAgentDevice">
+			<result name="success" type="json" >
+				<param name="root">msg</param>
+			</result>                                                        
+		</action>
+		<action name="allotDevices" class="deviceAction" method="allotCustDevice">
+			<result name="success" type="json" >
+				<param name="root">msg</param>
+			</result>                                                        
+		</action>
+		
+		<action name="denyAllot" class="deviceAction" method="denyAllot">
+			<result name="success" type="json" >
+				<param name="root">msg</param>
+			</result>                                                        
+		</action>
+		<action name="remitDevice" class="deviceAction" method="remitDevice">
+			<result name="success" type="json" >
+				<param name="root">msg</param>
+			</result>                                                        
+		</action>
+		<action name="deviceExport" class="deviceAction" method="deviceExport">
+			<result  name="success">/jsp/device/export.jsp</result>
+			<result name="error">/jsp/device/deviceOrderQuery.jsp</result>                                                                              
+		</action>
+		<action name="checkOrderMaking" class="deviceAction" method="checkOrderMaking">
+			<result name="success" type="json" >
+				<param name="root">msg</param>
+			</result>                                                        
+		</action>
+		<action name="warehousing" class="deviceAction" method="warehousing">
+			<result name="success" type="json" >
+				<param name="root">msg</param>
+			</result>                                                        
+		</action>
+		<!-- hj -->
+		<action name="toDeviceOrderAdd" class="deviceAction" method="getDeviceType">
+			<result name="success">/jsp/device/deviceOrderAdd.jsp</result>                                                                   
+		</action>
+		<action name="toDeviceOrderQuery" class="deviceAction" method="getDeviceType">
+			<result name="success">/jsp/device/deviceOrderQuery.jsp</result>                                                      
+		</action>
+		
+		<action name="devicePurchAdd" class="deviceAction" method="addDeviceOrder">
+			<result name="success" type="json" >
+				<param name="root">msg</param>
+			</result>                                                                         
+		</action>
+		<action name="agentDeviceAudit" class="defaultValueListAction">
+			<param name="queryId">agentDeviceOrderInfo</param>
+			<result>/jsp/device/agentDeviceOrderAuditQueryResult.jsp</result>                                                                           
+		</action>
+		<!-- 设备 结束 -->
+		<!-- 服务商 开始 -->
+		<action name="agentCheckPhone" class="agentAction" method="checkPhone">
+			<result name="success" type="json">
+				<param name="root">msg</param>
+			</result>
+		</action>
+		<action name="openAgentAction" class="agentAction" method="openAgent">
+		  <result name="success" type="redirect">toAddAggent.action?status=true</result>
+      <result name="error" type="redirect">toAddAggent.action?status=false</result>
+		</action>
+		<action name="agentQuery" class="agentAction" method="agentQuery">
+			<result name="success">/jsp/agent/agentQueryResult.jsp</result>
+		</action>
+		<action name="toUpdateAgentAction" class="agentAction" method="findByAgentNo">
+			<result name="success" >/jsp/agent/agentUpdate.jsp</result>                                                                           
+		</action>
+		<action name="updateAgentAction" class="agentAction" method="update">
+			<result name="success" type="redirect">/jsp/agent/agentQuery.jsp</result>      
+		</action>
+		
+		<action name="agentDetail" class="agentAction" method="findByAgentNo">
+			<result name="success" >/jsp/agent/agentDetail.jsp</result>
+		</action>
+		<action name="resetAgentPasswordAction" class="agentAction" method="resetAgentPassword">
+			<result name="success" type="json">
+				<param name="root">msg</param>
+			</result>
+		</action>
+		<!-- 服务商获取文档图片流  start-->  
+		<action name="findDocumentImg" class="agentAction" method="findDocumentImg">
+		    <result name="success" type="stream">       
+		        <param name="contentType">image/jpeg</param>       
+		        <param name="inputName">fileOutput</param>   
+		    </result>    
+		</action>
+		<!-- 服务商获取文档图片流  end-->  
+		<!-- 服务商费率 start-->
+		<action name="agentFeeQuery" class="defaultValueListAction">
+			<param name="queryId">agentFeeInfo</param>
+			<result>/jsp/agentFee/agentFeeQueryResult.jsp</result>                                                                           
+		</action>
+		<action name="toUpdateagentFeeAction" class="agentFeeAction" method="findById">
+			<result name="success" >/jsp/agentFee/agentFeeUpdate.jsp</result>     
+		</action>
+		<action name="updateAgentFee" class="agentFeeAction" method="update">
+			<result name="success" type="redirect" >toAgentFeeQuery.action</result>      
+		</action>
+		<action name="createAgentFee" class="agentFeeAction" method="create">
+			<result name="success" type="redirect" >toAgentFeeQuery.action</result>      
+		</action>
+		<action name="checkAgentFeeAction" class="agentFeeAction" method="checkAgentFee">
+			<result name="success" type="json" >
+				<param name="root">msg</param>
+			</result>                                                                           
+		</action>
+		<action name="findAgentFullNameByAgentNo" class="agentAction" method="findAgentFullNameByAgentNo">
+			<result type="json" name="success">
+			     <param name="root">msg</param>
+			</result>
+		</action>
+    <action name="queryAgentFeeAllByAgentNo" class="agentFeeAction" method="queryAgentFeeAllByAgentNo">
+      <result type="json" name="success">
+        <param name="root">msg</param>
+      </result>
+    </action>
+    <action name="queryParenIdByAgentNo" class="agentAction" method="queryParenIdByAgentNo">
+      <result type="json" name="success">
+        <param name="root">msg</param>
+      </result>
+    </action>
+		<!-- 服务商费率 end-->
+		<!-- 服务商结算信息 -->
+		<action name="agentSettlementQuery" class="defaultValueListAction">
+			<param name="queryId">agentSettlementQuery</param>
+			<result>/jsp/agent/agentSettlementQueryResult.jsp</result>
+		</action>
+		<action name="findAgentSettleByAgentNo" class="agentSettleAction" method="findAgentSettleByAgentNo">
+			<result>/jsp/agent/agentSettlementUpdate.jsp</result>
+		</action>
+		<action name="agentSettlementUpdate" class="agentSettleAction" method="update">
+			<result type="redirect">agentSettlementQuery.action</result>
+		</action>
+		<action name="agentSettleHistoryQueryResult" class="agentSettleAction" method="agentSettleHistoryQueryResult">
+			<result>/jsp/agent/agentSettleHistoryQueryResult.jsp</result>
+		</action>
+		<!-- 服务商审核信息 -->
+		<action name="agentAuditDetail" class="agentAction" method="findByAgentNo">
+			<result name="success">/jsp/agent/agentAudit.jsp</result>
+		</action>
+		<action name="auditAgent" class="agentAction" method="auditAgent">
+			<result name="success" type="redirect">/toAgentAuditQuery.action</result>
+		</action>
+		<!-- 服务商 结束-->
+		
+		
+		<!--账户  -->
+		<action name="queryAccountAction" class="accountAction" method="queryAccount">
+			<result name="queryAccount">/jsp/account/accountInfoQueryResult.jsp</result>
+			<result name="queryAccountAdjust">/jsp/account/accountAdjust/accountInfoQueryResult.jsp</result>
+			<result name="queryAccountFrozen">/jsp/account/accountFrozen/accountInfoQueryResult.jsp</result>
+		</action>
+		<action name="findAccountChangeRecordsAction" class="accountAction" method="findAccountChangeRecords">
+			<result name="findAccountChangeRecords">/jsp/account/accountChangeDetailQueryResult.jsp</result>
+		</action>
+		<action name="updateAcountStatusAction" class="accountAction" method="updateAcountStatus">
+			<result  type="json">
+				<param name="root">msg</param>
+			</result>
+		</action>
+		<action name="queryAccountHistoryAction" class="accountAction" method="queryAccountHistory">
+			<result name="queryAccountHistory">/jsp/account/accountHistory/accountHistoryInfoQueryResult.jsp</result>
+		</action>
+		<action name="queryAccountHistorySum" class="accountAction" method="queryAccountHistorySum">
+			<result name="success" type="json">
+				<param name="root">msg</param>
+			</result>
+		</action>
+		<action name="accountHistoryAction" class="accountAction" method="accountHistoryById">
+			<result name="queryAccountHistory">/jsp/account/accountAdjust/accountHistoryInfoQueryResult.jsp</result>
+		</action>
+		<action name="accountFZHistoryAction" class="accountAction" method="accountFZHistoryById">
+			<result name="queryAccountFZHistory">/jsp/account/accountFrozen/accountHistoryInfoQueryResult.jsp</result>
+		</action>
+		<!-- 账户资金冻结 -->
+		<action name="accountFrozenAction" class="accountAction" method="accountFrozen">
+			<result name="accountFrozen" type="json">
+				<param name="root">msg</param>
+			</result>
+		</action>
+		<action name="accountJCFrozenAction" class="accountAction" method="accountJCFrozen">
+			<result name="queryAccountFZHistory" type="json">
+				<param name="root">msg</param>
+			</result>
+		</action>
+		<action name="checkAccountJCFrozen" class="accountAction" method="queryFreezeAccount">
+			<result name="success" type="json">
+				<param name="root">msg</param>
+			</result>
+		</action>
+		<action name="adjustmentAccountAction" class="accountAction" method="adjustmentAccount">
+			<result name="adjustmentAccount" type="json">
+				<param name="root">msg</param>
+			</result>
+		</action>
+		<action name="queryFreezeNoExists" class="accountAction" method="queryFreezeNoExists">
+		  <result name="success" type="json">
+		    <param name="root">msg</param>
+		  </result>
+		</action>
+		
+		<!--账户 结束 -->
+		
+		<!-- 代付 -->
+		<!-- 历史查询 -->
+		<action name="checkDfConfig" class="com.yl.boss.action.DfAction" method="checkDfConfig">
+			<result name="success" type="json">
+				<param name="root">msg</param>
+			</result>
+		</action>
+		<action name="phoneVerifymsg" class="com.yl.boss.action.DfAction" method="phoneVerifymsg">
+			<result name="success" type="json">
+				<param name="root">msg</param>
+			</result>
+		</action>
+		<action name="getAccInfo" class="com.yl.boss.action.DfAction" method="getAccInfo">
+			<result name="success" type="json">
+				<param name="root">msg</param>
+			</result>
+		</action>
+		<action name="serviceConfigAdd" class="com.yl.boss.action.DfAction" method="serviceConfigAdd">
+			<result name="success" type="json">
+				<param name="root">msg</param>
+			</result>
+		</action>
+		<action name="receiveServiceConfigAdd" class="com.yl.boss.action.ReceiveAction" method="serviceConfigAdd">
+			<result name="success" type="json">
+				<param name="root">msg</param>
+			</result>
+		</action>
+		<action name="goHistoryById" class="com.yl.boss.action.DfAction" method="historyById">
+			<result>/jsp/df/serviceConfigHistory.jsp</result>
+		</action>
+		<action name="dfQuery" class="com.yl.boss.action.DfAction" method="dfQuery">
+			<result>/jsp/df/dfQueryResult.jsp</result>
+		</action>
+		<action name="dfAuditQuery" class="com.yl.boss.action.DfAction" method="dfAuditQuery">
+			<result>/jsp/df/dfAuditQueryResult.jsp</result>
+		</action>
+		<action name="dfExport" class="com.yl.boss.action.DfAction" method="dfExport">
+			<result>/jsp/df/export.jsp</result>
+		</action>
+		
+		<action name="accExport" class="com.yl.boss.action.AccountAction" method="accExport">
+			<result name="success" type="stream">
+                <param name="contentType">application/vnd.ms-excel</param>
+                <param name="inputName">inputStream</param>
+                <param name="contentDisposition">attachment;filename="${msg}"</param>  
+        		<param name="bufferSize">1024</param>
+            </result>
+		</action>
+		
+		<action name="getDPayCount" class="com.yl.boss.action.DfAction" method="getDPayCount"/>
+		<action name="toDpayConfig" class="com.yl.boss.action.DfAction" method="toDpayConfig">
+			<result>/jsp/df/dfConfigUpdate.jsp</result>
+		</action>
+		<action name="dpayConfig" class="com.yl.boss.action.DfAction" method="dpayConfig"/>
+		<action name="dpayConfigHistory" class="com.yl.boss.action.DfAction" method="dpayConfigHistory">
+			<result>/jsp/df/dfConfigHistoryQueryResult.jsp</result>
+		</action>
+		<action name="toRouteConfig" class="com.yl.boss.action.DfAction" method="toRouteConfig">
+			<result>/jsp/df/dfRouteConfigUpdate.jsp</result>
+		</action>
+		<action name="routeConfig" class="com.yl.boss.action.DfAction" method="routeConfig"/>
+		<action name="routeConfigHistory" class="com.yl.boss.action.DfAction" method="routeConfigHistory">
+			<result>/jsp/df/dfRouteConfigHistoryQueryResult.jsp</result>
+		</action>
+		<action name="dfCustomerConfigQuery" class="com.yl.boss.action.DfAction" method="dfCustomerConfigQuery">
+			<result>/jsp/df/export.jsp</result>
+		</action>
+		<action name="routeConfigHistory" class="com.yl.boss.action.DfAction" method="routeConfigHistory">
+			<result>/jsp/df/dfRouteConfigHistoryQueryResult.jsp</result>
+		</action>
+		<action name="serviceConfigQuery" class="com.yl.boss.action.DfAction" method="serviceConfigQuery">
+			<result>/jsp/df/serviceConfigQueryResult.jsp</result>
+		</action>
+		<action name="resetDfPwd" class="com.yl.boss.action.DfAction" method="resetDfPwd">
+			<result>/jsp/df/serviceConfigQueryResult.jsp</result>
+		</action>
+		<action name="serviceConfigById" class="com.yl.boss.action.DfAction" method="serviceConfigFindId">
+			<result>/jsp/df/serviceConfigUpdate.jsp</result>
+		</action>
+		<action name="serviceConfigUpdate" class="com.yl.boss.action.DfAction" method="serviceConfigUpdate">
+			<result type="redirect">serviceConfigQuery.action</result>
+		</action>
+		<!-- 代收配置信息 -->
+		<action name="toReceiveConfigUp" class="com.yl.boss.action.ReceiveAction" method="receiveConfigFindById">
+			<result>/jsp/receive/receiveConfigUpdate.jsp</result>
+		</action>
+		<action name="receiveConfigQuery" class="com.yl.boss.action.ReceiveAction" method="receiveConfigQuery">
+			<result>/jsp/receive/receiveConfigQueryResult.jsp</result>
+		</action>
+		<action name="receiveConfigHistoryQuery" class="com.yl.boss.action.ReceiveAction" method="receiveConfigHistoryQuery">
+			<result>/jsp/receive/receiveConfigHistory.jsp</result>
+		</action>
+		<action name="receiveConfigUpdate" class="com.yl.boss.action.ReceiveAction" method="upReceiveConfig">
+			<result name="success" type="json">
+				<param name="root">msg</param>
+			</result>
+		</action>
+		<action name="receiveConfigExists" class="com.yl.boss.action.ReceiveAction" method="receiveConfigExists">
+		  <result name="success" type="json">
+		    <param name="root">msg</param>
+		  </result>
+		</action>
+		<!-- 代收订单查询 -->
+		<action name="receiveOrderQuery" class="com.yl.boss.action.ReceiveAction" method="receiveOrderQuery">
+			<result>/jsp/receive/receiveOrderQueryResult.jsp</result>
+		</action>
+		<action name="receiveOrderSum" class="com.yl.boss.action.ReceiveAction" method="receiveOrderSum">
+			<result name="success" type="json">
+				<param name="root">msg</param>
+			</result>
+		</action>
+		<action name="receiveOrderExport" class="com.yl.boss.action.ReceiveAction" method="receiveOrderExport">
+			<result name="success">/jsp/receive/receiveOrderExport.jsp</result>
+		</action>
+    	<action name="receiveConfigAdd" class="com.yl.boss.action.ReceiveAction" method="receiveConfigAdd">
+      		<result name="success" type="json">
+				<param name="root">msg</param>
+			</result>
+    	</action>
+    	<!-- 代收路由 -->
+    	<action name="receiveRouteQuery" class="com.yl.boss.action.ReceiveAction" method="receiveRouteQuery">
+    		<result name="success">/jsp/receive/receiveRouteQueryResult.jsp</result>
+    	</action>
+    	<action name="receiveRouteQueryDictionary" class="com.yl.boss.action.ReceiveAction" method="receiveRouteQueryDictionary">
+    		<result name="success">/jsp/receive/receiveRouteAdd.jsp</result>
+    	</action>
+    	<action name="receiveRouteAdd" class="com.yl.boss.action.ReceiveAction" method="receiveRouteAdd">
+    		<result name="success">/jsp/receive/receiveRouteAdd.jsp</result>
+    	</action>
+    	<action name="receiveRouteQueryByCode" class="com.yl.boss.action.ReceiveAction" method="receiveRouteQueryByCode">
+    		<result name="update">/jsp/receive/receiveRouteUpdate.jsp</result>
+    		<result name="detail">/jsp/receive/receiveRouteDetails.jsp</result>
+    	</action>
+    	<action name="receiveRouteUpdate" class="com.yl.boss.action.ReceiveAction" method="receiveRouteUpdate">
+    		<result name="success">/jsp/receive/receiveRouteUpdate.jsp</result>
+    	</action>
+    	<action name="receiveConfigFindByIdBool" class="com.yl.boss.action.ReceiveAction" method="receiveConfigFindByIdBool">
+    		<result name="success" type="json" >
+				<param name="root">msg</param>
+			</result>
+    	</action>
+		
+		
+		<action name="customerConfigAdd" class="com.yl.boss.action.DfAction" method="customerConfigAdd"/>
+		<action name="customerConfigUpdate" class="com.yl.boss.action.DfAction" method="customerConfigUpdate"/>
+		<action name="applyVerify" class="com.yl.boss.action.DfAction" method="verifyPassword"/>
+		<action name="applyVerifyWithVerifyCode" class="com.yl.boss.action.DfAction" method="applyVerifyWithVerifyCode"/>
+		<action name="sendVerifyCode" class="com.yl.boss.action.DfAction" method="sendVerifyCode"/>
+		<action name="checkVerifyCodeEqual" class="com.yl.boss.action.DfAction" method="checkVerifyCodeEqual"/>
+		<action name="isUsePhoneCheck" class="com.yl.boss.action.DfAction" method="isUsePhoneCheck"/>
+		<action name="remitAudit" class="com.yl.boss.action.DfAction" method="remitAudit"/>
+
+		<!-- 代付路由 -->
+		<action name="dfRouteQuery" class="com.yl.boss.action.DfAction" method="dfRouteQuery">
+			<result name="success">/jsp/df/dfRouteQueryResult.jsp</result>
+		</action>
+		<action name="dfRouteAdd" class="com.yl.boss.action.DfAction" method="dfRouteAdd">
+			<result name="success">/jsp/df/dfRouteAdd.jsp</result>
+		</action>
+		<action name="dfRouteUpdate" class="com.yl.boss.action.DfAction" method="dfRouteUpdate">
+			<result name="success">/jsp/df/dfRouteUpdate.jsp</result>
+		</action>
+		<action name="dfRouteQueryByCode" class="com.yl.boss.action.DfAction" method="dfRouteQueryByCode">
+			<result name="update">/jsp/df/dfRouteUpdate.jsp</result>
+			<result name="detail">/jsp/df/dfRouteQueryDetails.jsp</result>
+		</action>
+		<action name="dfRouteQueryDictionary" class="com.yl.boss.action.DfAction" method="dfRouteQueryDictionary">
+			<result name="success">/jsp/df/dfRouteAdd.jsp</result>
+		</action>
+		<action name="dfRouteQueryByCodeBool" class="com.yl.boss.action.DfAction" method="dfRouteQueryByCodeBool">
+			<result name="success" type="json" >
+				<param name="root">msg</param>
+			</result>
+		</action>
+		<!-- 代付结束 -->	
+		
+        <action name="findCustomerNo" class="customerAction" method="findCustomerNo">
+           <result name="success" type="json" >
+				<param name="root">msg</param>
+			</result>
+        </action>
+
+		<!-- 白名单 -->
+		<action name="nameListQuery" class="com.yl.boss.action.NameListAction" method="queryNameList">
+			<result>/jsp/nameList/nameListQueryResult.jsp</result>
+		</action>
+		<!-- 导出 -->
+		<action name="nameListExport" class="com.yl.boss.action.NameListAction" method="Export">
+			<result>/jsp/nameList/export.jsp</result>
+		</action>
+		<!-- 图片输出 -->
+		<action name="openImg" class="com.yl.boss.action.ImgAction" method="openImg">
+			<result name="success" type="stream">       
+		        <param name="contentType">image/jpeg</param>
+		        <param name="inputName">fileOutput</param> 
+		    </result>
+		</action>
+		<!-- 接口对账配置结束 -->
+		<action name="loginLogQuery" class="com.yl.boss.action.LogQueryAction" method="loginLogQuery">
+			<result>/jsp/operator/loginLog.jsp</result>
+		</action>
+		
+		<!-- 设备类型管理 -->			
+		<action name="toDeviceTypeAdd" class="com.yl.boss.action.DeviceAction" method="toDeviceTypeAdd">
+			<result name="success">/jsp/device/deviceTypeAdd.jsp</result>
+		</action>	
+		<action name="addDeviceParentType" class="com.yl.boss.action.DeviceAction" method="addDeviceParentType">
+			<result name="success" type="json" >
+				<param name="root">msg</param>
+			</result> 
+		</action>
+		<action name="toUpDeviceParentType" class="com.yl.boss.action.DeviceAction" method="toUpDeviceParentType">
+			<result name="success">/jsp/device/deviceParentTypeUpdate.jsp</result>
+		</action>	
+		<action name="upDeviceParentType" class="com.yl.boss.action.DeviceAction" method="upDeviceParentType">
+			<result name="success" type="json" >
+				<param name="root">msg</param>
+			</result> 
+		</action>
+		<action name="deviceConfigHistory" class="defaultValueListAction">
+			<param name="queryId">deviceConfigHistory</param>
+			<result>/jsp/device/deviceConfigHistoryQueryResult.jsp</result>		
+		</action>
+		<action name="deviceConfigUpdate" class="com.yl.boss.action.DeviceAction" method="deviceConfigUpdate">
+			<result name="success" type="redirectAction">toDeviceConfigQuery</result>
+		</action>
+		<action name="toDeviceConfigQuery" class="com.yl.boss.action.DeviceAction" method="toDeviceConfigQuery">
+			<result name="success">/jsp/device/deviceConfigQuery.jsp</result>	
+		</action>
+		<!-- 支付回调 -->
+		<action name="callback" class="com.yl.boss.action.DeviceAction" method="callback">
+			<result name="success" type="json">
+				<param name="root">msg</param>
+			</result> 
+		</action>
+		<action name="pageCallBack" class="com.yl.boss.action.DeviceAction" method="pageCallBack">
+			<result name="success">/jsp/message/message.jsp</result>	
+		</action>
+		<!-- 信息管理 -->
+		<action name="protocolManagements" class="defaultValueListAction">
+			<param name="queryId">protocolManagements</param>
+			<result>/jsp/Management/ProtocolManagementResult.jsp</result>		
+		</action>
+		<action name="findHelpList" class="com.yl.boss.action.protocolManagementAction" method="findHelpList">
+			<result name="success" type="json" >
+				<param name="root">msg</param>
+			</result>
+		</action>
+		<action name="toUpdateprotocolManagement" class="com.yl.boss.action.protocolManagementAction" method="protocolManagementFindById">
+			<result name="success">/jsp/Management/ProtocolManagementUpdate.jsp</result>
+		</action>
+		<action name="protocolManagementDetail" class="com.yl.boss.action.protocolManagementAction" method="protocolManagementFindById">
+			<result name="success">/jsp/Management/ProtocolManagementDetail.jsp</result>
+		</action>
+		<action name="protocolManagementUpdate" class="com.yl.boss.action.protocolManagementAction" method="protocolManagementUpdate">
+			<result name="success" type="json" >
+				<param name="root">msg</param>
+			</result>
+		</action>
+		<action name="protocolManagementAdd" class="com.yl.boss.action.protocolManagementAction" method="protocolManagementAdd">
+			<result name="success" type="json" >
+				<param name="root">msg</param>
+			</result>
+		</action>
+		<action name="showAppHelp" class="com.yl.boss.action.protocolManagementAction" method="findAppHelp">
+			<result name="list">/jsp/word/appHelpList.jsp</result>
+			<result name="detail">/jsp/word/AppHelp.jsp</result>
+		</action>
+		<!-- 字典 公共查询ajax -->
+		<action name="findDict" class="com.yl.boss.action.DictionaryAction" method="findDict">
+			<result name="success" type="json" >
+				<param name="root">msg</param>
+			</result>
+		</action>
+		<!-- 客户端版本管理 -->
+		<action name="appMainVersion" class="com.yl.boss.action.ClientAction" method="findAllVersion">
+			<result name="success">/jsp/client/clientVersion.jsp</result>
+		</action>
+		<action name="updateAndroid" class="com.yl.boss.action.ClientAction" method="upAndroidMain">
+			<result name="success" >/jsp/client/clientVersion.jsp</result>
+			<result name="error" type="redirect">toClientVersion.action?android=false</result>
+		</action>
+		<action name="updateIos" class="com.yl.boss.action.ClientAction" method="upIosMain">
+			<result name="success" >/jsp/client/clientVersion.jsp</result>
+			<result name="error" type="redirect">toClientVersion.action?ios=false</result>
+		</action>
+		<action name="upInsStoreIos" class="com.yl.boss.action.ClientAction" method="upInsStoreMain">
+			<result name="success" >/jsp/client/clientVersion.jsp</result>
+			<result name="error" type="redirect">toClientVersion.action?ios=false</result>
+		</action>
+		
+		<action name="oemExist" class="com.yl.boss.action.ClientAction" method="exist" >
+			<result name="success" type="json" >
+				<param name="root">msg</param>
+			</result>
+		</action>
+		<action name="clientVersionQuery" class="defaultValueListAction">
+			<param name="queryId">clientVersionQuery</param>
+			<result>/jsp/client/clientVersionQueryResult.jsp</result>		
+		</action>
+		<action name="updateOemAndroid" class="com.yl.boss.action.ClientAction" method="updateOemAndroid">
+			<result name="success" type="json">
+				<param name="root">msg</param>
+			</result>
+		</action>
+		<action name="updateOemIos" class="com.yl.boss.action.ClientAction" method="updateOemIos">
+			<result name="success" type="json">
+				<param name="root">msg</param>
+			</result>
+		</action>
+		<action name="updateOemIosStore" class="com.yl.boss.action.ClientAction" method="updateOemIosStore">
+			<result name="success" type="json">
+				<param name="root">msg</param>
+			</result>
+		</action>
+		
+		<action name="toAndroidOemUpdate" class="com.yl.boss.action.ClientAction" method="findById">
+			<result name="success">/jsp/client/androidOemUpdate.jsp</result>
+		</action>
+		<action name="toIosOemUpdate" class="com.yl.boss.action.ClientAction" method="findById">
+			<result name="success" >/jsp/client/iosOemUpdate.jsp</result>
+		</action>
+		<action name="toIosStoreOemUpdate" class="com.yl.boss.action.ClientAction" method="findById">
+			<result name="success" >/jsp/client/iosStoreOemUpdate.jsp</result>
+		</action>
+
+
+		<!-- Mcc管理 -->
+		<action name="mccQuery" class="defaultValueListAction">
+			<param name="queryId">mccInfo</param>
+			<result>/jsp/mcc/mccQueryResult.jsp</result>
+		</action>
+		<action name="mccAdd" class="com.yl.boss.action.MccAction" method="mccAdd">
+			<result name="success" type="redirect">/toMccQuery.action</result>
+		</action>
+		<action name="mccById" class="com.yl.boss.action.MccAction" method="mccById">
+			<result name="success">/jsp/mcc/mccUpdate.jsp</result>
+		</action>
+		<action name="mccUpdate" class="com.yl.boss.action.MccAction" method="mccUpdate">
+			<result name="success" type="redirect">/toMccQuery.action</result>
+		</action>
+		<action name="mccAjaxByMcc" class="com.yl.boss.action.MccAction" method="mccAjaxByMcc">
+			<result name="success" type="json">
+				<param name="root">msg</param>
+			</result>
+		</action>
+		
+		<!-- 秘钥管理 -->
+		<action name="secretKeyQuery" class="defaultValueListAction">
+			<param name="queryId">secretKeyInfo</param>
+			<result>/jsp/rasioManagement/secretKey/secretKeyQueryResult.jsp</result>
+		</action>
+		<action name="secretKeyById" class="com.yl.boss.action.SecretKeyAction" method="secretKeyById">
+			<result name="success">/jsp/rasioManagement/secretKey/secretKeyUpdate.jsp</result>
+		</action>
+		<action name="secretKeyAdd" class="com.yl.boss.action.SecretKeyAction" method="secretKeyAdd">
+			<result name="success" type="redirect">/toSecretKeyQuery.action</result>
+		</action>
+		<action name="secretKeyUpdate" class="com.yl.boss.action.SecretKeyAction" method="secretKeyUpdate">
+			<result name="success" type="redirect">/toSecretKeyQuery.action</result>
+		</action>
+		
+		<!-- 网点管理 -->
+		<action name="shopQuery" class="defaultValueListAction">
+			<param name="queryId">shopInfo</param>
+			<result>/jsp/rasioManagement/shop/shopQueryResult.jsp</result>
+		</action>
+		<action name="shopAdd" class="com.yl.boss.action.ShopAction" method="shopAdd">
+			<result name="success" type="redirect">/toShopQuery.action</result>
+		</action>
+		<action name="shopById" class="com.yl.boss.action.ShopAction" method="shopById">
+			<result name="success">/jsp/rasioManagement/shop/shopUpdate.jsp</result>
+		</action>
+		<action name="shopUpdate" class="com.yl.boss.action.ShopAction" method="shopUpdate">
+			<result name="success" type="redirect">/toShopQuery.action</result>
+		</action>
+		<action name="ajaxQueryShopByShopNo" class="com.yl.boss.action.ShopAction" method="ajaxQueryShopByShopNo">
+			<result name="success" type="json">
+				<param name="root">msg</param>
+			</result>
+		</action>
+		<action name="queryShopNameByShopNo" class="com.yl.boss.action.ShopAction" method="queryShopNameByShopNo">
+			<result name="success" type="json">
+				<param name="root">msg</param>
+			</result>
+		</action>
+		<action name="queryShopListByCustomerNo" class="com.yl.boss.action.ShopAction" method="queryShopListByCustomerNo">
+			<result name="success" type="json">
+				<param name="root">msg</param>
+			</result>
+		</action>
+		
+		<!-- POS管理 -->
+		<action name="posQuery" class="defaultValueListAction">
+			<param name="queryId">posInfo</param>
+			<result>/jsp/pos/posQueryResult.jsp</result>
+		</action>
+		<action name="posAdd" class="posAction" method="posAdd">
+			<result name="success" type="json">
+				<param name="root">msg</param>
+			</result>
+		</action>
+		<action name="posById" class="posAction" method="posById">
+			<result name="success">/jsp/pos/posUpdate.jsp</result>
+		</action>
+		<action name="posUpdate" class="posAction" method="posUpdate">
+			<result name="success" type="redirect">/toPosQuery.action</result>
+		</action>
+		<action name="posDelivery" class="posAction" method="posDelivery">
+			<result name="success" type="redirect">/toPosQuery.action</result>
+		</action>
+		<!-- pos 请求记录查询 -->
+		<action name="posRequestQuery" class="posAction" method="posRequestQuery">
+			<result name="success">/jsp/pos/posRequestQueryResult.jsp</result>
+		</action>
+		<!-- pos 订单查询 -->
+		<action name="findAllPosOrder" class="posAction" method="posOrderQuery">
+			<result name="success">/jsp/pos/posOrderQueryResult.jsp</result>
+		</action>
+		<action name="findPosOrderByCode" class="posAction" method="posOrderDetail">
+			<result name="success">/jsp/pos/posOrderQueryDetail.jsp</result>
+		</action>
+		<action name="posOrderSumAction" class="posAction" method="posOrderSumAction">
+			<result name="success" type="json">
+				<param name="root">msg</param>
+			</result>
+		</action>
+		<action name="posOrderQueryExport" class="posAction" method="posOrderQueryExport">
+			<result name="success">/jsp/pos/posOrderQueryResultExport.jsp</result>
+		</action>
+		<action name="posBatchDelivery" class="posAction" method="posBatchDelivery">
+			<result name="success" type="json">
+				<param name="root">msg</param>
+			</result>
+		</action>
+		<action name="posBind" class="posAction" method="posBind">
+			<result name="success" type="json">
+				<param name="root">msg</param>
+			</result>
+		</action>
+		<action name="posAssign" class="defaultValueListAction">
+			<param name="queryId">posAssign</param>
+			<result>/jsp/pos/posAssignQueryResult.jsp</result>
+		</action>
+		<action name="posSynchronize" class="posAction" method="posSynchronize"></action>
+		<action name="posSynchronizeNotice" class="posAction" method="posSynchronizeNotice"></action>
+		
+		<!-- 实名认证开通查询 -->
+		<action name="findAuthConfig" class="com.yl.boss.action.RealNameAuthentication" method="findAuthConfig">
+			<result name="success">/jsp/RealIdentify/RealMangerQueryResult.jsp</result>
+		</action>
+		<action name="addAuthConfig" class="com.yl.boss.action.RealNameAuthentication" method="addAuthConfig">
+			<result name="success">/jsp/RealIdentify/RealMangerQueryResult.jsp</result>
+		</action>
+		<action name="updateAuthConfig" class="com.yl.boss.action.RealNameAuthentication" method="updateAuthConfig">
+			<result name="success">/jsp/RealIdentify/RealMangerQueryResult.jsp</result>
+		</action>
+		<action name="dynamicBindCarInfo" class="com.yl.boss.action.RealNameAuthentication" method="dynamicBindCarInfo">
+			<result name="success">/jsp/RealIdentify/RealFaceQueryResult.jsp</result>
+		</action>
+		<action name="dynamicRealNameAuthOrder" class="com.yl.boss.action.RealNameAuthentication" method="dynamicRealNameAuthOrder">
+			<result name="success">/jsp/RealIdentify/RealidQueryResult.jsp</result>
+		</action>
+		<action name="authQueryCustomerNoBool" class="com.yl.boss.action.RealNameAuthentication" method="authQueryCustomerNoBool">
+			<result name="success" type="json">
+				<param name="root">msg</param>
+			</result>
+		</action>
+		<action name="findAuthConfigBeanByCustomerNoAndBusiType" class="com.yl.boss.action.RealNameAuthentication" method="findAuthConfigBeanByCustomerNoAndBusiType">
+			<result name="success">/jsp/RealIdentify/RealUpdate.jsp</result>
+		</action>
+		<!-- 商户报备 -->
+		<action name="reportCustomerQuery" class="defaultValueListAction">
+			<param name="queryId">reportCustomerQuery</param>
+			<result>/jsp/reportCustomer/reportCustomerQueryResult.jsp</result>
+		</action>
+		<action name="createReportCustomer" class="com.yl.boss.action.ReportCustomerAction" method="create">
+			<result name="success">/jsp/reportCustomer/reportCustomerQueryResult.jsp</result>
+		</action>
+		<action name="updateReportCustomer" class="com.yl.boss.action.ReportCustomerAction" method="update">
+			<result name="success">/jsp/reportCustomer/reportCustomerQueryResult.jsp</result>
+		</action>
+		<action name="toUpdateReportCustomer" class="com.yl.boss.action.ReportCustomerAction" method="findById">
+			<result name="success">/jsp/reportCustomer/reportCustomerUpdate.jsp</result>
+		</action>
+		<action name="toAddReal" class="com.yl.boss.action.RealNameAuthentication" method="findAllTemplate">
+			<result name="success">/jsp/RealIdentify/AddReal.jsp</result>
+		</action>
+		
+		<!-- 客户端配置管理 -->
+		<action name="addNoticeConfig" class="noticeManageAction" method="addNoticeConfig">
+			<result name="success" type="json">
+				<param name="root">msg</param>
+			</result>
+		</action>
+		<action name="upNoticeConfig" class="noticeManageAction" method="upNoticeConfig">
+			<result name="success" type="json">
+				<param name="root">msg</param>
+			</result>
+		</action>
+		<action name="findNoticeConfig" class="noticeManageAction" method="findNoticeConfig">
+			<result name="success">/jsp/noticeManage/noticeManageUpdate.jsp</result>
+		</action>
+		<action name="findNoticeConfigByOem" class="noticeManageAction" method="findNoticeConfigByOem">
+			<result name="success" type="json">
+				<param name="root">msg</param>
+			</result>
+		</action>
+		<action name="findAllNoticeConfigByInfo" class="noticeManageAction" method="findAllNoticeConfigByInfo">
+			<result name="success">/jsp/noticeManage/noticeManageQueryResult.jsp</result>
+		</action>
+		<action name="sendAllNotice" class="noticeManageAction" method="sendAllNotice">
+			<result name="success">/jsp/noticeManage/noticeManageQuery.jsp</result>
+		</action>
+		
+		<!-- 一户多码 -->
+		<action name="findProvince" class="com.yl.boss.action.OneCustomerMultiCodeAction" method="findProvince">
+			<result name="success" type="json" >
+				<param name="root">provinces</param>
+			</result>                                                                        
+		</action>
+		
+		<action name="findCityByProvince" class="com.yl.boss.action.OneCustomerMultiCodeAction" method="findCityByProvince">
+			<result name="success" type="json" >
+				<param name="root">citys</param>
+			</result>                                                                        
+		</action>
+		
+		<action name="findMcc" class="com.yl.boss.action.OneCustomerMultiCodeAction" method="findMcc">
+			<result name="success" type="json" >
+				<param name="root">mccs</param>
+			</result>                                                                        
+		</action>
+		<action name="findBankCustomerByPage" class="com.yl.boss.action.OneCustomerMultiCodeAction" method="findBankCustomerByPage">
+			<result name="success" type="json" >
+				<param name="root">customers</param>
+			</result>                                                                        
+		</action>
+		<action name="followBankCustomer" class="com.yl.boss.action.OneCustomerMultiCodeAction" method="followBankCustomer">
+			<result name="success" type="json" >
+				<param name="root">msg</param>
+			</result>                                                                        
+		</action>
+		<action name="cancleFollowBankCustomer" class="com.yl.boss.action.OneCustomerMultiCodeAction" method="cancleFollowBankCustomer">
+			<result name="success" type="json" >
+				<param name="root">msg</param>
+			</result>                                                                        
+		</action>
+		<action name="followed" class="com.yl.boss.action.OneCustomerMultiCodeAction" method="followed">
+			<result name="success" type="json" >
+				<param name="root">followed</param>
+			</result>                                                                        
+		</action>
+
+
+
+        <!--对账start-->
+        <!-- 对账查询 -->
+        <action name="findReconByDate" class="com.yl.boss.action.ReconAction" method="findReconByDate">
+            <result name="in">/jsp/recon/reconInfoQueryResult.jsp</result>
+            <result name="out">/jsp/recon/outReconInfoQueryResult.jsp</result>
+        </action>
+        <action name="findReconInfo" class="com.yl.boss.action.ReconAction" method="findReconInfo">
+            <result name="success">/jsp/recon/reconInfoDetail.jsp</result>
+            <result name="reconExceptionResult">/jsp/recon/reconExceptionResult.jsp</result>
+        </action>
+        <!--对账文件信息start-->
+        <!-- 查询 -->
+        <action name="findReconFileInfo" class="com.yl.boss.action.ReconAction" method="findReconFileInfo">
+            <result name="success">/jsp/recon/reconFileInfoQueryResult.jsp</result>
+        </action>
+        <!-- 新增接口对账文件查询接口信息 -->
+        <action name="toReconFileInfoAdd" class="com.yl.boss.action.ReconAction" method="toReconFileInfoAdd">
+            <result name="success">/jsp/recon/reconFileInfoAdd.jsp</result>
+        </action>
+        <!--新增-->
+        <action name="reconFileInfoAdd" class="com.yl.boss.action.ReconAction" method="reconFileInfoAdd">
+            <result name="success">/jsp/recon/reconFileInfoAdd.jsp</result>
+        </action>
+        <!-- 修改接口对账文件信息 -->
+        <action name="toReconFileInfoModify" class="com.yl.boss.action.ReconAction" method="toReconFileInfoModify">
+            <result name="success">/jsp/recon/reconFileInfoModify.jsp</result>
+        </action>
+        <!--修改-->
+        <action name="reconFileInfoModify" class="com.yl.boss.action.ReconAction" method="reconFileInfoModify">
+            <result name="success">/jsp/recon/reconFileInfoModify.jsp</result>
+        </action>
+        <action name="checkInterfaceCode" class="com.yl.boss.action.ReconAction" method="checkInterfaceCode">
+            <result name="success" type="json">
+                <param name="root">msg</param>
+            </result>
+        </action>
+        <!--对账文件信息end-->
+        <!--对账数据 start-->
+        <action name="toReconOrderDataQuery" class="com.yl.boss.action.ReconAction" method="toReconOrderDataQuery">
+            <result name="success">/jsp/recon/sourceData/reconOrderDataQuery.jsp</result>
+        </action>
+
+        <!--查询:对账数据-->
+        <action name="reconOrderDataQuery" class="com.yl.boss.action.ReconAction" method="reconOrderDataQuery">
+            <result name="ACCOUNT">/jsp/recon/sourceData/accountDataResult.jsp</result>
+            <result name="PAYINTERFACE">/jsp/recon/sourceData/payinterfaceDataResult.jsp</result>
+            <result name="REAL_AUTH">/jsp/recon/sourceData/realAuthDataResult.jsp</result>
+            <result name="ONLINE">/jsp/recon/sourceData/onlineTradeDataResult.jsp</result>
+            <result name="DPAY">/jsp/recon/sourceData/dpayDataResult.jsp</result>
+            <result name="BANK">/jsp/recon/sourceData/bankDataResult.jsp</result>
+        </action>
+        <!--导出:对账数据-->
+        <action name="reconOrderDataExport" class="com.yl.boss.action.ReconAction" method="reconOrderDataExport"/>
+        <!--对账数据 end-->
+        <!-- 对账订单导出-->
+        <action name="reconOrderExport" class="com.yl.boss.action.ReconAction" method="reconOrderExport"/>
+
+        <!-- 对账详情导出-->
+        <action name="exceptionExport" class="com.yl.boss.action.ReconAction" method="exceptionExport"/>
+
+        <action name="exceptionUpload" class="com.yl.boss.action.ReconAction" method="exceptionUpload">
+            <result name="success">/jsp/recon/reconInfoQuery.jsp</result>
+        </action>
+
+        <!--对账end-->
+		
+    </package>
+</struts>

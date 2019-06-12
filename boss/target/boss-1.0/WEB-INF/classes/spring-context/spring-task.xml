@@ -1,0 +1,28 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.0.xsd 
+	http://www.springframework.org/schema/task http://www.springframework.org/schema/task/spring-task-4.0.xsd"
+	default-autowire="byName">
+	
+	<bean id="syncInfoTask" class="com.yl.boss.task.SyncInfoTask"></bean>
+	<!-- 信息定时同步 -->
+	<bean id="infoSyncDetail" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+        <property name="targetObject" ref="syncInfoTask"></property>
+        <property name="targetMethod" value="infoPospSync"></property>
+        <property name="concurrent" value="false" />
+        <!-- 是否允许任务并发执行。当值为false时，表示必须等到前一个线程处理完毕后才再启一个新的线程 -->
+   </bean>
+   <bean id="infoSyncSyncTriggers" class="org.springframework.scheduling.quartz.CronTriggerBean">
+        <property name="jobDetail" ref="infoSyncDetail"/>
+        <property name="cronExpression" value="0 0/1 * * * ?"/>
+    </bean>
+    
+    <bean id="startQuertz" lazy-init="false" autowire="no" class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
+		<property name="triggers">
+			<list>
+				<ref bean="infoSyncSyncTriggers"/>
+			</list>
+		</property>
+	</bean>
+</beans>

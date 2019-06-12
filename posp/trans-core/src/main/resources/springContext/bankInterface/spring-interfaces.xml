@@ -1,0 +1,34 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" ":/spring-beans.dtd">
+
+<beans default-autowire="byName">
+	
+	<!-- 银行交易处理工厂配置 -->
+	<bean id="bankTransactionFactory" class="com.yl.pay.pos.interfaces.BankTransactionFactory">
+		<property name="serviceMap">
+			<map>
+				<!-- P360001 -->
+				<entry key="balanceInquiryP360001"><ref bean="balanceInquiryP360001"/></entry>
+				<entry key="purchaseP360001"><ref bean="purchaseP360001" /></entry>
+				<entry key="purchaseReversalP360001"><ref bean="purchaseReversalP360001" /></entry>	
+				<entry key="signInP360001"><ref bean="signInP360001" /></entry>
+				
+				<!-- P500001 -->
+				<entry key="balanceInquiryP500001"><ref bean="balanceInquiryP500001"/></entry>
+				<entry key="purchaseP500001"><ref bean="purchaseP500001" /></entry>
+				<entry key="purchaseReversalP500001"><ref bean="purchaseReversalP500001" /></entry>	
+				<entry key="purchaseVoidP500001"><ref bean="purchaseVoidP500001" /></entry>	
+				<entry key="signInP500001"><ref bean="signInP500001" /></entry>
+			</map>
+		</property>
+	</bean> 
+	
+	<!-- 银行签到处理工厂,只有需要每天签到的银行才需要配置这里 -->
+	<bean id="bankSignInActionFactory" class="com.yl.pay.pos.interfaces.BankSignInActionFactory">
+		<property name="serviceMap">
+			<map>
+			</map>
+		</property>
+	</bean> 
+	
+</beans>

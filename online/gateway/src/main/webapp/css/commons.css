@@ -1,0 +1,1341 @@
+/*
+ * 全区样式设置
+ */
+
+* {
+    margin: 0;
+    padding: 0
+}
+
+body {
+    font: 12px "Microsoft YaHei", 微软雅黑, "MicrosoftJhengHei", 华文细黑, STHeiti, MingLiu;
+    background-color: #f2f2f2;
+    color: #222;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-size: 15px;
+    font-weight: bold;
+}
+
+ul {
+    list-style: none outside none;
+}
+
+a:link {
+    color: #333;
+    text-decoration: none;
+}
+
+a:hover {
+    color: #333;
+    transition: color .3s;
+}
+
+a:active {
+    color: #333;
+}
+
+a:visited {
+    color: #333;
+}
+
+a:link,
+a:active,
+a:visited,
+a:focus,
+a:hover {
+    outline: 0 none;
+}
+input[type=submit],input[type=button] {
+    transition: background-color .3s;
+    
+}
+img {
+    border: none;
+}
+
+.cf:before,
+.cf:after {
+    content: "";
+    display: table;
+}
+
+.cf:after {
+    clear: both;
+}
+
+.cf {
+    zoom: 1;
+}
+
+input,
+textarea {
+    outline: none;
+}
+
+input:-webkit-autofill,
+textarea:-webkit-autofill,
+select:-webkit-autofill {
+    background-color: transparent !important;
+    background-image: none !important;
+    color: rgb(0, 0, 0) !important;
+}
+
+
+/*图标*/
+
+.icons {
+    display: block;
+    background-image: url("../images/icons.png");
+    background-repeat: no-repeat;
+    background-position: 0 0;
+}
+
+.icons.iconTopAccount {
+    width: 20px;
+    height: 16px;
+    background-position: 0 -60px;
+}
+
+.icons.iconAccount {
+    width: 20px;
+    height: 16px;
+    background-position: 0 -112px;
+}
+
+.icons.iconCat {
+    width: 20px;
+    height: 20px;
+    background-position: 0 0;
+}
+
+.icons.iconDetail {
+    width: 20px;
+    height: 20px;
+    background-position: 0 -20px;
+}
+.icons.iconAlbum {
+    width: 20px;
+    height: 20px;
+    background-position: 0 -266px;
+}
+.icons.iconComment {
+	width: 20px;
+    height: 20px;
+    background-position: 0 -286px;
+}
+.icons.iconMessage {
+	width: 20px;
+    height: 20px;
+    background-position: 0 -306px;
+}
+.icons.iconSsp {
+	width: 20px;
+    height: 16px;
+    background-position: 0 -326px;
+}
+.icons.iconAdmin {
+    width: 20px;
+    height: 20px;
+    background-position: 0 -40px;
+}
+
+.icons.iconSetting {
+    width: 20px;
+    height: 20px;
+    background-position: 0 -76px;
+}
+.icons.iconUser {
+    width: 20px;
+    height: 16px;
+    background-position: 0 -96px;
+}
+.icons.iconInfo {
+    width: 32px;
+    height: 32px;
+    background-position: 0 -234px;
+}
+
+.icons.iconErrorInfo {
+    width: 32px;
+    height: 32px;
+    background-position: 0 -202px;
+}
+.icons.iconSearch {
+    width: 14px;
+    height: 14px;
+    background-position: 0 -156px;
+}
+.icons.iconEditItem {
+    width: 14px;
+    height: 14px;
+    background-position: 0 -128px;
+}
+
+.icons.iconAddItem {
+    width: 14px;
+    height: 14px;
+    background-position: -16px -128px;
+}
+
+.icons.iconFormSave {
+    width: 14px;
+    height: 14px;
+    background-position: 0 -142px;
+}
+.icons.iconAllDel {
+    width: 14px;
+    height: 14px;
+    background-position: -16px -142px;
+}
+
+/*
+ * 容器
+ */
+
+.shtWrap {
+    width: 1226px;
+    margin: 0 auto;
+    background: #fff url("../images/iframe-bg.png") 0 0 repeat-y;
+}
+
+.shtWrap.topMargin {
+    margin-top: 84px;
+}
+
+.shtWrap.login {
+    
+    margin-top: 100px;
+    width: 348px;
+    height: 276px;
+    background: #f9f9f9 url('../images/login/bg.png') center bottom no-repeat;
+}
+
+
+/*
+ * 登录模块
+ */
+
+.shtWrap.login .loginContent {
+    width: 346px;
+    border-top: 1px solid #eaeaea;
+    border-right: 1px solid #eaeaea;
+    border-left: 1px solid #eaeaea;
+    height: 251px;
+    position: relative;
+}
+
+.shtWrap.login .loginContent .logo {
+    height: 46px;
+    padding: 10px 0;
+    border-bottom: 1px dotted #eaeaea;
+}
+
+.shtWrap.login .loginContent .logo img {
+    display: block;
+    width: 180px;
+    height: 46px;
+    margin: 0 auto;
+}
+
+.shtWrap.login .loginContent .form {
+    width: 304px;
+    height: 138px;
+    margin: 18px auto 0 auto;
+}
+
+.shtWrap.login .loginContent .form .item {
+    width: 302px;
+    height: 38px;
+    border: 1px solid #BDBDBD;
+    margin-bottom: 10px;
+}
+
+.shtWrap.login .loginContent .form label {
+    display: block;
+    float: left;
+    background-image: url(../images/login/login-form-bg.png);
+    background-repeat: no-repeat;
+    width: 39px;
+    height: 38px;
+}
+
+.shtWrap.login .loginContent .form label.account {
+    background-position: 0 0;
+}
+
+.shtWrap.login .loginContent .form label.password {
+    background-position: 0 -129px;
+}
+
+.shtWrap.login .loginContent .form input[type='text'],
+.shtWrap.login .loginContent .form input[type='password'] {
+    float: left;
+    margin-left: 39px;
+    padding: 0 10px 0 10px;
+    border: none;
+    width: 243px;
+    height: 38px;
+    line-height: 38px;
+}
+
+.shtWrap.login .loginContent .form input[type='submit'] {
+    line-height: 37px;
+    width: 304px;
+    height: 37px;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    border-bottom: 1px solid #0D6FB8;
+    cursor: pointer;
+    background-color: #29A7E1;
+    font-size: 16px;
+    color: white;
+    
+}
+
+.shtWrap.login .loginContent .form input[type='submit']:hover,
+.shtWrap.login .loginContent .form input[type='submit']:focus {
+    background-color: #0D6FB8;
+    box-shadow: .5px .5px 2px #0D6FB8;
+    -webkit-box-shadow: .5px .5px 2px #0D6FB8;
+    -moz-box-shadow: .5px .5px 2px #0D6FB8;
+
+}
+/*login验证样式*/
+.shtWrap.login .loginContent .form .item.iHover {
+    border-color: #ADBB97;
+}
+.shtWrap.login .loginContent .form label.account.iHover {
+    background-position: 0 -43px;
+}
+.shtWrap.login .loginContent .form label.password.iHover {
+    background-position: 0 -172px;
+}
+/*顶部模块*/
+
+.shtToper {
+    width: 100%;
+    position: absolute;
+    margin: 0 auto;
+    top: 0;
+    left: 0;
+    min-width: 1226px;
+    height: 46px;
+    padding: 10px 0;
+    margin-bottom: 20px;
+    border-top: 5px solid #0D6FB8;
+    border-bottom: 1px solid #EDEDED;
+    background-color: #FFF;
+    box-shadow: .5px .5px 5px #EDEDED;
+    -webkit-box-shadow: .5px .5px 5px #EDEDED;
+    -moz-box-shadow: .5px .5px 5px #EDEDED;
+}
+
+.shtToper .shtWrap {
+    background-image: none;
+    background-color: transparent;
+}
+
+.shtToper .logo {
+    display: block;
+    width: 180px;
+    height: 46px;
+    float: left;
+}
+
+.shtToper .shtToperRight {
+    float: right;
+    margin-top: 18px;
+}
+
+.shtToper .shtToperRight i,
+.shtToper .shtToperRight span,
+.shtToper .shtToperRight a {
+    display: block;
+    float: left;
+    margin-left: 5px;
+}
+
+
+/*主界面模块*/
+
+.shtWrap .container {
+    width: 1224px;
+    border: 1px solid #ededed;
+}
+
+.shtWrap .shtContent {
+    float: right;
+    width: 1025px;
+    padding-bottom: 20px;
+    background-color: #fff;
+}
+.shtWrap .shtContent .titleSearch {
+    position: relative;
+}
+.shtWrap .shtContent .titleSearch h2.title {
+    padding: 20px 30px;
+}
+
+.shtWrap .shtContent .titleSearch .searchDiv {
+    
+    position: absolute;
+    top:15px;
+    right:30px;
+}
+.shtWrap .shtContent .titleSearch .searchDiv .status {
+	float: left;
+}
+.shtWrap .shtContent .titleSearch .searchDiv .status span {
+	display: block;
+	float:left;
+	padding-top:5px;
+	margin-right: 10px;
+}
+.shtWrap .shtContent .titleSearch .searchDiv select {
+    float: left;
+    height: 30px;
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    border-radius: 4px;
+    border: 1px solid #ddd;
+    margin-right: 10px;
+}
+
+.shtWrap .shtContent .titleSearch .searchDiv input[type='text'] {
+    float: left;
+    padding: 5px;
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    border-radius: 4px;
+    border: 1px solid #ddd;
+    height: 18px;
+    margin-right: 10px;
+    width:360px;
+}
+
+.shtWrap .shtContent .titleSearch .searchDiv button {
+    float: left;
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    border-radius: 4px;
+    border: none;
+    background-color: #00AEEF;
+    color: #fff;
+    padding: 0 10px;
+    height: 30px;
+    cursor: pointer;
+}
+
+.shtWrap .shtContent .titleSearch .searchDiv button i,
+.shtWrap .shtContent .titleSearch .searchDiv span {
+    display: block;
+    float: left;
+}
+
+.shtWrap .shtContent .titleSearch .searchDiv button i {
+    margin-right: 5px;
+    margin-top: 1px;
+}
+.shtWrap .shtContent .titleSearch .searchDiv button:hover,
+.shtWrap .shtContent .titleSearch .searchDiv button:focus {
+    background-color: #00A4E1;
+    box-shadow: .5px .5px 2px #009AD5;
+    -webkit-box-shadow: .5px .5px 2px #009AD5;
+    -moz-box-shadow: .5px .5px 2px #009AD5;
+}
+.shtWrap .shtContent .headerInfo {
+    padding: 20px 30px 19px 30px;
+    background-color: #fafafa;
+    border-top: 1px solid #eaeaea;
+    border-bottom: 1px solid #eaeaea;
+    position: relative;
+}
+
+.shtWrap .shtContent .headerInfo.noFlag {
+    background-color: #fafafa;
+    border-top: none;
+}
+
+.shtWrap .shtContent .headerInfo.noFlag h3 {
+    font-size: 18px;
+    margin-top: 4px;
+}
+
+.shtWrap .shtContent .headerInfo i,
+.shtWrap .shtContent .headerInfo .text {
+    float: left;
+}
+
+.shtWrap .shtContent .headerInfo h3 {
+    font-size: 14px;
+}
+
+.shtWrap .shtContent .headerInfo a {
+    display: block;
+    position: absolute;
+    right: 30px;
+    top: 18px;
+    height: 25px;
+    line-height: 25px;
+    background-color: #29A7E1;
+    color: #fff;
+    padding: 0 10px;
+    margin-top: 5px;
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    border-radius: 2px;
+    transition: background-color .3s;
+}
+
+.shtWrap .shtContent .headerInfo a i {
+    margin: 5px 5px 0 0;
+}
+
+.shtWrap .shtContent .headerInfo a:hover,
+.shtWrap .shtContent .headerInfo a:focus {
+    background-color: #0D6FB8;
+    box-shadow: .5px .5px 2px #0D6FB8;
+    -webkit-box-shadow: .5px .5px 2px #0D6FB8;
+    -moz-box-shadow: .5px .5px 2px #0D6FB8;
+}
+
+.shtWrap .shtContent .headerInfo .text {
+    margin-left: 10px;
+}
+
+.shtWrap .shtContent .accountSetting {
+    padding-left: 30px;
+    margin-top: 30px;
+}
+
+.shtWrap .shtContent .accountSetting h3 {
+    margin-bottom: 15px;
+}
+
+.shtWrap .shtContent .accountSetting i,
+.shtWrap .shtContent .accountSetting span,
+.shtWrap .shtContent .accountSetting a {
+    display: block;
+    float: left;
+    margin-right: 10px;
+}
+
+.shtWrap .shtContent .accountSetting a {
+    text-decoration: underline;
+}
+
+.shtWrap .shtContent .accountSetting a:hover {
+    color: #4F9CEE;
+}
+
+
+/*底部*/
+
+.shtFooter {
+    text-align: center;
+    width: 1224px;
+    background-color: #fff;
+    margin: 0 auto;
+    border-left: 1px solid #ededed;
+    border-right: 1px solid #ededed;
+    border-bottom: 1px solid #ededed;
+    padding: 20px 0;
+}
+
+
+/*
+ 导航
+ */
+
+.shtWrap .nav {
+    padding-top: 30px;
+    width: 198px;
+    float: left;
+}
+
+.shtWrap .nav h2.navTitle {
+    padding-left: 30px;
+    margin-bottom: 9px;
+    font-size: 15px;
+}
+
+.shtWrap .nav h2.navTitle i,
+.shtWrap .nav h2.navTitle span {
+    display: block;
+    float: left;
+}
+
+.shtWrap .nav h2.navTitle span {
+    margin-left: 5px;
+}
+
+.shtWrap .nav ul {
+    padding-bottom: 10px;
+    margin-bottom: 30px;
+    border-bottom: 1px solid #EDEDED;
+}
+
+.shtWrap .nav ul:last-child {
+    border-bottom: none;
+}
+
+.shtWrap .nav ul li a {
+    display: block;
+    padding: 8px 0 8px 55px;
+}
+
+.shtWrap .nav ul li a:hover {
+    background-color: #fafafa;
+}
+
+.shtWrap .nav ul li a.cur {
+    background-color: #0D6FB8;
+    color: #FFF;
+}
+
+
+/*表格*/
+
+.tableSource {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 1px;
+    text-align: left;
+    background-color: #efefef;
+}
+.tableSource a.btn{
+	
+	background-color: #3bb3e0;
+	padding: 5px 5px;
+	
+	position: relative;
+	font-family: 'Open Sans', sans-serif;
+	font-size: 12px;
+	text-decoration: none;
+	color: #fff;
+	border: solid 1px #186f8f;
+	background-image: linear-gradient(bottom, rgb(44, 160, 202) 0%, rgb(62, 184, 229) 100%);
+	background-image: -o-linear-gradient(bottom, rgb(44, 160, 202) 0%, rgb(62, 184, 229) 100%);
+	background-image: -moz-linear-gradient(bottom, rgb(44, 160, 202) 0%, rgb(62, 184, 229) 100%);
+	background-image: -webkit-linear-gradient(bottom, rgb(44, 160, 202) 0%, rgb(62, 184, 229) 100%);
+	background-image: -ms-linear-gradient(bottom, rgb(44, 160, 202) 0%, rgb(62, 184, 229) 100%);
+	background-image: -webkit-gradient( linear, left bottom, left top, color-stop(0, rgb(44, 160, 202)), color-stop(1, rgb(62, 184, 229)));
+	-webkit-box-shadow: inset 0px 1px 0px #7fd2f1, 0px 1px 0px #fff;
+	-moz-box-shadow: inset 0px 1px 0px #7fd2f1, 0px 1px 0px #fff;
+	box-shadow: inset 0px 1px 0px #7fd2f1, 0px 1px 0px #fff;
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+	-o-border-radius: 5px;
+	border-radius: 5px;
+}
+.tableSource a.btn.danger {
+	background-color: #E33326;
+	border: solid 1px #A01F14;
+	background-image: linear-gradient(bottom, rgb(233, 96, 84) 0%, rgb(218, 43, 29) 100%);
+	background-image: -o-linear-gradient(bottom, rgb(233, 96, 84) 0%, rgb(218, 43, 29) 100%);
+	background-image: -moz-linear-gradient(bottom, rgb(233, 96, 84) 0%, rgb(218, 43, 29) 100%);
+	background-image: -webkit-linear-gradient(bottom, rgb(233, 96, 84) 0%, rgb(218, 43, 29) 100%);
+	background-image: -ms-linear-gradient(bottom, rgb(233, 96, 84) 0%, rgb(218, 43, 29) 100%);
+	background-image: -webkit-gradient( linear, left bottom, left top, color-stop(0, rgb(233, 96, 84)), color-stop(1, rgb(218, 43, 29)));
+	-webkit-box-shadow: inset 0px 1px 0px #F08F88, 0px 1px 0px #fff;
+	-moz-box-shadow: inset 0px 1px 0px #F08F88, 0px 1px 0px #fff;
+	box-shadow: inset 0px 1px 0px #F08F88, 0px 1px 0px #fff;
+}
+.tableSource a.btn.or {
+	background-color: #FF8000;
+	border: solid 1px #D26900;
+	background-image: linear-gradient(bottom, rgb(255, 128, 0) 0%, rgb(255, 168, 81) 100%);
+	background-image: -o-linear-gradient(bottom, rgb(255, 128, 0) 0%, rgb(255, 168, 81) 100%);
+	background-image: -moz-linear-gradient(bottom, rgb(255, 128, 0) 0%, rgb(255, 168, 81) 100%);
+	background-image: -webkit-linear-gradient(bottom, rgb(255, 128, 0) 0%, rgb(255, 168, 81) 100%);
+	background-image: -ms-linear-gradient(bottom, rgb(255, 128, 0) 0%, rgb(255, 168, 81) 100%);
+	background-image: -webkit-gradient( linear, left bottom, left top, color-stop(0, rgb(255, 128, 0)), color-stop(1, rgb(255, 168, 81)));
+	-webkit-box-shadow: inset 0px 1px 0px #F08F88, 0px 1px 0px #fff;
+	-moz-box-shadow: inset 0px 1px 0px #F08F88, 0px 1px 0px #fff;
+	box-shadow: inset 0px 1px 0px #F08F88, 0px 1px 0px #fff;
+}
+.tableSource a.btn.success {
+	background-color: #62b900;
+	border: solid 1px #448200;
+	background-image: linear-gradient(bottom, rgb(85, 162, 0) 0%, rgb(98, 185, 0) 100%);
+	background-image: -o-linear-gradient(bottom, rgb(85, 162, 0) 0%, rgb(98, 185, 0) 100%);
+	background-image: -moz-linear-gradient(bottom, rgb(85, 162, 0) 0%, rgb(98, 185, 0) 100%);
+	background-image: -webkit-linear-gradient(bottom, rgb(85, 162, 0) 0%, rgb(98, 185, 0) 100%);
+	background-image: -ms-linear-gradient(bottom, rgb(85, 162, 0) 0%, rgb(98, 185, 0) 100%);
+	background-image: -webkit-gradient( linear, left bottom, left top, color-stop(0, rgb(85, 162, 0)), color-stop(1, rgb(98, 185, 0)));
+	-webkit-box-shadow: inset 0px 1px 0px #59AA00, 0px 1px 0px #fff;
+	-moz-box-shadow: inset 0px 1px 0px #59AA00, 0px 1px 0px #fff;
+	box-shadow: inset 0px 1px 0px #59AA00, 0px 1px 0px #fff;
+}
+.tableSource a.btn::before {
+	background-color: #ccd0d5;
+	content: "";
+	display: block;
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	padding: 8px;
+	left: -8px;
+	top: -8px;
+	z-index: -1;
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+	-o-border-radius: 5px;
+	border-radius: 5px;
+	-webkit-box-shadow: inset 0px 1px 1px #909193, 0px 1px 0px #fff;
+	-moz-box-shadow: inset 0px 1px 1px #909193, 0px 1px 0px #fff;
+	-o-box-shadow: inset 0px 1px 1px #909193, 0px 1px 0px #fff;
+	box-shadow: inset 0px 1px 1px #909193, 0px 1px 0px #fff;
+}
+
+.tableSource a.btn:active{
+	top: 1px;
+	background-image: linear-gradient(bottom, rgb(62, 184, 229) 0%, rgb(44, 160, 202) 100%);
+	background-image: -o-linear-gradient(bottom, rgb(62, 184, 229) 0%, rgb(44, 160, 202) 100%);
+	background-image: -moz-linear-gradient(bottom, rgb(62, 184, 229) 0%, rgb(44, 160, 202) 100%);
+	background-image: -webkit-linear-gradient(bottom, rgb(62, 184, 229) 0%, rgb(44, 160, 202) 100%);
+	background-image: -ms-linear-gradient(bottom, rgb(62, 184, 229) 0%, rgb(44, 160, 202) 100%);
+	background-image: -webkit-gradient( linear, left bottom, left top, color-stop(0, rgb(62, 184, 229)), color-stop(1, rgb(44, 160, 202)));
+}
+.tableSource a.btn.danger:active{
+	background-image: linear-gradient(bottom, rgb(218, 43, 29) 0%, rgb(233, 96, 84) 100%);
+	background-image: -o-linear-gradient(bottom, rgb(218, 43, 29) 0%, rgb(233, 96, 84) 100%);
+	background-image: -moz-linear-gradient(bottom, rgb(218, 43, 29) 0%, rgb(233, 96, 84) 100%);
+	background-image: -webkit-linear-gradient(bottom, rgb(218, 43, 29) 0%, rgb(233, 96, 84) 100%);
+	background-image: -ms-linear-gradient(bottom, rgb(218, 43, 29)0%, rgb(233, 96, 84) 100%);
+	background-image: -webkit-gradient( linear, left bottom, left top, color-stop(0, rgb(218, 43, 29)), color-stop(1, rgb(233, 96, 84)));
+}
+.tableSource a.btn.or:active{
+	background-image: linear-gradient(bottom, rgb(255, 168, 81) 0%, rgb(255, 128, 0) 100%);
+	background-image: -o-linear-gradient(bottom, rgb(255, 168, 81) 0%, rgb(255, 128, 0) 100%);
+	background-image: -moz-linear-gradient(bottom, rgb(255, 168, 81) 0%, rgb(255, 128, 0) 100%);
+	background-image: -webkit-linear-gradient(bottom, rgb(255, 168, 81) 0%, rgb(255, 128, 0) 100%);
+	background-image: -ms-linear-gradient(bottom, rgb(255, 168, 81)0%, rgb(255, 128, 0) 100%);
+	background-image: -webkit-gradient( linear, left bottom, left top, color-stop(0, rgb(255, 168, 81)), color-stop(1, rgb(255, 128, 0)));
+}
+.tableSource a.btn.success:active{
+	background-image: linear-gradient(bottom, rgb(98, 185, 0) 0%, rgb(85, 162, 0) 100%);
+	background-image: -o-linear-gradient(bottom, rgb(98, 185, 0) 0%, rgb(85, 162, 0) 100%);
+	background-image: -moz-linear-gradient(bottom, rgb(98, 185, 0) 0%, rgb(85, 162, 0) 100%);
+	background-image: -webkit-linear-gradient(bottom, rgb(98, 185, 0) 0%, rgb(85, 162, 0) 100%);
+	background-image: -ms-linear-gradient(bottom, rgb(98, 185, 0) 0%, rgb(85, 162, 0) 100%);
+	background-image: -webkit-gradient( linear, left bottom, left top, color-stop(0, rgb(98, 185, 0)), color-stop(1, rgb(85, 162, 0)));
+}
+.tableSource td,
+th {
+    display: table-cell;
+    vertical-align: inherit;
+    padding-left: 10px;
+    padding: 10px;
+}
+
+.tableSource th {
+    height: 30px;
+}
+
+.tableSource thead {
+    background-color: #fcfcfc;
+}
+
+.tableSource tbody tr:nth-child(odd) {
+    background-color: #fff;
+}
+
+.tableSource tbody tr:nth-child(even) {
+    background-color: #fcfcfc;
+}
+
+.tableSource .cat {
+    width: 70%;
+}
+.tableSource .catModel {
+    width: 10%;
+}
+
+.tableSource .one {
+    font-weight: bold;
+    font-size: 18px;
+}
+
+
+
+.tableSource .articleSelect {
+    width: 1%;
+}
+
+.tableSource .articleId {
+    width: 4%;
+}
+
+.tableSource .articleTitle {
+    width: 27%;
+}
+
+.tableSource .articleAuthor {
+    width: 6%;
+}
+.tableSource .articleViews {
+    width: 6%;
+}
+
+.tableSource .articleUpdateTime {
+    width: 9%;
+}
+
+
+
+
+.tableSource .albumSelect {
+    width: 1%;
+}
+
+.tableSource .albumId {
+    width: 6%;
+}
+
+.tableSource .albumTitle {
+    width: 24%;
+}
+
+.tableSource .albumAuthor {
+    width: 12%;
+}
+.tableSource .albumThum {
+    width: 16%;
+}
+
+.tableSource .albumCreateDate {
+    width: 9%;
+}
+.tableSource .albumPublic {
+	width: 9%;
+}
+
+
+.tableSource .adminSelect {
+    width: 3%;
+}
+
+.tableSource .adminId {
+    width: 8%;
+}
+
+.tableSource .adminName {
+    width: 10%;
+}
+.tableSource .adminPur {
+    width: 64%;
+}
+.tableSource .adminPur span.t {
+	display: block;
+	float:left;
+}
+.tableSource .adminPur .pur {
+	float:left;
+	width: 90%
+}
+.tableSource .adminPur span {
+	margin-right:20px;
+}
+
+.tableSource .userSelect {
+    width: 3%;
+}
+.tableSource .userId {
+    width: 5%;
+}
+
+.tableSource .userNc {
+    width: 12%;
+}
+.tableSource .userPwd {
+    width: 14%;
+}
+.tableSource .userName {
+    width: 7%;
+}
+.tableSource .userCheck {
+    width: 8%;
+}
+.tableSource .userAmNo {
+    width: 24%;
+}
+.tableSource .userLeader {
+    width: 13%;
+}
+.tableSource .handle a,
+.tableSource i,
+.tableSource span {
+    display: block;
+    float: left;
+    margin-right: 10px;
+}
+.tableSource .handle select {
+	float: left;
+	margin-right:10px;
+	padding: 5px;
+}
+.tableSource span.ff {
+	padding-top: 5px;
+}
+
+
+.tableSource input[type='checkbox'] {
+    display: block;
+    margin-top: 1px;
+    width: 15px;
+    height: 15px;
+}
+.tableSource  .delOne {
+    position: relative;
+}
+
+
+/*表单*/
+
+.shtWrap .shtContent .form {
+    width: 90%;
+    margin: 30px 0 0 30px;
+    position: relative;
+}
+.shtWrap .shtContent .form input[type='checkbox'] {
+    width: 15px;
+    height: 15px;
+    float: left;
+    margin-top: 2px;
+    margin-right: 10px;
+}
+
+.shtWrap .shtContent .form select {
+    padding: 5px;
+}
+
+.shtWrap .shtContent .form .formGroup {
+    margin-bottom: 25px;
+}
+.shtWrap .shtContent .form .formGroup.infoArea {
+    position: relative;
+}
+.shtWrap .shtContent .form .formGroup .title {
+    margin-bottom: 10px;
+}
+
+.shtWrap .shtContent .form .formGroup .title label {
+    display: block;
+    font-size: 14px;
+    font-weight: bold;
+    margin-right: 20px;
+    float: left;
+}
+
+
+.shtWrap .shtContent .form .formGroup .title span {
+    margin-top: 1px;
+    display: block;
+    font-size: 12px;
+    color: #ccc;
+    float: left;
+}
+
+.shtWrap .shtContent .form .formGroup input[type='text'],
+.shtWrap .shtContent .form .formGroup input[type='password'],
+.shtWrap .shtContent .form .formGroup textarea {
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    border-radius: 4px;
+    padding: 10px;
+    border: 1px solid #ddd;
+    width: 100%;
+}
+
+.shtWrap .shtContent .form .formGroup textarea.editor {
+    width: 100%;
+}
+
+.shtWrap .shtContent .form .formGroup textarea.normal {
+    height: 140px;
+}
+
+.shtWrap .shtContent .form .formGroup input.w80 {
+    width: 80%;
+}
+.shtWrap .shtContent .form .formGroup input.w70 {
+    width: 70%;
+}
+.shtWrap .shtContent .form .formGroup input.w60 {
+    width: 60%;
+}
+.shtWrap .shtContent .form .formGroup input.w40 {
+    width: 40%;
+}
+
+.shtWrap .shtContent .form .formGroup input.w30,.shtWrap .shtContent .form .formGroup .w30 {
+    width: 30%;
+}
+.shtWrap .shtContent .form .formGroup input.w20,.shtWrap .shtContent .form .formGroup .w20 {
+    width: 20%;
+}
+
+.shtWrap .shtContent .form .formGroup input.w10 {
+    width: 10%;
+}
+
+.shtWrap .shtContent .form .formGroup .purview> div {
+    margin-bottom: 10px;
+}
+
+.shtWrap .shtContent .form .formGroup button[type='submit'], .shtWrap .shtContent .form .formGroup button[type='button']{
+    display: block;
+    padding: 10px 20px;
+    background-color: #29A7E1;
+    border: none;
+    color: #fff;
+    cursor: pointer;
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    border-radius: 4px;
+    transition: background-color .3s;
+}
+
+.shtWrap .shtContent .form .formGroup button[type='submit'].addElem,.shtWrap .shtContent .form .formGroup button[type='button'].addElem  {
+    background-color: #18BA0D;
+}
+
+.shtWrap .shtContent .form .formGroup button[type='submit']:hover,
+.shtWrap .shtContent .form .formGroup button[type='submit']:focus{
+    background-color: #0D6FB8;
+    box-shadow: .5px .5px 2px #0D6FB8;
+    -webkit-box-shadow: .5px .5px 2px #0D6FB8;
+    -moz-box-shadow: .5px .5px 2px #0D6FB8;
+}
+
+.shtWrap .shtContent .form .formGroup button[type='button']:hover,
+.shtWrap .shtContent .form .formGroup button[type='button']:focus{
+    background-color: #18BA0D;
+    box-shadow: .5px .5px 2px #138F0A;
+    -webkit-box-shadow: .5px .5px 2px #138F0A;
+    -moz-box-shadow: .5px .5px 2px #138F0A;
+}
+
+
+.shtWrap .shtContent .form .formGroup button[type='submit'] i,
+.shtWrap .shtContent .form .formGroup button[type='submit'] span,
+.shtWrap .shtContent .form .formGroup button[type='button'] i,
+.shtWrap .shtContent .form .formGroup button[type='button'] span {
+    display: block;
+    float: left;
+}
+
+.shtWrap .shtContent .form .formGroup button[type='submit'] i,
+.shtWrap .shtContent .form .formGroup button[type='button'] i {
+    margin-right: 5px;
+}
+
+.shtWrap .shtContent .form .formGroup button[type='submit'] span,
+.shtWrap .shtContent .form .formGroup button[type='button'] span {
+    font-size: 14px;
+}
+
+.shtWrap .shtContent .page {
+    height: 30px;
+    margin: 10px 25px 10px 25px;
+}
+
+.shtWrap .shtContent .page .delBtn {
+    display: block;
+    height: 30px;
+    line-height: 30px;
+    background-color: #29A7E1;
+    color: #fff;
+    padding: 0 10px;
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    border-radius: 2px;
+    border: none;
+    cursor: pointer;
+    float: left;
+    position: relative;
+    transition: background-color .3s;
+}
+
+.shtWrap .shtContent .page .delBtn i.icons {
+    float: left;
+    margin: 8px 5px 0 0;
+}
+
+.shtWrap .shtContent .page .delBtn span {
+    display: block;
+    float: left;
+}
+
+.shtWrap .shtContent .page .delBtn:hover,
+.shtWrap .shtContent .page .delBtn:focus {
+    background-color: #0D6FB8;
+    box-shadow: .5px .5px 2px #0D6FB8;
+    -webkit-box-shadow: .5px .5px 2px #0D6FB8;
+    -moz-box-shadow: .5px .5px 2px #0D6FB8;
+}
+
+.shtWrap .shtContent .page .pager {
+    float: left;
+    margin-left: 10px;
+}
+
+.shtWrap .shtContent .page .pager .pageList {
+    float: left;
+}
+
+.shtWrap .shtContent .page .pager .pageInfo {
+    font-size: 12px;
+    float: left;
+    margin-left: 10px;
+    line-height: 30px;
+}
+
+.shtWrap .shtContent .page .pager .pageInfo strong {
+    padding: 0 5px;
+    font-weight: bold;
+    color: #FF0000;
+}
+
+.shtWrap .shtContent .page .pager .pageList li {
+    float: left;
+    margin: 0 1px;
+}
+
+.shtWrap .shtContent .page .pager .pageList li a,
+.shtWrap .shtContent .page .pager .pageList li span {
+    display: block;
+    padding: 5px 12px;
+    height: 18px;
+    line-height: 20px;
+    border: 1px solid #ddd;
+    background-color: #fff;
+    color: #666;
+    text-align: center;
+    font-size: 0.725em;
+    transition: background-color .3s;
+}
+
+.shtWrap .shtContent .page .pager .pageList li a:hover,
+.shtWrap .shtContent .page .pager .pageList li.current span {
+    border-color: #0D6FB8;
+    background-color: #29A7E1;
+    color: #fff;
+}
+
+.shtWrap .shtContent .page .pager .pageList li.si span,
+.shtWrap .shtContent .page .pager .pageList li.si a {
+    width: 38px;
+    font-size: 0.725em;
+}
+/*错误提示框*/
+.formTip {
+    display: none;
+    height: 39px;
+    line-height: 39px;
+}
+
+.formTip .formTipArrow {
+    float: left;
+    display: block;
+    height: 39px;
+    margin: 0;
+}
+
+.formTip .formTipArrowLeft,
+.formTip .formTipArrowRight {
+    width: 10px;
+}
+
+.formTip .formTipArrowLeft {
+    background: url(../img/images/form-tip-bg.png) 0 0 no-repeat;
+}
+
+.formTip .formTipArrowRight {
+    background: url(../img/images/form-tip-bg.png) -10px 0 no-repeat;
+}
+
+.formTip em {
+    font-style: normal;
+    background: url(../img/images/form-tip-bg.png) 0 -65px repeat-x;
+}
+
+.formTip .formTipArrowTriangle {
+    position: absolute;
+    top: -7px;
+    left: 15px;
+    display: block;
+    width: 8px;
+    height: 10px;
+    background: url(../img/images/form-tip-bg.png) 0 -47px no-repeat;
+}
+/*
+    modal
+*/
+.modal {
+    position: absolute;
+    top: 11px;
+    left: 120px;
+    height: 20px;
+    line-height: 20px;
+    display: block;
+}
+.modal i,
+.modal span {
+    display: block;
+    float: left;
+}
+
+.modal i {
+    margin-top: 1px;
+    margin-right: 5px;
+    width: 16px;
+    height: 16px;
+    background: url("../images/icons.png") no-repeat;
+}
+
+.modal span {
+    font-size: 12px;
+}
+.shtWrap.login .loginContent .modal  {
+    top:240px;
+    left:20px;
+}
+.modal.error i,
+.modal.errorCallback i {
+    margin-top:2px;
+    background-position: 0 -170px;
+}
+.modal.errorCallback {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    width: 100px;
+    color: #222;
+    padding: 5px 10px;
+    left: 0;
+    z-index: 999;
+}
+.modal.loading i,
+.modal.loadingCallback i {
+    background: url("../images/loading.gif") no-repeat;
+    width: 16px;
+    height: 16px;
+}
+
+.modal.successCallback,.modal.loadingCallback {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    color: #222;
+    padding: 5px;
+    
+    left:100px;
+    top:-10px;
+    z-index: 999;
+}
+
+.modal.successCallback i {
+    display: block;
+    background-image: url("../images/icons.png");
+    background-repeat: no-repeat;
+    background-position: 0 -186px;
+}
+
+#purview {
+    position: relative;
+}
+#clear {
+    position: relative;
+}
+#views{
+    position: relative;
+}
+.deleteModal,.deleteModalOne {
+    position: absolute;
+    width: 200px;
+    padding: 20px;
+    border: 1px solid #ccc;
+    background-color: #fff;
+    text-align: center;
+    left: -120px;
+    top:40px;
+    z-index: 99;
+}
+.deleteModalOne {
+    left: -140px;
+    top: 20px;
+}
+.deleteModal .deleteModalInfo,.deleteModalOne .deleteModalInfo {
+    margin: 0;
+    padding: 0;
+    height: 30px;
+    margin-bottom: 10px;
+    color: #0000CC;
+}
+
+.deleteModal button,.deleteModalOne button {
+    display: inline-block;
+    border: none;
+    padding: 5px;
+    margin: 0 10px;
+    cursor: pointer;
+    background-color: #00AEEF;
+    color: #fff;
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    border-radius: 4px;
+}
+
+.deleteModal button#cancle,.deleteModalOne button#cancle {
+    background-color: #333;
+}
+
+.deleteModal i,.deleteModalOne i {
+    position: absolute;
+    float: none;
+    top: -5px;
+    right: 26px;
+    width: 0;
+    height: 0;
+    border-left: 6px solid transparent;
+    border-right: 6px solid transparent;
+    border-bottom: 5px solid #fff;
+    z-index: 99;
+}
+
+.deleteModal i.y,.deleteModalOne i.y {
+    position: absolute;
+    float: none;
+    top: -5px;
+    right: 26px;
+    width: 0;
+    height: 0;
+    border-left: 6px solid transparent;
+    border-right: 6px solid transparent;
+    border-bottom: 5px solid #000;
+    z-index: 98;
+}
+.deleteModalOne i {
+    top: -7px;
+    right: 70px;
+}
+.deleteModalOne i.y {
+    top: -7px;
+    right: 70px;
+}
+.shtWrap .noData {
+    padding:30px;
+    text-align: center;
+}
+.shtWrap .noData a {
+    color: #0066CC;
+    text-decoration: underline;
+}

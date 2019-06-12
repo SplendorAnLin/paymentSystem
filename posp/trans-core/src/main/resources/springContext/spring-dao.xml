@@ -1,0 +1,77 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" ":/spring-beans.dtd">
+
+<beans default-autowire="byName">
+
+	<!-- DAO -->
+	<bean id="posMessageDao" class="com.yl.pay.pos.dao.impl.PosMessageDaoImpl"></bean>	
+	<bean id="bankChannelCustomerConfigDao" class="com.yl.pay.pos.dao.impl.BankChannelCustomerConfigDaoImpl"></bean>   	
+	<bean id="bankChannelFeeDao" class="com.yl.pay.pos.dao.impl.BankChannelFeeDaoImpl"></bean>                
+	<bean id="bankChannelFunctionDao" class="com.yl.pay.pos.dao.impl.BankChannelFunctionDaoImpl"></bean>           
+	<bean id="bankInterfaceTerminalDao" class="com.yl.pay.pos.dao.impl.BankInterfaceTerminalDaoImpl"></bean>         
+	<bean id="customerFeeDao" class="com.yl.pay.pos.dao.impl.CustomerFeeDaoImpl"></bean>                   
+	<bean id="mccInfoDao" class="com.yl.pay.pos.dao.impl.MccInfoDaoImpl"></bean>                       
+	<bean id="bankChannelDao" class="com.yl.pay.pos.dao.impl.BankChannelDaoImpl"></bean>	
+	<bean id="bankDao" class="com.yl.pay.pos.dao.impl.BankDaoImpl"></bean>	
+	<bean id="bankIdNumberDao" class="com.yl.pay.pos.dao.impl.BankIdNumberDaoImpl"></bean>	
+	<bean id="bankInterfaceDao" class="com.yl.pay.pos.dao.impl.BankInterfaceDaoImpl"></bean>	
+	<bean id="bankRequestDao" class="com.yl.pay.pos.dao.impl.BankRequestDaoImpl"></bean>	
+	<bean id="cardInfoDao" class="com.yl.pay.pos.dao.impl.CardInfoDaoImpl"></bean>	
+	<bean id="customerDao" class="com.yl.pay.pos.dao.impl.CustomerDaoImpl"></bean>	
+	<bean id="orderDao" class="com.yl.pay.pos.dao.impl.OrderDaoImpl"></bean>	
+	<bean id="paymentDao" class="com.yl.pay.pos.dao.impl.PaymentDaoImpl"></bean>	
+	<bean id="posDao" class="com.yl.pay.pos.dao.impl.PosDaoImpl"></bean>	
+	<bean id="posRequestDao" class="com.yl.pay.pos.dao.impl.PosRequestDaoImpl"></bean>	
+	<bean id="shopDao" class="com.yl.pay.pos.dao.impl.ShopDaoImpl"></bean>
+	<bean id="customerFunctionDao" class="com.yl.pay.pos.dao.impl.CustomerFunctionDaoImpl"></bean>
+	<bean id="industryFunctionDao" class="com.yl.pay.pos.dao.impl.IndustryFunctionDaoImpl"></bean>	
+	<bean id="sequenceDao" class="com.yl.pay.pos.dao.impl.SequenceDaoImpl"></bean>	
+	<bean id="transResponseDictDao" class="com.yl.pay.pos.dao.impl.TransResponseDictDaoImpl"></bean>	
+	<bean id="bankResponseDictDao" class="com.yl.pay.pos.dao.impl.BankResponseDictDaoImpl"></bean>
+	<bean id="posResponseDictDao" class="com.yl.pay.pos.dao.impl.PosResponseDictDaoImpl"></bean>
+	<bean id="paymentFeeDao" class="com.yl.pay.pos.dao.impl.PaymentFeeDaoImpl"></bean>
+	<bean id="organizationDao" class="com.yl.pay.pos.dao.impl.OrganizationDaoImpl"></bean>
+	<bean id="singleAmountLimitDao" class="com.yl.pay.pos.dao.impl.SingleAmountLimitDaoImpl"></bean>
+	<bean id="accumulatedAmountLimitDao" class="com.yl.pay.pos.dao.impl.AccumulatedAmountLimitDaoImpl"></bean>
+	<bean id="bankInterfaceSwitchConfigDao" class="com.yl.pay.pos.dao.impl.BankInterfaceSwitchConfigDaoImpl"></bean>
+	<bean id="parameterDao" class="com.yl.pay.pos.dao.impl.ParameterDaoImpl"></bean>
+	<bean id="bankReversalTaskDao" class="com.yl.pay.pos.dao.impl.BankReversalTaskDaoImpl"></bean>
+	
+	<bean id="bankCustomerConfigDao" class="com.yl.pay.pos.dao.impl.BankCustomerConfigDaoImpl"></bean>
+	<bean id="transRouteConfigDao" class="com.yl.pay.pos.dao.impl.TransRouteConfigDaoImpl"></bean>
+	<bean id="transRouteProfileDao" class="com.yl.pay.pos.dao.impl.TransRouteProfileDaoImpl"></bean>
+	<bean id="transRouteDao" class="com.yl.pay.pos.dao.impl.TransRouteDaoImpl"></bean>
+	
+	<bean id="lefuOrg2UnionPayOrgDao" class="com.yl.pay.pos.dao.impl.LefuOrg2UnionPayOrgDaoImpl"/>
+	<bean id="unionPayBCN32ConfigDao" class="com.yl.pay.pos.dao.impl.UnionPayBCN32ConfigDaoImpl" />
+	
+	<bean id="icKeyDao" class="com.yl.pay.pos.dao.impl.IcKeyDaoImpl" />
+	<bean id="icParamsDao" class="com.yl.pay.pos.dao.impl.IcParamsDaoImpl" />
+	<bean id="icUpdateMarkDao" class="com.yl.pay.pos.dao.impl.IcUpdateMarkDaoImpl" />
+	
+	
+	<bean id="sysRouteCustomerConfigDao" class="com.yl.pay.pos.dao.impl.SysRouteCustomerConfigDaoImpl" />
+	<bean id="sysRouteCustomerConfigDetailDao" class="com.yl.pay.pos.dao.impl.SysRouteCustomerConfigDetailDaoImpl" />
+	<bean id="sysRespCustomerNoConfigDao" class="com.yl.pay.pos.dao.impl.SysRespCustomerNoConfigDaoImpl" />
+	
+	<bean id="foreignCardFeeDao" class="com.yl.pay.pos.dao.impl.ForeignCardFeeDaoImpl" />
+	
+	
+	<bean id="cardAmountLimitDao" class="com.yl.pay.pos.dao.impl.CardAmountLimitDaoImpl" />
+	<bean id="lngAndLatDao" class="com.yl.pay.pos.dao.impl.LngAndLatDaoImpl" />
+	<bean id="bankCustomerDao" class="com.yl.pay.pos.dao.impl.BankCustomerDaoImpl" />
+	<bean id="bankInterfaceMccConfigDao" class="com.yl.pay.pos.dao.impl.BankInterfaceMccConfigDaoImpl" />
+	
+	
+	<bean id="demotionWhiteBillDao" class="com.yl.pay.pos.dao.impl.DemotionWhiteBillDaoImpl" />
+	<bean id="transCheckProfileDao" class="com.yl.pay.pos.dao.impl.TransCheckProfileDaoImpl" />
+	
+	<bean id="enterpriseCheckInfoDao" class="com.yl.pay.pos.dao.impl.EnterpriseCheckInfoDaoImpl" />
+	
+	<bean id="customerTransFunctionDao" class="com.yl.pay.pos.dao.impl.CustomerTransFunctionDaoImpl" />
+	<bean id="customerTransSortDao" class="com.yl.pay.pos.dao.impl.CustomerTransSortDaoImpl" />
+	<bean id="secretKeyDao" class="com.yl.pay.pos.dao.impl.SecretKeyDaoImpl" />
+	<bean id="transPayService" class="com.yl.pay.pos.service.impl.TransPayServiceImpl"/>
+	
+	<bean id="proxyPayInfoDao" class="com.yl.pay.pos.dao.impl.ProxyPayInfoDaoImpl" />
+</beans>

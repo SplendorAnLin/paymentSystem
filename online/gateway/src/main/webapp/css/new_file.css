@@ -1,0 +1,496 @@
+html,
+body,
+div,
+dl,
+dt,
+dd,
+ul,
+ol,
+li,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+pre,
+code,
+form,
+fieldset,
+legend,
+input,
+textarea,
+p,
+blockquote,
+th,
+td {
+    margin: 0;
+    padding: 0;
+    font-family: Helvetica, Tahoma, Arial, "Hiragino Sans GB", "Hiragino Sans GB W3", "Microsoft YaHei", STXihei, STHeiti, Heiti, SimSun, sans-serif;
+    -webkit-text-size-adjust: 100%;
+}
+
+ul,
+li {
+    display: block;
+    list-style-type: none;
+    -webkit-margin-before: 0;
+    -webkit-margin-after: 0;
+    -webkit-margin-start: 0;
+    -webkit-margin-end: 0;
+    -webkit-padding-start: 0;
+}
+
+html {
+    font-size: 625%;
+}
+
+a {
+    text-decoration: none;
+    color: black;
+}
+
+i {
+    font-style: normal;
+    margin-right: 0.1rem;
+}
+
+body {
+    background: #F0F0F0 none repeat scroll 0 0;
+    font-family: "Microsoft YaHei", 微软雅黑, "MicrosoftJhengHei", 华文细黑, STHeiti, MingLiu, Helvetica;
+    word-wrap: break-word;
+    -webkit-overflow-scrolling: touch;
+    overflow-scrolling: touch;
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+    margin: auto;
+    height: 100%;
+    max-width: 1024px;
+
+}
+
+.right_margin {
+	font-size:0.26rem;
+    margin-left: 0.2rem;
+}
+
+html,
+body {
+    width: 100%;
+    margin: auto;
+}
+    /*清除谷歌历史背景颜色*/
+input:-webkit-autofill {
+background-color:white;
+background-image: none;
+-webkit-box-shadow: 0 0 0px 1000px white inset;
+
+}
+/***去除type为number的箭头***/
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button{
+    -webkit-appearance: none !important;
+    margin: 0; 
+}
+
+/***火狐***/
+
+input[type="number"]{
+	-moz-appearance:textfield;}
+input[type=button], input[type=submit], input[type=file],input[type=text], button {
+	cursor: pointer; -webkit-appearance: none; }
+
+@media only screen and (min-width: 1024px) {
+    .btn_ok {
+        top: 1rem;
+        font-size: 0.16rem;
+        height: 0.6rem;
+        line-height: 0.6rem;
+        width: 100%;
+        margin: auto;
+
+    }
+
+    .section {
+        font-size: 0.16rem;
+    }
+
+    .item {
+        height: 0.1rem;
+        line-height: 0.1rem;
+    }
+
+    .yanzheng {
+        font-size: 0.14rem;
+        height: 0.35rem;
+        line-height: 0.35rem;
+        top: 0;
+
+    }
+
+    .input {
+        font-size: 0.16rem;
+        border: none;
+        outline: medium;
+    }
+
+}
+
+.input_right {
+    text-align: right;
+}
+
+input {
+	color: black;
+    -webkit-box-shadow: 0 0 0px 1000px rgba(255, 255, 255, 0) inset;
+    font-size: 0.16rem;
+    border: none;
+    outline: medium;
+    background: initial;
+}
+
+@media only screen and (max-width: 1024px) {
+    html,
+    body {
+        height: 100%;
+    }
+    .input_right {
+    font-size:0.26rem;
+    }
+    .btn_ok {
+        font-size: 0.26rem;
+        margin: auto;
+        position: relative;
+        width: 94%;
+        height: 0.8rem;
+        margin-left: 3%;
+        line-height: 0.8rem;
+        cursor: pointer
+    }
+
+    .section {
+        font-size: 0.26rem;
+    }
+
+    .item {
+        height: 0.3rem;
+        line-height: 0.3rem;
+    }
+
+    .yanzheng {
+        font-size: 0.24rem;
+        height: 0.5rem;
+        line-height: 0.5rem;
+    }
+
+    .input {
+        font-size: 0.26rem;
+    }
+    input {
+        font-size: 0.26rem;
+    }
+
+    header {
+        position: relative;
+    }
+    .add_flo_right{
+    font-size:0.26rem;}
+}
+
+header {
+    position: relative;
+    width: 100%;
+    height: .7rem;
+    line-height: .7rem;
+    text-align: center;
+    background-color: #03a9f4;
+    color: #ffffff;
+    font-size: 0.30rem;
+}
+
+header div {
+    position: absolute;
+    right: 0.1rem;
+    top: 0.1rem;
+    width: 1.28rem;
+    margin-top: 0.1rem;
+}
+
+header div img {
+    height: auto;
+    max-width: 100%;
+    vertical-align: top;
+    border: none;
+}
+
+a:-webkit-any-link {
+    color: -webkit-link;
+    text-decoration: underline;
+}
+section{
+	margin:0 0.2rem;
+}
+.section {
+    width: 100%;
+    position: relative;
+    background: #FFFFFF;
+}
+
+.item {
+    position: relative;
+    margin-top: 0.1rem;
+    padding: 0.15rem 0;
+}
+
+.co_left {
+    float: left;
+    position: relative;
+    left: 0.1rem;
+    display: block;
+    width: 1.7rem;
+    text-align: left;
+    margin-left: 5px;
+}
+
+.co_right {
+    right: 0.15rem;
+    float: left;
+    display: block;
+    position: relative;
+    margin-right: 5px;
+    left: auto;
+}
+
+.co_ico {
+    position: absolute;
+    right: 0.15rem;
+    top: 0.01rem;
+}
+
+.co_ico img {
+    position: relative;
+    width: 0.29rem;
+    right: 0.2rem;
+    top: 0.1rem;
+}
+
+.sec {
+    background: #FFFFFF;
+}
+
+.toggle_mation {
+    display: none;
+}
+
+.section_item {
+    margin-top: 0.45rem;
+}
+
+.item_border {
+    border-bottom: 1px solid rgba(240,240,240,1);
+}
+
+.btn {
+    display: inline-block;
+    color: #FFFFFF;
+    text-align: center;
+    border-radius: 8px;
+    border: none;
+    outline: none;
+    filter: chroma(color=#000000);
+}
+
+.input {
+    border: none;
+    outline: medium;
+}
+
+footer {
+    margin-top: 1rem;
+}
+
+.btn_ok {
+    user-select: none;
+    /*box-shadow: inset rgba(255,254,255,0.6) 0 0.3em .3em, inset rgba(0,0,0,0.15) 0 -0.1em .3em, /* inner shadow */
+hsl(208, 50 %, 55 %) 0 .1 em 3 px, hsl(208, 50 %, 40 %) 0 .3 em 1 px, /* color border */
+rgba(0, 0, 0, 0.2) 0 .5 em 5 px;
+    border-top: 1px solid rgba(255, 255, 255, 0.8);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    transition: background .2s ease-in-out;
+    vertical-align: top;
+    max-width: 1024px;
+}
+
+.yanzheng {
+    width: 1.5rem;
+    position: absolute;
+    right: 0.5rem;
+    top: 0.01rem;
+    background: #03a9f4;
+}
+
+.back:active {
+    border: none;
+    border-top: none;
+}
+
+.back:hover,.back:active {
+    background: rgba(3, 169, 244, 0.8);
+    color: black;
+}
+
+.btn_ok {
+    background: rgba(3, 169, 244, 0.8);
+    cursor: pointer;
+}
+
+.hist {
+    position: relative;
+    font-size: 0.18rem;
+}
+
+.hist p {
+    width: 100%;
+    height: 0.8rem;
+    text-align: center;
+    line-height: 0.8rem;
+}
+
+.back {
+    cursor: pointer;
+    display: block;
+    margin: auto;
+    font-size: 0.28rem;
+	color: white;
+    width: 90%;
+    height: 0.8rem;
+    line-height: 0.8rem;
+    border-radius: 5px;
+    position: relative;
+    top: 4.5rem;
+    background: #03a9f4;
+}
+
+.checkbox {
+
+    width: 0.4rem;
+    height: 0.4rem;
+    font-weight: 600;
+    border: none;
+    color: #03a9f4;
+    background: #00A4E1;
+
+}
+
+.boll {
+    position: relative;
+    margin-top: 0.5rem;
+    font-size: 0.24rem;
+    font-weight: 500;
+    text-align: center;
+    border-radius: 10px;
+    width: 100%;
+
+}
+
+.boll a {
+    display: block;
+    line-height: 0.5rem;
+
+}
+
+/**图标样式***/
+.span_ico {
+    position: relative;
+    display: block;
+    margin: auto;
+    height: 1.1rem;
+    width: 0.8rem;
+
+}
+
+.span_ico img {
+    width: 100%;
+}
+
+.error_state {
+    color: orange;
+    font-weight: 500;
+    font-size: 0.26rem;
+}
+
+.state {
+    margin-top: 0.15rem;
+}
+
+/*错误提示框*/
+.formTip {
+    display: none;
+    height: 39px;
+    line-height: 39px;
+    font-size: 16px;
+}
+
+.formTip .formTipArrow {
+    float: left;
+    display: block;
+    height: 39px;
+    margin: 0;
+}
+
+.formTip .formTipArrowLeft,
+.formTip .formTipArrowRight {
+    width: 10px;
+}
+
+.formTip .formTipArrowLeft {
+    background: url(../image/form-tip-bg.png) 0 0 no-repeat;
+}
+
+.formTip .formTipArrowRight {
+    background: url(../image/form-tip-bg.png) -10px 0 no-repeat;
+}
+
+.formTip em {
+    font-style: normal;
+    background: url(../image/form-tip-bg.png) 0 -65px repeat-x;
+}
+
+.formTip .formTipArrowTriangle {
+    position: absolute;
+    top: -7px;
+    left: 15px;
+    display: block;
+    width: 8px;
+    height: 10px;
+    background: url(../image/form-tip-bg.png) 0 -47px no-repeat;
+}
+
+.shtWrap.login .loginContent .form .item.iHover {
+    border-color: #ADBB97;
+}
+
+.shtWrap.login .loginContent .form label.account.iHover {
+    background-position: 0 -43px;
+}
+
+.shtWrap.login .loginContent .form label.password.iHover {
+    background-position: 0 -172px;
+}
+
+.fullpage {
+    z-index: 10;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background: rgba(0, 0, 0, 0.14);
+    display: none;
+}
+
+.fullpage img {
+    position: absolute;
+    left: calc(50% - 0.62rem);
+    width: 1.24rem;
+    height: 1.24rem;
+    display: block;
+    top: calc(50% - 0.62rem);
+}

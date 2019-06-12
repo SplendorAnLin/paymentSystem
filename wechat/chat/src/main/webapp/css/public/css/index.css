@@ -1,0 +1,52 @@
+/*引入字体*/
+@font-face {
+	font-family: pingfangSC;
+	src: url("${pageContext.request.contextPath}/fonts/pingfang/PingFang Bold.ttf");
+}
+
+body {
+	font-family: pinfangSC;
+	font-size: 0.3rem;
+}
+
+.header {
+	padding: 0.1rem 0;
+	font-size: 0.4rem;
+	color: #FFFFFF;
+	text-align: center;
+	background: #1B82D2;
+	position: relative;
+}
+.header a{
+		color: #FFFFFF;
+		position: absolute;
+		right: 0.3rem;
+		font-size: 0.24rem;
+		top: 0.1rem;
+		display: block;
+		border: 1px solid #166AAB;
+		padding: 0.1rem 0.2rem;
+		border-radius: 6px;
+}
+.fo_gray{
+	color: #969696;
+}
+.goback{
+	font-size: 0.26rem;
+	padding: 0.1rem 0;
+	background: #1B82D2;
+	color: #FFFFFF;
+	position: relative;
+	height: 0.5rem;
+	text-align: center;
+	line-height: 0.5rem;
+}
+.goback a{
+	color: #FFFFFF;
+	position: absolute;
+	top: 0.1rem;
+	left: 0.2rem;
+}
+.goback a img{
+	width: 30px;
+}

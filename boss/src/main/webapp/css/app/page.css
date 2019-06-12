@@ -1,0 +1,137 @@
+/* js分页 */
+
+/*分页容器*/
+.jump-rarp {
+  /*margin-bottom: 1.8em;*/
+  text-align: center;
+}
+
+.jump-bar {
+  display: inline-block;
+  color: #666;
+}
+
+/*总条数*/
+.jump-bar > .record {
+  display: none;
+  margin-right: 1.8em;
+}
+.jump-bar > .record > .count {
+  margin: 0 0.4em;
+  color: #03a9f4;
+}
+
+/*分页按钮*/
+.page-btn-1,
+.jump-number a {
+  color: #999;
+  height: 2em;
+  margin-right: 4px;
+  background-color: #fff;
+  border: 1px solid #d7dde4;
+  border-radius: 0.3em;
+  min-width: 30px;
+  padding: 0 0.5em;
+  line-height: 2em;
+  cursor: pointer;
+  font-family: Arial;
+  display: inline-block;
+  text-align: center;
+  vertical-align: middle;
+  text-decoration: none;
+}
+.jump-number a:hover {
+  border-color: #03a9f4;
+}
+.jump-number .current {
+  color: #fff;
+  background-color: #03a9f4;
+  border-color: #03a9f4;
+}
+
+/*跳转输入框*/
+.jump-wrap {
+  display: none;
+  margin-left: 1.8em;
+}
+.jump-wrap > .input-wrap {
+  position: relative;
+  display: inline-block;
+  width: 1.2963rem;
+}
+.jump-wrap > .input-wrap > .input-text {
+  height: 2.5em;
+  line-height: 2.5em;
+  padding-right: 2em;
+  padding-left: 1em;
+}
+.jump-wrap > .input-wrap > .jump-btn {
+  position: absolute;
+  right: 0;
+  top: 0;
+  height: 2.5em;
+  margin-right: 0;
+  line-height: 2.5em;
+}
+/* 移动端下隐藏其他箭头功能 */
+@media only screen and (max-width: 1280px) {
+  .record,
+  .jump-wrap {
+    display: none;
+  }
+}
+
+
+
+/* java分页 */
+div.page {
+  margin: 20px 0;
+  font-size: 14px;
+  color: #666;
+}
+div.page .fa {
+  line-height: 30px;
+}
+div.page .search_resultsPagingTag {
+  margin: auto;
+}
+div.page .search_resultsSummary {
+  font-size: 13px;
+  padding-right: 20px;
+}
+div.page .search_resultsSummary b {
+  margin: 0 5px;
+  color: #03a9f4;
+}
+div.page .input-wrap > .input-text  {
+  padding-right: 32px;
+  width: 70px !important;
+}
+div.page .span.ml-20 {
+  font-size: 13px;
+}
+div.page .search_resultsPaging .off,
+div.page .search_resultsPaging th,
+div.page .search_resultsPaging a {
+  color: #999;
+  height: 30px;
+  margin-right: 4px;
+  background-color: #fff;
+  border: 1px solid #d7dde4;
+  border-radius: 4px;
+  min-width: 29px;
+  line-height: 30px;
+  cursor: pointer;
+  font-family: Arial;
+  display: inline-block;
+  text-align: center;
+  font-size: 13px;
+}
+div.page .search_resultsPaging th{
+  color: #fff;
+  background-color: #39f;
+  border-color: #39f;
+}
+div.page .off {
+  cursor: not-allowed;
+}

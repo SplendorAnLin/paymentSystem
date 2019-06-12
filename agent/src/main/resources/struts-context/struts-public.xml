@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?> 
+  
+<!DOCTYPE struts PUBLIC   
+    "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"  
+    "http://struts.apache.org/dtds/struts-2.0.dtd">
+    
+<struts>
+    
+    <package name="default" extends="json-default"> 
+    					
+	    <!-- 权限管理拦截器 -->
+		<interceptors>
+	    	<interceptor name="authorityInterceptor" class="com.yl.agent.interceptor.AuthorityInterceptor" />
+	        <interceptor-stack name="authorityStack">
+				<interceptor-ref name="defaultStack"></interceptor-ref>
+				<interceptor-ref name="authorityInterceptor"></interceptor-ref>
+			</interceptor-stack>
+				    
+	    </interceptors>
+	    
+	    <default-interceptor-ref name="authorityStack" />
+	    
+	    <!-- 定义全局处理结果 -->
+        <global-results>    
+        	<result name="login">/jsp/login.jsp</result>
+        	<result name="noPermit">/jsp/noPermit.jsp?type=A</result>
+        	<result name="sessionExpired">/jsp/noPermit.jsp?type=B</result>	
+        	<result name="compelLogout">/jsp/noPermit.jsp?type=C</result>	
+			<result name="exception">/jsp/error.jsp</result>
+		</global-results>
+       
+        <global-exception-mappings>  
+        	<exception-mapping exception="java.lang.Exception" result="exception"/>      
+        	<exception-mapping exception="com.yl.agent.dao.DAOException" result="exception"/>
+        	<exception-mapping exception="com.yl.agent.service.ServiceException" result="exception"/>
+        </global-exception-mappings>      
+	         
+    </package>   
+</struts>

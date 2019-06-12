@@ -1,0 +1,253 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+		http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
+
+	<bean id="valueListHandler" scope="prototype" class="net.mlw.vlh.DefaultValueListHandlerImpl">
+		<property name="config.adapters">
+			<map>
+				<entry key="requestQuery">
+					<bean parent="posConfig">
+						<property name="defaultNumberPerPage">
+							<value>10</value>
+						</property>
+						<property name="sql">
+							<value>
+								<![CDATA[
+									select 
+										r.id					as 						id,
+										r.RESPONSE_CODE			as						response_code,
+										r.REMARK				as						remark,
+										r.SIM_CARD				as						sim_card,
+										r.CARD_TRACK_INFO		as						card_track_info,
+										r.CREATE_TIME			as						create_time,
+										r.BASE_STATION_INFO		as						base_station_info,
+										r.S_TRANS_DATE			as						s_trans_date,
+										r.S_AUTHORIZATION_CODE	as 						s_authorization_code,
+										r.EXCEPTION_CODE		as						exception_code,
+										r.COMPLETE_TIME			as						complete_time,
+										r.S_BATCH_NO			as						s_batch_no,
+										r.POS_REQUEST_ID		as						pos_request_id,
+										r.S_POSREQUEST_ID		as						s_posrequest_id,
+										r.CALL_PHONE_NO			as						call_phone_no,
+										r.CURRENCY_TYPE         as                      currency_type,
+										r.LOCATION_INFO         as                      location_info,
+										r.OPERATOR              as                      operator,
+										r.POS_BATCH             as                      pos_batch,
+										r.SHOP_NO				as						shop_no,
+										r.REQUEST_IP			as						request_ip,
+										r.POS_CATI				as						pos_cati,
+										r.TRANS_TYPE        	as                      trans_type,
+										r.CUSTOMER_NO           as                      customer_no,
+										r.amount            	as                      amount,
+										r.EXTERNAL_ID           as                      external_id,
+										REPLACE(r.PAN, SUBSTR(r.PAN,5,LENGTH(r.PAN)-8), '****')					as						pan,
+										p.POS_SN				as						pos_sn
+									from pos_request r left jon pos p on r.POS_CATI = p.POS_CATI
+									where 1=1
+									/~customer_no: and r.customer_no = '[customer_no]' ~/
+									/~external_id: and r.external_id = '[external_id]' ~/
+									/~amount_start: and r.amount >= '[amount_start]'~/
+									/~amount_end: and r.amount <= '[amount_end]'~/
+									/~create_time_start: and r.create_time >= str_to_date('[create_time_start]','%Y-%m-%d %H:%i:%s') ~/
+									/~create_time_end: and r.create_time <= str_to_date('[create_time_end]','%Y-%m-%d %H:%i:%s')~/
+									/~complete_time_start: and r.complete_time >= str_to_date('[complete_time_start]','%Y-%m-%d %H:%i:%s') ~/
+									/~complete_time_end: and r.complete_time <= str_to_date('[complete_time_end]','%Y-%m-%d %H:%i:%s')~/
+									/~pos_sn： and p.pos_sn = '[pos_sn]' ~/
+									order by r.ID desc
+								]]>
+							</value>
+						</property>
+					</bean>
+				</entry>
+				<entry key="orderQuery">
+					<bean parent="posConfig">
+						<property name="defaultNumberPerPage">
+							<value>10</value>
+						</property>
+						<property name="sql">
+							<value>
+								<![CDATA[
+									select 
+										o.id					as 						id,
+										o.DESCRIPTION			as						description,
+										o.STATUS				as						status,
+										o.is_Syn				as						is_syn,
+										o.SETTLE_TIME			as						settle_time,
+										o.CREDIT_TIME			as						credit_time,
+										o.business_Type			as						business_type,
+										o.FINAL_PAYMENT_ID		as						final_payment_id,
+										o.BANK_CUSTOMER_NO		as 						bank_customer_no,
+										o.CUSTOMER_ORDER_CODE	as						customer_order_code,
+										o.CUSTOMER_FEE			as						customer_fee,
+										o.COMPLETE_TIME			as						complete_time,
+										o.AUTHORIZATION_CODE	as						authorization_code,
+										o.POS_REQUEST_ID		as						pos_request_id,
+										o.CREDIT_STATUS			as						credit_status,
+										o.CURRENCY_TYPE         as                      currency_type,
+										o.bank_channel_code     as                      currency_type,
+										o.POS_BATCH             as                      pos_batch,
+										o.BANK_COST             as                      bank_cost,
+										o.respon_Code			as						respon_code,
+										o.POS_CATI				as						pos_cati,
+										o.TRANS_TYPE			as						trans_type,
+										o.CARD_TYPE        		as                      card_type,
+										o.CUSTOMER_NO           as                      customer_no,
+										o.IS_IC            		as                      is_ic,
+										o.AMOUNT           		as                      amount,	
+										o.EXTERNAL_ID           as                      external_id,
+										o.PAN					as						pan,
+										o.CREATE_TIME			as						create_time,
+										o.BANK_INTERFACE		as						bank_interface,
+										o.shop_id        		as                      shop_id,
+										o.customer_id           as                      customer_id,
+										o.ISSUER            	as                      issuer,
+										o.cardInfo_id           as                      card_info_id,
+										o.ROUTE_TYPE  			as						route_type,
+										c.SHORT_NAME  			as						short_name,
+										p.POS_SN				as						pos_sn
+									from pos_order o 
+									left join customer c on o.customer_no = c.customer_no
+									left join pos p on o.pos_cati = p.pos_cati
+									where 1=1 
+									/~route_type: and o.route_type = '[route_type]'~/
+									/~customer_no: and o.customer_no = '[customer_no]' ~/
+									/~agent_no: and o.CUSTOMER_NO IN (SELECT customer.CUSTOMER_NO from `ol-boss`.customer where customer.AGENT_NO = '[agent_no]') ~/
+									/~external_id: and o.external_id = '[external_id]'~/
+									/~customer_order_code: and o.customer_order_code = '[customer_order_code]'~/
+									/~short_name: and c.short_name = '[short_name]'~/
+									/~amount_start: and o.amount >= '[amount_start]'~/
+									/~amount_end: and o.amount <= '[amount_end]'~/
+									/~customer_fee_start: and o.customer_fee >= '[customer_fee_start]'~/
+									/~customer_fee_end: and o.customer_fee <= '[customer_fee_end]'~/
+									/~status: and o.status = '[status]'~/
+									/~credit_status: and o .credit_status = '[credit_status]'~/
+									/~create_time_start: and o.create_time >= str_to_date('[create_time_start]','%Y-%m-%d %H:%i:%s') ~/
+									/~create_time_end: and o.create_time <= str_to_date('[create_time_end]','%Y-%m-%d %H:%i:%s')~/
+									/~complete_time_start: and o.complete_time >= str_to_date('[complete_time_start]','%Y-%m-%d %H:%i:%s') ~/
+									/~complete_time_end: and o.complete_time <= str_to_date('[complete_time_end] ','%Y-%m-%d %H:%i:%s')~/
+									/~pos_sn: and p.pos_sn = '[pos_sn]'~/
+									order by o.id desc
+								]]>
+							</value>
+						</property>
+					</bean>
+				</entry>
+				
+				<!-- POS订单合计 -->
+				<entry key="orderTotalQuery">
+					<bean parent="posConfig">
+						<property name="sql">
+							<value>
+								<![CDATA[
+									select 
+										COUNT(o.id)				as				al,
+										SUM(o.AMOUNT)				as				am,
+										SUM(o.CUSTOMER_FEE)		as				cf,
+										SUM(o.BANK_COST)			as				bc
+									from pos_order o 
+									left join customer c on o.customer_no = c.customer_no
+									left join pos p on o.pos_cati = p.pos_cati
+									where 1=1 
+									/~route_type: and o.route_type = '[route_type]'~/
+									/~customer_no: and o.customer_no = '[customer_no]' ~/
+									/~agent_no: and o.CUSTOMER_NO IN (SELECT customer.CUSTOMER_NO from `ol-boss`.customer where customer.AGENT_NO = '[agent_no]') ~/
+									/~external_id: and o.external_id = '[external_id]'~/
+									/~customer_order_code: and o.customer_order_code = '[customer_order_code]'~/
+									/~short_name: and c.short_name = '[short_name]'~/
+									/~amount_start: and o.amount >= '[amount_start]'~/
+									/~amount_end: and o.amount <= '[amount_end]'~/
+									/~customer_fee_start: and o.customer_fee >= '[customer_fee_start]'~/
+									/~customer_fee_end: and o.customer_fee <= '[customer_fee_end]'~/
+									/~status: and o.status = '[status]'~/
+									/~credit_status: and o .credit_status = '[credit_status]'~/
+									/~create_time_start: and o.create_time >= str_to_date('[create_time_start]','%Y-%m-%d %H:%i:%s') ~/
+									/~create_time_end: and o.create_time <= str_to_date('[create_time_end]','%Y-%m-%d %H:%i:%s')~/
+									/~complete_time_start: and o.complete_time >= str_to_date('[complete_time_start]','%Y-%m-%d %H:%i:%s') ~/
+									/~complete_time_end: and o.complete_time <= str_to_date('[complete_time_end] ','%Y-%m-%d %H:%i:%s')~/
+									/~pos_sn: and p.pos_sn = '[pos_sn]'~/
+									order by o.id desc
+								]]>
+							</value>
+						</property>
+					</bean>
+				</entry>
+				
+				<entry key="posOrderQueryExport">
+					<bean parent="posConfig">
+						<property name="defaultNumberPerPage">
+							<value>999999999</value>
+						</property>
+						<property name="sql">
+							<value>
+								<![CDATA[
+									select 
+										o.id					as 						id,
+										o.DESCRIPTION			as						description,
+										o.STATUS				as						status,
+										o.is_Syn				as						is_syn,
+										o.SETTLE_TIME			as						settle_time,
+										o.CREDIT_TIME			as						credit_time,
+										o.business_Type			as						business_type,
+										o.FINAL_PAYMENT_ID		as						final_payment_id,
+										o.BANK_CUSTOMER_NO		as 						bank_customer_no,
+										o.CUSTOMER_ORDER_CODE	as						customer_order_code,
+										o.CUSTOMER_FEE			as						customer_fee,
+										o.COMPLETE_TIME			as						complete_time,
+										o.AUTHORIZATION_CODE	as						authorization_code,
+										o.POS_REQUEST_ID		as						pos_request_id,
+										o.CREDIT_STATUS			as						credit_status,
+										o.CURRENCY_TYPE         as                      currency_type,
+										o.bank_channel_code     as                      currency_type,
+										o.POS_BATCH             as                      pos_batch,
+										o.BANK_COST             as                      bank_cost,
+										o.respon_Code			as						respon_code,
+										o.POS_CATI				as						pos_cati,
+										o.TRANS_TYPE			as						trans_type,
+										o.CARD_TYPE        		as                      card_type,
+										o.CUSTOMER_NO           as                      customer_no,
+										o.IS_IC            		as                      is_ic,
+										o.AMOUNT           		as                      amount,	
+										o.EXTERNAL_ID           as                      external_id,
+										o.PAN					as						pan,
+										o.CREATE_TIME			as						create_time,
+										o.BANK_INTERFACE		as						bank_interface,
+										o.shop_id        		as                      shop_id,
+										o.customer_id           as                      customer_id,
+										o.ISSUER            	as                      issuer,
+										o.cardInfo_id           as                      card_info_id,
+										c.SHORT_NAME  			as						short_name,
+										p.POS_SN				as						pos_sn
+									from pos_order o 
+									left join customer c on o.customer_no = c.customer_no
+									left join pos p on o.pos_cati = p.pos_cati
+									where 1=1 
+									/~route_type: and o.route_type = '[route_type]'~/
+									/~customer_no: and o.customer_no = '[customer_no]' ~/
+									/~agent_no: and o.CUSTOMER_NO IN (SELECT customer.CUSTOMER_NO from `ol-boss`.customer where customer.AGENT_NO = '[agent_no]') ~/
+									/~external_id: and o.external_id = '[external_id]'~/
+									/~customer_order_code: and o.customer_order_code = '[customer_order_code]'~/
+									/~short_name: and c.short_name = '[short_name]'~/
+									/~amount_start: and o.amount >= '[amount_start]'~/
+									/~amount_end: and o.amount <= '[amount_end]'~/
+									/~customer_fee_start: and o.customer_fee >= '[customer_fee_start]'~/
+									/~customer_fee_end: and o.customer_fee <= '[customer_fee_end]'~/
+									/~status: and o.status = '[status]'~/
+									/~credit_status: and o .credit_status = '[credit_status]'~/
+									/~create_time_start: and o.create_time >= str_to_date('[create_time_start]','%Y-%m-%d %H:%i:%s') ~/
+									/~create_time_end: and o.create_time <= str_to_date('[create_time_end]','%Y-%m-%d %H:%i:%s')~/
+									/~complete_time_start: and o.complete_time >= str_to_date('[complete_time_start]','%Y-%m-%d %H:%i:%s') ~/
+									/~complete_time_end: and o.complete_time <= str_to_date('[complete_time_end]','%Y-%m-%d %H:%i:%s')~/
+									/~pos_sn: and p.pos_sn = '[pos_sn]'~/
+									order by o.id desc
+								]]>
+							</value>
+						</property>
+					</bean>
+				</entry>
+				
+			</map>
+		</property>
+	</bean>
+</beans>

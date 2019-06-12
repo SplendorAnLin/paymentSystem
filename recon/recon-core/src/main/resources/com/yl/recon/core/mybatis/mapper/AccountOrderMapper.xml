@@ -1,0 +1,509 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.yl.recon.core.mybatis.mapper.AccountOrderMapper">
+    <!--auto generated Code-->
+    <resultMap id="BaseResultMap" type="com.yl.recon.core.entity.order.AccountOrder">
+        <result column="account_no" property="accountNo" jdbcType="VARCHAR"/>
+        <result column="trade_order_code" property="tradeOrderCode" jdbcType="VARCHAR"/>
+        <result column="trans_type" property="transType" jdbcType="VARCHAR"/>
+        <result column="amount" property="amount" jdbcType="DOUBLE"/>
+        <result column="fund_symbol" property="fundSymbol" jdbcType="VARCHAR"/>
+        <result column="trans_time" property="transTime" jdbcType="TIMESTAMP"/>
+        <result column="system_code" property="systemCode" jdbcType="VARCHAR"/>
+        <result column="bussiness_code" property="bussinessCode" jdbcType="VARCHAR"/>
+        <result column="recon_date" property="reconDate" jdbcType="DATE"/>
+        <result column="is_fee" property="isFee" jdbcType="VARCHAR"/>
+        <result column="code" property="code" jdbcType="BIGINT"/>
+        <result column="version" property="version" jdbcType="BIGINT"/>
+        <result column="create_time" property="createTime" jdbcType="TIMESTAMP"/>
+    </resultMap>
+
+    <!--auto generated Code-->
+    <sql id="Base_Column_List">
+        account_no,
+        trade_order_code,
+        trans_type,
+        amount,
+        fund_symbol,
+        trans_time,
+        system_code,
+        bussiness_code,
+        recon_date,
+        is_fee,
+        code,
+        version,
+        create_time
+    </sql>
+
+    <!--auto generated Code-->
+    <insert id="insert" useGeneratedKeys="true" keyProperty="accountOrder.code">
+        INSERT INTO account_order (
+            account_no,
+            trade_order_code,
+            trans_type,
+            amount,
+            fund_symbol,
+            trans_time,
+            system_code,
+            bussiness_code,
+            recon_date,
+            is_fee,
+            code,
+            version,
+            create_time
+        ) VALUES (
+            #{accountOrder.accountNo,jdbcType=VARCHAR},
+            #{accountOrder.tradeOrderCode,jdbcType=VARCHAR},
+            #{accountOrder.transType,jdbcType=VARCHAR},
+            #{accountOrder.amount,jdbcType=DOUBLE},
+            #{accountOrder.fundSymbol,jdbcType=VARCHAR},
+            #{accountOrder.transTime,jdbcType=TIMESTAMP},
+            #{accountOrder.systemCode,jdbcType=VARCHAR},
+            #{accountOrder.bussinessCode,jdbcType=VARCHAR},
+            #{accountOrder.reconDate,jdbcType=DATE},
+            #{accountOrder.isFee,jdbcType=VARCHAR},
+            #{accountOrder.code,jdbcType=BIGINT},
+            #{accountOrder.version,jdbcType=BIGINT},
+            #{accountOrder.createTime,jdbcType=TIMESTAMP}
+        )
+    </insert>
+
+    <!--auto generated Code-->
+    <insert id="insertSelective" useGeneratedKeys="true" keyProperty="accountOrder.code">
+        INSERT INTO account_order
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="accountOrder.accountNo!=null">account_no,</if>
+            <if test="accountOrder.tradeOrderCode!=null">trade_order_code,</if>
+            <if test="accountOrder.transType!=null">trans_type,</if>
+            <if test="accountOrder.amount!=null">amount,</if>
+            <if test="accountOrder.fundSymbol!=null">fund_symbol,</if>
+            <if test="accountOrder.transTime!=null">trans_time,</if>
+            <if test="accountOrder.systemCode!=null">system_code,</if>
+            <if test="accountOrder.bussinessCode!=null">bussiness_code,</if>
+            <if test="accountOrder.reconDate!=null">recon_date,</if>
+            <if test="accountOrder.isFee!=null">is_fee,</if>
+            <if test="accountOrder.code!=null">code,</if>
+            <if test="accountOrder.version!=null">version,</if>
+            <if test="accountOrder.createTime!=null">create_time,</if>
+        </trim>
+        VALUES
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="accountOrder.accountNo!=null">#{accountOrder.accountNo,jdbcType=VARCHAR},
+            </if>
+            <if test="accountOrder.tradeOrderCode!=null">#{accountOrder.tradeOrderCode,jdbcType=VARCHAR},
+            </if>
+            <if test="accountOrder.transType!=null">#{accountOrder.transType,jdbcType=VARCHAR},
+            </if>
+            <if test="accountOrder.amount!=null">#{accountOrder.amount,jdbcType=DOUBLE},
+            </if>
+            <if test="accountOrder.fundSymbol!=null">#{accountOrder.fundSymbol,jdbcType=VARCHAR},
+            </if>
+            <if test="accountOrder.transTime!=null">#{accountOrder.transTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="accountOrder.systemCode!=null">#{accountOrder.systemCode,jdbcType=VARCHAR},
+            </if>
+            <if test="accountOrder.bussinessCode!=null">#{accountOrder.bussinessCode,jdbcType=VARCHAR},
+            </if>
+            <if test="accountOrder.reconDate!=null">#{accountOrder.reconDate,jdbcType=DATE},
+            </if>
+            <if test="accountOrder.isFee!=null">#{accountOrder.isFee,jdbcType=VARCHAR},
+            </if>
+            <if test="accountOrder.code!=null">#{accountOrder.code,jdbcType=BIGINT},
+            </if>
+            <if test="accountOrder.version!=null">#{accountOrder.version,jdbcType=BIGINT},
+            </if>
+            <if test="accountOrder.createTime!=null">#{accountOrder.createTime,jdbcType=TIMESTAMP},
+            </if>
+        </trim>
+    </insert>
+
+    <!--auto generated Code-->
+    <insert id="insertList">
+        INSERT INTO account_order (
+        <include refid="Base_Column_List"/>
+        )VALUES
+        <foreach collection="accountOrders" item="accountOrder" index="index" separator=",">
+            (
+            #{accountOrder.accountNo,jdbcType=VARCHAR},
+            #{accountOrder.tradeOrderCode,jdbcType=VARCHAR},
+            #{accountOrder.transType,jdbcType=VARCHAR},
+            #{accountOrder.amount,jdbcType=DOUBLE},
+            #{accountOrder.fundSymbol,jdbcType=VARCHAR},
+            #{accountOrder.transTime,jdbcType=TIMESTAMP},
+            #{accountOrder.systemCode,jdbcType=VARCHAR},
+            #{accountOrder.bussinessCode,jdbcType=VARCHAR},
+            #{accountOrder.reconDate,jdbcType=DATE},
+            #{accountOrder.isFee,jdbcType=VARCHAR},
+            #{accountOrder.code,jdbcType=BIGINT},
+            #{accountOrder.version,jdbcType=BIGINT},
+            #{accountOrder.createTime,jdbcType=TIMESTAMP}
+            )
+        </foreach>
+    </insert>
+
+    <!--auto generated Code-->
+    <update id="update">
+        UPDATE account_order
+        <set>
+            <if test="accountOrder.accountNo != null">account_no= #{accountOrder.accountNo,jdbcType=VARCHAR},</if>
+            <if test="accountOrder.tradeOrderCode != null">trade_order_code=
+                #{accountOrder.tradeOrderCode,jdbcType=VARCHAR},
+            </if>
+            <if test="accountOrder.transType != null">trans_type= #{accountOrder.transType,jdbcType=VARCHAR},</if>
+            <if test="accountOrder.amount != null">amount= #{accountOrder.amount,jdbcType=DOUBLE},</if>
+            <if test="accountOrder.fundSymbol != null">fund_symbol= #{accountOrder.fundSymbol,jdbcType=VARCHAR},</if>
+            <if test="accountOrder.transTime != null">trans_time= #{accountOrder.transTime,jdbcType=TIMESTAMP},</if>
+            <if test="accountOrder.systemCode != null">system_code= #{accountOrder.systemCode,jdbcType=VARCHAR},</if>
+            <if test="accountOrder.bussinessCode != null">bussiness_code=
+                #{accountOrder.bussinessCode,jdbcType=VARCHAR},
+            </if>
+            <if test="accountOrder.reconDate != null">recon_date= #{accountOrder.reconDate,jdbcType=DATE},</if>
+            <if test="accountOrder.isFee != null">is_fee= #{accountOrder.isFee,jdbcType=VARCHAR},</if>
+            <if test="accountOrder.code != null">code= #{accountOrder.code,jdbcType=BIGINT},</if>
+            <if test="accountOrder.version != null">version= #{accountOrder.version,jdbcType=BIGINT},</if>
+            <if test="accountOrder.createTime != null">create_time= #{accountOrder.createTime,jdbcType=TIMESTAMP}</if>
+        </set>
+        WHERE code = #{accountOrder.code,jdbcType=BIGINT}
+    </update>
+
+    <!--Mybatis自动生成代码分割线-->
+
+    <sql id="Example_Where_Clause">
+        <!--
+          WARNING - @mbggenerated
+          This element is automatically generated by MyBatis Generator, do not modify.
+          This element was generated on Thu Jan 11 10:14:35 CST 2018.
+        -->
+        <where>
+            <foreach collection="oredCriteria" item="criteria" separator="or">
+                <if test="criteria.valid">
+                    <trim prefix="(" suffix=")" prefixOverrides="and">
+                        <foreach collection="criteria.criteria" item="criterion">
+                            <choose>
+                                <when test="criterion.noValue">
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue">
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue">
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue">
+                                    and ${criterion.condition}
+                                    <foreach collection="criterion.value" item="listItem" open="(" close=")"
+                                             separator=",">
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+    <sql id="Update_By_Example_Where_Clause">
+        <!--
+          WARNING - @mbggenerated
+          This element is automatically generated by MyBatis Generator, do not modify.
+          This element was generated on Thu Jan 11 10:14:35 CST 2018.
+        -->
+        <where>
+            <foreach collection="example.oredCriteria" item="criteria" separator="or">
+                <if test="criteria.valid">
+                    <trim prefix="(" suffix=")" prefixOverrides="and">
+                        <foreach collection="criteria.criteria" item="criterion">
+                            <choose>
+                                <when test="criterion.noValue">
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue">
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue">
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue">
+                                    and ${criterion.condition}
+                                    <foreach collection="criterion.value" item="listItem" open="(" close=")"
+                                             separator=",">
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+    <select id="selectByExample" resultMap="BaseResultMap"
+            parameterType="com.yl.recon.core.entity.order.AccountOrderExample">
+        <!--
+          WARNING - @mbggenerated
+          This element is automatically generated by MyBatis Generator, do not modify.
+          This element was generated on Thu Jan 11 10:14:35 CST 2018.
+        -->
+        select
+        <if test="distinct">
+            distinct
+        </if>
+        <include refid="Base_Column_List"/>
+        from account_order
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+        <if test="orderByClause != null">
+            order by ${orderByClause}
+        </if>
+    </select>
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long">
+        <!--
+          WARNING - @mbggenerated
+          This element is automatically generated by MyBatis Generator, do not modify.
+          This element was generated on Thu Jan 11 10:14:35 CST 2018.
+        -->
+        select
+        <include refid="Base_Column_List"/>
+        from account_order
+        where code = #{code,jdbcType=BIGINT}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+        <!--
+          WARNING - @mbggenerated
+          This element is automatically generated by MyBatis Generator, do not modify.
+          This element was generated on Thu Jan 11 10:14:35 CST 2018.
+        -->
+        DELETE FROM account_order
+        WHERE code = #{code,jdbcType=BIGINT}
+    </delete>
+    <delete id="deleteByExample" parameterType="com.yl.recon.core.entity.order.AccountOrderExample">
+        <!--
+          WARNING - @mbggenerated
+          This element is automatically generated by MyBatis Generator, do not modify.
+          This element was generated on Thu Jan 11 10:14:35 CST 2018.
+        -->
+        delete from account_order
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+    </delete>
+    <select id="countByExample" parameterType="com.yl.recon.core.entity.order.AccountOrderExample"
+            resultType="java.lang.Integer">
+        <!--
+          WARNING - @mbggenerated
+          This element is automatically generated by MyBatis Generator, do not modify.
+          This element was generated on Thu Jan 11 10:14:35 CST 2018.
+        -->
+        select count(*) from account_order
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+    </select>
+
+    <update id="updateByExampleSelective" parameterType="map">
+        <!--
+          WARNING - @mbggenerated
+          This element is automatically generated by MyBatis Generator, do not modify.
+          This element was generated on Thu Jan 11 10:14:35 CST 2018.
+        -->
+        update account_order
+        <set>
+            <if test="record.code != null">
+                code = #{record.code,jdbcType=BIGINT},
+            </if>
+            <if test="record.version != null">
+                version = #{record.version,jdbcType=INTEGER},
+            </if>
+            <if test="record.accountNo != null">
+                ACCOUNT_NO = #{record.accountNo,jdbcType=VARCHAR},
+            </if>
+            <if test="record.tradeOrderCode != null">
+                TRADE_ORDER_CODE = #{record.tradeOrderCode,jdbcType=VARCHAR},
+            </if>
+            <if test="record.transType != null">
+                TRANS_TYPE = #{record.transType,jdbcType=VARCHAR},
+            </if>
+            <if test="record.amount != null">
+                AMOUNT = #{record.amount,jdbcType=DOUBLE},
+            </if>
+            <if test="record.fundSymbol != null">
+                FUND_SYMBOL = #{record.fundSymbol,jdbcType=VARCHAR},
+            </if>
+            <if test="record.transTime != null">
+                TRANS_TIME = #{record.transTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="record.systemCode != null">
+                SYSTEM_CODE = #{record.systemCode,jdbcType=VARCHAR},
+            </if>
+            <if test="record.bussinessCode != null">
+                BUSSINESS_CODE = #{record.bussinessCode,jdbcType=VARCHAR},
+            </if>
+            <if test="record.createTime != null">
+                CREATE_TIME = #{record.createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="record.reconDate != null">
+                RECON_DATE = #{record.reconDate,jdbcType=DATE},
+            </if>
+            <if test="record.isFee != null">
+                IS_FEE = #{record.isFee,jdbcType=VARCHAR},
+            </if>
+        </set>
+        <if test="_parameter != null">
+            <include refid="Update_By_Example_Where_Clause"/>
+        </if>
+    </update>
+    <update id="updateByExample" parameterType="map">
+        <!--
+          WARNING - @mbggenerated
+          This element is automatically generated by MyBatis Generator, do not modify.
+          This element was generated on Thu Jan 11 10:14:35 CST 2018.
+        -->
+        update account_order
+        set code = #{record.code,jdbcType=BIGINT},
+        version = #{record.version,jdbcType=INTEGER},
+        ACCOUNT_NO = #{record.accountNo,jdbcType=VARCHAR},
+        TRADE_ORDER_CODE = #{record.tradeOrderCode,jdbcType=VARCHAR},
+        TRANS_TYPE = #{record.transType,jdbcType=VARCHAR},
+        AMOUNT = #{record.amount,jdbcType=DOUBLE},
+        FUND_SYMBOL = #{record.fundSymbol,jdbcType=VARCHAR},
+        TRANS_TIME = #{record.transTime,jdbcType=TIMESTAMP},
+        SYSTEM_CODE = #{record.systemCode,jdbcType=VARCHAR},
+        BUSSINESS_CODE = #{record.bussinessCode,jdbcType=VARCHAR},
+        CREATE_TIME = #{record.createTime,jdbcType=TIMESTAMP},
+        RECON_DATE = #{record.reconDate,jdbcType=DATE},
+        IS_FEE = #{record.isFee,jdbcType=VARCHAR}
+        <if test="_parameter != null">
+            <include refid="Update_By_Example_Where_Clause"/>
+        </if>
+    </update>
+    <update id="updateByPrimaryKeySelective" parameterType="com.yl.recon.core.entity.order.AccountOrder">
+        <!--
+          WARNING - @mbggenerated
+          This element is automatically generated by MyBatis Generator, do not modify.
+          This element was generated on Thu Jan 11 10:14:35 CST 2018.
+        -->
+        update account_order
+        <set>
+            <if test="version != null">
+                version = #{version,jdbcType=INTEGER},
+            </if>
+            <if test="accountNo != null">
+                ACCOUNT_NO = #{accountNo,jdbcType=VARCHAR},
+            </if>
+            <if test="tradeOrderCode != null">
+                TRADE_ORDER_CODE = #{tradeOrderCode,jdbcType=VARCHAR},
+            </if>
+            <if test="transType != null">
+                TRANS_TYPE = #{transType,jdbcType=VARCHAR},
+            </if>
+            <if test="amount != null">
+                AMOUNT = #{amount,jdbcType=DOUBLE},
+            </if>
+            <if test="fundSymbol != null">
+                FUND_SYMBOL = #{fundSymbol,jdbcType=VARCHAR},
+            </if>
+            <if test="transTime != null">
+                TRANS_TIME = #{transTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="systemCode != null">
+                SYSTEM_CODE = #{systemCode,jdbcType=VARCHAR},
+            </if>
+            <if test="bussinessCode != null">
+                BUSSINESS_CODE = #{bussinessCode,jdbcType=VARCHAR},
+            </if>
+            <if test="createTime != null">
+                CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="reconDate != null">
+                RECON_DATE = #{reconDate,jdbcType=DATE},
+            </if>
+            <if test="isFee != null">
+                IS_FEE = #{isFee,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where code = #{code,jdbcType=BIGINT}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.yl.recon.core.entity.order.AccountOrder">
+        <!--
+          WARNING - @mbggenerated
+          This element is automatically generated by MyBatis Generator, do not modify.
+          This element was generated on Thu Jan 11 10:14:35 CST 2018.
+        -->
+        UPDATE account_order
+        SET version = #{version,jdbcType=INTEGER},
+        ACCOUNT_NO = #{accountNo,jdbcType=VARCHAR},
+        TRADE_ORDER_CODE = #{tradeOrderCode,jdbcType=VARCHAR},
+        TRANS_TYPE = #{transType,jdbcType=VARCHAR},
+        AMOUNT = #{amount,jdbcType=DOUBLE},
+        FUND_SYMBOL = #{fundSymbol,jdbcType=VARCHAR},
+        TRANS_TIME = #{transTime,jdbcType=TIMESTAMP},
+        SYSTEM_CODE = #{systemCode,jdbcType=VARCHAR},
+        BUSSINESS_CODE = #{bussinessCode,jdbcType=VARCHAR},
+        CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+        RECON_DATE = #{reconDate,jdbcType=DATE},
+        IS_FEE = #{isFee,jdbcType=VARCHAR}
+        WHERE code = #{code,jdbcType=BIGINT}
+    </update>
+
+
+    <!--自定义 start-->
+    <resultMap id="AccountOrderResultMap" type="com.yl.recon.api.core.bean.order.AccountOrder">
+        <result column="account_no" property="accountNo" jdbcType="VARCHAR"/>
+        <result column="trade_order_code" property="tradeOrderCode" jdbcType="VARCHAR"/>
+        <result column="trans_type" property="transType" jdbcType="VARCHAR"/>
+        <result column="amount" property="amount" jdbcType="DOUBLE"/>
+        <result column="fund_symbol" property="fundSymbol" jdbcType="VARCHAR"/>
+        <result column="trans_time" property="transTime" jdbcType="TIMESTAMP"/>
+        <result column="system_code" property="systemCode" jdbcType="VARCHAR"/>
+        <result column="bussiness_code" property="bussinessCode" jdbcType="VARCHAR"/>
+        <result column="recon_date" property="reconDate" jdbcType="DATE"/>
+        <result column="is_fee" property="isFee" jdbcType="VARCHAR"/>
+        <result column="code" property="code" jdbcType="BIGINT"/>
+        <result column="version" property="version" jdbcType="BIGINT"/>
+        <result column="create_time" property="createTime" jdbcType="TIMESTAMP"/>
+    </resultMap>
+
+    <sql id="findSql">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM account_order
+        WHERE 1=1
+
+        <if test="reconOrderDataQueryBean!=null">
+            <if test="reconOrderDataQueryBean.createStartTime != null  and reconOrderDataQueryBean.createEndTime != null  and reconOrderDataQueryBean.createStartTime != ''  and reconOrderDataQueryBean.createEndTime != '' ">
+                and create_time BETWEEN #{reconOrderDataQueryBean.createStartTime} AND
+                #{reconOrderDataQueryBean.createEndTime}
+            </if>
+            <if test="reconOrderDataQueryBean.createStartTime != null  and reconOrderDataQueryBean.createEndTime == null  and reconOrderDataQueryBean.createStartTime != ''">
+                and create_time &gt;= #{reconOrderDataQueryBean.createStartTime}
+            </if>
+            <if test="reconOrderDataQueryBean.createStartTime == null and reconOrderDataQueryBean.createEndTime != null and reconOrderDataQueryBean.createEndTime != ''">
+                and create_time &lt;= #{reconOrderDataQueryBean.createEndTime}
+            </if>
+            <if test="reconOrderDataQueryBean.reconDate != null">
+                AND recon_date = str_to_date(#{reconOrderDataQueryBean.reconDate,jdbcType=DATE}, '%Y-%m-%d')
+            </if>
+            <if test="reconOrderDataQueryBean.accountOrder != null">
+                <if test="reconOrderDataQueryBean.accountOrder.accountNo != null and reconOrderDataQueryBean.accountOrder.accountNo != ''">
+                    AND account_no = #{reconOrderDataQueryBean.accountOrder.accountNo}
+                </if>
+                <if test="reconOrderDataQueryBean.accountOrder.tradeOrderCode != null and reconOrderDataQueryBean.accountOrder.tradeOrderCode != ''">
+                    AND trade_order_code = #{reconOrderDataQueryBean.accountOrder.tradeOrderCode}
+                </if>
+            </if>
+        </if>
+    </sql>
+    <!--分页-->
+    <select id="findAllAccountOrder" resultMap="AccountOrderResultMap">
+        <include refid="findSql"/>
+    </select>
+    <!--不分页-->
+    <select id="finAccountOrder" resultMap="AccountOrderResultMap">
+        <include refid="findSql"/>
+    </select>
+
+    <!--自定义 end-->
+
+</mapper>

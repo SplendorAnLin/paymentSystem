@@ -1,0 +1,521 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.yl.recon.core.mybatis.mapper.PayinterfaceOrderMapper">
+    <!--auto generated Code-->
+    <resultMap id="BaseResultMap" type="com.yl.recon.core.entity.order.PayinterfaceOrder">
+        <result column="interface_code" property="interfaceCode" jdbcType="VARCHAR"/>
+        <result column="interface_type" property="interfaceType" jdbcType="VARCHAR"/>
+        <result column="interface_order_code" property="interfaceOrderCode" jdbcType="VARCHAR"/>
+        <result column="bank_channel_code" property="bankChannelCode" jdbcType="VARCHAR"/>
+        <result column="trade_order_code" property="tradeOrderCode" jdbcType="VARCHAR"/>
+        <result column="amount" property="amount" jdbcType="DOUBLE"/>
+        <result column="fee" property="fee" jdbcType="DOUBLE"/>
+        <result column="trans_time" property="transTime" jdbcType="TIMESTAMP"/>
+        <result column="recon_date" property="reconDate" jdbcType="DATE"/>
+        <result column="remark" property="remark" jdbcType="VARCHAR"/>
+        <result column="code" property="code" jdbcType="BIGINT"/>
+        <result column="version" property="version" jdbcType="BIGINT"/>
+        <result column="create_time" property="createTime" jdbcType="TIMESTAMP"/>
+    </resultMap>
+
+    <!--auto generated Code-->
+    <sql id="Base_Column_List">
+        interface_code,
+        interface_type,
+        interface_order_code,
+        bank_channel_code,
+        trade_order_code,
+        amount,
+        fee,
+        trans_time,
+        recon_date,
+        remark,
+        code,
+        version,
+        create_time
+    </sql>
+
+    <!--auto generated Code-->
+    <insert id="insert" useGeneratedKeys="true" keyProperty="payinterfaceOrder.code">
+        INSERT INTO payinterface_order (
+            interface_code,
+            interface_type,
+            interface_order_code,
+            bank_channel_code,
+            trade_order_code,
+            amount,
+            fee,
+            trans_time,
+            recon_date,
+            remark,
+            code,
+            version,
+            create_time
+        ) VALUES (
+            #{payinterfaceOrder.interfaceCode,jdbcType=VARCHAR},
+            #{payinterfaceOrder.interfaceType,jdbcType=VARCHAR},
+            #{payinterfaceOrder.interfaceOrderCode,jdbcType=VARCHAR},
+            #{payinterfaceOrder.bankChannelCode,jdbcType=VARCHAR},
+            #{payinterfaceOrder.tradeOrderCode,jdbcType=VARCHAR},
+            #{payinterfaceOrder.amount,jdbcType=DOUBLE},
+            #{payinterfaceOrder.fee,jdbcType=DOUBLE},
+            #{payinterfaceOrder.transTime,jdbcType=TIMESTAMP},
+            #{payinterfaceOrder.reconDate,jdbcType=DATE},
+            #{payinterfaceOrder.remark,jdbcType=VARCHAR},
+            #{payinterfaceOrder.code,jdbcType=BIGINT},
+            #{payinterfaceOrder.version,jdbcType=BIGINT},
+            #{payinterfaceOrder.createTime,jdbcType=TIMESTAMP}
+        )
+    </insert>
+
+    <!--auto generated Code-->
+    <insert id="insertSelective" useGeneratedKeys="true" keyProperty="payinterfaceOrder.code">
+        INSERT INTO payinterface_order
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="payinterfaceOrder.interfaceInfoCode!=null">interface_code,</if>
+            <if test="payinterfaceOrder.interfaceType!=null">interface_type,</if>
+            <if test="payinterfaceOrder.interfaceOrderCode!=null">interface_order_code,</if>
+            <if test="payinterfaceOrder.bankChannelCode!=null">bank_channel_code,</if>
+            <if test="payinterfaceOrder.tradeOrderCode!=null">trade_order_code,</if>
+            <if test="payinterfaceOrder.amount!=null">amount,</if>
+            <if test="payinterfaceOrder.fee!=null">fee,</if>
+            <if test="payinterfaceOrder.transTime!=null">trans_time,</if>
+            <if test="payinterfaceOrder.reconDate!=null">recon_date,</if>
+            <if test="payinterfaceOrder.remark!=null">remark,</if>
+            <if test="payinterfaceOrder.code!=null">code,</if>
+            <if test="payinterfaceOrder.version!=null">version,</if>
+            <if test="payinterfaceOrder.createTime!=null">create_time,</if>
+        </trim>
+        VALUES
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="payinterfaceOrder.interfaceInfoCode!=null">#{payinterfaceOrder.interfaceCode,jdbcType=VARCHAR},
+            </if>
+            <if test="payinterfaceOrder.interfaceType!=null">#{payinterfaceOrder.interfaceType,jdbcType=VARCHAR},
+            </if>
+            <if test="payinterfaceOrder.interfaceOrderCode!=null">
+                #{payinterfaceOrder.interfaceOrderCode,jdbcType=VARCHAR},
+            </if>
+            <if test="payinterfaceOrder.bankChannelCode!=null">#{payinterfaceOrder.bankChannelCode,jdbcType=VARCHAR},
+            </if>
+            <if test="payinterfaceOrder.tradeOrderCode!=null">#{payinterfaceOrder.tradeOrderCode,jdbcType=VARCHAR},
+            </if>
+            <if test="payinterfaceOrder.amount!=null">#{payinterfaceOrder.amount,jdbcType=DOUBLE},
+            </if>
+            <if test="payinterfaceOrder.fee!=null">#{payinterfaceOrder.fee,jdbcType=DOUBLE},
+            </if>
+            <if test="payinterfaceOrder.transTime!=null">#{payinterfaceOrder.transTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="payinterfaceOrder.reconDate!=null">#{payinterfaceOrder.reconDate,jdbcType=DATE},
+            </if>
+            <if test="payinterfaceOrder.remark!=null">#{payinterfaceOrder.remark,jdbcType=VARCHAR},
+            </if>
+            <if test="payinterfaceOrder.code!=null">#{payinterfaceOrder.code,jdbcType=BIGINT},
+            </if>
+            <if test="payinterfaceOrder.version!=null">#{payinterfaceOrder.version,jdbcType=BIGINT},
+            </if>
+            <if test="payinterfaceOrder.createTime!=null">#{payinterfaceOrder.createTime,jdbcType=TIMESTAMP},
+            </if>
+        </trim>
+    </insert>
+
+    <!--auto generated Code-->
+    <insert id="insertList">
+        INSERT INTO payinterface_order (
+        <include refid="Base_Column_List"/>
+        )VALUES
+        <foreach collection="payinterfaceOrders" item="payinterfaceOrder" index="index" separator=",">
+            (
+            #{payinterfaceOrder.interfaceCode,jdbcType=VARCHAR},
+            #{payinterfaceOrder.interfaceType,jdbcType=VARCHAR},
+            #{payinterfaceOrder.interfaceOrderCode,jdbcType=VARCHAR},
+            #{payinterfaceOrder.bankChannelCode,jdbcType=VARCHAR},
+            #{payinterfaceOrder.tradeOrderCode,jdbcType=VARCHAR},
+            #{payinterfaceOrder.amount,jdbcType=DOUBLE},
+            #{payinterfaceOrder.fee,jdbcType=DOUBLE},
+            #{payinterfaceOrder.transTime,jdbcType=TIMESTAMP},
+            #{payinterfaceOrder.reconDate,jdbcType=DATE},
+            #{payinterfaceOrder.remark,jdbcType=VARCHAR},
+            #{payinterfaceOrder.code,jdbcType=BIGINT},
+            #{payinterfaceOrder.version,jdbcType=BIGINT},
+            #{payinterfaceOrder.createTime,jdbcType=TIMESTAMP}
+            )
+        </foreach>
+    </insert>
+
+    <!--auto generated Code-->
+    <update id="update">
+        UPDATE payinterface_order
+        <set>
+            <if test="payinterfaceOrder.interfaceInfoCode != null">interface_code=
+                #{payinterfaceOrder.interfaceCode,jdbcType=VARCHAR},
+            </if>
+            <if test="payinterfaceOrder.interfaceType != null">interface_type=
+                #{payinterfaceOrder.interfaceType,jdbcType=VARCHAR},
+            </if>
+            <if test="payinterfaceOrder.interfaceOrderCode != null">interface_order_code=
+                #{payinterfaceOrder.interfaceOrderCode,jdbcType=VARCHAR},
+            </if>
+            <if test="payinterfaceOrder.bankChannelCode != null">bank_channel_code=
+                #{payinterfaceOrder.bankChannelCode,jdbcType=VARCHAR},
+            </if>
+            <if test="payinterfaceOrder.tradeOrderCode != null">trade_order_code=
+                #{payinterfaceOrder.tradeOrderCode,jdbcType=VARCHAR},
+            </if>
+            <if test="payinterfaceOrder.amount != null">amount= #{payinterfaceOrder.amount,jdbcType=DOUBLE},</if>
+            <if test="payinterfaceOrder.fee != null">fee= #{payinterfaceOrder.fee,jdbcType=DOUBLE},</if>
+            <if test="payinterfaceOrder.transTime != null">trans_time=
+                #{payinterfaceOrder.transTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="payinterfaceOrder.reconDate != null">recon_date= #{payinterfaceOrder.reconDate,jdbcType=DATE},
+            </if>
+            <if test="payinterfaceOrder.remark != null">remark= #{payinterfaceOrder.remark,jdbcType=VARCHAR},</if>
+            <if test="payinterfaceOrder.code != null">code= #{payinterfaceOrder.code,jdbcType=BIGINT},</if>
+            <if test="payinterfaceOrder.version != null">version= #{payinterfaceOrder.version,jdbcType=BIGINT},</if>
+            <if test="payinterfaceOrder.createTime != null">create_time=
+                #{payinterfaceOrder.createTime,jdbcType=TIMESTAMP}
+            </if>
+        </set>
+        WHERE code = #{payinterfaceOrder.code,jdbcType=BIGINT}
+    </update>
+
+
+    <!--Mybatis 自动生产代码分割线 -->
+
+    <sql id="Example_Where_Clause">
+        <!--
+          WARNING - @mbggenerated
+          This element is automatically generated by MyBatis Generator, do not modify.
+          This element was generated on Fri Jan 19 15:50:31 CST 2018.
+        -->
+        <where>
+            <foreach collection="oredCriteria" item="criteria" separator="or">
+                <if test="criteria.valid">
+                    <trim prefix="(" suffix=")" prefixOverrides="and">
+                        <foreach collection="criteria.criteria" item="criterion">
+                            <choose>
+                                <when test="criterion.noValue">
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue">
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue">
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue">
+                                    and ${criterion.condition}
+                                    <foreach collection="criterion.value" item="listItem" open="(" close=")"
+                                             separator=",">
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+    <sql id="Update_By_Example_Where_Clause">
+        <!--
+          WARNING - @mbggenerated
+          This element is automatically generated by MyBatis Generator, do not modify.
+          This element was generated on Fri Jan 19 15:50:31 CST 2018.
+        -->
+        <where>
+            <foreach collection="example.oredCriteria" item="criteria" separator="or">
+                <if test="criteria.valid">
+                    <trim prefix="(" suffix=")" prefixOverrides="and">
+                        <foreach collection="criteria.criteria" item="criterion">
+                            <choose>
+                                <when test="criterion.noValue">
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue">
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue">
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue">
+                                    and ${criterion.condition}
+                                    <foreach collection="criterion.value" item="listItem" open="(" close=")"
+                                             separator=",">
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+    <select id="selectByExample" resultMap="BaseResultMap"
+            parameterType="com.yl.recon.core.entity.order.PayinterfaceOrderExample">
+        <!--
+          WARNING - @mbggenerated
+          This element is automatically generated by MyBatis Generator, do not modify.
+          This element was generated on Fri Jan 19 15:50:31 CST 2018.
+        -->
+        select
+        <if test="distinct">
+            distinct
+        </if>
+        <include refid="Base_Column_List"/>
+        from payinterface_order
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+        <if test="orderByClause != null">
+            order by ${orderByClause}
+        </if>
+    </select>
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long">
+        <!--
+          WARNING - @mbggenerated
+          This element is automatically generated by MyBatis Generator, do not modify.
+          This element was generated on Fri Jan 19 15:50:31 CST 2018.
+        -->
+        select
+        <include refid="Base_Column_List"/>
+        from payinterface_order
+        where code = #{code,jdbcType=BIGINT}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+        <!--
+          WARNING - @mbggenerated
+          This element is automatically generated by MyBatis Generator, do not modify.
+          This element was generated on Fri Jan 19 15:50:31 CST 2018.
+        -->
+        DELETE FROM payinterface_order
+        WHERE code = #{code,jdbcType=BIGINT}
+    </delete>
+    <delete id="deleteByExample" parameterType="com.yl.recon.core.entity.order.PayinterfaceOrderExample">
+        <!--
+          WARNING - @mbggenerated
+          This element is automatically generated by MyBatis Generator, do not modify.
+          This element was generated on Fri Jan 19 15:50:31 CST 2018.
+        -->
+        delete from payinterface_order
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+    </delete>
+
+    <select id="countByExample" parameterType="com.yl.recon.core.entity.order.PayinterfaceOrderExample"
+            resultType="java.lang.Integer">
+        <!--
+          WARNING - @mbggenerated
+          This element is automatically generated by MyBatis Generator, do not modify.
+          This element was generated on Fri Jan 19 15:50:31 CST 2018.
+        -->
+        select count(*) from payinterface_order
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+    </select>
+    <update id="updateByExampleSelective" parameterType="map">
+        <!--
+          WARNING - @mbggenerated
+          This element is automatically generated by MyBatis Generator, do not modify.
+          This element was generated on Fri Jan 19 15:50:31 CST 2018.
+        -->
+        update payinterface_order
+        <set>
+            <if test="record.code != null">
+                code = #{record.code,jdbcType=BIGINT},
+            </if>
+            <if test="record.version != null">
+                version = #{record.version,jdbcType=INTEGER},
+            </if>
+            <if test="record.interfaceInfoCode != null">
+                interface_code = #{record.interfaceCode,jdbcType=VARCHAR},
+            </if>
+            <if test="record.interfaceType != null">
+                interface_type = #{record.interfaceType,jdbcType=VARCHAR},
+            </if>
+            <if test="record.interfaceOrderCode != null">
+                interface_order_code = #{record.interfaceOrderCode,jdbcType=VARCHAR},
+            </if>
+            <if test="record.bankChannelCode != null">
+                bank_channel_code = #{record.bankChannelCode,jdbcType=VARCHAR},
+            </if>
+            <if test="record.tradeOrderCode != null">
+                trade_order_code = #{record.tradeOrderCode,jdbcType=VARCHAR},
+            </if>
+            <if test="record.amount != null">
+                amount = #{record.amount,jdbcType=DOUBLE},
+            </if>
+            <if test="record.transTime != null">
+                trans_time = #{record.transTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="record.createTime != null">
+                create_time = #{record.createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="record.reconDate != null">
+                recon_date = #{record.reconDate,jdbcType=DATE},
+            </if>
+            <if test="record.fee != null">
+                fee = #{record.fee,jdbcType=DOUBLE},
+            </if>
+            <if test="record.remark != null">
+                remark = #{record.remark,jdbcType=VARCHAR},
+            </if>
+        </set>
+        <if test="_parameter != null">
+            <include refid="Update_By_Example_Where_Clause"/>
+        </if>
+    </update>
+    <update id="updateByExample" parameterType="map">
+        <!--
+          WARNING - @mbggenerated
+          This element is automatically generated by MyBatis Generator, do not modify.
+          This element was generated on Fri Jan 19 15:50:31 CST 2018.
+        -->
+        update payinterface_order
+        set code = #{record.code,jdbcType=BIGINT},
+        version = #{record.version,jdbcType=INTEGER},
+        interface_code = #{record.interfaceCode,jdbcType=VARCHAR},
+        interface_type = #{record.interfaceType,jdbcType=VARCHAR},
+        interface_order_code = #{record.interfaceOrderCode,jdbcType=VARCHAR},
+        bank_channel_code = #{record.bankChannelCode,jdbcType=VARCHAR},
+        trade_order_code = #{record.tradeOrderCode,jdbcType=VARCHAR},
+        amount = #{record.amount,jdbcType=DOUBLE},
+        trans_time = #{record.transTime,jdbcType=TIMESTAMP},
+        create_time = #{record.createTime,jdbcType=TIMESTAMP},
+        recon_date = #{record.reconDate,jdbcType=DATE},
+        fee = #{record.fee,jdbcType=DOUBLE},
+        remark = #{record.remark,jdbcType=VARCHAR}
+        <if test="_parameter != null">
+            <include refid="Update_By_Example_Where_Clause"/>
+        </if>
+    </update>
+    <update id="updateByPrimaryKeySelective" parameterType="com.yl.recon.core.entity.order.PayinterfaceOrder">
+        <!--
+          WARNING - @mbggenerated
+          This element is automatically generated by MyBatis Generator, do not modify.
+          This element was generated on Fri Jan 19 15:50:31 CST 2018.
+        -->
+        update payinterface_order
+        <set>
+            <if test="version != null">
+                version = #{version,jdbcType=INTEGER},
+            </if>
+            <if test="interfaceInfoCode != null">
+                interface_code = #{interfaceCode,jdbcType=VARCHAR},
+            </if>
+            <if test="interfaceType != null">
+                interface_type = #{interfaceType,jdbcType=VARCHAR},
+            </if>
+            <if test="interfaceOrderCode != null">
+                interface_order_code = #{interfaceOrderCode,jdbcType=VARCHAR},
+            </if>
+            <if test="bankChannelCode != null">
+                bank_channel_code = #{bankChannelCode,jdbcType=VARCHAR},
+            </if>
+            <if test="tradeOrderCode != null">
+                trade_order_code = #{tradeOrderCode,jdbcType=VARCHAR},
+            </if>
+            <if test="amount != null">
+                amount = #{amount,jdbcType=DOUBLE},
+            </if>
+            <if test="transTime != null">
+                trans_time = #{transTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="createTime != null">
+                create_time = #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="reconDate != null">
+                recon_date = #{reconDate,jdbcType=DATE},
+            </if>
+            <if test="fee != null">
+                fee = #{fee,jdbcType=DOUBLE},
+            </if>
+            <if test="remark != null">
+                remark = #{remark,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where code = #{code,jdbcType=BIGINT}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.yl.recon.core.entity.order.PayinterfaceOrder">
+        <!--
+          WARNING - @mbggenerated
+          This element is automatically generated by MyBatis Generator, do not modify.
+          This element was generated on Fri Jan 19 15:50:31 CST 2018.
+        -->
+        UPDATE payinterface_order
+        SET version = #{version,jdbcType=INTEGER},
+        interface_code = #{interfaceCode,jdbcType=VARCHAR},
+        interface_type = #{interfaceType,jdbcType=VARCHAR},
+        interface_order_code = #{interfaceOrderCode,jdbcType=VARCHAR},
+        bank_channel_code = #{bankChannelCode,jdbcType=VARCHAR},
+        trade_order_code = #{tradeOrderCode,jdbcType=VARCHAR},
+        amount = #{amount,jdbcType=DOUBLE},
+        trans_time = #{transTime,jdbcType=TIMESTAMP},
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+        recon_date = #{reconDate,jdbcType=DATE},
+        fee = #{fee,jdbcType=DOUBLE},
+        remark = #{remark,jdbcType=VARCHAR}
+        WHERE code = #{code,jdbcType=BIGINT}
+    </update>
+
+    <!--自定义 start-->
+    <resultMap id="PayInterfaceOrderResultMap" type="com.yl.recon.api.core.bean.order.PayinterfaceOrder">
+        <result column="interface_code" property="interfaceCode" jdbcType="VARCHAR"/>
+        <result column="interface_type" property="interfaceType" jdbcType="VARCHAR"/>
+        <result column="interface_order_code" property="interfaceOrderCode" jdbcType="VARCHAR"/>
+        <result column="bank_channel_code" property="bankChannelCode" jdbcType="VARCHAR"/>
+        <result column="trade_order_code" property="tradeOrderCode" jdbcType="VARCHAR"/>
+        <result column="amount" property="amount" jdbcType="DOUBLE"/>
+        <result column="fee" property="fee" jdbcType="DOUBLE"/>
+        <result column="trans_time" property="transTime" jdbcType="TIMESTAMP"/>
+        <result column="recon_date" property="reconDate" jdbcType="DATE"/>
+        <result column="remark" property="remark" jdbcType="VARCHAR"/>
+        <result column="code" property="code" jdbcType="BIGINT"/>
+        <result column="version" property="version" jdbcType="BIGINT"/>
+        <result column="create_time" property="createTime" jdbcType="TIMESTAMP"/>
+    </resultMap>
+
+    <sql id="findSql">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM payinterface_order
+        WHERE 1=1
+
+        <if test="reconOrderDataQueryBean!=null">
+            <if test="reconOrderDataQueryBean.createStartTime != null  and reconOrderDataQueryBean.createEndTime != null  and reconOrderDataQueryBean.createStartTime != ''  and reconOrderDataQueryBean.createEndTime != '' ">
+                and create_time BETWEEN #{reconOrderDataQueryBean.createStartTime} AND
+                #{reconOrderDataQueryBean.createEndTime}
+            </if>
+            <if test="reconOrderDataQueryBean.createStartTime != null  and reconOrderDataQueryBean.createEndTime == null  and reconOrderDataQueryBean.createStartTime != ''">
+                and create_time &gt;= #{reconOrderDataQueryBean.createStartTime}
+            </if>
+            <if test="reconOrderDataQueryBean.createStartTime == null and reconOrderDataQueryBean.createEndTime != null and reconOrderDataQueryBean.createEndTime != ''">
+                and create_time &lt;= #{reconOrderDataQueryBean.createEndTime}
+            </if>
+            <if test="reconOrderDataQueryBean.reconDate != null">
+                AND recon_date = str_to_date(#{reconOrderDataQueryBean.reconDate,jdbcType=DATE}, '%Y-%m-%d')
+            </if>
+            <if test="reconOrderDataQueryBean.payinterfaceOrder != null">
+                <if test="reconOrderDataQueryBean.payinterfaceOrder.interfaceOrderCode != null and reconOrderDataQueryBean.payinterfaceOrder.interfaceOrderCode != ''">
+                    AND interface_order_code = #{reconOrderDataQueryBean.payinterfaceOrder.interfaceOrderCode}
+                </if>
+                <if test="reconOrderDataQueryBean.payinterfaceOrder.bankChannelCode != null and reconOrderDataQueryBean.payinterfaceOrder.bankChannelCode != ''">
+                    AND bank_channel_code = #{reconOrderDataQueryBean.payinterfaceOrder.bankChannelCode}
+                </if>
+            </if>
+        </if>
+    </sql>
+    <!--分页-->
+    <select id="findAllPayInterfaceOrder" resultMap="PayInterfaceOrderResultMap">
+        <include refid="findSql"/>
+    </select>
+    <!--不分页-->
+    <select id="findPayInterfaceOrder" resultMap="PayInterfaceOrderResultMap">
+        <include refid="findSql"/>
+    </select>
+
+    <!--自定义 end-->
+
+</mapper>

@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.yl.account.core.dao.mapper.AccountBehaviorBaseMapper">
+	
+	<resultMap id="AccountBehavior" type="com.yl.account.model.AccountBehavior">
+		<result column="CODE" 						property="code" />
+		<result column="VERSION" 	 				property="version" />
+		<result column="CREATE_TIME" 				property="createTime" />
+		<result column="ACC_NO" 					property="accountNo" />
+		<result column="ACC_TYPE" 					property="accountType" />
+		<result column="PRE_FRZ_NUM" 				property="preFreezeNum" />
+	</resultMap>
+    
+	<!--通用的sql语句段-->
+	<sql id="commonColumn">
+		CODE, VERSION, CREATE_TIME, ACC_NO, ACC_TYPE, PRE_FRZ_NUM
+	</sql>
+	
+	<!--持久化账户属性 -->
+	<insert id="insert" parameterType="com.yl.account.model.AccountBehavior">
+		INSERT INTO 
+			T_ACC_ATTR (<include refid="commonColumn"/>)
+		VALUES 
+			(#{code}, #{version}, #{createTime}, #{accountNo}, #{accountType}, #{preFreezeNum})
+	</insert>
+	
+	<!-- 账号、账户类型获取账户属性 -->
+	<select id="findAccountBehaviorBy" resultMap="AccountBehavior">
+		SELECT <include refid="commonColumn" /> FROM T_ACC_ATTR WHERE ACC_NO = #{accountNo}	FOR UPDATE
+	</select>
+	
+	<!-- 冻结次数递增或递减 -->
+	<update id="addOrSubtractPreFreezeCount">
+		UPDATE 
+			T_ACC_ATTR att
+		SET 
+			version = #{newVersion}, PRE_FRZ_NUM = #{accountBehavior.preFreezeNum}
+		where
+			CODE = #{accountBehavior.code}
+	</update>
+	
+</mapper>

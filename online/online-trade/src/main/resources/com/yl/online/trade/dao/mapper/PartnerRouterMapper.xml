@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yl.online.trade.dao.mapper.PartnerRouterMapper">
+
+	<resultMap id="partnerRouterMap" type="com.yl.online.model.model.PartnerRouter">
+		<id 	property="id" 					column="ID"></id>
+		<result property="code" 				column="CODE"></result>
+		<result property="version" 				column="VERSION"></result>
+		<result property="createTime" 			column="CREATE_TIME"></result>
+		<result property="partnerRole" 			column="PARTNER_ROLE"></result>
+		<result property="partnerCode" 			column="PARTNER_CODE"></result>
+		<result property="profiles" 			column="PROFILES"></result>
+		<result property="status" 				column="STATUS"></result>
+	</resultMap>
+
+	<sql id="partnerRouterColumns">
+		ID,CODE,VERSION,CREATE_TIME,PARTNER_ROLE,PARTNER_CODE,PROFILES,STATUS
+	</sql>
+
+	<insert id="createPartnerRouter" parameterType="com.yl.online.model.model.PartnerRouter"
+		useGeneratedKeys="true" keyProperty="id">
+		INSERT INTO PARTNER_ROUTER (
+		CODE,VERSION,CREATE_TIME,PARTNER_ROLE,PARTNER_CODE,PROFILES,STATUS)
+		VALUES
+		(#{code},#{version},#{createTime},#{partnerRole},#{partnerCode},#{profiles},#{status})
+	</insert>
+
+	<select id="queryPartnerRouterByCode" resultMap="partnerRouterMap"
+		parameterType="Map">
+		SELECT
+		<include refid="partnerRouterColumns" />
+		FROM PARTNER_ROUTER
+		WHERE CODE = #{code}
+	</select>
+	
+	
+	
+	<select id="findAllPartnerRouter" resultMap="partnerRouterMap"
+		parameterType="Map">
+		SELECT 
+		   <include refid="partnerRouterColumns" />
+		FROM
+		    PARTNER_ROUTER t 
+		<!--  查询条件 params page -->
+		WHERE 1 = 1
+		<if test="params.partnerCode != null and params.partnerCode !='' ">
+			AND t.partner_Code = #{params.partnerCode}
+		</if>
+		<if test="params.partnerRole != null and params.partnerRole !='' ">
+			AND t.PARTNER_ROLE = #{params.partnerRole}
+		</if>
+		<if test="params.profiles!=null and params.profiles!=''  ">
+		
+		<foreach collection="params.profiles" index="key"  item="partnerRouterProfileBean" separator="">
+            <if test="partnerRouterProfileBean!=null and partnerRouterProfileBean!='' and partnerRouterProfileBean.templateInterfacePolicy != null and partnerRouterProfileBean.templateInterfacePolicy !='' ">
+				  AND t.PROFILES  like CONCAT('%"templateInterfacePolicy":"',#{partnerRouterProfileBean.templateInterfacePolicy},'"%' )
+			</if>   
+			<if test="partnerRouterProfileBean!=null and partnerRouterProfileBean!='' and partnerRouterProfileBean.interfaceType != null and partnerRouterProfileBean.interfaceType !='' ">
+				  AND t.PROFILES  like CONCAT('%"interfaceType":"',#{partnerRouterProfileBean.interfaceType},'"%' )
+			</if>
+        </foreach>
+		</if>
+		<if test="params.createStartTime != null and params.createStartTime !='' ">
+			and UNIX_TIMESTAMP(DATE_FORMAT(t.CREATE_TIME,'%Y-%m-%d')) &gt;=  #{params.createStartTime}
+		</if>
+		<if test="params.createEndTime != null and params.createEndTime !='' ">
+			and UNIX_TIMESTAMP(DATE_FORMAT(t.CREATE_TIME,'%Y-%m-%d')) &lt;=  #{params.createEndTime}
+		</if>
+		
+		<if test="params.status != null and params.status !='' ">
+			AND t.STATUS = #{params.status}
+		</if>
+		ORDER BY t.ID DESC
+	</select>
+	
+	
+	
+	<select id="queryPartnerRouterByPage" resultMap="partnerRouterMap">
+		SELECT
+		<include refid="partnerRouterColumns" />
+		FROM PARTNER_ROUTER
+		<!-- page -->
+		ORDER BY ID DESC
+	</select>
+	
+	<update id="updatePartnerRouter">
+		update PARTNER_ROUTER
+		set PROFILES = #{partnerRouter.profiles},
+		STATUS = #{partnerRouter.status},
+		partner_role = #{partnerRouter.partnerRole}
+		where id = #{partnerRouter.id}
+	</update>
+	
+	<select id="queryPartnerRouterBy" resultMap="partnerRouterMap">
+		SELECT
+		<include refid="partnerRouterColumns" />
+		FROM PARTNER_ROUTER
+		WHERE PARTNER_ROLE = #{partnerRole} AND PARTNER_CODE = #{partnerCode}
+	</select>
+	
+	<select id="queryCustRouterByCustomerNo" resultType="map">
+		select c.FULL_NAME,p.PARTNER_ROLE,p.PROFILES from PARTNER_ROUTER p,`ol-boss`.customer c where p.PARTNER_CODE = c.CUSTOMER_NO AND p.PARTNER_CODE = #{customerNo}
+	</select>
+
+</mapper> 

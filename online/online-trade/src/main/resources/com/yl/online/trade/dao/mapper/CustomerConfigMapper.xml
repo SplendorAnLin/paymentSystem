@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yl.online.trade.dao.mapper.CustomerConfigMapper">
+
+	<resultMap id="configMap" type="com.yl.online.model.model.CustomerConfig">
+		<id 	property="id" 					column="ID"></id>
+		<result property="code" 				column="CODE"></result>
+		<result property="version" 				column="VERSION"></result>
+		<result property="createTime" 			column="CREATE_TIME"></result>
+		<result property="startTime" 			column="START_TIME"></result>
+		<result property="endTime" 				column="END_TIME"></result>
+		<result property="productType" 			column="PRODUCT_TYPE"></result>
+		<result property="customerNo" 			column="CUSTOMER_NO"></result>
+		<result property="maxAmount" 			column="MAX_AMOUNT"></result>
+		<result property="minAmount" 			column="MIN_AMOUNT"></result>
+		<result property="dayMax" 				column="DAY_MAX"></result>
+	</resultMap>
+	
+	<sql id="configColumns">
+		ID,CODE,VERSION,CREATE_TIME,START_TIME,END_TIME,PRODUCT_TYPE,CUSTOMER_NO,MAX_AMOUNT,MIN_AMOUNT,DAY_MAX
+	</sql>
+	
+	<insert id="create" parameterType="com.yl.online.model.model.CustomerConfig"
+		useGeneratedKeys="true" keyProperty="id">
+		INSERT INTO CUSTOMER_CONFIG(
+			CODE,VERSION,CREATE_TIME,START_TIME,END_TIME,PRODUCT_TYPE,CUSTOMER_NO,MAX_AMOUNT,MIN_AMOUNT,DAY_MAX)
+		VALUES
+			(#{code},#{version},#{createTime},#{startTime},#{endTime},#{productType},#{customerNo},#{maxAmount},#{minAmount},#{dayMax})
+	</insert>
+	
+	<select id="findById" resultMap="configMap"
+		parameterType="Map">
+		SELECT
+		<include refid="configColumns" />
+		FROM CUSTOMER_CONFIG
+		WHERE ID = #{id}
+	</select>
+	
+	<select id="findByCustomerNo" resultMap="configMap"
+		parameterType="Map">
+		SELECT 
+		<include refid="configColumns" />
+		FROM CUSTOMER_CONFIG
+		WHERE CUSTOMER_NO = #{customerNo} 
+		<if test="payType != null and payType !='' ">
+			AND PRODUCT_TYPE = #{payType}
+		</if>
+		ORDER BY CREATE_TIME limit 0,1
+	</select>
+	
+	<select id="findAll" resultMap="configMap"
+		parameterType="Map">
+		SELECT 
+			c.ID,
+		    c.CODE,
+		    c.VERSION,
+		    c.CREATE_TIME,
+		    c.START_TIME,
+		    c.END_TIME,
+		    c.PRODUCT_TYPE,
+		    c.CUSTOMER_NO,
+		    c.MAX_AMOUNT,
+		    c.MIN_AMOUNT,
+		    c.DAY_MAX
+		FROM
+			CUSTOMER_CONFIG c
+		WHERE 1 = 1  
+		<if test="params.customerNo != null and params.customerNo !='' ">
+			AND CUSTOMER_NO = #{params.customerNo}
+		</if>
+		order by CREATE_TIME desc
+	</select>
+	
+	<update id="modifyConfig">
+		update CUSTOMER_CONFIG
+			set
+				CREATE_TIME = #{params.createTime},
+				START_TIME = #{params.startTime},
+				END_TIME = #{params.endTime},
+				PRODUCT_TYPE = #{params.productType},
+				CUSTOMER_NO = #{params.customerNo},
+				MAX_AMOUNT = #{params.maxAmount},
+				MIN_AMOUNT = #{params.minAmount},
+				DAY_MAX = #{params.dayMax}
+		where ID = #{params.id}
+	</update>
+	
+	<select id="queryProductTypeExistsByCustNo" parameterType="Map" resultType="int">
+	  SELECT COUNT(1) FROM CUSTOMER_CONFIG
+    WHERE CUSTOMER_NO = #{customerNo} and PRODUCT_TYPE = #{productType}
+	</select>
+	
+	<select id="queryAllByCustomerNo" resultMap="configMap">
+		SELECT 
+		<include refid="configColumns" />
+		FROM CUSTOMER_CONFIG
+		WHERE CUSTOMER_NO = #{customerNo}
+	</select>
+	
+</mapper>

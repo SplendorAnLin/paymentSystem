@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.yl.risk.core.dao.RiskOrderRecordDao">
+
+    <resultMap id="riskOrderRecord" type="com.yl.risk.core.entity.RiskOrderRecord">
+        <result     column="ID"                                 property="id"></result>
+        <result     column="CREATE_TIME"                        property="createTime"></result>
+        <result     column="ORDER_CODE"                         property="orderCode"></result>
+        <result     column="RISK_CASE_ID"                       property="riskCaseId"></result>
+        <result     column="RESPONSE_CODE"                      property="responseCode"></result>
+    </resultMap>
+
+    <!-- 账户数据库模型字段 -->
+    <sql id="commonColumn">
+        ID, CREATE_TIME, ORDER_CODE, RISK_CASE_ID, RESPONSE_CODE
+    </sql>
+
+    <insert id="create" parameterType="com.yl.risk.core.entity.RiskOrderRecord" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO
+        RISK_ORDER_RECORD(CREATE_TIME, ORDER_CODE, RISK_CASE_ID, RESPONSE_CODE)
+        VALUES
+        (#{createTime}, #{orderCode}, #{riskCaseId}, #{responseCode})
+    </insert>
+
+    <update id="update" parameterType="com.yl.risk.core.entity.RiskOrderRecord">
+        UPDATE
+        RISK_ORDER_RECORD
+        SET
+        ORDER_CODE = #{orderCode}, RISK_CASE_ID = #{riskCaseId}, RESPONSE_CODE = #{responseCode}
+        WHERE
+        ID = #{id}
+    </update>
+
+    <select id="findById" resultMap="riskOrderRecord" parameterType="java.lang.Integer">
+        SELECT <include refid="commonColumn"/>
+        FROM RISK_ORDER_RECORD
+        WHERE ID = #{id}
+    </select>
+
+    <select id="findByOrderCode" resultMap="riskOrderRecord" parameterType="java.lang.String">
+        SELECT <include refid="commonColumn"/>
+        FROM RISK_ORDER_RECORD
+        WHERE ORDER_CODE = #{orderCode}
+    </select>
+
+    <select id="findAllByParams" resultType="java.util.Map" parameterType="java.util.Map">
+        SELECT
+            r.ID                AS    ID,
+            r.CREATE_TIME       AS    CREATE_TIME,
+            r.ORDER_CODE        AS    ORDER_CODE,
+            r.RISK_CASE_ID      AS    RISK_CASE_ID,
+            r.RESPONSE_CODE     AS    RESPONSE_CODE
+        FROM RISK_ORDER_RECORD r
+        WHERE 1 = 1
+        <if test="params.orderCode != null and params.orderCode != '' ">
+            AND r.ORDER_CODE = #{params.orderCode}
+        </if>
+        <if test="params.riskCaseId != null and params.riskCaseId != '' ">
+            AND r.RISK_CASE_ID = #{params.riskCaseId}
+        </if>
+        <if test="params.responseCode != null and params.responseCode != '' ">
+            AND r.RESPONSE_CODE = #{params.responseCode}
+        </if>
+        <if test="params.timeStart != null and params.timeStart != '' ">
+            <if test="params.timeEnd != null and params.timeEnd != '' ">
+                AND r.CREATE_TIME BETWEEN #{params.timeStart} AND
+                #{params.timeEnd}
+            </if>
+            <if test="params.timeEnd == null or params.timeEnd == '' ">
+                AND r.CREATE_TIME &gt; #{params.timeStart}
+            </if>
+        </if>
+        <if test="params.timeEnd != null and params.timeEnd != '' ">
+            <if test="params.timeStart == null or params.timeStart == '' ">
+                AND r.CREATE_TIME &lt; #{params.timeEnd}
+            </if>
+        </if>
+        ORDER BY r.ID DESC
+    </select>
+</mapper>

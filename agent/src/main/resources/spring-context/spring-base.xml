@@ -1,0 +1,48 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" ":/spring-beans.dtd">
+
+<beans default-autowire="byName">
+     
+	<!-- 操作员登录 -->
+	<bean id="operatorLoginAction" class="com.yl.agent.action.OperatorLoginAction" singleton="false"/>
+	<bean id="operatorLoginService" class="com.yl.agent.service.impl.OperatorLoginServiceImpl">
+	</bean>	
+	<bean id="loginLogDao" class="com.yl.agent.dao.impl.LoginDaoImpl" />
+	
+	<!-- 缓存管理 -->
+	<bean id="cacheManagerService" class="com.yl.agent.cache.CacheManagerService" init-method="initCache" singleton="true"/>
+	
+	<!-- 数据字典 -->	
+	<bean id="dictionaryTypeService" class="com.yl.agent.service.impl.DictionaryTypeServiceImpl"></bean>
+	<bean id="dictionaryService" class="com.yl.agent.service.impl.DictionaryServiceImpl"></bean>
+	<bean id="dictionaryDao" class="com.yl.agent.dao.impl.DictionaryDaoImpl"/>
+	<bean id="dictionaryTypeDao" class="com.yl.agent.dao.impl.DictionaryTypeDaoImpl" />		
+	<bean id="dictUtil" class="com.yl.agent.taglib.dict.DictUtil"/>
+	<bean id="dictionaryAction" class="com.yl.agent.action.DictionaryAction" />
+		
+	<!-- 操作员管理 -->
+	<bean id="operatorAction" class="com.yl.agent.action.OperatorAction" singleton="false"/>	
+	<bean id="operatorService" class="com.yl.agent.service.impl.OperatorServiceImpl" />	
+	<bean id="operatorDao" class="com.yl.agent.dao.impl.OperatorDaoImpl" />	
+	
+	<!-- 角色管理 -->	
+	<bean id="roleService" class="com.yl.agent.service.impl.RoleServiceImpl" />
+	<bean id="roleDao" class="com.yl.agent.dao.impl.RoleDaoImpl"/>
+	
+	<!-- 组织机构管理 -->	
+	<bean id="organizationService" class="com.yl.agent.service.impl.OrganizationServiceImpl"/>
+	<bean id="organizationDao" class="com.yl.agent.dao.impl.OrganizationDaoImpl"/>
+	
+	<!-- 功能 -->
+	<bean id="functionService" class="com.yl.agent.service.impl.FunctionServiceImpl"/>
+	<bean id="functionDao" class="com.yl.agent.dao.impl.FunctionDaoImpl"/>
+	
+	<!-- 菜单 -->
+	<bean id="menuService" class="com.yl.agent.service.impl.MenuServiceImpl"/>
+	<bean id="menuDao" class="com.yl.agent.dao.impl.MenuDaoImpl"/>
+	
+	<!-- 意见反馈 -->
+	<bean id="adviceFeedBackAction" class="com.yl.agent.action.AdviceFeedBackAction" singleton="false"></bean>
+	<bean id="adviceFeedBackService" class="com.yl.agent.service.impl.AdviceFeedBackServiceImpl"></bean>
+	<bean id="adviceFeedBackDao" class="com.yl.agent.dao.impl.AdviceFeedBackDaoImpl"></bean>
+</beans>

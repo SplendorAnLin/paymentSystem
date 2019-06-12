@@ -1,0 +1,57 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" ":/spring-beans.dtd">
+
+<beans default-autowire="byName">
+
+	<!-- 操作员登录 -->
+	<bean id="operatorLoginAction" class="com.yl.boss.action.OperatorLoginAction" singleton="false"/>
+	<bean id="operatorLoginService" class="com.yl.boss.service.impl.OperatorLoginServiceImpl">
+	</bean>	
+	<bean id="loginLogDao" class="com.yl.boss.dao.impl.LoginDaoImpl" />
+	
+	<!-- 缓存管理 
+	<bean id="cacheManagerService" class="com.pay.boss.cache.CacheManagerService" init-method="initCache" singleton="true"/>
+	-->
+	
+	<!-- 数据字典 -->	
+	<bean id="dictionaryTypeService" class="com.yl.boss.service.impl.DictionaryTypeServiceImpl"></bean>
+	<bean id="dictionaryService" class="com.yl.boss.service.impl.DictionaryServiceImpl"></bean>
+	<bean id="dictionaryDao" class="com.yl.boss.dao.impl.DictionaryDaoImpl"/>
+	<bean id="dictionaryTypeDao" class="com.yl.boss.dao.impl.DictionaryTypeDaoImpl" />		
+	<bean id="dictUtil" class="com.yl.boss.taglib.dict.DictUtil"/>
+		
+	<!-- 操作员管理 -->
+	<bean id="operatorAction" class="com.yl.boss.action.OperatorAction" singleton="false"/>	
+	<bean id="operatorService" class="com.yl.boss.service.impl.OperatorServiceImpl" />	
+	<bean id="operatorDao" class="com.yl.boss.dao.impl.OperatorDaoImpl" />	
+	
+	<!-- 角色管理 -->	
+	<bean id="roleService" class="com.yl.boss.service.impl.RoleServiceImpl" />
+	<bean id="roleDao" class="com.yl.boss.dao.impl.RoleDaoImpl"/>
+	
+	<!-- 组织机构管理 -->	
+	<bean id="organizationService" class="com.yl.boss.service.impl.OrganizationServiceImpl"/>
+	<bean id="organizationDao" class="com.yl.boss.dao.impl.OrganizationDaoImpl"/>
+	
+	<!-- 功能 -->
+	<bean id="functionService" class="com.yl.boss.service.impl.FunctionServiceImpl"/>
+	<bean id="functionDao" class="com.yl.boss.dao.impl.FunctionDaoImpl"/>
+	
+	<!-- 菜单 -->
+	<bean id="menuService" class="com.yl.boss.service.impl.MenuServiceImpl"/>
+	<bean id="menuDao" class="com.yl.boss.dao.impl.MenuDaoImpl"/>
+	
+	<!-- 意见反馈 -->
+	<bean id="adviceFeedBackAction" class="com.yl.boss.action.AdviceFeedBackAction" singleton="false"></bean>
+	<bean id="adviceFeedBackService" class="com.yl.boss.service.impl.AdviceFeedBackServiceImpl"></bean>
+	<bean id="adviceFeedBackDao" class="com.yl.boss.dao.impl.AdviceFeedBackDaoImpl"></bean>
+	
+	<!-- Mcc管理 -->
+	<bean id="mccAction" class="com.yl.boss.action.MccAction" singleton="false" />
+	<bean id="mccService" class="com.yl.boss.service.impl.MccServiceImpl" />
+	<bean id="mccDao" class="com.yl.boss.dao.impl.MccDaoImpl" />
+	<!-- 报备信息 -->
+	<bean id="reportCustomerAction" class="com.yl.boss.action.ReportCustomerAction" singleton="false" />
+	<bean id="reportCustomerService" class="com.yl.boss.service.impl.ReportCustomerServiceImpl" />
+	<bean id="reportCustomerDao" class="com.yl.boss.dao.impl.ReportCustomerDaoImpl" />
+</beans>

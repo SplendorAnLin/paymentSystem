@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>  
+  
+<!DOCTYPE struts PUBLIC   
+    "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"  
+    "http://struts.apache.org/dtds/struts-2.0.dtd">   
+  
+<struts>
+	<package name="base" extends="default"> 
+               
+        <!-- 操作员登录 -->
+        <action name="operatorLogin" class="operatorLoginAction" method="login">
+			<result name="success">/jsp/index.jsp</result>
+			<result name="login">/jsp/login.jsp</result>
+			<result name="input">/jsp/login.jsp</result>
+			<interceptor-ref name="defaultStack"></interceptor-ref>
+		</action>
+			
+        <action name="operatorLogout" class="operatorLoginAction" method="logout">
+   	 		<result name="success">/jsp/login.jsp</result>
+   	 		<interceptor-ref name="defaultStack"></interceptor-ref>
+   	 	</action>  
+   	 	
+   	 	<action name="operatorPasswordUpdate" class="operatorAction" method="passwordUpdate">
+			<result name="success">/jsp/operator/operatorPasswordUpdate.jsp?success=true</result>
+			<result name="input">/jsp/operator/operatorPasswordUpdate.jsp?success=false</result>	
+		</action>
+   	 	
+   	 	
+        <!-- 验证码生成 -->
+        <action name="generateRandomCode" class="com.yl.boss.action.RandomCodeAction">
+        	<interceptor-ref name="defaultStack"></interceptor-ref>
+        </action> 
+		
+    </package> 
+</struts>

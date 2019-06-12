@@ -1,0 +1,119 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" ":/spring-beans.dtd">
+
+<beans default-autowire="byName">
+	<!--日 终定时入账 -->
+	<bean id="orderDailyManage" class="com.yl.pay.pos.task.OrderDailyManage"/>
+	<bean id="orderDailyManageJob" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject" ref="orderDailyManage"/>
+		<property name="targetMethod" value="creditHandle"/>
+		<property name="concurrent" value="false"/>
+	</bean>
+	<bean id="orderDailyManageJobTrigger" class="org.springframework.scheduling.quartz.CronTriggerBean">
+		<property name="jobDetail" ref="orderDailyManageJob"/>		
+		<property name="cronExpression" value="00 30 00 * * ? *"/>
+	</bean>
+	
+	<!-- 代付补单 -->	
+	<bean id="proxyPayRepairJob" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">            
+        <property name="targetObject">
+            <ref bean="proxyPayRepairService"/>
+        </property>
+        <property name="targetMethod">
+            <value>execute</value>
+        </property>
+    </bean>
+    <bean id="proxyPayRepairTrigger" class="org.springframework.scheduling.quartz.CronTriggerBean">
+        <property name="jobDetail">
+            <ref bean="proxyPayRepairJob"/>
+        </property>
+        <property name="cronExpression">
+            <value>0 0/10 * * * ?</value>
+        </property>
+    </bean>
+	
+	<!-- 终端资源回收器 -->	
+	<bean id="bankTerminalRecoverJob" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">            
+        <property name="targetObject">
+            <ref bean="bankTerminalRecoverService"/>
+        </property>
+        <property name="targetMethod">
+            <value>execute</value>
+        </property>
+    </bean>
+    <bean id="bankTerminalRecoverTrigger" class="org.springframework.scheduling.quartz.CronTriggerBean">
+        <property name="jobDetail">
+            <ref bean="bankTerminalRecoverJob"/>
+        </property>
+        <property name="cronExpression">
+            <value>0 0/1 * * * ?</value>
+        </property>
+    </bean>
+    	<!-- 银行冲正定时处理 -->	
+	<bean id="bankReversalTaskManageJob" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">            
+        <property name="targetObject">
+            <ref bean="bankReversalTaskManage"/>
+        </property>
+        <property name="targetMethod">
+            <value>execute</value>
+        </property>
+    </bean>
+    <bean id="bankReversalTaskManageTrigger" class="org.springframework.scheduling.quartz.CronTriggerBean">
+        <property name="jobDetail">
+            <ref bean="bankReversalTaskManageJob"/>
+        </property>
+        <property name="cronExpression">
+            <value>0 0/30 * * * ?</value>
+        </property>
+    </bean>
+    <!-- 订单同步定时处理 -->	
+    <bean id="orderSycnManage" class="com.yl.pay.pos.task.OrderSycnManage"/>
+	<bean id="orderSycnManageJob" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">            
+        <property name="targetObject">
+            <ref bean="orderSycnManage"/>
+        </property>
+        <property name="targetMethod">
+            <value>sycnHandle</value>
+        </property>
+    </bean>
+    <bean id="orderSycnManageTrigger" class="org.springframework.scheduling.quartz.CronTriggerBean">
+        <property name="jobDetail">
+            <ref bean="orderSycnManageJob"/>
+        </property>
+        <property name="cronExpression">
+           <value>0 0/2 * * * ?</value>
+        </property>
+    </bean>
+    <!-- 银行终端批量签到-->	
+    <bean id="bankTerminalBatchSignInService" class="com.yl.pay.pos.task.BankTerminalBatchSignInService"/>
+	<bean id="bankTerminalBatchSignInServiceJob" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">            
+        <property name="targetObject">
+            <ref bean="bankTerminalBatchSignInService"/>
+        </property>
+        <property name="targetMethod">
+            <value>execute</value>
+        </property>
+    </bean>
+    <bean id="bankTerminalBatchSignInServiceTrigger" class="org.springframework.scheduling.quartz.CronTriggerBean">
+        <property name="jobDetail">
+            <ref bean="bankTerminalBatchSignInServiceJob"/>
+        </property>
+        <property name="cronExpression">
+           <value>0 30 0 * * ?</value>
+        </property>
+    </bean>
+	<!-- 总控制器 -->
+	<bean id="riskQuertz" lazy-init="false" autowire="no" class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
+		<property name="triggers">
+			<list>
+		  	 	<!-- <ref bean="orderDailyManageJobTrigger" /> --> 
+		  	 	<ref bean="bankTerminalRecoverTrigger"/>  
+		  	 	<ref bean="bankReversalTaskManageTrigger"/> 
+		  	 	<ref bean="bankTerminalBatchSignInServiceTrigger"/>
+		  	 	<!--<ref bean="proxyPayRepairTrigger"/> -->
+		  	 	<!-- <ref bean="orderSycnManageTrigger"/> -->
+			</list>
+		</property>
+	</bean>
+
+</beans>

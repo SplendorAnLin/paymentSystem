@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.yl.rate.core.dao.RateRuleHistoryMapper">
+    <!--auto generated Code-->
+    <resultMap id="BaseResultMap" type="com.yl.rate.core.entity.RateRuleHistory">
+        <result column="rate_code" property="rateCode" jdbcType="VARCHAR"/>
+        <result column="id" property="id" jdbcType="BIGINT"/>
+        <result column="owner_rate_id" property="ownerRateId" jdbcType="BIGINT"/>
+        <result column="code" property="code" jdbcType="VARCHAR"/>
+        <result column="create_time" property="createTime"/>
+        <result column="oper" property="oper" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <!--auto generated Code-->
+    <sql id="Base_Column_List">
+        rate_code,
+        id,
+        code,
+        create_time,
+        oper,
+        owner_rate_id
+    </sql>
+
+    <insert id="rateRuleAdd" parameterType="com.yl.rate.core.entity.RateRuleHistory">
+        INSERT INTO rate_rule_history (code, create_time, rate_code, oper, owner_rate_id)
+        VALUES (#{code}, #{createTime}, #{rateCode}, #{oper}, #{ownerRateId})
+    </insert>
+
+    <select id="queryRateRule" resultMap="BaseResultMap">
+        SELECT
+        <include refid="Base_Column_List" />
+        FROM rate_rule_history
+        WHERE rate_code = #{rateCode}
+        AND owner_rate_id = #{ownerRateId}
+    </select>
+
+    <select id="queryRateRuleByCodeAndDate" resultMap="BaseResultMap">
+        SELECT
+        <include refid="Base_Column_List" />
+        FROM rate_rule_history
+        WHERE rate_code = #{rateCode}
+        AND owner_rate_id = #{ownerRateId}
+    </select>
+</mapper>

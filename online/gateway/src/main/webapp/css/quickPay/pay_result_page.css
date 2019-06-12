@@ -1,0 +1,48 @@
+
+section{
+	font-size: 0.26rem;
+	margin-top: 0.1rem;
+	text-align: center;
+}
+.success{
+	margin-top: 0.3rem;
+}
+
+@media only screen and (min-width: 1024px)  {
+	.state{
+	width: 100%;
+	text-align: center;
+	height: 0.5rem;
+	line-height: 0.5rem;
+}
+.successok{
+	font-size: 0.3rem;
+	margin-top: 0.3rem;
+}
+.font_18{font-size: 0.18rem;}
+}
+
+@media only screen and (max-width: 1024px)  {
+	.state{
+	width: 100%;
+	text-align: center;
+	height: 1rem;
+	line-height: 1rem;
+}
+
+}
+.pay_count img{
+	width:0.6rem;
+}
+footer{
+	font-size: 0.24rem;
+	position: relative;
+	top: 2rem;
+	width: 100%;
+}
+.com_i{
+	font-style: normal;
+}
+.orange{
+	color: orange !important;
+}

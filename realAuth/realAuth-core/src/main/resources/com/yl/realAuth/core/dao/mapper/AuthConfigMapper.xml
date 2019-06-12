@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yl.realAuth.core.dao.mapper.AuthConfigMapper">
+	<resultMap id="BaseResultMap" type="com.yl.realAuth.model.AuthConfigInfo">
+		<id column="ID" property="id" />
+		<result column="CODE" property="code" />
+		<result column="VERSION" property="version" />
+		<result column="CREATE_TIME" property="createTime" />
+		<result column="CUSTOMER_NO" property="customerNo" />
+		<result column="CUSTOMER_NAME" property="customerName" />
+		<result column="BUSI_TYPE" property="busiType" />
+		<result column="STATUS" property="status" />
+		<result column="REMARK" property="remark" />
+		<result column="LAST_UPDATE_TIME" property="lastUpdateTime" />
+		<result column="IS_ACTUAL" property="isActual" />
+		<result column="ROUTING_TEMPLATE_CODE" property="routingTemplateCode" />
+	</resultMap>
+	
+	<resultMap id="authConfigBeanResultMap" type="com.yl.realAuth.hessian.bean.AuthConfigBean">
+		<id column="ID" property="id" />
+		<result column="CODE" property="code" />
+		<result column="VERSION" property="version" />
+		<result column="CREATE_TIME" property="createTime" />
+		<result column="CUSTOMER_NO" property="customerNo" />
+		<result column="CUSTOMER_NAME" property="customerName" />
+		<result column="BUSI_TYPE" property="busiType" />
+		<result column="STATUS" property="status" />
+		<result column="REMARK" property="remark" />
+		<result column="LAST_UPDATE_TIME" property="lastUpdateTime" />
+		<result column="IS_ACTUAL" property="isActual" />
+		<result column="ROUTING_TEMPLATE_CODE" property="routingTemplateCode" />
+		<result column="NAME" property="name" />
+	</resultMap>
+	<sql id="base_Column_List">
+		ID,CODE,VERSION,CREATE_TIME,CUSTOMER_NO,CUSTOMER_NAME,BUSI_TYPE,STATUS,REMARK,LAST_UPDATE_TIME,
+		IS_ACTUAL,ROUTING_TEMPLATE_CODE
+	</sql>
+
+	<select id="findAllAuthConfigBean" parameterType="Map"
+		resultMap="authConfigBeanResultMap">
+		SELECT a.ID,a.CODE,a.VERSION,a.CREATE_TIME,a.CUSTOMER_NO,a.CUSTOMER_NAME,a.BUSI_TYPE,a.STATUS,a.REMARK,a.LAST_UPDATE_TIME,
+		a.IS_ACTUAL,a.ROUTING_TEMPLATE_CODE,t.NAME
+		FROM auth_config_info a LEFT JOIN routing_template t on a.ROUTING_TEMPLATE_CODE=t.CODE
+		WHERE  1=1
+		<if test="params.customerNo !=null and params.customerNo != '' ">
+			and a.CUSTOMER_NO=#{params.customerNo}
+		</if>
+		<if test="params.customerName !=null and params.customerName != '' ">
+			and a.CUSTOMER_NAME=#{params.customerName}
+		</if>
+		<if test="params.busiType !=null and params.busiType != '' ">
+			and a.BUSI_TYPE=#{params.busiType}
+		</if>
+		<if test="params.status != null and params.status != '' ">
+			and a.STATUS=#{params.status}
+		</if>
+		<if test="params.startLastUpdateTime != null and params.startLastUpdateTime != '' ">
+			and a.LAST_UPDATE_TIME&gt;=#{params.startLastUpdateTime}
+		</if>
+		<if test="params.endLastUpdateTime != null and params.endLastUpdateTime != ''">
+			and a.LAST_UPDATE_TIME&lt;=#{params.endLastUpdateTime}
+		</if>
+		<if test="params.isActual != null and params.isActual != '' ">
+			and a.IS_ACTUAL=#{params.isActual}
+		</if>
+		<if test="params.startCreateTime != null and params.startCreateTime != '' ">
+			and a.CREATE_TIME&gt;=#{params.startCreateTime}
+		</if>
+		<if test="params.endCreateTime != null and params.endCreateTime != '' ">
+			and a.CREATE_TIME&lt;=#{params.endCreateTime}
+		</if>
+		ORDER BY a.ID DESC
+	</select>
+
+	<insert id="insertAuthConfig" parameterType="com.yl.realAuth.model.AuthConfigInfo"
+		useGeneratedKeys="true" keyProperty="id">
+		INSERT INTO AUTH_CONFIG_INFO (
+		CODE,VERSION,CREATE_TIME,CUSTOMER_NO,CUSTOMER_NAME,BUSI_TYPE,STATUS,REMARK,LAST_UPDATE_TIME,
+		IS_ACTUAL,ROUTING_TEMPLATE_CODE
+		) VALUES (
+		#{code},#{version},#{createTime},#{customerNo},#{customerName},#{busiType},#{status},#{remark},
+		#{lastUpdateTime},#{isActual},#{routingTemplateCode}
+		)
+	</insert>
+
+	<update id="updateAuthConfig" parameterType="com.yl.realAuth.model.BindCardInfo">
+		UPDATE
+		AUTH_CONFIG_INFO
+		set CUSTOMER_NO = #{customerNo},
+		CUSTOMER_NAME =
+		#{customerName},
+		BUSI_TYPE = #{busiType},
+		STATUS = #{status},
+		REMARK =
+		#{remark},
+		LAST_UPDATE_TIME = #{lastUpdateTime},
+		ROUTING_TEMPLATE_CODE =
+		#{routingTemplateCode},
+		IS_ACTUAL =
+		#{isActual},
+		BUSI_TYPE =
+		#{busiType},
+		VERSION =
+		#{version}
+		WHERE CODE = #{code}
+	</update>
+
+	<select id="findAuthConfigByCustomerNoAndType" parameterType="Map"
+		resultMap="BaseResultMap">
+		SELECT
+		<include refid="base_Column_List" />
+		FROM AUTH_CONFIG_INFO
+		WHERE CUSTOMER_NO = #{partnerCode}
+		AND BUSI_TYPE =
+		#{busiType}
+	</select>
+	<select id="findAuthConfigByCustomerNo" parameterType="String"
+		resultMap="BaseResultMap">
+		SELECT
+		<include refid="base_Column_List" />
+		FROM AUTH_CONFIG_INFO
+		WHERE CUSTOMER_NO = #{partnerCode}
+	</select>
+	<select id="findAlldynamicAuthConfigBean" parameterType="Map"
+		resultMap="BaseResultMap">
+		SELECT
+		<include refid="base_Column_List" />
+		FROM AUTH_CONFIG_INFO
+		WHERE  1=1
+		<if test="params.customerNo !=null and params.customerNo != '' ">
+			and CUSTOMER_NO=#{params.customerNo}
+		</if>
+		<if test="params.customerName !=null and params.customerName != '' ">
+			and CUSTOMER_NAME=#{params.customerName}
+		</if>
+		<if test="params.busiType !=null and params.busiType != '' ">
+			and BUSI_TYPE=#{params.busiType}
+		</if>
+		<if test="params.status != null and params.status != '' ">
+			and STATUS=#{params.status}
+		</if>
+		<if test="params.startLastUpdateTime != null and params.startLastUpdateTime != '' ">
+			and LAST_UPDATE_TIME&gt;=#{params.startLastUpdateTime}
+		</if>
+		<if test="params.endLastUpdateTime != null and params.endLastUpdateTime != ''">
+			and LAST_UPDATE_TIME&lt;=#{params.endLastUpdateTime}
+		</if>
+		<if test="params.isActual != null and params.isActual != '' ">
+			and IS_ACTUAL=#{params.isActual}
+		</if>
+		<if test="params.startCreateTime != null and params.startCreateTime != '' ">
+			and CREATE_TIME&gt;=#{params.startCreateTime}
+		</if>
+		<if test="params.endCreateTime != null and params.endCreateTime != '' ">
+			and CREATE_TIME&lt;=#{params.endCreateTime}
+		</if>
+		ORDER BY ID DESC
+	</select>
+	
+	<select id="queryAuthConfigBoolByCode" resultType="int">
+		SELECT COUNT(id)
+		FROM AUTH_CONFIG_INFO
+		WHERE CODE = #{code}
+	</select>
+	
+	<select id="queryAuthConfigListByCustomerNo" parameterType="String"
+		resultMap="BaseResultMap">
+		SELECT
+		<include refid="base_Column_List" />
+		FROM AUTH_CONFIG_INFO
+		WHERE CUSTOMER_NO = #{partnerCode}
+	</select>
+</mapper>

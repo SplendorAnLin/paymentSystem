@@ -1,0 +1,136 @@
+.SelectBox {
+  position: relative;
+  display: inline-block;
+  min-width: 100px;
+  height: 2.5em;
+  line-height: 2.5em;
+  padding: 0;
+  text-align: left;
+  vertical-align: middle;
+  cursor: pointer;
+  border: 1px solid #DDD;
+  border-top: 1px solid #EEE;
+  border-bottom: 1px solid #B7B7B7;
+  outline: 0 none;
+  background: #fafafa;
+  transition: 0.2s;
+  box-sizing: border-box; }
+
+.SelectBox:focus {
+  background-color: #eee; }
+
+.SelectBox > .inner {
+  padding: 0 0 0 0.5em;
+  margin-right: 1.3em;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis; }
+
+.SelectBox > .icon {
+  position: absolute;
+  right: 0.2em;
+  top: 50%;
+  margin-top: -2px;
+  border-top: 0.3em solid #A7A7A7;
+  border-left: 0.3em dashed transparent;
+  border-right: 0.3em dashed transparent;
+  border-bottom: 0 none;
+  display: block;
+  width: 0;
+  height: 0;
+  overflow: hidden;
+  line-height: 0; }
+
+.SelectBox:hover {
+  background-color: #eee; }
+
+.SelectBox.open > .icon {
+  margin-top: -3px;
+  border-top: 0 none;
+  border-bottom: 0.3em solid #A7A7A7; }
+
+.SelectBox[disabled],
+.SelectBox[readonly] {
+  color: #ccc;
+  border: 1px solid #B7B7B7;
+  cursor: not-allowed;
+  box-shadow: none;
+  opacity: .7;
+  user-select: none; }
+
+.SelectBox-dropdown {
+  opacity: 0.3;
+  transform: translateY(-20px);
+  transition: 0.3s;
+  z-index: 50;
+  box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.3);
+  box-sizing: border-box;
+  background: #fff; }
+
+.SelectBox-dropdown.open {
+  opacity: 1;
+  transform: translateY(0px); }
+
+.SelectBox-dropdown.close {
+  opacity: 0;
+  transform: translateY(-20px); }
+
+.SelectBox-options {
+  position: relative;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  /*overflow-y: auto;
+  overflow-x: hidden;
+  overflow-y: overlay;*/
+  overflow: hidden;
+  border: 1px solid #ccc;
+  background: #FFF;
+  border: 1px solid #DCDCDC;
+  border-radius: 0 0 5px 5px;
+  /*min-height: 33px;*/
+  max-height: initial; }
+
+.SelectBox-options > .optgroup,
+.SelectBox-options > .option {
+  margin: 0;
+  padding: 0.5em 0.7em;
+  cursor: pointer;
+  color: #333;
+  background: transparent;
+  outline: 0 none;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  transition: 0.1s; }
+
+.SelectBox-options > .option.inGroup {
+  padding: 0.5em 0.7em 0.5em 1em; }
+
+.SelectBox-options > .option:hover,
+.SelectBox-options > .option.active {
+  background: #ccc; }
+
+.SelectBox-options > .optgroup {
+  cursor: default;
+  color: #999;
+  font-weight: bold;
+  font-style: italic;
+  border-bottom: 1px solid #e5e5e5; }
+
+.SelectBox-options > .option[selected] {
+  background: #394D7E;
+  color: #fff;
+  border-bottom: 1px solid #5c71a2; }
+
+.SelectBox-options > .option[selected]:hover {
+  background: #586da0; }
+
+.SelectBox-options > .option[disabled] {
+  color: #ccc;
+  cursor: not-allowed;
+  box-shadow: none;
+  opacity: .7;
+  user-select: none; }
+
+/*# sourceMappingURL=../maps/component/SelectBox.css.map */

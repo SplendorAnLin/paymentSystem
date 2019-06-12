@@ -1,0 +1,236 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.yl.account.core.dao.mapper.AccountBaseMapper">
+
+	<resultMap id="Account" type="com.yl.account.model.Account">
+		<result column="CODE" 						property="code" />
+		<result column="VERSION" 	 				property="version" />
+		<result column="CREATE_TIME" 				property="createTime" />
+		<result column="ACC_TYPE" 					property="type" />
+		<result column="USER_NO" 					property="userNo" />
+		<result column="USER_ROLE" 					property="userRole" />
+		<result column="CURR_NO" 					property="currency" />
+		<result column="BALANCE" 					property="balance" />
+		<result column="TRANSIT_BAL" 				property="transitBalance" />
+		<result column="FRZ_BAL" 					property="freezeBalance" />
+		<result column="STATUS" 					property="status" />
+		<result column="OPEN_DATE" 					property="openDate" />
+		<result column="REMARK" 					property="remark" />
+		<result column="ABLE_DATE" 					property="ableDate" />
+		<result column="CYCLE" 						property="cycle" />
+		
+	</resultMap>
+
+	<!-- 账户数据库模型字段 -->
+	<sql id="commonColumn">
+		CODE, VERSION, CREATE_TIME, ACC_TYPE, USER_NO, USER_ROLE, CURR_NO, BALANCE, TRANSIT_BAL, FRZ_BAL, STATUS, OPEN_DATE, REMARK, ABLE_DATE, CYCLE
+	</sql>
+
+	<!-- 持久化账户 -->
+	<insert id="insert" parameterType="com.yl.account.model.Account">
+		INSERT INTO
+			T_ACC (<include refid="commonColumn"/>)
+		VALUES
+			(#{code}, #{version}, #{createTime}, #{type}, #{userNo}, #{userRole}, #{currency}, #{balance}, #{transitBalance}, #{freezeBalance}, #{status}, #{openDate}, #{remark},
+			#{ableDate}, #{cycle})
+	</insert>
+
+	<!-- 根据账户、类型获取账户信息 -->
+	<select id="findAccountByCode" resultMap="Account">
+		SELECT <include refid="commonColumn" /> FROM T_ACC WHERE CODE = #{accountNo} 
+	</select>
+
+	<!-- 根据账户、类型获取账户信息 -->
+	<select id="findAccountBy" resultMap="Account">
+		SELECT <include refid="commonColumn" /> FROM T_ACC WHERE USER_NO = #{userNo} AND USER_ROLE = #{userRole} AND ACC_TYPE = #{accountType} 
+	</select>
+
+	<!-- 更新账户信息 -->
+	<update id="modifyAccountInfo">
+		UPDATE
+			T_ACC acc
+		SET
+			version = #{newVersion}, STATUS = #{account.status}, CYCLE = #{account.cycle}
+		where
+			CODE = #{account.code} 
+		and version = #{account.version}
+	</update>
+
+	<!-- 账户冻结金额增加 -->
+	<update id="addFreezeBalance">
+		UPDATE
+			T_ACC acc
+		SET
+			version = #{newVersion}, FRZ_BAL = #{account.freezeBalance}
+		where
+			CODE = #{account.code} <!--and version = #{account.version}-->
+	</update>
+
+	<!-- 账户可用金额增加 -->
+	<update id="addValueableBalance">
+		UPDATE
+			T_ACC acc
+		SET
+			version = #{newVersion}, BALANCE = #{account.balance}
+		where
+			CODE = #{account.code} <!--and version = #{account.version}-->
+	</update>
+
+	<!-- 账户可用金额、在途金额增加 -->
+	<update id="addValueableAndTransitBalance">
+		UPDATE
+			T_ACC acc
+		SET
+			version = #{newVersion}, BALANCE = #{account.balance}, TRANSIT_BAL = #{account.transitBalance}
+		where
+			CODE = #{account.code} <!--and version = #{account.version}-->
+	</update>
+
+	<!-- 账户在途金额减少 -->
+	<update id="subtractTransit">
+		UPDATE
+			T_ACC acc
+		SET
+			version = #{newVersion}, TRANSIT_BAL = #{account.transitBalance}
+		where
+			CODE = #{account.code} <!--and version = #{account.version}-->
+	</update>
+
+	<!-- 账户余额、冻结扣除请款金额 -->
+	<update id="subtractValueableAndFreezeBalance">
+		UPDATE
+			T_ACC acc
+		SET
+			version = #{newVersion}, BALANCE = #{account.balance}, FRZ_BAL = #{account.freezeBalance}
+		where
+			CODE = #{account.code}<!--and version = #{account.version}-->
+	</update>
+
+	<!-- 账户扣除可用、在途金额 -->
+	<update id="subtractValueableAndTransitBalance">
+		UPDATE
+			T_ACC acc
+		SET
+			version = #{newVersion}, BALANCE = #{account.balance}, TRANSIT_BAL = #{account.transitBalance}
+		where
+			CODE = #{account.code} <!--and version = #{account.version}-->
+	</update>
+	
+	<!-- 按条件汇总账户余额-->
+	<select id="findAccountBalanceBySum" resultType="java.util.Map">
+		SELECT SUM(acc.BALANCE) AS BALANCE
+		FROM T_ACC acc
+		WHERE acc.USER_NO NOT IN
+			('8616112401', '8611265943', '8612230202', '8612220367', '8612230323', '8612250340', '8612231951')
+	</select>
+	
+	<!-- 按账户类型总余额-->
+	<select id="findcountAccBalance" resultType="java.util.Map">
+		select sum(BALANCE) ACCSUM,USER_ROLE From t_acc 
+		GROUP BY USER_ROLE
+	</select>
+	
+	<!-- 用户号、角色、账户类型、币种获取账户信息 -->
+	<select id="findAllAccountByPage" resultMap="Account">
+		SELECT <include refid="commonColumn" /> FROM T_ACC acc
+		<where> 1 = 1
+			<if test="queryParams != null">
+				<if test="queryParams.accountNo != '' and queryParams.accountNo != null">
+					and acc.CODE = #{queryParams.accountNo}
+				</if>
+				<if test="queryParams.accountType != '' and queryParams.accountType != null">
+					and acc.ACC_TYPE = #{queryParams.accountType}
+				</if>
+				<if test="queryParams.userNo != '' and queryParams.userNo != null">
+					and acc.USER_NO = #{queryParams.userNo}
+				</if>
+				<if test="queryParams.userRole != '' and queryParams.userRole != null">
+					and acc.USER_ROLE = #{queryParams.userRole}
+				</if>
+				<if test="queryParams.symbol != '' and queryParams.symbol != null">
+					and acc.FUND_SYMBOL = #{queryParams.symbol}
+				</if>
+				<if test="queryParams.status != '' and queryParams.status != null">
+					and acc.STATUS = #{queryParams.status}
+				</if>
+				<if test="queryParams.startBalance != null and queryParams.endBanlance != null">
+					and acc.BALANCE &gt;= #{queryParams.startBalance} and acc.BALANCE &lt;= #{queryParams.endBanlance}
+				</if>
+				<if test="queryParams.startBalance != null and queryParams.endBanlance == null">
+					and acc.BALANCE &gt;= #{queryParams.startBalance}
+				</if>
+				<if test="queryParams.startBalance == null and queryParams.endBanlance != null">
+					and acc.BALANCE &lt;= #{queryParams.endBanlance}
+				</if>
+				<if test="queryParams.startTransitBalance != null and queryParams.endTransitBalance != null">
+					and acc.TRANSIT_BAL &gt;= #{queryParams.startTransitBalance} and acc.BALANCE &lt;= #{queryParams.endTransitBalance}
+				</if>
+				<if test="queryParams.startTransitBalance != null and queryParams.endTransitBalance == null">
+					and acc.TRANSIT_BAL &gt;= #{queryParams.startTransitBalance}
+				</if>
+				<if test="queryParams.startTransitBalance == null and queryParams.endTransitBalance != null">
+					and acc.TRANSIT_BAL &lt;= #{queryParams.endTransitBalance}
+				</if>
+				<if test="queryParams.openStartDate != null and queryParams.openEndDate == null">
+					and acc.CREATE_TIME &gt;= #{queryParams.openStartDate}
+				</if>
+				<if test="queryParams.openStartDate == null and queryParams.openEndDate != null">
+					and acc.CREATE_TIME &lt;= #{queryParams.openEndDate}
+				</if>
+				<if test="queryParams.openStartDate != null and queryParams.openEndDate != null">
+					and acc.CREATE_TIME BETWEEN #{queryParams.openStartDate} AND #{queryParams.openEndDate}
+				</if>
+			</if>
+		</where>
+		ORDER BY acc.CREATE_TIME DESC
+	</select>
+	
+	<!-- 根据账户、类型获取账户信息 -->
+	<select id="_findAccountBy" resultMap="Account">
+		SELECT <include refid="commonColumn" /> FROM T_ACC acc
+		<where> 1 = 1
+			<if test="queryParams != null">
+				<if test="queryParams.accountNo != '' and queryParams.accountNo != null">
+					and acc.CODE = #{queryParams.accountNo}
+				</if>
+				<if test="queryParams.userNo != '' and queryParams.userNo != null">
+					and acc.USER_NO = #{queryParams.userNo}
+				</if>
+				<if test="queryParams.userRole != '' and queryParams.userRole != null">
+					and acc.USER_ROLE = #{queryParams.userRole}
+				</if>
+				<if test="queryParams.accountType != '' and queryParams.accountType != null">
+					and acc.ACC_TYPE = #{queryParams.accountType}
+				</if>
+				<if test="queryParams.currency != '' and queryParams.currency != null">
+					and acc.CURR_NO = #{queryParams.currency}
+				</if>
+			</if>
+		</where>
+	</select>
+	
+	<!-- 查询待转可用金额的账户 -->
+	<select id="findWaitAbleAccounts" resultMap="Account">
+		select distinct a.* from t_acc a LEFT JOIN t_acc_trans_det ac on a.code = ac.ACC_NO 
+		where TRANSIT_BAL &gt; 0 and ac.WAIT_ACC_DATE = #{operDate} and a.ABLE_DATE &lt; #{operDate} limit #{nums}
+	</select>
+	
+	<!--帐户分类总计余额，在途，冻结  -->
+	<select id="findAccTypeBalance" resultType="java.util.Map">
+		select sum(BALANCE) accsum,SUM(TRANSIT_BAL) transit,SUM(FRZ_BAL) freeze,USER_ROLE From t_acc 
+		GROUP BY USER_ROLE
+	</select>
+	
+	<!-- 账户在途资金转可用 -->
+	<update id="updateAbleAmount">
+		UPDATE
+			T_ACC acc
+		SET
+			version = #{newVersion}, BALANCE = #{account.balance}, TRANSIT_BAL = #{account.transitBalance}, ABLE_DATE = #{ableDate}
+		where
+			CODE = #{account.code}<!--and version = #{account.version}-->
+	</update>
+	
+</mapper>

@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yl.realAuth.front.dao.mapper.RealNameAuthRequestMapper">
+	<resultMap id="BaseResultMap" type="com.yl.realAuth.model.RealNameAuthRequest">
+		<id column="ID" 					property="id" />
+		<result column="CODE"  				property="code" />
+		<result column="VERSION" 		    property="version" />
+		<result column="CREATE_TIME" 		property="createTime" />
+		<result column="API_CODE" 					property="apiCode" />
+		<result column="VERSION_CODE" 					property="versionCode" />
+		<result column="INPUT_CHARSET" 					property="inputCharset" />
+		<result column="SIGN_TYPE" 					property="signType" />
+		<result column="SIGN" 					property="sign" />
+		<result column="CUSTOMER_NO" 					property="customerNo" />
+		<result column="REQUEST_CODE" 					property="requestCode" />
+		<result column="EXT_PARAM" 					property="extParam" />
+		<result column="RETURN_PARAM" 					property="returnParam" />
+		<result column="IS_ACTUAL" 					property="isActual" />
+		<result column="BUSI_TYPE" 					property="busiType" />
+		<result column="NOTIFY_URL" 					property="notifyURL" />
+		<result column="PAYER_NAME" 					property="payerName" />
+		<result column="PAYER_MOB_NO" 					property="payerMobNo" />
+		<result column="BANK_CARD_NO" 					property="bankCardNo" />
+		<result column="BANK_CARD_NO_ENCRYPT" 					property="bankCardNoEncrypt" />
+		<result column="CERT_NO" 					property="certNo" />
+		<result column="CERT_NO_ENCRYPT" 					property="certNoEncrypt" />
+	</resultMap>
+	<sql id="base_Column_List">
+		ID,CODE,VERSION,CREATE_TIME,API_CODE,VERSION_CODE,INPUT_CHARSET,SIGN_TYPE,SIGN,CUSTOMER_NO,
+		REQUEST_CODE,EXT_PARAM,RETURN_PARAM,IS_ACTUAL,BUSI_TYPE,NOTIFY_URL,PAYER_NAME,PAYER_MOB_NO,
+		BANK_CARD_NO,BANK_CARD_NO_ENCRYPT,CERT_NO,CERT_NO_ENCRYPT
+	</sql>
+	
+	<insert id="insertAuthRequest" parameterType="com.yl.realAuth.model.RealNameAuthRequest" useGeneratedKeys="true" keyProperty="id">
+		INSERT INTO REAL_NAME_AUTH_REQUEST (
+			CODE,VERSION,CREATE_TIME,API_CODE,VERSION_CODE,INPUT_CHARSET,SIGN_TYPE,SIGN,CUSTOMER_NO,
+			REQUEST_CODE,EXT_PARAM,RETURN_PARAM,IS_ACTUAL,BUSI_TYPE,NOTIFY_URL,PAYER_NAME,PAYER_MOB_NO,
+			BANK_CARD_NO,BANK_CARD_NO_ENCRYPT,CERT_NO,CERT_NO_ENCRYPT
+		) VALUES (
+			#{code},#{version},#{createTime},#{apiCode},#{versionCode},#{inputCharset},#{signType},#{sign},
+			#{customerNo},#{requestCode},#{extParam},#{returnParam},#{isActual},#{busiType},#{notifyURL},
+			#{payerName},#{payerMobNo},#{bankCardNo},#{bankCardNoEncrypt},#{certNo},#{certNoEncrypt}
+		)
+	</insert>
+	
+	<select id="queryPartnerRequestByRequestCode" parameterType="String" resultMap="BaseResultMap">
+		SELECT 
+		<include refid="base_Column_List" />
+		FROM REAL_NAME_AUTH_REQUEST 
+	   WHERE REQUEST_CODE = #{requestCode}
+	     AND CUSTOMER_NO = #{receiver}
+	</select>
+	
+	
+	
+</mapper>

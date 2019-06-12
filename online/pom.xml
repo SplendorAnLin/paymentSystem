@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<artifactId>online</artifactId>
+	<version>1.0.0-SNAPSHOT</version>
+	<packaging>pom</packaging>
+	<name>在线支付</name>
+	<description>提供在线支付的网关、交易、运营、补单等的服务的接口及实现</description>
+
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<maven.test.skip>true</maven.test.skip>
+		<java.version>1.7</java.version>
+		<junit.version>4.10</junit.version>
+		<slf4j.version>1.6.4</slf4j.version>
+        <maven.compiler.source>1.7</maven.compiler.source>
+        <maven.compiler.target>1.7</maven.compiler.target>
+	</properties>
+
+	<modules>
+		<module>online-model</module>
+		<module>online-trade</module>
+		<module>online-trade-hessian</module>
+		<module>online-trade-test</module>
+		<module>gateway</module>
+		<module>gateway-hessian</module>
+	</modules>
+	<groupId>com.yl</groupId>
+</project>

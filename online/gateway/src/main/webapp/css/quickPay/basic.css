@@ -1,0 +1,159 @@
+
+
+/*头部start*/
+.header{
+	width: 100%;
+	height: 0.9rem;
+	background: #03a9f4;
+	
+}
+.header_title{
+	background: #03a9f4;
+	margin: 0 0.1rem;
+	padding: 0 0.1rem;
+	height: 0.9rem;
+	color: white;
+	text-align: center;
+	line-height: 0.9rem;
+	position: relative;
+}
+.header_title img{
+	position: absolute;
+    top: 0.15rem;
+    left: 0;
+	width: 0.4rem;
+	height: 0.4rem;
+}
+.header_title span{
+	font-size: 0.32rem;
+	line-height: 0.9rem;
+	display: block;
+	height: 0.9rem;
+}
+/*头部end*/
+
+/*底部start*/
+footer{
+	position: relative;
+	width: 6rem;
+	margin: auto;
+}
+footer .footer{
+	display: block;
+	width: 90%;
+	margin: auto;
+}
+.submit_ok{
+	color: white;
+	background: #03a9f4;
+	border: none;
+	outline: none;
+	display: block;
+	width: 100%;
+	height: 0.6rem;
+	line-height: 0.6rem;
+	text-align: center;
+	border-radius: 5px;
+	font-size: 0.26rem;
+}
+.submit_ok:active,.submit_ok:visited{
+	color: black;
+	background: white;
+}
+/*底部end*/
+/**图标样式***/
+	.span_ico {  
+       position: relative;  
+       display: block;  
+       margin: auto;
+       height: 1.1rem;
+       width: 0.8rem;
+      
+   }  
+  
+       .span_ico img {  
+          width: 100%;
+       }  
+  
+     
+.error_state{
+	color: orange;
+    font-weight: 500;
+    font-size: 0.26rem;
+}
+
+.state{margin-top:0.15rem ;}
+/*错误提示框*/
+.formTip {
+    display: none;
+    height: 39px;
+    line-height: 39px;
+    font-size: 14px;
+}
+
+.formTip .formTipArrow {
+    float: left;
+    display: block;
+    height: 39px;
+    margin: 0;
+}
+
+.formTip .formTipArrowLeft,
+.formTip .formTipArrowRight {
+    width: 10px;
+}
+
+.formTip .formTipArrowLeft {
+    background: url(../../image/quickPay/form-tip-bg.png) 0 0 no-repeat;
+}
+
+.formTip .formTipArrowRight {
+    background: url(../../image/quickPay/form-tip-bg.png) -10px 0 no-repeat;
+}
+
+.formTip em {
+    font-style: normal;
+    background: url(../../image/quickPay/form-tip-bg.png) 0 -65px repeat-x;
+}
+
+.formTip .formTipArrowTriangle {
+    position: absolute;
+    top: -7px;
+    left: 15px;
+    display: block;
+    width: 8px;
+    height: 10px;
+    background: url(../../image/quickPay/form-tip-bg.png) 0 -47px no-repeat;
+}
+.shtWrap.login .loginContent .form .item.iHover {
+    border-color: #ADBB97;
+}
+.shtWrap.login .loginContent .form label.account.iHover {
+    background-position: 0 -43px;
+}
+.shtWrap.login .loginContent .form label.password.iHover {
+    background-position: 0 -172px;
+}
+.fullpage{
+	z-index: 10; position: fixed;top: 0;left: 0;background: rgba(0,0,0,0.14);display: none;width: 100%;height: 100%;
+}
+.fullpage img{
+	position: absolute;left: calc(50% - 0.62rem); width: 1.24rem; height: 1.24rem; display: block;top: calc(50% - 0.62rem);
+}
+/*清除谷歌历史背景颜色*/
+input:-webkit-autofill {
+background-color:white;
+background-image: none;
+-webkit-box-shadow: 0 0 0px 1000px white inset;
+
+}
+/***去除type为number的箭头***/
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button{
+    -webkit-appearance: none !important;
+    margin: 0; 
+}
+
+/***火狐***/
+
+input[type="number"]{-moz-appearance:textfield;}

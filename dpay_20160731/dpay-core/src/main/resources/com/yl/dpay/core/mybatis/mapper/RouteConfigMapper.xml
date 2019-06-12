@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yl.dpay.core.mybatis.mapper.RouteConfigMapper">
+	<resultMap id="routeConfigMap" type="com.yl.dpay.core.entity.RouteConfig">
+		<id property="id" column="ID"></id>
+		<result property="optimistic" column="OPTIMISTIC"></result>
+		<result property="createDate" column="CREATE_DATE"></result>
+		<result property="code" column="CODE"></result>
+		<result property="name" column="NAME"></result>
+		<result property="routeInfo" column="ROUTE_INFO"></result>
+		<result property="status" column="STATUS"></result>
+	</resultMap>
+ 
+	<sql id="routeConfigColumns">
+		ID,OPTIMISTIC,CREATE_DATE,CODE,NAME,ROUTE_INFO,STATUS
+	</sql>
+
+	<insert id="insert" parameterType="com.yl.dpay.core.entity.RouteConfig"
+		useGeneratedKeys="true" keyProperty="id">
+		INSERT INTO ROUTE_CONFIG (
+			OPTIMISTIC,CREATE_DATE,CODE,NAME,ROUTE_INFO,STATUS
+		)
+		VALUES (
+			#{optimistic},#{createDate},#{code},#{name},#{routeInfo},#{status}
+		)
+	</insert>
+
+	<select id="findByCode" resultMap="routeConfigMap" parameterType="String">
+		SELECT
+		<include refid="routeConfigColumns" />
+		FROM ROUTE_CONFIG WHERE code = #{code}
+	</select>
+	
+	<select id="findById" resultMap="routeConfigMap" parameterType="java.lang.Long">
+		SELECT
+		<include refid="routeConfigColumns" />
+		FROM ROUTE_CONFIG WHERE id = #{id}
+	</select>
+	
+	<update id="update" parameterType="com.yl.dpay.core.entity.RouteConfig">
+		UPDATE ROUTE_CONFIG
+		SET ROUTE_INFO = #{routeInfo},
+			STATUS = #{status},
+			OPTIMISTIC = OPTIMISTIC + 1
+		WHERE ID = #{id} and OPTIMISTIC = #{optimistic}
+	</update>
+	
+	<select id="findBy" resultMap="routeConfigMap">
+		SELECT
+		<include refid="routeConfigColumns" />
+		FROM ROUTE_CONFIG WHERE STATUS = #{status}
+		order by id desc
+	</select>
+	
+	<select id="findRouteConfig" resultMap="routeConfigMap">
+		SELECT
+		<include refid="routeConfigColumns" />
+		FROM ROUTE_CONFIG
+		order by id desc
+		limit 1
+	</select>
+
+	<select id="findRouteConfigList" resultMap="routeConfigMap" parameterType="com.yl.dpay.core.entity.RouteConfig">
+		SELECT
+		<include refid="routeConfigColumns" />
+		FROM ROUTE_CONFIG
+		WHERE 1=1
+		<if test="code != null and code != ''">
+        	and CODE = #{code}
+      	</if>
+      	<if test="name != null and name != ''">
+        	and NAME = #{name}
+      	</if>
+      	<if test="status != null and status != ''">
+        	and STATUS = #{status}
+      	</if>
+      	order by id desc
+	</select>
+</mapper>

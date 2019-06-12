@@ -1,0 +1,225 @@
+div,
+dl,
+dt,
+dd,
+ul,
+ol,
+li,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+pre,
+code,
+form,
+fieldset,
+legend,
+input,
+textarea,
+p,
+blockquote,
+th,
+td {
+    margin: 0;
+    padding: 0;
+    font-family: Helvetica, Tahoma, Arial, "Hiragino Sans GB", "Hiragino Sans GB W3", "Microsoft YaHei", STXihei, STHeiti, Heiti, SimSun, sans-serif;
+    -webkit-text-size-adjust: 100%;
+}
+
+ul,
+li {
+    display: block;
+    list-style-type: none;
+    -webkit-margin-before: 0;
+    -webkit-margin-after: 0;
+    -webkit-margin-start: 0;
+    -webkit-margin-end: 0;
+    -webkit-padding-start: 0;
+}
+
+
+a {
+    text-decoration: none;
+    color: black;
+}
+a:active,a:hover,a:visited{
+    color: black;
+}
+i {
+    font-style: normal;
+    margin-right: 0.1rem;
+}
+
+body {
+    background: #F0F0F0 none repeat scroll 0 0;
+    color: #333;
+    font-family: "Microsoft YaHei", 微软雅黑, "MicrosoftJhengHei", 华文细黑, STHeiti, MingLiu, Helvetica;
+    word-wrap: break-word;
+    -webkit-overflow-scrolling: touch;
+    overflow-scrolling: touch;
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+    margin: auto;
+    max-width: 1024px;
+}
+
+html,
+body {
+    padding: 0;
+    margin: auto;
+}
+
+/*图标样式***/
+.span_ico {
+    position: relative;
+    display: block;
+    margin: auto;
+    height: 1.1rem;
+    width: 0.8rem;
+
+}
+
+.span_ico img {
+    width: 100%;
+}
+
+
+.error_state{
+    color: orange;
+    font-weight: 500;
+    font-size: 0.26rem;
+}
+
+.state{margin-top:0.15rem ;}
+/**错误提示框**/
+.formTip {
+    display: none;
+    height: 39px;
+    line-height: 39px;
+    font-size: 14px;
+}
+
+.formTip .formTipArrow {
+    float: left;
+    display: block;
+    height: 39px;
+    margin: 0;
+}
+
+.formTip .formTipArrowLeft,
+.formTip .formTipArrowRight {
+    width: 10px;
+}
+
+.formTip .formTipArrowLeft {
+    background: url(../image/form-tip-bg.png) 0 0 no-repeat;
+}
+
+.formTip .formTipArrowRight {
+    background: url(../image/form-tip-bg.png) -10px 0 no-repeat;
+}
+
+.formTip em {
+    font-style: normal;
+    background: url(../image/form-tip-bg.png) 0 -65px repeat-x;
+}
+
+.formTip .formTipArrowTriangle {
+    position: absolute;
+    top: -7px;
+    left: 15px;
+    display: block;
+    width: 8px;
+    height: 10px;
+    background: url(../image/form-tip-bg.png) 0 -47px no-repeat;
+}
+.shtWrap.login .loginContent .form .item.iHover {
+    border-color: #ADBB97;
+}
+.shtWrap.login .loginContent .form label.account.iHover {
+    background-position: 0 -43px;
+}
+.shtWrap.login .loginContent .form label.password.iHover {
+    background-position: 0 -172px;
+}
+.fullpage{
+    z-index: 10; position: fixed;top: 0;left: 0;background: rgba(0,0,0,0.14);display: none;width: 100%;height: 100%;
+}
+.fullpage img{
+    position: absolute;left: calc(50% - 0.62rem); width: 1.24rem; height: 1.24rem; display: block;top: calc(50% - 0.62rem);
+}
+/**清除谷歌历史背景颜色**/
+input:-webkit-autofill {
+    background-color:white;
+    background-image: none;
+    -webkit-box-shadow: 0 0 0px 1000px white inset;
+
+}
+/**去除type为number的箭头**/
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button{
+    -webkit-appearance: none !important;
+    margin: 0;
+}
+
+/***火狐**/
+
+input[type="number"]{-moz-appearance:textfield;}
+select, select[size="0"], select[size="1"] {
+    border-radius: 0px;
+    border-color: rgb(169, 169, 169);
+}
+select:not(:-internal-list-box) {
+    overflow: visible !important;
+}
+select {
+    -webkit-appearance: menulist;
+    box-sizing: border-box;
+    align-items: center;
+    white-space: pre;
+    -webkit-rtl-ordering: logical;
+    color: black;
+    background-color: white;
+    cursor: default;
+    border-width: 1px;
+    border-style: solid;
+    border-color: initial;
+    border-image: initial;
+}
+select {
+    border-radius: 5px;
+}
+/**返回*/
+.back{
+    text-align: center;
+    margin: 0.2rem;
+    color: white;
+    position: relative;
+}
+.back img{
+    width: 0.4rem;
+    position: absolute;
+    left: 0;
+}
+.bg_blue{
+    background: #396EDC;
+}
+.bg_bohai{
+    background: #1B82D2;
+}
+.bg_white{
+    background: white;
+}
+/**清除浮动**/
+.clear{ clear:both}
+/**z字体颜色**/
+.text_blue{
+    color: #27c3ff;
+}
+.text_red{
+    color: red;
+}
+.text_gray{
+    color: #A5A5A5;
+}

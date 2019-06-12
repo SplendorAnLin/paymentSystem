@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yl.dpay.core.mybatis.mapper.DpayConfigMapper">
+	<resultMap id="dpayConfigMap" type="com.yl.dpay.core.entity.DpayConfig">
+		<id property="id" column="ID"></id>
+		<result property="optimistic" column="OPTIMISTIC"></result>
+		<result property="createDate" column="CREATE_DATE"></result>
+		<result property="remitType"  column="REMIT_TYPE"></result>
+		<result property="minAmount"  column="MIN_AMOUNT"></result>
+		<result property="maxAmount"  column="MAX_AMOUNT"></result>
+		<result property="auditAmount"  column="AUDIT_AMOUNT"></result>
+		<result property="reRemitFlag"  column="REREMIT_FLAG"></result>
+		<result property="startTime"  column="START_TIME"></result>
+		<result property="endTime"  column="END_TIME"></result>
+		<result property="holidayStatus"  column="HOLIDAY_STATUS"></result>
+		<result property="status" column="STATUS"></result>
+	</resultMap>
+ 
+	<sql id="dpayConfigColumns">
+		ID,OPTIMISTIC,CREATE_DATE,REMIT_TYPE,MIN_AMOUNT,MAX_AMOUNT,AUDIT_AMOUNT,REREMIT_FLAG,START_TIME,END_TIME,
+		HOLIDAY_STATUS,STATUS
+	</sql>
+
+	<insert id="insert" parameterType="com.yl.dpay.core.entity.DpayConfig"
+		useGeneratedKeys="true" keyProperty="id">
+		INSERT INTO DPAY_CONFIG (
+			OPTIMISTIC,CREATE_DATE,REMIT_TYPE,MIN_AMOUNT,MAX_AMOUNT,AUDIT_AMOUNT,REREMIT_FLAG,START_TIME,END_TIME,
+			HOLIDAY_STATUS,STATUS
+		)
+		VALUES (
+			#{optimistic},#{createDate},#{remitType},#{minAmount},#{maxAmount},#{auditAmount},#{reRemitFlag},#{startTime},
+			#{endTime},#{holidayStatus},#{status}
+		)
+	</insert>
+	
+	<select id="findById" resultMap="dpayConfigMap" parameterType="java.lang.Long">
+		SELECT
+		<include refid="dpayConfigColumns" />
+		FROM DPAY_CONFIG WHERE id = #{id}
+	</select>
+	
+	<update id="update" parameterType="com.yl.dpay.core.entity.DpayConfig">
+		UPDATE DPAY_CONFIG
+		SET 
+			REMIT_TYPE = #{remitType},MIN_AMOUNT = #{minAmount},MAX_AMOUNT = #{maxAmount},AUDIT_AMOUNT = #{auditAmount},
+			REREMIT_FLAG = #{reRemitFlag},START_TIME = #{startTime},END_TIME = #{endTime},HOLIDAY_STATUS = #{holidayStatus},
+			STATUS = #{status},
+			OPTIMISTIC = OPTIMISTIC + 1
+		WHERE ID = #{id} and OPTIMISTIC = #{optimistic}
+	</update>
+	
+	<select id="findDpayConfig" resultMap="dpayConfigMap">
+		SELECT
+		<include refid="dpayConfigColumns" />
+		FROM DPAY_CONFIG ORDER BY ID DESC LIMIT 1
+	</select>
+
+</mapper>

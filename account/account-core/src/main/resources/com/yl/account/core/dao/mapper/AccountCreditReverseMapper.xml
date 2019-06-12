@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.yl.account.core.dao.mapper.AccountCreditReverseMapper">
+
+	<resultMap id="AccountCreditReverse" type="com.yl.account.model.AccountCreditReverse">
+		<result column="CODE" 						property="code" />
+		<result column="VERSION" 	 				property="version" />
+		<result column="CREATE_TIME" 				property="createTime" />
+		<result column="SYSTEM_CODE" 				property="systemCode" />
+		<result column="SYSTEM_FLOW_ID" 			property="systemFlowId" />
+		<result column="BUSSINESS_CODE" 			property="bussinessCode" />
+		<result column="REQUEST_TIME" 				property="requestTime" />
+		<!-- <result column="TRADE_VOUCHER" 				property="tradeVoucher" /> -->
+		<result column="OPERATOR" 					property="operator" />
+		<result column="REMARK" 					property="remark" />
+		<result column="STATUS" 					property="status" />
+		<result column="COUNT" 						property="count" />
+		<result column="EXCEPTION_MESSAGE" 			property="exceptionMessage" />
+	</resultMap>
+
+	<!-- 账户数据库模型字段 -->
+	<sql id="commonColumn">
+		CODE, VERSION, CREATE_TIME, SYSTEM_CODE, SYSTEM_FLOW_ID, BUSSINESS_CODE, REQUEST_TIME, TRADE_VOUCHER, OPERATOR,
+		REMARK, STATUS, COUNT, EXCEPTION_MESSAGE
+	</sql>
+
+	<!-- 持久化账户 -->
+	<insert id="create" parameterType="com.yl.account.model.AccountCreditReverse">
+		INSERT INTO
+			T_ACC_CRE_REV (<include refid="commonColumn"/>)
+		VALUES
+			(#{code}, #{version}, #{createTime}, #{systemCode}, #{systemFlowId}, #{bussinessCode}, #{requestTime}, #{tradeVoucher},
+			 #{operator}, #{remark}, #{status}, #{count}, #{exceptionMessage})
+	</insert>
+	
+	<!-- 根据系统编码、系统流水、业务编码查询账务补单信息 -->
+	<select id="queryBy" resultMap="AccountCreditReverse">
+		SELECT <include refid="commonColumn" /> FROM T_ACC_CRE_REV WHERE SYSTEM_CODE = #{systemCode} AND SYSTEM_FLOW_ID = #{systemFlowId} AND
+		BUSSINESS_CODE = #{bussinessCode}
+	</select>
+	
+</mapper>

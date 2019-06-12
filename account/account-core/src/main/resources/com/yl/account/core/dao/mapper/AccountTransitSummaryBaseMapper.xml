@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.yl.account.core.dao.mapper.AccountTransitSummaryBaseMapper">
+	
+	<resultMap id="AccountTransitSummary" type="com.yl.account.model.AccountTransitSummary">
+		<result column="CODE" 						property="code" />
+		<result column="VERSION" 	 				property="version" />
+		<result column="CREATE_TIME" 				property="createTime" />
+		<result column="ACC_NO" 					property="accountNo" />
+		<result column="WAIT_ACC_DATE" 				property="waitAccountDate" />
+		<result column="WAIT_ACC_AMT" 				property="waitAccountAmount" />
+		<result column="SUM_STATUS" 				property="status" />
+	</resultMap>
+    
+	<!--通用的sql语句段-->
+	<sql id="commonColumn">
+		CODE, VERSION, CREATE_TIME, ACC_NO, WAIT_ACC_DATE, WAIT_ACC_AMT, SUM_STATUS
+	</sql>
+	
+	<!-- 持久化汇总信息-->
+	<insert id="insert" parameterType="com.yl.account.model.AccountTransitSummary">
+		INSERT INTO 
+			T_ACC_UNCYCLE_SUM (<include refid="commonColumn"/>)
+		VALUES 
+			(#{code}, #{version}, #{createTime}, #{accountNo}, #{waitAccountDate, jdbcType=DATE}, #{waitAccountAmount}, #{status})
+	</insert>
+	
+	<!-- 账号、类型、待入账周期获取汇总信息 -->
+	<select id="findTransitSummaryBy" resultMap="AccountTransitSummary">
+		SELECT <include refid="commonColumn" /> FROM T_ACC_UNCYCLE_SUM WHERE ACC_NO = #{accountNo} 
+		<if test="waitAccountDate != null">
+			AND WAIT_ACC_DATE = #{waitAccountDate}
+		</if>
+		<if test="waitAccountDate == null">
+			AND WAIT_ACC_DATE is null
+		</if>
+		FOR UPDATE
+	</select>
+	
+	<!-- 批量查询待入账周期获取汇总信息 -->
+	<select id="findBatchTransitSummaryBy" resultMap="AccountTransitSummary">
+		SELECT * FROM (SELECT tmp_tb.*, ROWNUM row_id FROM (SELECT <include refid="commonColumn" /> FROM T_ACC_UNCYCLE_SUM WHERE 
+		SUM_STATUS = 'SUMMARY_ING' AND WAIT_ACC_DATE = trunc(#{currentDate}) ORDER BY CREATE_TIME ASC) 
+		tmp_tb WHERE ROWNUM &lt;= #{rowNum}) WHERE row_id &gt; #{rowId}
+	</select>
+	
+	<!-- 批量查询待入账周期获取汇总信息 -->
+	<select id="findBatchTransitSummaryBySeq" resultMap="AccountTransitSummary">
+		SELECT <include refid="commonColumn" /> FROM T_ACC_UNCYCLE_SUM WHERE ACC_NO = #{accountNo} AND SUM_STATUS = 'SUMMARY_ING' AND WAIT_ACC_DATE IS NOT NULL ORDER BY 
+		<if test="transitDebitSeq == 'DESC'">
+			WAIT_ACC_DATE DESC
+		</if>
+		<if test="transitDebitSeq == 'ASC'">
+			WAIT_ACC_DATE ASC
+		</if>
+	</select>
+	
+	<!-- 更新汇总信息 -->
+	<update id="addOrSubstractWaitAccountAmount">
+		UPDATE 
+			T_ACC_UNCYCLE_SUM summ
+		SET 
+			version = #{newVersion}, WAIT_ACC_AMT = #{accountTransitSummary.waitAccountAmount}
+		where
+			CODE = #{accountTransitSummary.code}
+	</update>
+	
+	<!-- 更新汇总信息汇总状态 -->
+	<update id="modifySummaryStatus">
+		UPDATE 
+			T_ACC_UNCYCLE_SUM summ
+		SET 
+			version = #{newVersion}, SUM_STATUS = #{accountTransitSummary.status}
+		where
+			CODE = #{accountTransitSummary.code} and version = #{accountTransitSummary.version}
+	</update>
+	
+	<!-- 扣减待入账金额并修改费入账周期汇总状态 -->
+	<update id="modifySummary">
+		UPDATE 
+			T_ACC_UNCYCLE_SUM summ
+		SET 
+			version = #{newVersion}, SUM_STATUS = #{accountTransitSummary.status}, WAIT_ACC_AMT = #{accountTransitSummary.waitAccountAmount}
+		where
+			CODE = #{accountTransitSummary.code} and version = #{accountTransitSummary.version}
+	</update>
+	
+	<!-- 账号、类型、待入账周期获取汇总信息 -->
+	<select id="_findTransitSummaryBy" resultMap="AccountTransitSummary">
+		SELECT <include refid="commonColumn" /> FROM T_ACC_UNCYCLE_SUM
+		<where> WAIT_ACC_DATE IS NULL
+			<if test="accountBalanceQuery != null">
+				<if test="accountBalanceQuery.accountNo != '' and accountBalanceQuery.accountNo != null">
+					AND ACC_NO = #{accountBalanceQuery.accountNo}
+				</if>
+			</if>
+		</where>
+	</select>
+
+</mapper>

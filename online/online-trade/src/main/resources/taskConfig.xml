@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+	http://www.springframework.org/schema/beans/spring-beans-4.0.xsd"
+	default-autowire="byName">
+
+	<!-- 补入账定时任务 -->
+    <bean id="autoRetryAccountJob" class="com.yl.online.trade.task.AutoRetryAccountFacadeJob"></bean>
+
+    <bean id="autoRetryAccountTask" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject" ref="autoRetryAccountJob"/>
+		<property name="targetMethod" value="execute"/>
+		<property name="concurrent" value="false"/>
+	</bean>
+	<bean id="autoRetryAccountTrigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+		<property name="jobDetail" ref="autoRetryAccountTask"/>
+		<property name="cronExpression" value="0 0/5 * * * ? *"/>
+	</bean>
+	
+	<!-- 补单定时任务 -->
+    <bean id="autoSalesResultReverseOrderJob" class="com.yl.online.trade.task.AutoSalesResultReverseOrderJob"></bean>
+
+    <bean id="autoSalesResultReverseOrderTask" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject" ref="autoSalesResultReverseOrderJob"/>
+		<property name="targetMethod" value="execute"/>
+		<property name="concurrent" value="false"/>
+	</bean>
+	<bean id="autoSalesResultReverseOrderTrigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+		<property name="jobDetail" ref="autoSalesResultReverseOrderTask"/>
+		<property name="cronExpression" value="0 0/5 * * * ? *"/>
+	</bean>
+	
+	<!-- 网关通知补单定时任务 -->
+    <!-- <bean id="autoMerchantSalesResultReverseOrderJob" class="com.lefu.online.trade.task.AutoMerchantSalesResultReverseOrderJob"></bean>
+
+    <bean id="autoMerchantSalesResultReverseOrderTask" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject" ref="autoMerchantSalesResultReverseOrderJob"/>
+		<property name="targetMethod" value="execute"/>
+		<property name="concurrent" value="false"/>
+	</bean>
+	<bean id="autoMerchantSalesResultReverseOrderTrigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+		<property name="jobDetail" ref="autoMerchantSalesResultReverseOrderTask"/>
+		<property name="cronExpression" value="0 0/3 * * * ? *"/>
+	</bean> -->
+
+
+	<!-- 总控制器 -->
+	<bean id="startQuertz" lazy-init="false" autowire="no" class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
+		<property name="triggers">
+			<list>
+				<ref bean="autoRetryAccountTrigger"/>
+ 				<!--<ref bean="autoSalesResultReverseOrderTrigger"/>-->
+				<!-- <ref bean="autoMerchantSalesResultReverseOrderTrigger"/> -->
+			</list>
+		</property>
+	</bean>
+</beans>

@@ -1,0 +1,570 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+		http://www.springframework.org/schema/beans/spring-beans-4.0.xsd">
+
+	<bean id="valueListHandler" scope="prototype" class="net.mlw.vlh.DefaultValueListHandlerImpl">
+		<property name="config.adapters">
+			<map>
+			<!-- 代付历史查询 -->
+				<entry key="historyQuery">
+					<bean parent="dpayConfig">
+						<property name="sql">
+							<value>
+								<![CDATA[
+										SELECT
+										h.OWNER_ID 					AS 						owner_id,
+										h.CREATE_DATE				AS						create_time,
+										h.MAX_AMOUNT 				AS 						max_amount,
+										h.MIN_AMOUNT 				AS 						min_amount,
+										h.DOMAIN 					AS 						domain,
+										h.CUST_IP 					AS 						cust_ip,
+										h.PHONE 					AS 						phone,
+										h.VALID 					AS 						valid,
+										h.OWNER_ROLE 				AS 						owner_role,
+										h.MANUAL_AUDIT              AS                      manual_audit,
+										h.USE_PHONE_CHECK           AS                      use_phone_check,
+										h.OPERATOR                  AS                      operator,
+										h.DAY_MAX_AMOUNT            AS                      day_max_amount,
+										h.BOSS_AUDIT                AS                      boss_audit,
+										h.START_TIME                AS                      start_time,
+										h.END_TIME                  AS                      end_time,
+										h.FIRE_TYPE					AS						fire_type
+									FROM
+										service_config_history h
+									WHERE
+										1 = 1
+										/~owner_id: and h.owner_id  = '[owner_id]' ~/
+									ORDER BY
+										h.id DESC
+								]]>
+							</value>
+						</property>
+					</bean>
+				</entry>
+				<entry key="dpayRequest">
+					<bean parent="dpayConfig">
+							<property name="defaultNumberPerPage">
+							<value>10</value>
+						</property>
+						<property name="sql">
+							<value>
+							<![CDATA[
+								 SELECT
+								 	dr.REQUEST_NO as request_no,
+								 	dr.FLOW_NO as flow_no,
+								 	dr.OWNER_ID as owner_id,
+								 	dr.REQUEST_TYPE as request_type,
+								 	dr.ACCOUNT_NO as account_no,
+								 	dr.ACCOUNT_NAME as account_name,
+								 	dr.ACCOUNT_TYPE as account_type,
+								 	dr.CER_TYPE as cert_type,
+								 	dr.CARD_TYPE as card_type,
+								 	dr.CER_NO as cert_no,
+								 	CONVERT(dr.AMOUNT,CHAR) as amount,
+								 	dr.AUDIT_STATUS as audit_status,
+								 	dr.AUDIT_DATE as audit_date,
+								 	dr.DESCRIPTION as description,
+								 	dr.CREATE_DATE as create_date,
+									dr.STATUS as status,
+									dr.complete_Msg as error_msg,
+									dr.complete_Date as finish_date,
+									dr.operator as operator,
+									dr.bank_Code as bankCode,
+									dr.bank_Name as bank_name,
+									dr.validity as validity,
+									dr.cvv as cvv,
+									dr.fee as fee,
+									dr.REMIT_ADUTI_REASON as remit_aduti_reason
+								 FROM REQUEST dr
+								 where 1=1
+									 /~flowId:AND dr.FLOW_NO = '[flowId]'~/
+									 /~requestNo: AND dr.REQUEST_NO  = '[requestNo]'~/
+									 /~requestType: AND dr.REQUEST_TYPE  = '[requestType]'~/
+									 /~applyDate1: AND Date(dr.CREATE_DATE) >= str_to_date('[applyDate1]','%Y-%m-%d %H:%i:%s')~/
+									 /~applyDate2: AND Date(dr.CREATE_DATE) <= str_to_date('[applyDate2]','%Y-%m-%d %H:%i:%s')~/
+									 /~finish_date1: AND Date(dr.complete_Date) >= str_to_date('[finish_date1]','%Y-%m-%d %H:%i:%s')~/
+									 /~finish_date2: AND Date(dr.complete_Date) <= str_to_date('[finish_date2]','%Y-%m-%d %H:%i:%s')~/
+									 /~df.auditStatus: AND dr.AUDIT_STATUS  = '[df.auditStatus]'~/
+									 /~accountNo: AND dr.ACCOUNT_NO  like '%[accountNo]%'~/
+									 /~df.status: AND dr.STATUS  = '[df.status]'~/
+									 /~accountName: AND dr.ACCOUNT_NAME  like '%[accountName]%'~/
+									 /~ownerId: AND dr.OWNER_ID  = '[ownerId]'~/
+									 /~amountStart: AND dr.AMOUNT  >= '[amountStart]'~/
+									 /~amountEnd: AND dr.AMOUNT  <='[amountEnd]'~/
+									 /~operator: AND dr.operator  = '[operator]'~/
+									 /~auditStatus: AND dr.AUDIT_STATUS  = '[auditStatus]'~/
+									 /~requestStatus: AND dr.STATUS  = '[requestStatus]'~/
+									 /~accountType: AND dr.ACCOUNT_TYPE  = '[accountType]'~/
+									 /~cardType: AND dr.CARD_TYPE  = '[cardType]'~/
+									 /~certType: AND dr.CER_TYPE  = '[certType]'~/
+									 /~audit_date1: AND Date(dr.AUDIT_DATE) >= str_to_date('[audit_date1]','%Y-%m-%d %H:%i:%s')~/
+									 /~audit_date2: AND Date(dr.AUDIT_DATE) <= str_to_date('[audit_date2]','%Y-%m-%d %H:%i:%s')~/
+								order by dr.CREATE_DATE desc
+							]]>
+							</value>
+						</property>
+					</bean>
+				</entry>
+				<entry key="dpayAuditRequest">
+					<bean parent="dpayConfig">
+							<property name="defaultNumberPerPage">
+							<value>10</value>
+						</property>
+						<property name="sql">
+							<value>
+							<![CDATA[
+								 SELECT
+								 	dr.REQUEST_NO as request_no,
+								 	dr.FLOW_NO as flow_no,
+								 	dr.OWNER_ID as owner_id,
+								 	dr.ACCOUNT_NO as account_no,
+								 	dr.ACCOUNT_NAME as account_name,
+								 	dr.ACCOUNT_TYPE as account_type,
+								 	dr.REQUEST_TYPE as request_type,
+								 	dr.CER_TYPE as cert_type,
+								 	dr.CARD_TYPE as card_type,
+								 	dr.CER_NO as cert_no,
+								 	CONVERT(dr.AMOUNT,CHAR) as amount,
+								 	dr.AUDIT_STATUS as audit_status,
+								 	dr.DESCRIPTION as description,
+								 	dr.CREATE_DATE as create_date,
+									dr.STATUS as status,
+									dr.complete_Msg as error_msg,
+									dr.complete_Date as finish_date,
+									dr.operator as operator,
+									dr.bank_Code as bankCode,
+									dr.bank_Name as bank_name,
+									dr.validity as validity,
+									dr.cvv as cvv,
+									dr.fee as fee,
+									dr.REMIT_ADUTI_REASON as remit_aduti_reason,
+									dr.AUDIT_DATE as audit_date
+								 FROM REQUEST dr
+								 where 1=1 
+								 	 /~auditStatus:AND dr.AUDIT_STATUS  = '[auditStatus]'~/
+									 /~flowId:AND dr.FLOW_NO = '[flowId]'~/
+									 /~requestType: AND dr.REQUEST_TYPE  = '[requestType]'~/
+									 /~accountNo:AND dr.ACCOUNT_NO = '[accountNo]'~/
+									 /~requestNo: AND dr.REQUEST_NO  = '[requestNo]'~/
+									 /~applyDate1: AND Date(dr.CREATE_DATE) >= str_to_date('[applyDate1]','%Y-%m-%d %H:%i:%s')~/
+									 /~applyDate2: AND Date(dr.CREATE_DATE) <= str_to_date('[applyDate2]','%Y-%m-%d %H:%i:%s')~/
+									 /~finish_date1: AND Date(dhr.finish_date) >= str_to_date('[finish_date1] 00:00:00','%Y-%m-%d %H:%i:%s')~/
+									 /~finish_date2: AND Date(dhr.finish_date) <= str_to_date('[finish_date2] 23:59:59','%Y-%m-%d %H:%i:%s')~/
+									 /~df.status: AND dr.STATUS  = '[df.status]'~/
+									 /~accountName: AND dr.ACCOUNT_NAME  like '%[accountName]%'~/
+									  /~amountStart: AND dr.AMOUNT  >= '[amountStart]'~/
+									  /~amountEnd: AND dr.AMOUNT  <='[amountEnd]'~/
+									 /~ownerId: AND dr.OWNER_ID  = '[ownerId]'~/
+									 /~operator: AND dr.operator  = '[operator]'~/
+									 /~accountType: AND dr.ACCOUNT_TYPE  = '[accountType]'~/
+									 /~cardType: AND dr.CARD_TYPE  = '[cardType]'~/
+									 /~certType: AND dr.CER_TYPE  = '[certType]'~/
+									 /~auditDate1: AND Date(dr.AUDIT_DATE) >= str_to_date('[auditDate1]','%Y-%m-%d %H:%i:%s')~/
+									 /~auditDate2: AND Date(dr.AUDIT_DATE) <= str_to_date('[auditDate2]','%Y-%m-%d %H:%i:%s')~/
+								order by dr.CREATE_DATE desc
+							]]>
+							</value>
+						</property>
+					</bean>
+				</entry>
+				<entry key="dpayRequestExport">
+					<bean parent="dpayConfig">
+						<property name="defaultNumberPerPage">
+							<value>999999999</value>
+						</property>
+						<property name="sql">
+							<value>
+							<![CDATA[
+								 SELECT
+								 	dr.REQUEST_NO as request_no,
+								 	dr.FLOW_NO as flow_no,
+								 	dr.OWNER_ID as owner_id,
+								 	dr.ACCOUNT_NO as account_no,
+								 	dr.REQUEST_TYPE as request_type,
+								 	dr.ACCOUNT_NAME as account_name,
+								 	dr.ACCOUNT_TYPE as account_type,
+								 	dr.CER_TYPE as cert_type,
+								 	dr.CARD_TYPE as card_type,
+								 	dr.CER_NO as cert_no,
+								 	CONVERT(dr.AMOUNT,CHAR) as amount,
+								 	dr.AUDIT_STATUS as audit_status,
+								 	dr.AUDIT_DATE as audit_date,
+								 	dr.DESCRIPTION as description,
+								 	dr.CREATE_DATE as create_date,
+									dr.STATUS as status,
+									dr.complete_Msg as error_msg,
+									dr.complete_Date as finish_date,
+									dr.operator as operator,
+									dr.bank_Code as bankCode,
+									dr.bank_Name as bank_name,
+									dr.validity as validity,
+									dr.cvv as cvv,
+									dr.fee as fee,
+									dr.REMIT_ADUTI_REASON as remit_aduti_reason
+								 FROM REQUEST dr
+								 where 1=1
+									 /~flowId:AND dr.FLOW_NO = '[flowId]'~/
+									 /~requestNo: AND dr.REQUEST_NO  = '[requestNo]'~/
+									 /~requestType: AND dr.REQUEST_TYPE  = '[requestType]'~/
+									 /~applyDate1: AND Date(dr.CREATE_DATE) >= str_to_date('[applyDate1] 00:00:00','%Y-%m-%d %H:%i:%s')~/
+									 /~applyDate2: AND Date(dr.CREATE_DATE) <= str_to_date('[applyDate2] 23:59:59','%Y-%m-%d %H:%i:%s')~/
+									 /~finish_date1: AND Date(dr.complete_Date) >= str_to_date('[finish_date1] 00:00:00','%Y-%m-%d %H:%i:%s')~/
+									 /~finish_date2: AND Date(dr.complete_Date) <= str_to_date('[finish_date2] 23:59:59','%Y-%m-%d %H:%i:%s')~/
+									 /~df.auditStatus: AND dr.AUDIT_STATUS  = '[df.auditStatus]'~/
+									 /~df.status: AND dr.STATUS  = '[df.status]'~/
+									 /~accountName: AND dr.ACCOUNT_NAME  like '%[accountName]%'~/
+									 /~ownerId: AND dr.OWNER_ID  = '[ownerId]'~/
+									 /~operator: AND dr.operator  = '[operator]'~/
+									  /~amountStart: AND dr.AMOUNT  >= '[amountStart]'~/
+									  /~amountEnd: AND dr.AMOUNT  <='[amountEnd]'~/
+									 /~auditStatus: AND dr.AUDIT_STATUS  = '[auditStatus]'~/
+									 /~requestStatus: AND dr.STATUS  = '[requestStatus]'~/
+									 /~accountType: AND dr.ACCOUNT_TYPE  = '[accountType]'~/
+									 /~cardType: AND dr.CARD_TYPE  = '[cardType]'~/
+									 /~certType: AND dr.CER_TYPE  = '[certType]'~/
+								order by dr.id asc
+							]]>
+							</value>
+						</property>
+					</bean>
+				</entry>
+
+				<entry key="dpayRequestCount">
+					<bean parent="dpayConfig">
+						<property name="sql">
+							<value>
+							<![CDATA[
+								 SELECT
+								 	count(dr.FLOW_NO) as flow_no,
+								 	CONVERT(sum(dr.AMOUNT),CHAR) as amount,
+									round(sum(dr.fee),2) as fee
+								 FROM REQUEST dr
+								 where 1=1
+									 /~flowId:AND dr.FLOW_NO = '[flowId]'~/
+									 /~requestNo: AND dr.REQUEST_NO  = '[requestNo]'~/
+									 /~requestType: AND dr.REQUEST_TYPE  = '[requestType]'~/
+									 /~applyDate1: AND Date(dr.CREATE_DATE) >= str_to_date('[applyDate1]','%Y-%m-%d %H:%i:%s')~/
+									 /~applyDate2: AND Date(dr.CREATE_DATE) <= str_to_date('[applyDate2]','%Y-%m-%d %H:%i:%s')~/
+									 /~finish_date1: AND Date(dr.complete_Date) >= str_to_date('[finish_date1]','%Y-%m-%d %H:%i:%s')~/
+									 /~finish_date2: AND Date(dr.complete_Date) <= str_to_date('[finish_date2]','%Y-%m-%d %H:%i:%s')~/
+									 /~df.auditStatus: AND dr.AUDIT_STATUS  = '[df.auditStatus]'~/
+									 /~df.status: AND dr.STATUS  = '[df.status]'~/
+									 /~accountName: AND dr.ACCOUNT_NAME  like '%[accountName]%'~/
+									 /~ownerId: AND dr.OWNER_ID  = '[ownerId]'~/
+									 /~operator: AND dr.operator  = '[operator]'~/
+									  /~amountStart: AND dr.AMOUNT  >= '[amountStart]'~/
+									  /~amountEnd: AND dr.AMOUNT  <='[amountEnd]'~/
+									 /~auditStatus: AND dr.AUDIT_STATUS  = '[auditStatus]'~/
+									 /~requestStatus: AND dr.STATUS  = '[requestStatus]'~/
+									 /~accountType: AND dr.ACCOUNT_TYPE  = '[accountType]'~/
+									 /~cardType: AND dr.CARD_TYPE  = '[cardType]'~/
+									 /~certType: AND dr.CER_TYPE  = '[certType]'~/
+								order by dr.CREATE_DATE desc
+							]]>
+							</value>
+						</property>
+					</bean>
+				</entry>
+
+				<entry key="dpayInterfaceRequest">
+					<bean parent="dpayConfig">
+						<property name="defaultNumberPerPage">
+							<value>100</value>
+						</property>
+						<property name="sql">
+							<value>
+							<![CDATA[
+								 SELECT
+								 	dr.REQUEST_NO as request_no,
+								 	dr.FLOW_NO as flow_no,
+								 	dr.OWNER_ID as owner_id,
+								 	dr.REQUEST_TYPE as request_type,
+								 	dr.ACCOUNT_NO as account_no,
+								 	dr.ACCOUNT_NAME as account_name,
+								 	CONVERT(dr.AMOUNT,CHAR) as amount,
+								 	dr.AUDIT_STATUS as audit_status,
+								 	dr.DESCRIPTION as description,
+								 	dr.CREATE_DATE as create_date,
+									dr.STATUS as status,
+									dr.complete_Msg as error_msg,
+									dr.complete_Date as finish_date,
+									dr.operator as operator,
+									dr.bank_Code as bankCode,
+									dr.bank_Name as bankName,
+									dr.validity as validity,
+									dr.cvv as cvv,
+									dr.fee as fee,
+									dr.REMIT_ADUTI_REASON as remit_aduti_reason
+								 FROM REQUEST dr
+								 where 1=1
+									 /~flowId:AND dr.FLOW_NO = '[flowId]'~/
+									 /~requestNo: AND dr.REQUEST_NO  = '[requestNo]'~/
+									 /~requestType: AND dr.REQUEST_TYPE  = '[requestType]'~/
+									 /~applyDate1: AND Date(dr.CREATE_DATE) >= str_to_date('[applyDate1] 00:00:00','%Y-%m-%d %H:%i:%s')~/
+									 /~applyDate2: AND Date(dr.CREATE_DATE) <= str_to_date('[applyDate2] 23:59:59','%Y-%m-%d %H:%i:%s')~/
+									 /~finish_date1: AND Date(dhr.finish_date) >= str_to_date('[finish_date1] 00:00:00','%Y-%m-%d %H:%i:%s')~/
+									 /~finish_date2: AND Date(dhr.finish_date) <= str_to_date('[finish_date2] 23:59:59','%Y-%m-%d %H:%i:%s')~/
+									 /~df.auditStatus: AND dr.AUDIT_STATUS  = '[df.auditStatus]'~/
+									 /~df.status: AND dr.STATUS  = '[df.status]'~/
+									 /~amountStart: AND dr.AMOUNT  >= '[amountStart]'~/
+									 /~amountEnd: AND dr.AMOUNT  <='[amountEnd]'~/
+									 /~accountName: AND dr.ACCOUNT_NAME  like '%[accountName]%'~/
+									 /~ownerId: AND dr.OWNER_ID  = '[ownerId]'~/
+									 /~operator: AND dr.operator  = '[operator]'~/
+								order by dr.CREATE_DATE desc
+							]]>
+							</value>
+						</property>
+					</bean>
+				</entry>
+
+				<entry key="countOrder">
+					<bean parent="dpayConfig">
+						<property name="sql">
+							<value>
+							<![CDATA[
+								 SELECT
+								 	count(dr.id) as count
+								 FROM REQUEST dr
+								 where 1=1
+									 /~requestType: AND dr.REQUEST_TYPE  = '[requestType]'~/
+									 /~createDate1: AND Date(dr.CREATE_DATE) >= str_to_date('[applyDate1] 00:00:00','%Y-%m-%d %H:%i:%s')~/
+									 /~createDate2: AND Date(dr.CREATE_DATE) <= str_to_date('[applyDate2] 23:59:59','%Y-%m-%d %H:%i:%s')~/
+									 /~ownerId: AND dr.OWNER_ID  = '[ownerId]'~/
+									  /~amountStart: AND dr.AMOUNT  >= '[amountStart]'~/
+									 /~amountEnd: AND dr.AMOUNT  <='[amountEnd]'~/
+									 /~handle_status: AND dr.STATUS  IN ([handle_status])~/
+							]]>
+							</value>
+						</property>
+					</bean>
+				</entry>
+
+				<entry key="countOrderAmount">
+					<bean parent="dpayConfig">
+						<property name="sql">
+							<value>
+							<![CDATA[
+								 SELECT
+								 	CONVERT(sum(dr.AMOUNT),CHAR) as amount
+								 FROM REQUEST dr
+								 where 1=1
+								 /~requestType: AND dr.REQUEST_TYPE  = '[requestType]'~/
+									 /~createDate1: AND Date(dr.CREATE_DATE) >= str_to_date('[applyDate1] 00:00:00','%Y-%m-%d %H:%i:%s')~/
+									 /~createDate2: AND Date(dr.CREATE_DATE) <= str_to_date('[applyDate2] 23:59:59','%Y-%m-%d %H:%i:%s')~/
+									 /~ownerId: AND dr.OWNER_ID  = '[ownerId]'~/
+									  /~amountStart: AND dr.AMOUNT  >= '[amountStart]'~/
+									 /~amountEnd: AND dr.AMOUNT  <='[amountEnd]'~/
+									 /~handle_status: AND dr.STATUS  IN ([handle_status])~/
+							]]>
+							</value>
+						</property>
+					</bean>
+				</entry>
+				
+				<entry key="dpayConfigHistory">
+					<bean parent="dpayConfig">
+							<property name="defaultNumberPerPage">
+							<value>10</value>
+						</property>
+						<property name="sql">
+							<value>
+							<![CDATA[
+								 SELECT
+								 	dch.ID as id,
+								 	dch.CREATE_DATE as create_date,
+								 	dch.REMIT_TYPE as remit_type,
+								 	dch.MIN_AMOUNT as min_amount,
+								 	dch.MAX_AMOUNT as max_amount,
+								 	dch.AUDIT_AMOUNT as audit_amount,
+								 	dch.REREMIT_FLAG as reremit_flag,
+								 	dch.START_TIME as start_time,
+								 	dch.END_TIME as end_time,
+									dch.HOLIDAY_STATUS as holiday_status,
+									dch.STATUS as status,
+									dch.OPER as oper
+								 FROM DPAY_CONFIG_HISTORY dch
+								 where 1=1
+								order by dch.ID desc
+							]]>
+							</value>
+						</property>
+					</bean>
+				</entry>
+				
+				<entry key="dpayRequestHistory">
+					<bean parent="dpayConfig">
+							<property name="defaultNumberPerPage">
+							<value>10</value>
+						</property>
+						<property name="sql">
+							<value>
+							<![CDATA[
+								 SELECT
+								 	dr.REQUEST_NO as request_no,
+								 	dr.FLOW_NO as flow_no,
+								 	dr.OWNER_ID as owner_id,
+								 	dr.ACCOUNT_NO as account_no,
+								 	dr.ACCOUNT_NAME as account_name,
+								 	dr.ACCOUNT_TYPE as account_type,
+								 	dr.CER_TYPE as cert_type,
+								 	dr.CARD_TYPE as card_type,
+								 	dr.CER_NO as cert_no,
+								 	CONVERT(dr.AMOUNT,CHAR) as amount,
+								 	dr.AUDIT_STATUS as audit_status,
+								 	dr.AUDIT_DATE as audit_date,
+								 	dr.DESCRIPTION as description,
+								 	dr.CREATE_DATE as create_date,
+									dr.STATUS as status,
+									dr.complete_Msg as error_msg,
+									dr.complete_Date as finish_date,
+									dr.operator as operator,
+									dr.bank_Code as bank_code,
+									dr.validity as validity,
+									dr.cvv as cvv,
+									dr.oper_Time as oper_time,
+									dr.oper as oper,
+									dr.reason as reason
+								 FROM REQUEST_HISTORY dr
+								 where 1=1
+									 /~flowId:AND dr.FLOW_NO = '[flowId]'~/
+								order by dr.id desc
+							]]>
+							</value>
+						</property>
+					</bean>
+				</entry>
+				
+				<entry key="routeConfig">
+					<bean parent="dpayConfig">
+							<property name="defaultNumberPerPage">
+							<value>5</value>
+						</property>
+						<property name="sql">
+							<value>
+							<![CDATA[
+								 SELECT
+								 	rc.ID as id,
+								 	rc.CREATE_DATE as create_date,
+								 	rc.CODE as code,
+								 	rc.NAME as name,
+								 	rc.ROUTE_INFO as route_info,
+									rc.STATUS as status
+								 FROM ROUTE_CONFIG rc
+								 where 1=1
+								 /~code:and rc.CODE = '[code]' ~/
+								 /~name:and rc.NAME = '[name]' ~/
+								 /~status:and rc.STATUS = '[status]' ~/
+								 order by rc.ID desc
+							]]>
+							</value>
+						</property>
+					</bean>
+				</entry>
+				
+				<entry key="routeConfigHistory">
+					<bean parent="dpayConfig">
+							<property name="defaultNumberPerPage">
+							<value>10</value>
+						</property>
+						<property name="sql">
+							<value>
+							<![CDATA[
+								 SELECT
+								 	rch.ID as id,
+								 	rch.CREATE_DATE as create_date,
+								 	rch.ROUTE_INFO as route_info,
+									rch.STATUS as status,
+									rch.OPER as oper
+								 FROM ROUTE_CONFIG_HISTORY rch
+								 where 1=1
+								order by rch.ID desc
+							]]>
+							</value>
+						</property>
+					</bean>
+				</entry>
+				
+				<entry key="dpayQueryRecipientResult">
+					<bean parent="dpayConfig">
+						<property name="defaultNumberPerPage">
+							<value>10</value>
+						</property>
+						<property name="sql">
+							<value>
+								<![CDATA[
+									select 
+										p.ID					as 						id,
+										p.OWNER_ID				as						owner_id,
+										p.ACCOUNT_NO			as						account_no,
+										p.ACCOUNT_NAME			as						account_name,
+										p.ACCOUNT_TYPE			as						account_type,
+										p.OPEN_BANK_NAME		as						open_bank_name,
+										p.CREATE_DATE			as						create_date,
+										p.BANK_CODE             as                      bank_code,
+										p.SABK_CODE             as                      sabk_code,
+										p.SABK_NAME             as                      sabk_name,
+										p.CNAPS_CODE			as						cnaps_code,
+										p.CNAPS_NAME			as						cnaps_name,
+										p.ID_CARD_NO			as						id_card_no
+									from payee p
+									where 1=1
+									/~customer_no: and p.owner_id = '[customer_no]' ~/
+									/~create_time_start: and p.create_date >= str_to_date('[create_time_start] 00:00:00','%Y-%m-%d %H:%i:%s') ~/
+									/~create_time_end: and p.create_date <= str_to_date('[create_time_end] 23:59:59','%Y-%m-%d %H:%i:%s') ~/
+									/~account_no: and p.account_no = '[account_no]' ~/
+									/~account_name: and p.account_name = '[account_name]' ~/
+									/~account_type: and p.account_type = '[account_type]' ~/
+									/~open_bank_name: and p.OPEN_BANK_NAME like '%[open_bank_name]%' ~/
+									order by p.ID desc
+								]]>
+							</value>
+						</property>
+					</bean>
+				</entry>
+				<entry key="dpayConfigQuery">
+					<bean parent="dpayConfig">
+						<property name="defaultNumberPerPage">
+							<value>10</value>
+						</property>
+						<property name="sql">
+							<value>
+								<![CDATA[
+									select 
+										s.ID					as 						id,
+										s.OWNER_ID				as						owner_id,
+										s.CREATE_DATE			as						create_date,
+										s.OWNER_ROLE			as						owner_role,
+										s.VALID					as						valid,
+										s.PHONE					as						phone,
+										s.COMPLEX_PASSWORD		as						complex_password,
+										s.USE_PHONE_CHECK		as						use_phone_check,
+										s.PUBLIC_KEY			as 						public_key,
+										s.PRIVATE_KEY			as						private_key,
+										s.CUST_IP				as						cust_ip,
+										s.DOMAIN				as						domain,
+										s.MIN_AMOUNT			as						min_amount,
+										s.MAX_AMOUNT			as						max_amount,
+										s.HOLIDAYSTATUS			as						holiday_status,
+										s.DAY_MAX_AMOUNT        as                      day_max_amount,
+										s.BOSS_AUDIT            as                      boss_audit,
+										s.START_TIME            as                      start_time,
+										s.END_TIME              as                      end_time,
+										s.FIRE_TYPE				as						fire_type
+									from service_config s
+									where 1=1
+									/~owner_id: and s.owner_id = '[owner_id]' ~/
+									/~owner_role: and s.owner_role = '[owner_role]' ~/
+									/~valid: and s.valid = '[valid]' ~/
+									order by s.ID desc
+								]]>
+							</value>
+						</property>
+					</bean>
+				</entry>
+			</map>
+		</property>
+	</bean>
+</beans>

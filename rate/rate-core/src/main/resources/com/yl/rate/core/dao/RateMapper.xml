@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.yl.rate.core.dao.RateMapper">
+    <!--auto generated Code-->
+    <resultMap id="BaseResultMap" type="com.yl.rate.core.entity.Rate">
+        <result column="status" property="status" jdbcType="VARCHAR"/>
+        <result column="comp_fee_type" property="compFeeType" jdbcType="VARCHAR"/>
+        <result column="id" property="id" jdbcType="BIGINT"/>
+        <result column="code" property="code" jdbcType="VARCHAR"/>
+        <result column="create_time" property="createTime"/>
+    </resultMap>
+
+    <!--auto generated Code-->
+    <sql id="Base_Column_List">
+        status,
+        comp_fee_type,
+        id,
+        code,
+        create_time
+    </sql>
+
+    <!--auto generated Code-->
+    <insert id="insert" useGeneratedKeys="true" keyProperty="rate.id">
+        INSERT INTO rate (
+            status,
+            comp_fee_type,
+            id,
+            code,
+            create_time
+        ) VALUES (
+            #{rate.status,jdbcType=VARCHAR},
+            #{rate.compFeeType,jdbcType=VARCHAR},
+            #{rate.id,jdbcType=BIGINT},
+            #{rate.code,jdbcType=VARCHAR},
+            #{rate.createTime}
+        )
+    </insert>
+
+    <!--auto generated Code-->
+    <insert id="insertSelective" useGeneratedKeys="true" keyProperty="rate.id">
+        INSERT INTO rate
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="rate.status!=null"> status,</if>
+            <if test="rate.compFeeType!=null"> comp_fee_type,</if>
+            <if test="rate.id!=null"> id,</if>
+            <if test="rate.code!=null"> code,</if>
+            <if test="rate.createTime!=null"> create_time,</if>
+        </trim>
+        VALUES
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="rate.status!=null">#{rate.status,jdbcType=VARCHAR},
+            </if>
+            <if test="rate.compFeeType!=null">#{rate.compFeeType,jdbcType=VARCHAR},
+            </if>
+            <if test="rate.id!=null">#{rate.id,jdbcType=BIGINT},
+            </if>
+            <if test="rate.code!=null">#{rate.code,jdbcType=VARCHAR},
+            </if>
+            <if test="rate.createTime!=null">#{rate.createTime},
+            </if>
+        </trim>
+    </insert>
+
+    <!--auto generated Code-->
+    <insert id="insertList">
+        INSERT INTO rate (
+        <include refid="Base_Column_List"/>
+        )VALUES
+        <foreach collection="rates" item="rate" index="index" separator=",">
+            (
+            #{rate.status,jdbcType=VARCHAR},
+            #{rate.compFeeType,jdbcType=VARCHAR},
+            #{rate.id,jdbcType=BIGINT},
+            #{rate.code,jdbcType=VARCHAR},
+            #{rate.createTime}
+            )
+        </foreach>
+    </insert>
+
+    <!--auto generated Code-->
+    <update id="update">
+        UPDATE rate
+        <set>
+            <if test="rate.status != null"> status= #{rate.status,jdbcType=VARCHAR},</if>
+            <if test="rate.compFeeType != null"> comp_fee_type= #{rate.compFeeType,jdbcType=VARCHAR},</if>
+            <if test="rate.id != null"> id= #{rate.id,jdbcType=BIGINT},</if>
+            <if test="rate.code != null"> code= #{rate.code,jdbcType=VARCHAR},</if>
+            <if test="rate.createTime != null"> create_time= #{rate.createTime}</if>
+        </set>
+        WHERE id = #{rate.id,jdbcType=BIGINT}
+    </update>
+    <select id="queryByCode" resultMap="BaseResultMap">
+      select
+        <include refid="Base_Column_List" />
+      FROM rate
+      WHERE code = #{code}
+        AND status = 'TRUE'
+    </select>
+
+    <insert id="rateAdd" parameterType="com.yl.rate.core.entity.Rate">
+        INSERT INTO rate (
+            status,
+            comp_fee_type,
+            code,
+            create_time
+        ) VALUES (
+            #{status},
+            #{compFeeType},
+            #{code},
+            #{createTime}
+        )
+    </insert>
+
+    <select id="checkRateByCode" resultType="java.lang.Integer" parameterType="java.lang.String">
+        SELECT COUNT(1) FROM rate WHERE code = #{code}
+    </select>
+
+    <select id="queryByCodeDetails" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        FROM rate
+        WHERE code = #{code}
+    </select>
+
+    <update id="rateUpdate" parameterType="com.yl.rate.core.entity.Rate">
+        UPDATE rate
+        SET
+        status = #{status},
+        comp_fee_type = #{compFeeType}
+        WHERE code = #{code}
+    </update>
+
+    <delete id="delete">
+        DELETE FROM rate
+        WHERE id = #{id}
+    </delete>
+</mapper>
+

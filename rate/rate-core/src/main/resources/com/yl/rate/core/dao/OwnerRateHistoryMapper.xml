@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.yl.rate.core.dao.OwnerRateHistoryMapper">
+    <resultMap id="BaseResultMap" type="com.yl.rate.core.entity.OwnerRateHistory">
+        <result column="owner_role" property="ownerRole" jdbcType="VARCHAR"/>
+        <result column="owner_id" property="ownerId" jdbcType="VARCHAR"/>
+        <result column="owner_rate_type" property="ownerRateType" jdbcType="VARCHAR"/>
+        <result column="rate_code" property="rateCode" jdbcType="VARCHAR"/>
+        <result column="status" property="status" jdbcType="VARCHAR"/>
+        <result column="fee_type" property="feeType" jdbcType="VARCHAR"/>
+        <result column="product_type" property="productType" jdbcType="VARCHAR"/>
+        <result column="product_code" property="productCode" jdbcType="VARCHAR"/>
+        <result column="remarks" property="remarks" jdbcType="VARCHAR"/>
+        <result column="last_updated_time" property="lastUpdatedTime"/>
+        <result column="id" property="id" jdbcType="BIGINT"/>
+        <result column="code" property="code" jdbcType="VARCHAR"/>
+        <result column="create_time" property="createTime"/>
+        <result column="oper" property="oper" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        owner_role,
+        owner_id,
+        owner_rate_type,
+        rate_code,
+        status,
+        fee_type,
+        product_type,
+        product_code,
+        id,
+        code,
+        create_time,
+        remarks,
+        last_updated_time,
+        oper
+    </sql>
+
+    <!--auto generated Code-->
+    <insert id="insert" useGeneratedKeys="true" keyProperty="ownerRateHistory.id">
+        INSERT INTO owner_rate_history (
+        owner_role,
+        owner_id,
+        owner_rate_type,
+        rate_code,
+        status,
+        fee_type,
+        product_type,
+        product_code,
+        id,
+        code,
+        create_time,
+        remarks,
+        last_updated_time,
+        oper
+        ) VALUES (
+        #{ownerRateHistory.ownerRole,jdbcType=VARCHAR},
+        #{ownerRateHistory.ownerId,jdbcType=VARCHAR},
+        #{ownerRateHistory.ownerRateType,jdbcType=VARCHAR},
+        #{ownerRateHistory.rateCode,jdbcType=VARCHAR},
+        #{ownerRateHistory.status,jdbcType=VARCHAR},
+        #{ownerRateHistory.feeType,jdbcType=VARCHAR},
+        #{ownerRateHistory.productType,jdbcType=VARCHAR},
+        #{ownerRateHistory.productCode,jdbcType=VARCHAR},
+        #{ownerRateHistory.id,jdbcType=BIGINT},
+        #{ownerRateHistory.code,jdbcType=VARCHAR},
+        #{ownerRateHistory.createTime},
+        #{ownerRateHistory.remarks,jdbcType=VARCHAR},
+        #{ownerRateHistory.lastUpdatedTime},
+        #{ownerRateHistory.oper,jdbcType=VARCHAR}
+        )
+    </insert>
+
+    <select id="findAllFeeConfigHistory" parameterType="java.lang.String" resultType="java.util.HashMap">
+        SELECT
+            o.owner_role,
+            o.owner_id,
+            o.owner_rate_type,
+            o.rate_code,
+            o.status,
+            o.fee_type,
+            o.product_type,
+            o.product_code,
+            o.id,
+            o.code,
+            o.create_time,
+            o.remarks,
+            o.last_updated_time,
+            o.oper,
+            r.name
+        FROM
+            owner_rate_history o
+        LEFT JOIN rate_template r ON o.rate_code = r.`code`
+        WHERE o.code = #{code}
+        ORDER BY
+            o.id DESC
+    </select>
+
+    <select id="queryById" resultMap="BaseResultMap">
+        SELECT <include refid="Base_Column_List" />
+        FROM owner_rate_history
+        WHERE id = #{id, jdbcType=BIGINT}
+    </select>
+
+    <update id="updateStatus">
+        UPDATE owner_rate_history
+        <set>
+            <if test="ownerRateHistory.status != null"> status = #{ownerRateHistory.status,jdbcType=VARCHAR}</if>
+        </set>
+        WHERE id = #{ownerRateHistory.id,jdbcType=BIGINT}
+    </update>
+</mapper>

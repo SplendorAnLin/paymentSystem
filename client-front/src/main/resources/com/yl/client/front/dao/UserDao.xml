@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yl.client.front.dao.UserDao">
+
+	<resultMap id="BaseResultMap" type="com.yl.client.front.model.User">
+		<id column="id" jdbcType="BIGINT" property="id" />
+		<result column="CUSTOMER_NO" 		property="customerNo" />
+		<result column="JG_ID" 				property="jgId" />
+		<result column="CREATE_TIME" 		property="createTime" />
+		<result column="STAUTS" 			property="stauts" />
+		<result column="ERROR" 				property="error"  />
+		<result column="CUSTOMER_IMG" 		property="customerImg" />
+	</resultMap>
+
+	<sql id="commonColumn">
+		id,CUSTOMER_NO,JG_ID,ERROR,CREATE_TIME,STAUTS,CUSTOMER_IMG
+	</sql>
+
+   <insert id="createUser" parameterType="com.yl.client.front.model.User">
+		INSERT INTO
+			USER(CUSTOMER_NO,JG_ID,ERROR,CREATE_TIME,STAUTS)
+		VALUES
+			(#{customerNo}, #{jgId}, #{error},#{createTime}, #{stauts})
+	</insert>
+	<update id="updateImg" parameterType="com.yl.client.front.model.User">
+		UPDATE USER
+		SET CUSTOMER_IMG=#{customerImg}
+		where CUSTOMER_NO=#{customerNo}
+	</update>
+	<select id="findUserImg" resultType="string">
+		select CUSTOMER_IMG 
+		FROM USER
+		<where> 1=1 and CUSTOMER_NO=#{customerNo}	
+		</where>
+	</select>
+	<select id="findUserByJg" resultMap="BaseResultMap">
+		SELECT <include refid="commonColumn"/> 
+		FROM USER
+		<where> 1=1 and JG_ID=#{jgId}	
+		</where>
+	</select>
+	<update id="updateStauts" parameterType="com.yl.client.front.model.User">
+		UPDATE USER
+		SET ERROR=#{error,jdbcType=INTEGER},STAUTS=#{stauts,jdbcType=VARCHAR}
+		where JG_ID=#{jgId}
+	</update>
+</mapper>

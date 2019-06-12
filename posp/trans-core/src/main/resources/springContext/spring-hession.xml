@@ -1,0 +1,77 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" ":/spring-beans.dtd">
+
+<beans default-autowire="byName">
+	<!-- server -->
+	<bean id="infoSync" class="com.yl.pay.pos.interfaces.impl.InfoSyncImpl"></bean>
+	<bean id="posOrder" class="com.yl.pay.pos.interfaces.impl.PosOrderHessianServiceImpl"></bean>
+	<bean id="vlhQuery" class="com.yl.pay.pos.interfaces.impl.VlhQueryImpl"></bean>
+	
+	<!-- client -->
+    <!-- 账户 -->
+	<bean id="accountInterface" class="org.springframework.remoting.caucho.HessianProxyFactoryBean">
+		<property name="serviceUrl">
+			<value>
+				${account.accountInterface.service.url}
+			</value>
+		</property>
+		<property name="serviceInterface">
+			<value>
+				com.yl.account.api.dubbo.AccountInterface
+			</value>
+		</property>
+		<property name="hessian2" value="false" />
+		<property name="chunkedPost" value="false" />
+		<property name="overloadEnabled" value="true"/>
+	</bean>
+	<!-- 账户查询 -->
+	<bean id="accountQueryInterface" class="org.springframework.remoting.caucho.HessianProxyFactoryBean">
+		<property name="serviceUrl">
+			<value>
+				${account.accountQueryInterface.service.url}
+			</value>
+		</property>
+		<property name="serviceInterface">
+			<value>
+				com.yl.account.api.dubbo.AccountQueryInterface
+			</value>
+		</property>
+		<property name="hessian2" value="false" />
+		<property name="chunkedPost" value="false" />
+		<property name="overloadEnabled" value="true"/>
+	</bean>
+	
+	<!--分润 -->
+	<bean id="shareProfitInterface" class="org.springframework.remoting.caucho.HessianProxyFactoryBean">
+		<property name="serviceUrl">
+			<value>
+				${profit.shareProfitInterface.service.url}
+			</value>
+		</property>
+		<property name="serviceInterface">
+			<value>
+				com.yl.boss.api.interfaces.ShareProfitInterface
+			</value>
+		</property>
+		<property name="hessian2" value="false" />
+		<property name="chunkedPost" value="false" />
+		<property name="overloadEnabled" value="true"/>
+	</bean>
+	<!--查询结算卡信息 -->
+	<bean id="customerInterface" class="org.springframework.remoting.caucho.HessianProxyFactoryBean">
+		<property name="serviceUrl">
+			<value>
+				${boss.customerInterface.service.url}
+			</value>
+		</property>
+		<property name="serviceInterface">
+			<value>
+				com.yl.boss.api.interfaces.CustomerInterface
+			</value>
+		</property>
+		<property name="hessian2" value="false" />
+		<property name="chunkedPost" value="false" />
+		<property name="overloadEnabled" value="true"/>
+	</bean>
+	
+</beans>

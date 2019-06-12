@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+	http://www.springframework.org/schema/beans/spring-beans-4.0.xsd"
+	default-autowire="byName">
+
+	<!-- 补单定时任务 -->
+    <bean id="merchantSalesResultNotifyTask" class="com.yl.online.gateway.task.MerchantSalesResultNotifyJob"></bean>
+
+    <bean id="merchantSalesResultNotifyTaskJob" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject" ref="merchantSalesResultNotifyTask"/>
+		<property name="targetMethod" value="execute"/>
+		<property name="concurrent" value="false"/>
+	</bean>
+	<bean id="merchantSalesResultNotifyTaskTrigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+		<property name="jobDetail" ref="merchantSalesResultNotifyTaskJob"/>
+		<property name="cronExpression" value="0 0/1 * * * ? *"/>
+	</bean>
+
+	<!-- 总控制器 -->
+	<bean id="startQuertz" lazy-init="false" autowire="no" class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
+		<property name="triggers">
+			<list>
+				<ref bean="merchantSalesResultNotifyTaskTrigger"/>
+			</list>
+		</property>
+	</bean>
+</beans>

@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yl.realAuth.front.dao.mapper.AuthSalesResultNotifyOrderMapper">
+	<resultMap id="BaseResultMap" type="com.yl.realAuth.model.AuthResultNotifyOrder">
+		<id column="ID" 					property="id" />
+		<result column="CODE"  				property="code" />
+		<result column="VERSION" 		    property="version" />
+		<result column="CREATE_TIME" 		property="createTime" />
+		<result column="ORDER_CODE" 		property="orderCode" />
+		<result column="AUTH_RESULT" 		property="authResult" />
+		<result column="REQUEST_CODE" 		property="requestCode" />
+		<result column="NOTIFY_URL" 		property="notifyURL" />
+		<result column="NOTIFY_RESULT" 		property="notifyResult" />
+		<result column="NOTIFY_COUNT" 		property="notifyCount" />
+		<result column="NEXT_FIRE_TIME" 	property="nextFireTime" />
+	</resultMap>
+	<sql id="base_Column_List">
+		ID,CODE,VERSION,CREATE_TIME,ORDER_CODE,AUTH_RESULT,REQUEST_CODE,NOTIFY_URL,NOTIFY_RESULT,NOTIFY_COUNT,
+		NEXT_FIRE_TIME
+	</sql>
+	
+	<select id="queryOrderByCode" parameterType="String" resultMap="BaseResultMap">
+		SELECT 
+		<include refid="base_Column_List" />
+		FROM AUTH_RESULT_NOTIFY_ORDER 
+	   WHERE CODE = #{code}
+	</select>
+	
+	<select id="recordFaildOrder" parameterType="com.yl.realAuth.model.AuthResultNotifyOrder">
+	</select>
+	
+	
+	<select id="queryBy" parameterType="String">
+	</select>
+	
+	
+	<update id="updateAuthConfig" parameterType="com.yl.realAuth.model.AuthResultNotifyOrder">
+	</update>
+	
+	<update id="updateNotifyCount" parameterType="com.yl.realAuth.model.AuthResultNotifyOrder">
+	</update>
+	
+	
+</mapper>

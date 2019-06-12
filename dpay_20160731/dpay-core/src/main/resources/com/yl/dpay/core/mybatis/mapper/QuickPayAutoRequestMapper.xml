@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yl.dpay.core.mybatis.mapper.QuickPayAutoRequestMapper">
+	<resultMap id="BaseResultMap" type="com.yl.dpay.core.entity.QuickPayAutoRequest">
+		<id column="id" 					property="id" />
+		<result column="optimistic" 		property="optimistic" />
+		<result column="OWNER_ID" 			property="ownerId" />
+		<result column="OWNER_ROLE"			property="ownerRole"/>
+		<result column="OPERATOR"			property="operator" />
+		<result column="BANK_CODE"			property="bankCode" />
+		<result column="BANK_NAME"			property="bankName" />
+		<result column="ACCOUNT_NAME"		property="accountName" />
+		<result column="ACCOUNT_NO"			property="accountNo" />
+		<result column="ACCOUNT_TYPE"		property="accountType" />
+		<result column="AUTO_REQUEST_STATUS"	property="autoRequestStatus" />
+		<result column="ORDER_CODE"			property="orderCode" />
+		<result column="FLOW_NO"			property="flowNo" />
+		<result column="CODE"  				property="code" />
+		<result column="ACCOUNT_DATE"  		property="accountDate" />
+		<result column="CREATE_DATE" 		property="createDate" />
+		<result column="APPLY_DATE" 		property="applyDate" />
+		<result column="FREEZE_NO" 		property="freezeNo" />
+		<result column="REMIT_AMOUNT" 		property="remitAmount" />
+		<result column="REMIT_FEE" 		property="remitFee" />
+		<result column="FREEZE_STATUS" 		property="freezeStatus" />
+		<result column="CONSULT_REMIT_STATUS" 		property="consultRemitStatus" />
+		<result column="CONSULT_REMIT_FEE_STATUS" 		property="consultRemitFeeStatus" />
+		<result column="REQUEST_STATUS" 		property="requestStatus" />
+		
+	</resultMap>
+	<sql id="Base_Column_List">
+		id, optimistic, OWNER_ID, OWNER_ROLE, OPERATOR, BANK_CODE, BANK_NAME,
+		ACCOUNT_NAME, ACCOUNT_NO, ACCOUNT_TYPE, AUTO_REQUEST_STATUS,
+		ORDER_CODE, FLOW_NO,CODE, ACCOUNT_DATE, CREATE_DATE, APPLY_DATE,FREEZE_NO,REMIT_AMOUNT,REMIT_FEE,
+		FREEZE_STATUS,CONSULT_REMIT_STATUS,CONSULT_REMIT_FEE_STATUS,REQUEST_STATUS
+	</sql>
+	
+	
+	
+	<insert id="insert" parameterType="com.yl.dpay.core.entity.QuickPayAutoRequest" useGeneratedKeys="true" keyProperty="id">
+		insert into quickpay_auto_request (optimistic, OWNER_ID, OWNER_ROLE, OPERATOR, BANK_CODE, BANK_NAME,
+		ACCOUNT_NAME, ACCOUNT_NO, ACCOUNT_TYPE, AUTO_REQUEST_STATUS,
+		ORDER_CODE, FLOW_NO,CODE, ACCOUNT_DATE, CREATE_DATE, APPLY_DATE,FREEZE_NO,REMIT_AMOUNT,REMIT_FEE,
+		FREEZE_STATUS,CONSULT_REMIT_STATUS,CONSULT_REMIT_FEE_STATUS,REQUEST_STATUS
+		)
+		values (
+		#{optimistic},#{ownerId},#{ownerRole},#{operator},#{bankCode},#{bankName},#{accountName},#{accountNo},#{accountType},
+		#{autoRequestStatus},#{orderCode},#{flowNo},#{code},#{accountDate},#{createDate},#{applyDate},#{freezeNo},
+		#{remitAmount},#{remitFee},#{freezeStatus},#{consultRemitStatus},#{consultRemitFeeStatus},#{requestStatus}
+
+		)
+	</insert>
+	
+	<select id="query" parameterType="string"
+		resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from quickpay_auto_request
+		where ORDER_CODE = #{requestNo}
+	</select>
+
+</mapper>

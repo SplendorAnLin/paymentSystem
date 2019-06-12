@@ -1,0 +1,522 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.yl.recon.core.mybatis.mapper.ReconExceptionMapper">
+    <!--auto generated Code-->
+    <resultMap id="BaseResultMap" type="com.yl.recon.core.entity.ReconException">
+        <result column="recon_order_id" property="reconOrderId" jdbcType="BIGINT"/>
+        <result column="recon_date" property="reconDate" jdbcType="DATE"/>
+        <result column="recon_type" property="reconType" jdbcType="VARCHAR"/>
+        <result column="amount" property="amount" jdbcType="DOUBLE"/>
+        <result column="trade_order_code" property="tradeOrderCode" jdbcType="VARCHAR"/>
+        <result column="interface_order_code" property="interfaceOrderCode" jdbcType="VARCHAR"/>
+        <result column="recon_exception_type" property="reconExceptionType" jdbcType="VARCHAR"/>
+        <result column="handle_status" property="handleStatus" jdbcType="VARCHAR"/>
+        <result column="handle_remark" property="handleRemark" jdbcType="VARCHAR"/>
+        <result column="oper" property="oper" jdbcType="VARCHAR"/>
+        <result column="code" property="code" jdbcType="VARCHAR"/>
+        <result column="version" property="version" jdbcType="BIGINT"/>
+        <result column="create_time" property="createTime" jdbcType="TIMESTAMP"/>
+    </resultMap>
+
+    <!--auto generated Code-->
+    <sql id="Base_Column_List">
+        recon_order_id,
+        recon_date,
+        recon_type,
+        amount,
+        trade_order_code,
+        interface_order_code,
+        recon_exception_type,
+        handle_status,
+        handle_remark,
+        oper,
+        code,
+        version,
+        create_time
+    </sql>
+
+    <!--auto generated Code-->
+    <insert id="insert" useGeneratedKeys="true" keyProperty="reconException.code">
+        INSERT INTO recon_exception (
+            recon_order_id,
+            recon_date,
+            recon_type,
+            amount,
+            trade_order_code,
+            interface_order_code,
+            recon_exception_type,
+            handle_status,
+            handle_remark,
+            oper,
+            code,
+            version,
+            create_time
+        ) VALUES (
+            #{reconException.reconOrderId,jdbcType=BIGINT},
+            #{reconException.reconDate,jdbcType=DATE},
+            #{reconException.reconType,jdbcType=VARCHAR},
+            #{reconException.amount,jdbcType=DOUBLE},
+            #{reconException.tradeOrderCode,jdbcType=VARCHAR},
+            #{reconException.interfaceOrderCode,jdbcType=VARCHAR},
+            #{reconException.reconExceptionType,jdbcType=VARCHAR},
+            #{reconException.handleStatus,jdbcType=VARCHAR},
+            #{reconException.handleRemark,jdbcType=VARCHAR},
+            #{reconException.oper,jdbcType=VARCHAR},
+            #{reconException.code,jdbcType=VARCHAR},
+            #{reconException.version,jdbcType=BIGINT},
+            #{reconException.createTime,jdbcType=TIMESTAMP}
+        )
+    </insert>
+
+    <!--auto generated Code-->
+    <insert id="insertSelective" useGeneratedKeys="true" keyProperty="reconException.code">
+        INSERT INTO recon_exception
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="reconException.reconOrderId!=null">recon_order_id,</if>
+            <if test="reconException.reconDate!=null">recon_date,</if>
+            <if test="reconException.reconType!=null">recon_type,</if>
+            <if test="reconException.amount!=null">amount,</if>
+            <if test="reconException.tradeOrderCode!=null">trade_order_code,</if>
+            <if test="reconException.interfaceOrderCode!=null">interface_order_code,</if>
+            <if test="reconException.reconExceptionType!=null">recon_exception_type,</if>
+            <if test="reconException.handleStatus!=null">handle_status,</if>
+            <if test="reconException.handleRemark!=null">handle_remark,</if>
+            <if test="reconException.oper!=null">oper,</if>
+            <if test="reconException.code!=null">code,</if>
+            <if test="reconException.version!=null">version,</if>
+            <if test="reconException.createTime!=null">create_time,</if>
+        </trim>
+        VALUES
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="reconException.reconOrderId!=null">#{reconException.reconOrderId,jdbcType=BIGINT},
+            </if>
+            <if test="reconException.reconDate!=null">#{reconException.reconDate,jdbcType=DATE},
+            </if>
+            <if test="reconException.reconType!=null">#{reconException.reconType,jdbcType=VARCHAR},
+            </if>
+            <if test="reconException.amount!=null">#{reconException.amount,jdbcType=DOUBLE},
+            </if>
+            <if test="reconException.tradeOrderCode!=null">#{reconException.tradeOrderCode,jdbcType=VARCHAR},
+            </if>
+            <if test="reconException.interfaceOrderCode!=null">#{reconException.interfaceOrderCode,jdbcType=VARCHAR},
+            </if>
+            <if test="reconException.reconExceptionType!=null">#{reconException.reconExceptionType,jdbcType=VARCHAR},
+            </if>
+            <if test="reconException.handleStatus!=null">#{reconException.handleStatus,jdbcType=VARCHAR},
+            </if>
+            <if test="reconException.handleRemark!=null">#{reconException.handleRemark,jdbcType=VARCHAR},
+            </if>
+            <if test="reconException.oper!=null">#{reconException.oper,jdbcType=VARCHAR},
+            </if>
+            <if test="reconException.code!=null">#{reconException.code,jdbcType=VARCHAR},
+            </if>
+            <if test="reconException.version!=null">#{reconException.version,jdbcType=BIGINT},
+            </if>
+            <if test="reconException.createTime!=null">#{reconException.createTime,jdbcType=TIMESTAMP},
+            </if>
+        </trim>
+    </insert>
+
+    <!--auto generated Code-->
+    <insert id="insertList">
+        INSERT INTO recon_exception (
+        <include refid="Base_Column_List"/>
+        )VALUES
+        <foreach collection="reconExceptions" item="reconException" index="index" separator=",">
+            (
+            #{reconException.reconOrderId,jdbcType=BIGINT},
+            #{reconException.reconDate,jdbcType=DATE},
+            #{reconException.reconType,jdbcType=VARCHAR},
+            #{reconException.amount,jdbcType=DOUBLE},
+            #{reconException.tradeOrderCode,jdbcType=VARCHAR},
+            #{reconException.interfaceOrderCode,jdbcType=VARCHAR},
+            #{reconException.reconExceptionType,jdbcType=VARCHAR},
+            #{reconException.handleStatus,jdbcType=VARCHAR},
+            #{reconException.handleRemark,jdbcType=VARCHAR},
+            #{reconException.oper,jdbcType=VARCHAR},
+            #{reconException.code,jdbcType=VARCHAR},
+            #{reconException.version,jdbcType=BIGINT},
+            #{reconException.createTime,jdbcType=TIMESTAMP}
+            )
+        </foreach>
+    </insert>
+
+    <!--auto generated Code-->
+    <update id="update">
+        UPDATE recon_exception
+        <set>
+            <if test="reconException.reconOrderId != null">recon_order_id=
+                #{reconException.reconOrderId,jdbcType=BIGINT},
+            </if>
+            <if test="reconException.reconDate != null">recon_date= #{reconException.reconDate,jdbcType=DATE},</if>
+            <if test="reconException.reconType != null">recon_type= #{reconException.reconType,jdbcType=VARCHAR},</if>
+            <if test="reconException.amount != null">amount= #{reconException.amount,jdbcType=DOUBLE},</if>
+            <if test="reconException.tradeOrderCode != null">trade_order_code=
+                #{reconException.tradeOrderCode,jdbcType=VARCHAR},
+            </if>
+            <if test="reconException.interfaceOrderCode != null">interface_order_code=
+                #{reconException.interfaceOrderCode,jdbcType=VARCHAR},
+            </if>
+            <if test="reconException.reconExceptionType != null">recon_exception_type=
+                #{reconException.reconExceptionType,jdbcType=VARCHAR},
+            </if>
+            <if test="reconException.handleStatus != null">handle_status=
+                #{reconException.handleStatus,jdbcType=VARCHAR},
+            </if>
+            <if test="reconException.handleRemark != null">handle_remark=
+                #{reconException.handleRemark,jdbcType=VARCHAR},
+            </if>
+            <if test="reconException.oper != null">oper= #{reconException.oper,jdbcType=VARCHAR},</if>
+            <if test="reconException.code != null">code= #{reconException.code,jdbcType=VARCHAR},</if>
+            <if test="reconException.version != null">version= #{reconException.version,jdbcType=BIGINT},</if>
+            <if test="reconException.createTime != null">create_time= #{reconException.createTime,jdbcType=TIMESTAMP}
+            </if>
+        </set>
+        WHERE code = #{reconException.code,jdbcType=VARCHAR}
+    </update>
+
+    <!--Mybatis 自动生成代码-->
+
+    <sql id="Example_Where_Clause">
+        <!--
+          WARNING - @mbggenerated
+          This element is automatically generated by MyBatis Generator, do not modify.
+          This element was generated on Sat Sep 02 18:16:52 CST 2017.
+        -->
+        <where>
+            <foreach collection="oredCriteria" item="criteria" separator="or">
+                <if test="criteria.valid">
+                    <trim prefix="(" suffix=")" prefixOverrides="and">
+                        <foreach collection="criteria.criteria" item="criterion">
+                            <choose>
+                                <when test="criterion.noValue">
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue">
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue">
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue">
+                                    and ${criterion.condition}
+                                    <foreach collection="criterion.value" item="listItem" open="(" close=")"
+                                             separator=",">
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+    <sql id="Update_By_Example_Where_Clause">
+        <!--
+          WARNING - @mbggenerated
+          This element is automatically generated by MyBatis Generator, do not modify.
+          This element was generated on Sat Sep 02 18:16:52 CST 2017.
+        -->
+        <where>
+            <foreach collection="example.oredCriteria" item="criteria" separator="or">
+                <if test="criteria.valid">
+                    <trim prefix="(" suffix=")" prefixOverrides="and">
+                        <foreach collection="criteria.criteria" item="criterion">
+                            <choose>
+                                <when test="criterion.noValue">
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue">
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue">
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue">
+                                    and ${criterion.condition}
+                                    <foreach collection="criterion.value" item="listItem" open="(" close=")"
+                                             separator=",">
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+
+    <select id="selectByExample" resultMap="BaseResultMap"
+            parameterType="com.yl.recon.core.entity.ReconExceptionExample">
+        <!--
+          WARNING - @mbggenerated
+          This element is automatically generated by MyBatis Generator, do not modify.
+          This element was generated on Sat Sep 02 18:16:52 CST 2017.
+        -->
+        select
+        <if test="distinct">
+            distinct
+        </if>
+        <include refid="Base_Column_List"/>
+        from recon_exception
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+        <if test="orderByClause != null">
+            order by ${orderByClause}
+        </if>
+    </select>
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long">
+        <!--
+          WARNING - @mbggenerated
+          This element is automatically generated by MyBatis Generator, do not modify.
+          This element was generated on Sat Sep 02 18:16:52 CST 2017.
+        -->
+        select
+        <include refid="Base_Column_List"/>
+        from recon_exception
+        where code = #{code,jdbcType=BIGINT}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+        <!--
+          WARNING - @mbggenerated
+          This element is automatically generated by MyBatis Generator, do not modify.
+          This element was generated on Sat Sep 02 18:16:52 CST 2017.
+        -->
+        DELETE FROM recon_exception
+        WHERE code = #{code,jdbcType=BIGINT}
+    </delete>
+    <delete id="deleteByExample" parameterType="com.yl.recon.core.entity.ReconExceptionExample">
+        <!--
+          WARNING - @mbggenerated
+          This element is automatically generated by MyBatis Generator, do not modify.
+          This element was generated on Sat Sep 02 18:16:52 CST 2017.
+        -->
+        delete from recon_exception
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+    </delete>
+
+    <select id="countByExample" parameterType="com.yl.recon.core.entity.ReconExceptionExample"
+            resultType="java.lang.Integer">
+        <!--
+          WARNING - @mbggenerated
+          This element is automatically generated by MyBatis Generator, do not modify.
+          This element was generated on Sat Sep 02 18:16:52 CST 2017.
+        -->
+        select count(*) from recon_exception
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+    </select>
+    <update id="updateByExampleSelective" parameterType="map">
+        <!--
+          WARNING - @mbggenerated
+          This element is automatically generated by MyBatis Generator, do not modify.
+          This element was generated on Sat Sep 02 18:16:52 CST 2017.
+        -->
+        update recon_exception
+        <set>
+            <if test="record.code != null">
+                code = #{record.code,jdbcType=BIGINT},
+            </if>
+            <if test="record.version != null">
+                version = #{record.version,jdbcType=INTEGER},
+            </if>
+            <if test="record.reconOrderId != null">
+                recon_order_id = #{record.reconOrderId,jdbcType=VARCHAR},
+            </if>
+            <if test="record.reconDate != null">
+                recon_date = #{record.reconDate,jdbcType=DATE},
+            </if>
+            <if test="record.reconType != null">
+                recon_type = #{record.reconType,jdbcType=VARCHAR},
+            </if>
+            <if test="record.amount != null">
+                amount = #{record.amount,jdbcType=DOUBLE},
+            </if>
+            <if test="record.tradeOrderCode != null">
+                trade_order_code = #{record.tradeOrderCode,jdbcType=VARCHAR},
+            </if>
+            <if test="record.interfaceOrderCode != null">
+                interface_order_code = #{record.interfaceOrderCode,jdbcType=VARCHAR},
+            </if>
+            <if test="record.reconExceptionType != null">
+                recon_exception_type = #{record.reconExceptionType,jdbcType=VARCHAR},
+            </if>
+            <if test="record.handleStatus != null">
+                handle_status = #{record.handleStatus,jdbcType=VARCHAR},
+            </if>
+            <if test="record.handleRemark != null">
+                handle_remark = #{record.handleRemark,jdbcType=VARCHAR},
+            </if>
+            <if test="record.oper != null">
+                oper = #{record.oper,jdbcType=VARCHAR},
+            </if>
+            <if test="record.createTime != null">
+                create_time = #{record.createTime,jdbcType=TIMESTAMP},
+            </if>
+        </set>
+        <if test="_parameter != null">
+            <include refid="Update_By_Example_Where_Clause"/>
+        </if>
+    </update>
+    <update id="updateByExample" parameterType="map">
+        <!--
+          WARNING - @mbggenerated
+          This element is automatically generated by MyBatis Generator, do not modify.
+          This element was generated on Sat Sep 02 18:16:52 CST 2017.
+        -->
+        update recon_exception
+        set code = #{record.code,jdbcType=BIGINT},
+        version = #{record.version,jdbcType=INTEGER},
+        recon_order_id = #{record.reconOrderId,jdbcType=VARCHAR},
+        recon_date = #{record.reconDate,jdbcType=DATE},
+        recon_type = #{record.reconType,jdbcType=VARCHAR},
+        amount = #{record.amount,jdbcType=DOUBLE},
+        trade_order_code = #{record.tradeOrderCode,jdbcType=VARCHAR},
+        interface_order_code = #{record.interfaceOrderCode,jdbcType=VARCHAR},
+        recon_exception_type = #{record.reconExceptionType,jdbcType=VARCHAR},
+        handle_status = #{record.handleStatus,jdbcType=VARCHAR},
+        handle_remark = #{record.handleRemark,jdbcType=VARCHAR},
+        oper = #{record.oper,jdbcType=VARCHAR},
+        create_time = #{record.createTime,jdbcType=TIMESTAMP}
+        <if test="_parameter != null">
+            <include refid="Update_By_Example_Where_Clause"/>
+        </if>
+    </update>
+    <update id="updateByPrimaryKeySelective" parameterType="com.yl.recon.core.entity.ReconException">
+        <!--
+          WARNING - @mbggenerated
+          This element is automatically generated by MyBatis Generator, do not modify.
+          This element was generated on Sat Sep 02 18:16:52 CST 2017.
+        -->
+        update recon_exception
+        <set>
+            <if test="version != null">
+                version = #{version,jdbcType=INTEGER},
+            </if>
+            <if test="reconOrderId != null">
+                recon_order_id = #{reconOrderId,jdbcType=VARCHAR},
+            </if>
+            <if test="reconDate != null">
+                recon_date = #{reconDate,jdbcType=DATE},
+            </if>
+            <if test="reconType != null">
+                recon_type = #{reconType,jdbcType=VARCHAR},
+            </if>
+            <if test="amount != null">
+                amount = #{amount,jdbcType=DOUBLE},
+            </if>
+            <if test="tradeOrderCode != null">
+                trade_order_code = #{tradeOrderCode,jdbcType=VARCHAR},
+            </if>
+            <if test="interfaceOrderCode != null">
+                interface_order_code = #{interfaceOrderCode,jdbcType=VARCHAR},
+            </if>
+            <if test="reconExceptionType != null">
+                recon_exception_type = #{reconExceptionType,jdbcType=VARCHAR},
+            </if>
+            <if test="handleStatus != null">
+                handle_status = #{handleStatus,jdbcType=VARCHAR},
+            </if>
+            <if test="handleRemark != null">
+                handle_remark = #{handleRemark,jdbcType=VARCHAR},
+            </if>
+            <if test="oper != null">
+                oper = #{oper,jdbcType=VARCHAR},
+            </if>
+            <if test="createTime != null">
+                create_time = #{createTime,jdbcType=TIMESTAMP},
+            </if>
+        </set>
+        where code = #{code,jdbcType=BIGINT}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.yl.recon.core.entity.ReconException">
+        <!--
+          WARNING - @mbggenerated
+          This element is automatically generated by MyBatis Generator, do not modify.
+          This element was generated on Sat Sep 02 18:16:52 CST 2017.
+        -->
+        UPDATE recon_exception
+        SET version = #{version,jdbcType=INTEGER},
+        recon_order_id = #{reconOrderId,jdbcType=VARCHAR},
+        recon_date = #{reconDate,jdbcType=DATE},
+        recon_type = #{reconType,jdbcType=VARCHAR},
+        amount = #{amount,jdbcType=DOUBLE},
+        trade_order_code = #{tradeOrderCode,jdbcType=VARCHAR},
+        interface_order_code = #{interfaceOrderCode,jdbcType=VARCHAR},
+        recon_exception_type = #{reconExceptionType,jdbcType=VARCHAR},
+        handle_status = #{handleStatus,jdbcType=VARCHAR},
+        handle_remark = #{handleRemark,jdbcType=VARCHAR},
+        oper = #{oper,jdbcType=VARCHAR},
+        create_time = #{createTime,jdbcType=TIMESTAMP}
+        WHERE code = #{code,jdbcType=BIGINT}
+    </update>
+
+
+
+
+
+
+    <!--自定义 start-->
+    <resultMap id="BeanBaseResultMap" type="com.yl.recon.api.core.bean.ReconException">
+        <result column="recon_order_id" property="reconOrderId" jdbcType="BIGINT"/>
+        <result column="recon_date" property="reconDate" jdbcType="DATE"/>
+        <result column="recon_type" property="reconType" jdbcType="VARCHAR"/>
+        <result column="amount" property="amount" jdbcType="DOUBLE"/>
+        <result column="trade_order_code" property="tradeOrderCode" jdbcType="VARCHAR"/>
+        <result column="interface_order_code" property="interfaceOrderCode" jdbcType="VARCHAR"/>
+        <result column="recon_exception_type" property="reconExceptionType" jdbcType="VARCHAR"/>
+        <result column="handle_status" property="handleStatus" jdbcType="VARCHAR"/>
+        <result column="handle_remark" property="handleRemark" jdbcType="VARCHAR"/>
+        <result column="oper" property="oper" jdbcType="VARCHAR"/>
+        <result column="code" property="code" jdbcType="VARCHAR"/>
+        <result column="version" property="version" jdbcType="BIGINT"/>
+        <result column="create_time" property="createTime" jdbcType="TIMESTAMP"/>
+    </resultMap>
+
+    <sql id="findSql">
+        select
+        <include refid="Base_Column_List"/>
+        from recon_exception
+        WHERE 1=1
+        <if test="params.reconException != null">
+            <if test="params.reconException.reconOrderId != null">
+                AND recon_order_id = #{params.reconException.reconOrderId,jdbcType=VARCHAR}
+            </if>
+            <if test="params.reconException.reconExceptionType != null">
+                AND recon_exception_type = #{params.reconException.reconExceptionType,jdbcType=VARCHAR}
+            </if>
+            <if test="params.reconException.reconType != null">
+                AND recon_type = #{params.reconException.reconType,jdbcType=VARCHAR}
+            </if>
+            <if test="params.reconException.handleStatus != null">
+                AND handle_status = #{params.reconException.handleStatus,jdbcType=VARCHAR}
+            </if>
+
+            <if test="params.reconException.reconDate != null">
+                AND recon_date = #{params.reconException.reconDate,jdbcType=DATE}
+            </if>
+        </if>
+        <if test="params.startTime != null and params.startTime != ''">
+            AND create_time &gt;=#{params.startTime,jdbcType=TIMESTAMP}
+        </if>
+        <if test="params.endTime != null and params.startTime != ''">
+            AND create_time &lt;=#{params.endTime,jdbcType=TIMESTAMP}
+        </if>
+     </sql>
+    <!--分页查询所有-->
+    <select id="findAll" resultMap="BeanBaseResultMap" parameterType="Map">
+        <include refid="findSql"/>
+    </select>
+    <!--不分页查询所有-->
+    <select id="queryAll" resultMap="BeanBaseResultMap" parameterType="Map">
+        <include refid="findSql"/>
+    </select>
+
+    <!--自定义 end-->
+</mapper>

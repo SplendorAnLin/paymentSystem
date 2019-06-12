@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" ":/spring-beans.dtd">
+
+<beans default-autowire="byName">
+
+	<!-- 交易处理 -->
+	<bean id="balanceInquiryP500001" class="com.yl.pay.pos.interfaces.P500001.BalanceInquiry"></bean>
+	<bean id="purchaseP500001" class="com.yl.pay.pos.interfaces.P500001.Purchase"></bean>
+	<bean id="purchaseReversalP500001" class="com.yl.pay.pos.interfaces.P500001.PurchaseReversal"></bean>
+	<bean id="purchaseVoidP500001" class="com.yl.pay.pos.interfaces.P500001.PurchaseVoid"></bean>
+	<bean id="signInP500001" class="com.yl.pay.pos.interfaces.P500001.SignIn"></bean>
+	<bean id="cmbcTransUtil" class="com.yl.pay.pos.interfaces.P500001.NCCBTransUtil"></bean>
+</beans>

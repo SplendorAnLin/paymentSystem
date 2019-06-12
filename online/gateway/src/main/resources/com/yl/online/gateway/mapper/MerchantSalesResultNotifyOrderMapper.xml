@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yl.online.gateway.mapper.MerchantSalesResultNotifyOrderMapper">
+
+	<resultMap id="merchantSalesResultNotifyOrderMap" type="com.yl.online.model.model.MerchantSalesResultNotifyOrder">
+		<id 	property="id" 					column="ID"></id>
+		<result property="code" 				column="CODE"></result>
+		<result property="version" 				column="VERSION"></result>
+		<result property="createTime" 			column="CREATE_TIME"></result>
+		<result property="orderCode" 			column="ORDER_CODE"></result>
+		<result property="orderStatus" 			column="ORDER_STATUS"></result>
+		<result property="requestCode" 			column="REQUEST_CODE"></result>
+		<result property="notifyURL" 			column="NOTIFY_URL"></result>
+		<result property="notifyResult" 		column="NOTIFY_RESULT"></result>
+		<result property="notifyCount" 			column="NOTIFY_COUNT"></result>
+		<result property="nextFireTimes" 		column="NEXT_FIRE_TIMES"></result>
+		<result property="nextFireTime" 		column="NEXT_FIRE_TIME"></result>
+	</resultMap>
+
+	<sql id="merchantSalesResultNotifyOrderColumns">
+		ID,CODE,VERSION,CREATE_TIME,ORDER_CODE,ORDER_STATUS,REQUEST_CODE,NOTIFY_URL,NOTIFY_RESULT,
+		NOTIFY_COUNT,NEXT_FIRE_TIMES,NEXT_FIRE_TIME
+	</sql>
+
+
+	<insert id="recordFaildOrder" parameterType="com.yl.online.model.model.MerchantSalesResultNotifyOrder"
+		useGeneratedKeys="true" keyProperty="id">
+		INSERT INTO MER_SALES_RES_NOTI_ORD (
+		CODE,VERSION,CREATE_TIME,ORDER_CODE,ORDER_STATUS,REQUEST_CODE,NOTIFY_URL,NOTIFY_RESULT,
+		NOTIFY_COUNT,NEXT_FIRE_TIMES,NEXT_FIRE_TIME)
+		VALUES
+		(#{code},#{version},#{createTime},#{orderCode},#{orderStatus},#{requestCode},#{notifyURL},
+		#{notifyResult},#{notifyCount},#{nextFireTimes},#{nextFireTime})
+	</insert>
+
+	<select id="queryByOrderCode" resultMap="merchantSalesResultNotifyOrderMap"
+		parameterType="Map">
+		SELECT
+		<include refid="merchantSalesResultNotifyOrderColumns" />
+		FROM MER_SALES_RES_NOTI_ORD
+		WHERE ORDER_CODE = #{orderCode}
+	</select>
+	
+	<select id="queryBy" resultMap="merchantSalesResultNotifyOrderMap"
+		parameterType="Map">
+		SELECT
+		<include refid="merchantSalesResultNotifyOrderColumns" />
+		FROM MER_SALES_RES_NOTI_ORD
+		WHERE NOTIFY_COUNT &lt; #{maxCount} and NOTIFY_RESULT = 'FAILED'
+		ORDER BY ID ASC LIMIT #{maxNums}
+	</select>
+	
+	<update id="updateMerchantSalesResultNotifyOrder">
+		update MER_SALES_RES_NOTI_ORD
+		set NOTIFY_RESULT = #{merchantSalesResultNotifyOrder.notifyResult}
+		where ORDER_CODE = #{merchantSalesResultNotifyOrder.orderCode}
+	</update>
+	
+	<update id="updateNotifyCount">
+		update MER_SALES_RES_NOTI_ORD
+		set NOTIFY_COUNT = #{merchantSalesResultNotifyOrder.notifyCount},
+		NEXT_FIRE_TIMES = #{merchantSalesResultNotifyOrder.nextFireTimes},
+		NEXT_FIRE_TIME = #{merchantSalesResultNotifyOrder.nextFireTime}
+		where ORDER_CODE = #{merchantSalesResultNotifyOrder.orderCode}
+	</update>
+
+</mapper> 

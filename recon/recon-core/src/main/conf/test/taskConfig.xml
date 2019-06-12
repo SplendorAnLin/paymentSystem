@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+	http://www.springframework.org/schema/beans/spring-beans-4.0.xsd"
+       default-autowire="byName">
+
+
+    <!--生成对账文件 start-->
+    <!--Remit-->
+    <bean id="createRemitOrderReconFileTask" class="com.yl.recon.core.task.CreateRemitOrderReconFileTask"></bean>
+    <bean id="createRemitOrderReconFileJobTask"
+          class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+        <property name="targetObject" ref="createRemitOrderReconFileTask"/>
+        <property name="targetMethod" value="createRemitOrderReconFileTask"/>
+        <property name="concurrent" value="false"/>
+    </bean>
+    <bean id="createRemitOrderReconFileTrigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+        <property name="jobDetail" ref="createRemitOrderReconFileJobTask"/>
+        <property name="cronExpression" value="0 0 2 1/1 * ? "/>
+    </bean>
+    <!--OnlineOrder-->
+    <bean id="createOnlineOrderReconFileTask" class="com.yl.recon.core.task.CreateOnlineOrderReconFileTask"></bean>
+    <bean id="createOnlineOrderReconFileJobTask"
+          class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+        <property name="targetObject" ref="createOnlineOrderReconFileTask"/>
+        <property name="targetMethod" value="createOnlineOrderReconFileTask"/>
+        <property name="concurrent" value="false"/>
+    </bean>
+    <bean id="createOnlineOrderReconFileTrigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+        <property name="jobDetail" ref="createOnlineOrderReconFileJobTask"/>
+        <property name="cronExpression" value="0 05 2 1/1 * ? "/>
+    </bean>
+    <!--RealAuthOrder-->
+    <bean id="createRealAuthOrderReconFileTask" class="com.yl.recon.core.task.CreateRealAuthOrderReconFileTask"></bean>
+    <bean id="createRealAuthOrderReconFileJobTask"
+          class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+        <property name="targetObject" ref="createRealAuthOrderReconFileTask"/>
+        <property name="targetMethod" value="createRealAuthOrderReconFileTask"/>
+        <property name="concurrent" value="false"/>
+    </bean>
+    <bean id="createRealAuthOrderReconFileTrigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+        <property name="jobDetail" ref="createRealAuthOrderReconFileJobTask"/>
+        <property name="cronExpression" value="0 15 2 1/1 * ? "/>
+    </bean>
+    <!--PayInterface-->
+    <bean id="createPayInterfaceReconFileTask" class="com.yl.recon.core.task.CreatePayInterfaceReconFileTask"></bean>
+    <bean id="createPayInterfaceReconFileJobTask"
+          class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+        <property name="targetObject" ref="createPayInterfaceReconFileTask"/>
+        <property name="targetMethod" value="createPayInterfaceReconFileTask"/>
+        <property name="concurrent" value="false"/>
+    </bean>
+    <bean id="createPayInterfaceReconFileTrigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+        <property name="jobDetail" ref="createPayInterfaceReconFileJobTask"/>
+        <property name="cronExpression" value="0 20 2 1/1 * ? "/>
+    </bean>
+
+    <!--Account-->
+    <bean id="createAccountReconFileTask" class="com.yl.recon.core.task.CreateAccountReconFileTask"></bean>
+    <bean id="createAccountReconFileJobTask"
+          class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+        <property name="targetObject" ref="createAccountReconFileTask"/>
+        <property name="targetMethod" value="createAccountReconFileTask"/>
+        <property name="concurrent" value="false"/>
+    </bean>
+    <bean id="createAccountReconFileTrigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+        <property name="jobDetail" ref="createAccountReconFileJobTask"/>
+        <property name="cronExpression" value="0 25 2 1/1 * ? "/>
+    </bean>
+    <!--生成对账文件 end-->
+
+    <!-- 对账:将对账文件记录到数据库的定时任务 -->
+    <bean id="insertFileToDb" class="com.yl.recon.core.task.InsertFileToDbTask"></bean>
+    <bean id="insertFileToDbReconTask" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+        <property name="targetObject" ref="insertFileToDb"/>
+        <property name="targetMethod" value="execute"/>
+        <property name="concurrent" value="false"/>
+    </bean>
+    <bean id="insertFileToDbTrigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+        <property name="jobDetail" ref="insertFileToDbReconTask"/>
+        <property name="cronExpression" value="0 35 2 1/1 * ? "/>
+    </bean>
+
+
+    <!-- 订单和账户对账定时任务 -->
+    <!-- <bean id="order2AccountReconTask" class="com.yl.recon.core.task.Order2AccountReconTask"></bean> -->
+    <bean id="orderAccountDbReconTask" class="com.yl.recon.core.task.OrderAccountReconTask"></bean>
+    <bean id="orderAccountReconTask" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+        <property name="targetObject" ref="orderAccountDbReconTask"/>
+        <property name="targetMethod" value="execute"/>
+        <property name="concurrent" value="false"/>
+    </bean>
+    <bean id="orderAccountReconTrigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+        <property name="jobDetail" ref="orderAccountReconTask"/>
+        <property name="cronExpression" value="0 50 2 1/1 * ? "/>
+    </bean>
+
+
+    <!-- 订单和接口对账定时任务 -->
+    <bean id="orderInterfaceFbReconTask" class="com.yl.recon.core.task.OrderInterfaceReconTask"></bean>
+    <bean id="orderInterfaceReconTask" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+        <property name="targetObject" ref="orderInterfaceFbReconTask"/>
+        <property name="targetMethod" value="execute"/>
+        <property name="concurrent" value="false"/>
+    </bean>
+    <bean id="orderInterfaceReconTrigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+        <property name="jobDetail" ref="orderInterfaceReconTask"/>
+        <property name="cronExpression" value="0 55 2 1/1 * ? "/>
+    </bean>
+
+
+    <!-- 接口和银行通道对账定时任务 -->
+    <bean id="interfaceBankReconTaskTask" class="com.yl.recon.core.task.InterfaceBankReconTask"></bean>
+    <bean id="interfaceBankReconTask" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+        <property name="targetObject" ref="interfaceBankReconTaskTask"/>
+        <property name="targetMethod" value="execute"/>
+        <property name="concurrent" value="false"/>
+    </bean>
+    <bean id="interfaceBankReconTrigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+        <property name="jobDetail" ref="interfaceBankReconTask"/>
+        <property name="cronExpression" value="0 0 3 1/1 * ? "/>
+    </bean>
+
+
+
+    <!-- 总控制器 -->
+    <bean id="startQuertz" lazy-init="false" autowire="no"
+          class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
+        <property name="triggers">
+            <list>
+                <ref bean="orderAccountReconTrigger"/>
+                <ref bean="orderInterfaceReconTrigger"/>
+                <ref bean="interfaceBankReconTrigger"/>
+                <ref bean="insertFileToDbTrigger"/>
+                <ref bean="createRemitOrderReconFileTrigger"/>
+                <ref bean="createOnlineOrderReconFileTrigger"/>
+                <ref bean="createRealAuthOrderReconFileTrigger"/>
+                <ref bean="createPayInterfaceReconFileTrigger"/>
+                <ref bean="createAccountReconFileTrigger"/>
+            </list>
+        </property>
+    </bean>
+</beans>

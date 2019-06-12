@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yl.realAuth.core.dao.mapper.ChannelInfoMapper">
+	<resultMap id="resultMap" type="com.yl.realAuth.model.ChannelInfo">
+		<id column="ID" 					property="id" />
+		<result column="CODE"  				property="code" />
+		<result column="VERSION" 		    property="version" />
+		<result column="CREATE_TIME" 		property="createTime" />
+		<result column="INTERFACE_INFO_CODE"  		property="interfaceInfoCode" />
+		<result column="CHANNEL_NAME"  				property="channelName" />
+		<result column="STATUS"  				property="status" />
+		<result column="SUPPORT_NAME"  				property="supportName" />
+		<result column="MUST_NAME"  				property="mustName" />
+		<result column="SUPPORT_MOB_NO"  				property="supportMobNo" />
+		<result column="MUST_MOB_NO"  				property="mustMobNo" />
+		<result column="SUPPORT_CERT_NO"  				property="supportCertNo" />
+		<result column="MUST_CERT_NO"  				property="mustCertNo" />
+		<result column="CHANNEL_TYPE"  				property="channelType" />
+	</resultMap>
+	<sql id="base_Column_List">
+		ID,CODE,VERSION,CREATE_TIME,INTERFACE_INFO_CODE,CHANNEL_NAME,STATUS,SUPPORT_NAME,MUST_NAME,
+		SUPPORT_MOB_NO,MUST_MOB_NO,SUPPORT_CERT_NO,MUST_CERT_NO,CHANNEL_TYPE
+	</sql>
+	
+	
+	<insert id="insert" parameterType="com.yl.realAuth.model.ChannelInfo" useGeneratedKeys="true" keyProperty="id">
+		INSERT INTO CHANNEL_INFO (
+			CODE,VERSION,CREATE_TIME,INTERFACE_INFO_CODE,CHANNEL_NAME,STATUS,SUPPORT_NAME,MUST_NAME,
+			SUPPORT_MOB_NO,MUST_MOB_NO,SUPPORT_CERT_NO,MUST_CERT_NO,CHANNEL_TYPE
+		) VALUES (
+			#{code},#{version},#{createTime},#{interfaceInfoCode},#{channelName},#{status},#{supportName},
+			#{mustName},#{supportMobNo},#{mustMobNo},#{supportCertNo},#{mustCertNo},#{channelType}
+		)
+	</insert>
+	
+	<update id="modifyChannelInfo" parameterType="com.yl.realAuth.model.ChannelInfo">
+		UPDATE CHANNEL_INFO
+		set INTERFACE_INFO_CODE = #{interfaceInfoCode},
+			CHANNEL_NAME = #{channelName},
+			STATUS = #{status},
+			SUPPORT_NAME = #{supportName},
+			MUST_NAME = #{mustName},
+			SUPPORT_MOB_NO = #{supportMobNo},
+			MUST_MOB_NO = #{mustMobNo},
+			SUPPORT_CERT_NO = #{supportCertNo},
+			MUST_CERT_NO = #{mustCertNo},
+			CHANNEL_TYPE = #{channelType}
+		WHERE CODE = #{code}
+	</update>
+	
+	<select id="findByChannelCode" parameterType="String" resultMap="resultMap">
+		SELECT 
+		<include refid="base_Column_List" />
+		FROM CHANNEL_INFO 
+	   WHERE CODE = #{code}
+	</select>
+	
+</mapper>

@@ -1,0 +1,69 @@
+body{
+	font-size: 0.24rem;
+	background: white;
+}
+/***时间选择框start***/
+.riqi{
+	position: absolute;
+    right: 0.25rem;
+    top: -0.05rem;
+}
+.left{
+	float: left;
+}
+.right{
+	float: right;
+}
+.text-center{
+	text-align: center;
+}
+.icon_riqi{
+		position: absolute;
+		width: 0.3rem !important;
+		right: 0;
+		top: 0.05rem;
+		left: 3px;
+	}
+
+/***时间选择框end***/	
+.all_money{
+	width: 100%;
+	display: block;
+	margin:0.2rem 0 0.2rem 0;
+	text-align: center;
+	font-size: 0.3rem;
+}
+.list{
+    background: white;
+	height: 0.6rem;
+	margin: 0 0.2rem;
+	padding: 0.15rem 0.05rem;
+	line-height: 0.6rem;
+	font-size: 0.28rem;
+	border-bottom: 1px solid rgba(220,220,220,1);
+}
+.w-30{
+	width: 0.3rem;
+	position: relative;
+	top: 0.05rem;
+}
+.fon_gray{
+	color: #999999;
+}
+.w-50{
+	width: 0.5rem;
+}
+.mo{
+	left: 0.15rem;
+    top: 0.1rem;;
+}
+.lepo{
+	    position: relative;
+    font-size: 0.38rem;
+}
+.left_20{
+	margin-right: 0.2rem;
+}
+.listdata{
+	background: white;
+}

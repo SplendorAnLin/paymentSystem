@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.yl.account.core.dao.mapper.AccountAdjustVoucherMapper">
+
+	<resultMap id="AccountAdjustVoucher" type="com.yl.account.model.AccountAdjustVoucher">
+		<result column="CODE" 						property="code" />
+		<result column="VERSION" 	 				property="version" />
+		<result column="CREATE_TIME" 				property="createTime" />
+		<result column="SYSTEM"    					property="system" />   
+		<result column="BUSSINESS_CODE"    			property="bussinessCode" />   
+		<result column="ACCOUNT_NO"    				property="accountNo" />   
+		<result column="ACCOUNT_TYPE"    			property="accountType" />   
+		<result column="USER_NO"    				property="userNo" />   
+		<result column="USER_ROLE"    				property="userRole" />   
+		<result column="TRANS_ORDER"   				property="transOrder" />   
+		<result column="STATUS"    					property="status" />   
+		<result column="FUND_SYMBOL"    			property="fundSymbol" />   
+		<result column="AMOUNT"    					property="amount" />   
+		<result column="UN_FREEZE_AMOUNT"    		property="unFreezeAmount" />   
+		<result column="EXPIRE_TIME"    			property="expireTime" />   
+		<result column="EXPIRE_OPERATE"    			property="expireOperate" />   
+		<result column="FLOW_ID"    				property="flowId" />   
+		<result column="FREEZE_NO"    				property="freezeNo" />   
+		<result column="HANDLE_STATUS"    			property="handleStatus" />   
+		<result column="NOTICE_STATUS"    			property="noticeStatus" />   
+		<result column="PROCESS_INSTANCE_ID"    	property="processInstanceId" />   
+		<result column="OPERATOR"    				property="operator" />   
+		<result column="REASON"    					property="reason" />   
+		<result column="LASTMODIFY_TIME"    		property="lastModifyTime" />   
+		<result column="REMARK" 					property="remark" />
+	</resultMap>
+
+	<!-- 账户数据库模型字段 -->
+	<sql id="commonColumn">
+		CODE, VERSION, CREATE_TIME, SYSTEM, BUSSINESS_CODE, ACCOUNT_NO, ACCOUNT_TYPE, USER_NO, USER_ROLE, TRANS_ORDER, STATUS, FUND_SYMBOL, AMOUNT, UN_FREEZE_AMOUNT, EXPIRE_TIME, EXPIRE_OPERATE, FLOW_ID, FREEZE_NO, HANDLE_STATUS, NOTICE_STATUS, PROCESS_INSTANCE_ID, OPERATOR, REASON, LASTMODIFY_TIME, REMARK
+	</sql>
+	
+	<select id="findBy" resultMap="AccountAdjustVoucher" >
+		SELECT <include refid="commonColumn" /> FROM T_ACC_ADJ_VOUC WHERE 1 = 1
+	</select>
+	<select id="findByCode" resultMap="AccountAdjustVoucher" >
+		SELECT <include refid="commonColumn" /> FROM T_ACC_ADJ_VOUC WHERE CODE = #{code}
+	</select>
+	
+	<select id="findVoucherBy" resultMap="AccountAdjustVoucher" >
+		SELECT <include refid="commonColumn" /> FROM T_ACC_ADJ_VOUC 
+		WHERE 1 = 1
+		<if test="system != null and system != ''">
+			AND SYSTEM = #{system}
+		</if>
+		<if test="systemFlowId != null and systemFlowId != ''">
+			AND FLOW_ID = #{systemFlowId}
+		</if>
+		<if test="bussinessCode != null and bussinessCode != ''">
+			AND BUSSINESS_CODE = #{bussinessCode}
+		</if>
+		<if test="accountNo != null and accountNo != ''">
+			AND ACCOUNT_NO = #{accountNo}
+		</if>
+	</select>
+	
+	<update id="modify">
+		UPDATE
+			T_ACC_ADJ_VOUC
+		SET
+			VERSION = #{version}, 
+			STATUS = #{accountAdjustVoucher.status},
+			HANDLE_STATUS = #{accountAdjustVoucher.handleStatus},
+			NOTICE_STATUS = #{accountAdjustVoucher.noticeStatus},
+			UN_FREEZE_AMOUNT = #{accountAdjustVoucher.unFreezeAmount},
+			LASTMODIFY_TIME = #{accountAdjustVoucher.lastmodifyTime}
+		where
+			CODE = #{accountAdjustVoucher.code} 
+		AND version = #{accountAdjustVoucher.version}
+	</update>
+	
+	<insert id="insert" parameterType="com.yl.account.model.AccountAdjustVoucher">
+		INSERT INTO
+			T_ACC_ADJ_VOUC (<include refid="commonColumn"/>)
+		VALUES
+			(#{code}, #{version}, #{createTime}, #{system}, #{bussinessCode}, #{accountNo}, #{accountType}, #{userNo}, 
+			#{userRole}, #{transOrder}, #{status}, #{fundSymbol}, #{amount}, #{unFreezeAmount}, #{expireTime}, #{expireOperate}, 
+			#{flowId}, #{freezeNo}, #{handleStatus}, #{noticeStatus}, #{processInstanceId}, #{operator}, #{reason}, #{lastModifyTime}, #{remark})
+	</insert>
+	
+	<update id="modifyHandleStatusAndAdjustStatus">
+		UPDATE
+			T_ACC_ADJ_VOUC
+		SET
+			VERSION = #{version}, 
+			STATUS = #{accountAdjustVoucher.status},
+			HANDLE_STATUS = #{accountAdjustVoucher.handleStatus},
+			UN_FREEZE_AMOUNT = #{accountAdjustVoucher.unFreezeAmount},
+			LASTMODIFY_TIME = #{accountAdjustVoucher.lastmodifyTime}
+		where
+			CODE = #{accountAdjustVoucher.code} 
+		AND version = #{accountAdjustVoucher.version}
+	</update>
+	
+	<update id="modifyVoucher">
+		UPDATE
+			T_ACC_ADJ_VOUC
+		SET
+			VERSION = #{version}, 
+			LASTMODIFY_TIME = #{accountAdjustVoucher.lastmodifyTime},
+			ACCOUNT_NO = #{accountAdjustVoucher.accountNo},
+			ACCOUNT_TYPE = #{accountAdjustVoucher.accountType},
+			USER_NO = #{accountAdjustVoucher.userNo},
+			USER_ROLE = #{accountAdjustVoucher.userRole},
+			AMOUNT = #{accountAdjustVoucher.amount},
+			REASON = #{accountAdjustVoucher.reason},
+			REMARK = #{accountAdjustVoucher.remark}
+		where
+			CODE = #{accountAdjustVoucher.code} 
+		AND version = #{accountAdjustVoucher.version}
+	</update>
+	<select id="findAllAdjHistory" resultType="Map">
+		select v.CREATE_TIME, v.SYSTEM, v.BUSSINESS_CODE, v.ACCOUNT_NO, v.USER_NO, v.USER_ROLE, v.FUND_SYMBOL, v.AMOUNT, v.FLOW_ID, v.REASON, v.LASTMODIFY_TIME, v.REMARK,d.REMAIN_AMT
+		from T_ACC_ADJ_VOUC v Left JOIN T_ACC_VOUC_DET d On d.SYS_FLOW_ID=v.FLOW_ID
+		where v.ACCOUNT_NO=#{accountNo}
+		ORDER BY v.ID DESC
+	</select>
+</mapper>

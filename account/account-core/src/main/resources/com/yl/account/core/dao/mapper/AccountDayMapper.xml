@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.yl.account.core.dao.mapper.AccountDayMapper">
+
+	<resultMap id="AccountDay" type="com.yl.account.model.AccountDay">
+		<result column="CODE" 						property="code" />
+		<result column="VERSION" 	 				property="version" />
+		<result column="CREATE_TIME" 				property="createTime" />
+		<result column="BUSI_DATE" 					property="busiDate" />
+		<result column="USER_NO" 					property="userNo" />
+		<result column="USER_ROLE" 					property="userRole" />
+		<result column="DAY_INITIAL" 				property="dayInitial" />
+		<result column="DAY_RECEIP" 				property="dayReceip" />
+		<result column="DAY_PAY" 					property="dayPay" />
+		<result column="DAY_END" 					property="dayEnd" />
+		<result column="DAY_FREEZE" 				property="dayFreeze" />
+		<result column="DAY_UNFREE" 				property="dayUnFree" />
+		<result column="DAY_NO_REMIT" 				property="dayNoRemit" />
+		<result column="DAY_SYS_END" 				property="daySysEnd" />
+		<result column="DAY_FUNDS_END" 				property="dayFundsEnd" />
+		<result column="DAY_DIFF" 					property="dayDiff" />
+	</resultMap>
+
+	<!-- 账户数据库模型字段 -->
+	<sql id="commonColumn">
+		CODE, VERSION, CREATE_TIME, BUSI_DATE, USER_NO, USER_ROLE, DAY_INITIAL, DAY_RECEIP, DAY_PAY, DAY_END,
+		DAY_FREEZE, DAY_UNFREE, DAY_NO_REMIT, DAY_SYS_END, DAY_FUNDS_END, DAY_DIFF
+	</sql>
+
+	<!-- 持久化账户 -->
+	<insert id="insert" parameterType="com.yl.account.model.AccountDay">
+		INSERT INTO
+			T_ACC_DAY (<include refid="commonColumn"/>)
+		VALUES
+			(#{code}, #{version}, #{createTime}, #{busiDate}, #{userNo}, #{userRole}, #{dayInitial}, #{dayReceip}, #{dayPay},
+			 #{dayEnd}, #{dayFreeze}, #{dayUnFree}, #{dayNoRemit}, #{daySysEnd}, #{"dayFundsEnd"}, #{dayDiff})
+	</insert>
+	
+</mapper>

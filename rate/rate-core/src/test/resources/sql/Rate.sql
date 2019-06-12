@@ -1,0 +1,10 @@
+-- auto Generated on 2017-12-03 17:17:04 
+-- DROP TABLE IF EXISTS rate; 
+CREATE TABLE rate(
+	sub_product VARCHAR (50) NOT NULL COMMENT '是否使用子产品费率',
+	status VARCHAR (50) NOT NULL COMMENT '费率状态',
+	id BIGINT (15) NOT NULL AUTO_INCREMENT COMMENT 'id',
+	code VARCHAR (50) NOT NULL COMMENT '编号',
+	create_time DATETIME NOT NULL COMMENT '创建时间',
+	PRIMARY KEY (id)
+)ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT 'rate';

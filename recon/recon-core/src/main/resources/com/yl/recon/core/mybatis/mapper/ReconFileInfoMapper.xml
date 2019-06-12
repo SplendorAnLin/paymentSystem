@@ -1,0 +1,498 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.yl.recon.core.mybatis.mapper.ReconFileInfoMapper">
+    <!--auto generated Code-->
+    <resultMap id="BaseResultMap" type="com.yl.recon.core.entity.fileinfo.ReconFileInfo">
+        <result column="extend_code" property="extendCode" jdbcType="BIGINT"/>
+        <result column="file_name" property="fileName" jdbcType="VARCHAR"/>
+        <result column="system_code" property="systemCode" jdbcType="VARCHAR"/>
+        <result column="recon_file_type" property="reconFileType" jdbcType="VARCHAR"/>
+        <result column="valid" property="valid" jdbcType="INTEGER"/>
+        <result column="is_bank_channel" property="isBankChannel" jdbcType="INTEGER"/>
+        <result column="file_path" property="filePath" jdbcType="VARCHAR"/>
+        <result column="remark" property="remark" jdbcType="VARCHAR"/>
+        <result column="code" property="code" jdbcType="BIGINT"/>
+        <result column="version" property="version" jdbcType="BIGINT"/>
+        <result column="create_time" property="createTime" jdbcType="TIMESTAMP"/>
+    </resultMap>
+
+    <!--auto generated Code-->
+    <sql id="Base_Column_List">
+        extend_code,
+        file_name,
+        system_code,
+        recon_file_type,
+        valid,
+        is_bank_channel,
+        file_path,
+        remark,
+        code,
+        version,
+        create_time
+    </sql>
+
+    <!--auto generated Code-->
+    <insert id="insert" useGeneratedKeys="true" keyProperty="reconFileInfo.code">
+        INSERT INTO recon_file_info (
+            extend_code,
+            file_name,
+            system_code,
+            recon_file_type,
+            valid,
+            is_bank_channel,
+            file_path,
+            remark,
+            code,
+            version,
+            create_time
+        ) VALUES (
+            #{reconFileInfo.extendCode,jdbcType=BIGINT},
+            #{reconFileInfo.fileName,jdbcType=VARCHAR},
+            #{reconFileInfo.systemCode,jdbcType=VARCHAR},
+            #{reconFileInfo.reconFileType,jdbcType=VARCHAR},
+            #{reconFileInfo.valid,jdbcType=INTEGER},
+            #{reconFileInfo.isBankChannel,jdbcType=INTEGER},
+            #{reconFileInfo.filePath,jdbcType=VARCHAR},
+            #{reconFileInfo.remark,jdbcType=VARCHAR},
+            #{reconFileInfo.code,jdbcType=BIGINT},
+            #{reconFileInfo.version,jdbcType=BIGINT},
+            #{reconFileInfo.createTime,jdbcType=TIMESTAMP}
+        )
+    </insert>
+
+    <!--auto generated Code-->
+    <insert id="insertSelective" useGeneratedKeys="true" keyProperty="reconFileInfo.code">
+        INSERT INTO recon_file_info
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="reconFileInfo.extendCode!=null">extend_code,</if>
+            <if test="reconFileInfo.fileName!=null">file_name,</if>
+            <if test="reconFileInfo.systemCode!=null">system_code,</if>
+            <if test="reconFileInfo.reconFileType!=null">recon_file_type,</if>
+            <if test="reconFileInfo.valid!=null">valid,</if>
+            <if test="reconFileInfo.isBankChannel!=null">is_bank_channel,</if>
+            <if test="reconFileInfo.filePath!=null">file_path,</if>
+            <if test="reconFileInfo.remark!=null">remark,</if>
+            <if test="reconFileInfo.code!=null">code,</if>
+            <if test="reconFileInfo.version!=null">version,</if>
+            <if test="reconFileInfo.createTime!=null">create_time,</if>
+        </trim>
+        VALUES
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="reconFileInfo.extendCode!=null">#{reconFileInfo.extendCode,jdbcType=BIGINT},
+            </if>
+            <if test="reconFileInfo.fileName!=null">#{reconFileInfo.fileName,jdbcType=VARCHAR},
+            </if>
+            <if test="reconFileInfo.systemCode!=null">#{reconFileInfo.systemCode,jdbcType=VARCHAR},
+            </if>
+            <if test="reconFileInfo.reconFileType!=null">#{reconFileInfo.reconFileType,jdbcType=VARCHAR},
+            </if>
+            <if test="reconFileInfo.valid!=null">#{reconFileInfo.valid,jdbcType=INTEGER},
+            </if>
+            <if test="reconFileInfo.isBankChannel!=null">#{reconFileInfo.isBankChannel,jdbcType=INTEGER},
+            </if>
+            <if test="reconFileInfo.filePath!=null">#{reconFileInfo.filePath,jdbcType=VARCHAR},
+            </if>
+            <if test="reconFileInfo.remark!=null">#{reconFileInfo.remark,jdbcType=VARCHAR},
+            </if>
+            <if test="reconFileInfo.code!=null">#{reconFileInfo.code,jdbcType=BIGINT},
+            </if>
+            <if test="reconFileInfo.version!=null">#{reconFileInfo.version,jdbcType=BIGINT},
+            </if>
+            <if test="reconFileInfo.createTime!=null">#{reconFileInfo.createTime,jdbcType=TIMESTAMP},
+            </if>
+        </trim>
+    </insert>
+
+    <!--auto generated Code-->
+    <insert id="insertList">
+        INSERT INTO recon_file_info (
+        <include refid="Base_Column_List"/>
+        )VALUES
+        <foreach collection="reconFileInfos" item="reconFileInfo" index="index" separator=",">
+            (
+            #{reconFileInfo.extendCode,jdbcType=BIGINT},
+            #{reconFileInfo.fileName,jdbcType=VARCHAR},
+            #{reconFileInfo.systemCode,jdbcType=VARCHAR},
+            #{reconFileInfo.reconFileType,jdbcType=VARCHAR},
+            #{reconFileInfo.valid,jdbcType=INTEGER},
+            #{reconFileInfo.isBankChannel,jdbcType=INTEGER},
+            #{reconFileInfo.filePath,jdbcType=VARCHAR},
+            #{reconFileInfo.remark,jdbcType=VARCHAR},
+            #{reconFileInfo.code,jdbcType=BIGINT},
+            #{reconFileInfo.version,jdbcType=BIGINT},
+            #{reconFileInfo.createTime,jdbcType=TIMESTAMP}
+            )
+        </foreach>
+    </insert>
+
+    <!--auto generated Code-->
+    <update id="update">
+        UPDATE recon_file_info
+        <set>
+            <if test="reconFileInfo.extendCode != null">extend_code= #{reconFileInfo.extendCode,jdbcType=BIGINT},</if>
+            <if test="reconFileInfo.fileName != null">file_name= #{reconFileInfo.fileName,jdbcType=VARCHAR},</if>
+            <if test="reconFileInfo.systemCode != null">system_code= #{reconFileInfo.systemCode,jdbcType=VARCHAR},</if>
+            <if test="reconFileInfo.reconFileType != null">recon_file_type=
+                #{reconFileInfo.reconFileType,jdbcType=VARCHAR},
+            </if>
+            <if test="reconFileInfo.valid != null">valid= #{reconFileInfo.valid,jdbcType=INTEGER},</if>
+            <if test="reconFileInfo.isBankChannel != null">is_bank_channel=
+                #{reconFileInfo.isBankChannel,jdbcType=INTEGER},
+            </if>
+            <if test="reconFileInfo.filePath != null">file_path= #{reconFileInfo.filePath,jdbcType=VARCHAR},</if>
+            <if test="reconFileInfo.remark != null">remark= #{reconFileInfo.remark,jdbcType=VARCHAR},</if>
+            <if test="reconFileInfo.code != null">code= #{reconFileInfo.code,jdbcType=BIGINT},</if>
+            <if test="reconFileInfo.version != null">version= #{reconFileInfo.version,jdbcType=BIGINT},</if>
+            <if test="reconFileInfo.createTime != null">create_time= #{reconFileInfo.createTime,jdbcType=TIMESTAMP}</if>
+        </set>
+        WHERE code = #{reconFileInfo.code,jdbcType=BIGINT}
+    </update>
+
+    <!--Mybatis 自动生成代码-->
+    <sql id="Example_Where_Clause">
+        <!--
+          WARNING - @mbggenerated
+          This element is automatically generated by MyBatis Generator, do not modify.
+          This element was generated on Thu Jan 18 09:59:58 CST 2018.
+        -->
+        <where>
+            <foreach collection="oredCriteria" item="criteria" separator="or">
+                <if test="criteria.valid">
+                    <trim prefix="(" suffix=")" prefixOverrides="and">
+                        <foreach collection="criteria.criteria" item="criterion">
+                            <choose>
+                                <when test="criterion.noValue">
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue">
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue">
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue">
+                                    and ${criterion.condition}
+                                    <foreach collection="criterion.value" item="listItem" open="(" close=")"
+                                             separator=",">
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+    <sql id="Update_By_Example_Where_Clause">
+        <!--
+          WARNING - @mbggenerated
+          This element is automatically generated by MyBatis Generator, do not modify.
+          This element was generated on Thu Jan 18 09:59:58 CST 2018.
+        -->
+        <where>
+            <foreach collection="example.oredCriteria" item="criteria" separator="or">
+                <if test="criteria.valid">
+                    <trim prefix="(" suffix=")" prefixOverrides="and">
+                        <foreach collection="criteria.criteria" item="criterion">
+                            <choose>
+                                <when test="criterion.noValue">
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue">
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue">
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue">
+                                    and ${criterion.condition}
+                                    <foreach collection="criterion.value" item="listItem" open="(" close=")"
+                                             separator=",">
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+    <select id="selectByExample" resultMap="BaseResultMap"
+            parameterType="com.yl.recon.core.entity.fileinfo.ReconFileInfoExample">
+        <!--
+          WARNING - @mbggenerated
+          This element is automatically generated by MyBatis Generator, do not modify.
+          This element was generated on Thu Jan 18 09:59:58 CST 2018.
+        -->
+        select
+        <if test="distinct">
+            distinct
+        </if>
+        <include refid="Base_Column_List"/>
+        from recon_file_info
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+        <if test="orderByClause != null">
+            order by ${orderByClause}
+        </if>
+    </select>
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long">
+        <!--
+          WARNING - @mbggenerated
+          This element is automatically generated by MyBatis Generator, do not modify.
+          This element was generated on Thu Jan 18 09:59:58 CST 2018.
+        -->
+        select
+        <include refid="Base_Column_List"/>
+        from recon_file_info
+        where code = #{code,jdbcType=BIGINT}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+        <!--
+          WARNING - @mbggenerated
+          This element is automatically generated by MyBatis Generator, do not modify.
+          This element was generated on Thu Jan 18 09:59:58 CST 2018.
+        -->
+        DELETE FROM recon_file_info
+        WHERE code = #{code,jdbcType=BIGINT}
+    </delete>
+    <delete id="deleteByExample" parameterType="com.yl.recon.core.entity.fileinfo.ReconFileInfoExample">
+        <!--
+          WARNING - @mbggenerated
+          This element is automatically generated by MyBatis Generator, do not modify.
+          This element was generated on Thu Jan 18 09:59:58 CST 2018.
+        -->
+        delete from recon_file_info
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+    </delete>
+    <select id="countByExample" parameterType="com.yl.recon.core.entity.fileinfo.ReconFileInfoExample"
+            resultType="java.lang.Integer">
+        <!--
+          WARNING - @mbggenerated
+          This element is automatically generated by MyBatis Generator, do not modify.
+          This element was generated on Thu Jan 18 09:59:58 CST 2018.
+        -->
+        select count(*) from recon_file_info
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+    </select>
+    <update id="updateByExampleSelective" parameterType="map">
+        <!--
+          WARNING - @mbggenerated
+          This element is automatically generated by MyBatis Generator, do not modify.
+          This element was generated on Thu Jan 18 09:59:58 CST 2018.
+        -->
+        update recon_file_info
+        <set>
+            <if test="record.code != null">
+                code = #{record.code,jdbcType=BIGINT},
+            </if>
+            <if test="record.version != null">
+                version = #{record.version,jdbcType=INTEGER},
+            </if>
+            <if test="record.filePath != null">
+                file_path = #{record.filePath,jdbcType=VARCHAR},
+            </if>
+            <if test="record.fileName != null">
+                file_name = #{record.fileName,jdbcType=VARCHAR},
+            </if>
+            <if test="record.createTime != null">
+                create_time = #{record.createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="record.systemCode != null">
+                system_code = #{record.systemCode,jdbcType=VARCHAR},
+            </if>
+            <if test="record.reconFileType != null">
+                recon_file_type = #{record.reconFileType,jdbcType=VARCHAR},
+            </if>
+            <if test="record.valid != null">
+                valid = #{record.valid,jdbcType=INTEGER},
+            </if>
+            <if test="record.isBankChannel != null">
+                is_bank_channel = #{record.isBankChannel,jdbcType=INTEGER},
+            </if>
+            <if test="record.remark != null">
+                remark = #{record.remark,jdbcType=VARCHAR},
+            </if>
+            <if test="record.extendcode != null">
+                extendCode = #{record.extendcode,jdbcType=BIGINT},
+            </if>
+        </set>
+        <if test="_parameter != null">
+            <include refid="Update_By_Example_Where_Clause"/>
+        </if>
+    </update>
+    <update id="updateByExample" parameterType="map">
+        <!--
+          WARNING - @mbggenerated
+          This element is automatically generated by MyBatis Generator, do not modify.
+          This element was generated on Thu Jan 18 09:59:58 CST 2018.
+        -->
+        update recon_file_info
+        set code = #{record.code,jdbcType=BIGINT},
+        version = #{record.version,jdbcType=INTEGER},
+        file_path = #{record.filePath,jdbcType=VARCHAR},
+        file_name = #{record.fileName,jdbcType=VARCHAR},
+        create_time = #{record.createTime,jdbcType=TIMESTAMP},
+        system_code = #{record.systemCode,jdbcType=VARCHAR},
+        recon_file_type = #{record.reconFileType,jdbcType=VARCHAR},
+        valid = #{record.valid,jdbcType=INTEGER},
+        is_bank_channel = #{record.isBankChannel,jdbcType=INTEGER},
+        remark = #{record.remark,jdbcType=VARCHAR},
+        extendCode = #{record.extendcode,jdbcType=BIGINT}
+        <if test="_parameter != null">
+            <include refid="Update_By_Example_Where_Clause"/>
+        </if>
+    </update>
+    <update id="updateByPrimaryKeySelective" parameterType="com.yl.recon.core.entity.fileinfo.ReconFileInfo">
+        <!--
+          WARNING - @mbggenerated
+          This element is automatically generated by MyBatis Generator, do not modify.
+          This element was generated on Thu Jan 18 09:59:58 CST 2018.
+        -->
+        update recon_file_info
+        <set>
+            <if test="version != null">
+                version = #{version,jdbcType=INTEGER},
+            </if>
+            <if test="filePath != null">
+                file_path = #{filePath,jdbcType=VARCHAR},
+            </if>
+            <if test="fileName != null">
+                file_name = #{fileName,jdbcType=VARCHAR},
+            </if>
+            <if test="createTime != null">
+                create_time = #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="systemCode != null">
+                system_code = #{systemCode,jdbcType=VARCHAR},
+            </if>
+            <if test="reconFileType != null">
+                recon_file_type = #{reconFileType,jdbcType=VARCHAR},
+            </if>
+            <if test="valid != null">
+                valid = #{valid,jdbcType=INTEGER},
+            </if>
+            <if test="isBankChannel != null">
+                is_bank_channel = #{isBankChannel,jdbcType=INTEGER},
+            </if>
+            <if test="remark != null">
+                remark = #{remark,jdbcType=VARCHAR},
+            </if>
+            <if test="extendcode != null">
+                extendCode = #{extendcode,jdbcType=BIGINT},
+            </if>
+        </set>
+        where code = #{code,jdbcType=BIGINT}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.yl.recon.core.entity.fileinfo.ReconFileInfo">
+        <!--
+          WARNING - @mbggenerated
+          This element is automatically generated by MyBatis Generator, do not modify.
+          This element was generated on Thu Jan 18 09:59:58 CST 2018.
+        -->
+        UPDATE recon_file_info
+        SET version = #{version,jdbcType=INTEGER},
+        file_path = #{filePath,jdbcType=VARCHAR},
+        file_name = #{fileName,jdbcType=VARCHAR},
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+        system_code = #{systemCode,jdbcType=VARCHAR},
+        recon_file_type = #{reconFileType,jdbcType=VARCHAR},
+        valid = #{valid,jdbcType=INTEGER},
+        is_bank_channel = #{isBankChannel,jdbcType=INTEGER},
+        remark = #{remark,jdbcType=VARCHAR},
+        extendCode = #{extendcode,jdbcType=BIGINT}
+        WHERE code = #{code,jdbcType=BIGINT}
+    </update>
+
+    <!--自定义start-->
+
+
+    <resultMap id="ApiBaseResultMap" type="com.yl.recon.api.core.bean.ReconFileInfo">
+        <result column="extend_code" property="extendCode" jdbcType="BIGINT"/>
+        <result column="file_name" property="fileName" jdbcType="VARCHAR"/>
+        <result column="system_code" property="systemCode" jdbcType="VARCHAR"/>
+        <result column="recon_file_type" property="reconFileType" jdbcType="VARCHAR"/>
+        <result column="valid" property="valid" jdbcType="INTEGER"/>
+        <result column="is_bank_channel" property="isBankChannel" jdbcType="INTEGER"/>
+        <result column="file_path" property="filePath" jdbcType="VARCHAR"/>
+        <result column="remark" property="remark" jdbcType="VARCHAR"/>
+        <result column="code" property="code" jdbcType="BIGINT"/>
+        <result column="version" property="version" jdbcType="BIGINT"/>
+        <result column="create_time" property="createTime" jdbcType="TIMESTAMP"/>
+        <result column="header" property="reconFileInfoExtend.header" jdbcType="VARCHAR"/>
+        <result column="footer" property="reconFileInfoExtend.footer" jdbcType="VARCHAR"/>
+        <result column="bank_name" property="reconFileInfoExtend.bankName" jdbcType="VARCHAR"/>
+        <result column="delimiter" property="reconFileInfoExtend.delimiter" jdbcType="VARCHAR"/>
+        <result column="interface_info_code" property="reconFileInfoExtend.interfaceInfoCode" jdbcType="VARCHAR"/>
+        <result column="bank_order_code" property="reconFileInfoExtend.bankOrderCode" jdbcType="VARCHAR"/>
+        <result column="interface_order_code" property="reconFileInfoExtend.interfaceOrderCode" jdbcType="VARCHAR"/>
+        <result column="amount" property="reconFileInfoExtend.amount" jdbcType="VARCHAR"/>
+        <result column="fee" property="reconFileInfoExtend.fee" jdbcType="VARCHAR"/>
+        <result column="trans_time" property="reconFileInfoExtend.transTime" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <sql id="findSql">
+        SELECT
+        rfi.extend_code,
+        rfi.file_name,
+        rfi.system_code,
+        rfi.recon_file_type,
+        rfi.valid,
+        rfi.is_bank_channel,
+        rfi.file_path,
+        rfi.remark,
+        rfi.CODE,
+        rfi.version,
+        rfi.create_time,
+        ex.header,
+        ex.footer,
+        ex.delimiter,
+        ex.interface_info_code,
+        ex.bank_order_code,
+        ex.interface_order_code,
+        ex.amount,
+        ex.fee,
+        ex.trans_time,
+        ex.bank_name
+        FROM
+        recon_file_info rfi
+        LEFT JOIN recon_file_info_extend ex ON rfi.extend_code = ex.`code`
+        WHERE 1=1
+        AND rfi.is_bank_channel = 1
+        <if test="params.startTime != null">
+            AND rfi.create_time &gt;=#{params.startTime,jdbcType=TIMESTAMP}
+        </if>
+        <if test="params.endTime != null">
+            AND rfi.create_time &lt;=#{params.endTime,jdbcType=TIMESTAMP}
+        </if>
+        <if test="params.code != null">
+            AND rfi.code = #{params.code}
+        </if>
+        <if test="params.valid != null">
+            AND rfi.valid = #{params.valid}
+        </if>
+        ORDER BY rfi.create_time desc
+    </sql>
+    <!--分页:通道对账文件查询-->
+    <select id="findAllReconFileInfo" resultMap="ApiBaseResultMap" parameterType="Map">
+        <include refid="findSql"/>
+    </select>
+    <!--修改:通过id查询一个对象,通道对账文件查询-->
+    <select id="findReconFileInfoByCode" resultMap="ApiBaseResultMap" parameterType="Map">
+        <include refid="findSql"/>
+    </select>
+    <!--不分页:通道对账文件查询-->
+    <select id="findReconFileInfo" resultMap="ApiBaseResultMap" parameterType="Map">
+        <include refid="findSql"/>
+    </select>
+    <!--自定义end-->
+
+
+</mapper>

@@ -1,0 +1,100 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" ":/spring-beans.dtd">
+
+<beans>
+
+	<bean id="valueListHelper" class="net.mlw.vlh.web.mvc.ValueListHandlerHelper">
+		<property name="valueListHandler">
+			<ref bean="valueListHandler" />
+		</property>
+	</bean>
+
+	<bean id="resourceI18nBundle"
+		class="org.springframework.context.support.ResourceBundleMessageSource">
+		<property name="basename">
+			<value>i18n</value>
+		</property>
+	</bean>
+
+	<bean id="defConfig" class="com.yl.agent.valuelist.MapAdapter" singleton="false" abstract="true">
+		<property name="connectionCreator">
+          <bean class="net.mlw.vlh.adapter.jdbc.util.StandardConnectionCreator">
+            <property name="dataSource"><ref bean="dataSourceRead"/></property>
+          </bean>
+        </property>
+        
+        <!-- <property name="sqlPagingSupport">
+           <bean class="net.mlw.vlh.adapter.jdbc.util.SqlPagingSupport">
+             <property name="database"><value>oracle</value></property>
+           </bean>
+         </property> -->
+		
+		<property name="showSql">
+			<value>false</value>
+		</property>
+		<property name="defaultNumberPerPage">
+			<value>10</value>
+		</property>
+		<property name="defaultSortColumn">
+			<value>id</value>
+		</property>
+		<property name="defaultSortDirection">
+			<value>desc</value>
+		</property>
+		<property name="adapterType">
+			<value>0</value>
+		</property>		
+	</bean>
+	
+	<bean id="defaultValueListAction" class="com.yl.agent.valuelist.ValueListAction"  singleton="false" autowire="byName" />
+	<bean id="valueListRemoteAction" class="com.yl.agent.valuelist.ValueListRemoteAction"  singleton="false" autowire="byName" />
+	<!-- style -->
+	
+	<bean id="csvDisplayProvider" class="net.mlw.vlh.web.tag.support.CsvDisplayProvider" />
+	<bean id="excelDisplayProvider" class="net.mlw.vlh.web.tag.support.ExcelDisplayProvider" />
+	<bean id="defaultlook" singleton="true" class="net.mlw.vlh.web.ValueListConfigBean">
+		<property name="displayHelper">
+			<bean class="net.mlw.vlh.web.util.PassThroughDisplayHelper" />
+		</property>
+		<property name="linkEncoder">
+			<bean class="net.mlw.vlh.web.tag.support.DefaultLinkEncoder">
+				<property name="encoding">
+					<value>UTF-8</value>
+				</property>
+			</bean>
+		</property>
+		<property name="messageSource">
+			<bean class="org.springframework.context.support.ResourceBundleMessageSource">
+				<property name="basename">
+					<value>defaultlook</value>
+				</property>
+				<property name="parentMessageSource">
+					<ref bean="resourceI18nBundle" />
+				</property>
+			</bean>
+		</property>
+		<property name="styleCount">
+			<value>2</value>
+		</property>
+		<property name="stylePrefix">
+			<value>search_results</value>
+		</property>
+		<property name="nullToken">
+			<value></value>
+		</property>
+		<property name="displayProviders">
+			<map>
+				<entry key="html">
+					<bean id="classicLookHtmlDisplayProvider" class="net.mlw.vlh.web.tag.support.HtmlDisplayProvider">
+						<property name="usePadding"><value>false</value></property>
+						<property name="imageHome"><value>images</value></property>
+						<property name="preAppendContextPath"><value>true</value></property>
+					</bean>
+				</entry>
+				<entry key="csv"><ref bean="csvDisplayProvider" /></entry>
+				<entry key="excel"><ref bean="excelDisplayProvider" /></entry>
+			</map>
+		</property>
+	</bean>
+
+</beans>

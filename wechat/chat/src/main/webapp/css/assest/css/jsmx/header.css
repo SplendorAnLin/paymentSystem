@@ -1,0 +1,64 @@
+body{
+	font-size: 0.26rem;
+	width: 100%;
+	overflow-x: hidden;
+}
+.header{
+	color: white;
+	/*height: 2.2rem;*/
+	background: #1B82D2;
+	padding: 0.2rem;
+}
+.txt_center{
+	margin: auto;
+	text-align: center;
+	height: 0.5rem;
+	line-height: 0.5rem;
+	
+}
+.po_re{
+	position: relative;
+	width: 100%;
+}
+.rifhts{
+	    position: absolute;
+    right: 0;
+    bottom:0;
+    font-size: 0.22rem;
+    color: white;
+}
+.rifhts:active{
+	color: black;
+}
+.w_50{
+	width: 0.5rem;
+}
+.icon_m{
+	position: relative;
+	top: 0.1rem;
+}
+.border-w{
+	width: 2rem;
+	border: 1px solid white;
+	border-radius: 30px;
+	margin-top: 0.2rem;
+}
+/*我的头像*/
+.img_title{
+	position: relative;
+	top: -0.3rem;
+	width: 1.8rem;
+	height: 1.8rem;
+	border-radius: 50%;
+	background: white;
+	margin: auto;
+}
+.img_title img{
+	width: 1.7rem;
+	height:1.7rem;
+	position: relative;
+	margin: auto;
+	top: 0.05rem;
+	left: 0.05rem;
+	border-radius: 50%;
+}

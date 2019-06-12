@@ -1,0 +1,810 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+		PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+		"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yl.online.trade.dao.mapper.TradeOrderMapper">
+
+	<resultMap id="orderMap" type="com.yl.online.model.model.Order">
+		<id property="id" column="ID"></id>
+		<result property="code" column="CODE"></result>
+		<result property="version" column="VERSION"></result>
+		<result property="createTime" column="CREATE_TIME"></result>
+		<result property="businessType" column="BUSINESS_TYPE"></result>
+		<result property="businessFlag1" column="BUSINESS_FLAG1"></result>
+		<result property="businessFlag2" column="BUSINESS_FLAG2"></result>
+		<result property="requestCode" column="REQUEST_CODE"></result>
+		<result property="payerRole" column="PAYER_ROLE"></result>
+		<result property="payer" column="PAYER"></result>
+		<result property="receiverRole" column="RECEIVER_ROLE"></result>
+		<result property="receiver" column="RECEIVER"></result>
+		<result property="repeatFlag" column="REPEAT_FLAG"></result>
+		<result property="currency" column="CURRENCY"></result>
+		<result property="amount" column="AMOUNT"></result>
+		<result property="paidAmount" column="PAID_AMOUNT"></result>
+		<result property="payerFee" column="PAYER_FEE"></result>
+		<result property="receiverFee" column="RECEIVER_FEE"></result>
+		<result property="cost" column="COST"></result>
+		<result property="status" column="STATUS"></result>
+		<result property="clearingStatus" column="CLEARING_STATUS"></result>
+		<result property="clearingFinishTime" column="CLEARING_FINISH_TIME"></result>
+		<result property="orderTime" column="ORDER_TIME"></result>
+		<result property="timeout" column="TIMEOUT"></result>
+		<result property="closeTime" column="CLOSE_TIME"></result>
+		<result property="successPayTime" column="SUCCESS_PAY_TIME"></result>
+		<result property="refundStatus" column="REFUND_STATUS"></result>
+		<result property="refundAmount" column="REFUND_AMOUNT"></result>
+		<result property="refundableAmount" column="REFUNDABLE_AMOUNT"></result>
+		<result property="supportRefundType" column="SUPPORT_REFUND_TYPE"></result>
+		<result property="supportRefundHandleType" column="SUPPORT_REFUND_HANDLE_TYPE"></result>
+		<result property="redirectURL" column="REDIRECT_URL"></result>
+		<result property="notifyURL" column="NOTIFY_URL"></result>
+		<result property="products" column="PRODUCTS"></result>
+		<result property="payType" column="PAY_TYPE" />
+		<result property="remitFee" column="REMIT_FEE" />
+	</resultMap>
+	<sql id="orderColumns">
+		ID,CODE,VERSION,CREATE_TIME,BUSINESS_TYPE,BUSINESS_FLAG1,BUSINESS_FLAG2,REQUEST_CODE,PAYER_ROLE,PAYER,RECEIVER_ROLE,RECEIVER,
+		REPEAT_FLAG,CURRENCY,AMOUNT,PAID_AMOUNT,RECEIVER_FEE,COST,STATUS,CLEARING_STATUS,CLEARING_FINISH_TIME,ORDER_TIME,
+		TIMEOUT,CLOSE_TIME,SUCCESS_PAY_TIME,REFUND_STATUS,REFUND_AMOUNT,REFUNDABLE_AMOUNT,SUPPORT_REFUND_TYPE,SUPPORT_REFUND_HANDLE_TYPE,
+		REDIRECT_URL,NOTIFY_URL,PRODUCTS,PAY_TYPE,REMIT_FEE
+	</sql>
+
+	<insert id="insert" parameterType="com.yl.online.model.model.Order"
+			useGeneratedKeys="true" keyProperty="id">
+		INSERT INTO TRADE_ORDER (
+		CODE,VERSION,CREATE_TIME,BUSINESS_TYPE,BUSINESS_FLAG1,BUSINESS_FLAG2,REQUEST_CODE,PAYER_ROLE,PAYER,RECEIVER_ROLE,RECEIVER,
+		REPEAT_FLAG,CURRENCY,AMOUNT,PAID_AMOUNT,RECEIVER_FEE,COST,STATUS,CLEARING_STATUS,CLEARING_FINISH_TIME,ORDER_TIME,
+		TIMEOUT,CLOSE_TIME,SUCCESS_PAY_TIME,REFUND_STATUS,REFUND_AMOUNT,REFUNDABLE_AMOUNT,SUPPORT_REFUND_TYPE,SUPPORT_REFUND_HANDLE_TYPE,
+		REDIRECT_URL,NOTIFY_URL,PRODUCTS,PAY_TYPE)
+		VALUES
+		(#{code},#{version},#{createTime},#{businessType},#{businessFlag1},#{businessFlag2},#{requestCode},#{payerRole},
+		#{payer},#{receiverRole},#{receiver},#{repeatFlag},#{currency},#{amount},#{paidAmount},#{receiverFee},#{cost},#{status},
+		#{clearingStatus},#{clearingFinishTime},#{orderTime},#{timeout},#{closeTime},#{successPayTime},#{refundStatus},
+		#{refundAmount},#{refundableAmount},#{supportRefundType},#{supportRefundHandleType},#{redirectURL},#{notifyURL},#{products},
+		#{payType})
+	</insert>
+
+
+	<select id="findByCode" resultMap="orderMap" parameterType="Map">
+		SELECT
+		<include refid="orderColumns" />
+		FROM TRADE_ORDER
+		WHERE CODE = #{code}
+	</select>
+
+	<select id="findByRequestCode" resultMap="orderMap">
+		SELECT
+		<include refid="orderColumns" />
+		FROM TRADE_ORDER
+		where RECEIVER = #{receiver} and REQUEST_CODE =
+		#{requestCode}
+		ORDER BY ID DESC
+	</select>
+
+	<select id="customerRecon" resultMap="orderMap">
+		SELECT
+		<include refid="orderColumns" />
+		FROM TRADE_ORDER
+		where RECEIVER = #{params.receiver} AND STATUS = 'SUCCESS'
+		<if test="params.orderTimeStart != null and params.orderTimeStart !='' ">
+			<if test="params.orderTimeEnd != null and params.orderTimeEnd !='' ">
+				AND ORDER_TIME BETWEEN #{params.orderTimeStart} AND
+				#{params.orderTimeEnd}
+			</if>
+			<if test="params.orderTimeEnd == null or params.orderTimeEnd =='' ">
+				AND ORDER_TIME &gt; #{params.orderTimeStart}
+			</if>
+		</if>
+		<if test="params.orderTimeEnd != null and params.orderTimeEnd !='' ">
+			<if test="params.orderTimeStart == null or params.orderTimeStart =='' ">
+				AND ORDER_TIME &lt; #{params.orderTimeEnd}
+			</if>
+		</if>
+		ORDER BY ID DESC
+	</select>
+
+	<update id="update">
+		update TRADE_ORDER
+		set COST = #{order.cost},
+		STATUS = #{order.status},
+		REFUND_STATUS = #{order.refundStatus},
+		PAID_AMOUNT = #{order.paidAmount},
+		RECEIVER_FEE = #{order.receiverFee},
+		REFUNDABLE_AMOUNT = #{order.refundableAmount},
+		SUCCESS_PAY_TIME = #{order.successPayTime},
+		CLEARING_STATUS = #{order.clearingStatus},
+		CLEARING_FINISH_TIME = #{order.clearingFinishTime},
+		REMIT_FEE =  #{order.remitFee},
+		PAYER_FEE =  #{order.payerFee}
+		where CODE = #{order.code}
+	</update>
+
+	<update id="updatePay">
+		update TRADE_ORDER
+		set PAY_TYPE = #{payType}
+		where CODE = #{orderCode}
+	</update>
+
+	<select id="findBy" resultMap="orderMap" parameterType="Map">
+		SELECT
+		<include refid="orderColumns" />
+		FROM TRADE_ORDER
+		<!-- page -->
+		ORDER BY ID DESC
+	</select>
+
+	<update id="closeTimeoutOrder">
+		update TRADE_ORDER
+		set
+		STATUS = 'CLOSED',
+		CLOSE_TIME = #{order.closeTime}
+		where CODE = #{order.code}
+	</update>
+
+	<select id="queryWaitCloseOrderBy" resultMap="orderMap"
+			parameterType="Map">
+		SELECT
+		<include refid="orderColumns" />
+		FROM TRADE_ORDER
+		<!-- 关闭订单时间 -->
+		LIMIT #{maxNums}
+		ORDER BY ID DESC
+	</select>
+
+	<update id="modifyOrderClearingStatus">
+		update TRADE_ORDER
+		set
+		CLEARING_STATUS = #{order.clearingStatus},
+		CLEARING_FINISH_TIME = #{order.clearingFinishTime}
+		where CODE = #{order.code}
+	</update>
+
+
+	<select id="findAllTradeOrderAndFee" resultMap="orderMap"
+			parameterType="Map">
+		SELECT
+		t.ID,
+		t.CODE,
+		t.VERSION,
+		t.CREATE_TIME,
+		BUSINESS_TYPE,
+		BUSINESS_FLAG1,
+		BUSINESS_FLAG2,
+		REQUEST_CODE,
+		PAYER_ROLE,
+		PAYER,
+		RECEIVER_ROLE,
+		RECEIVER,
+		REPEAT_FLAG,
+		CURRENCY,
+		t.AMOUNT,
+		PAID_AMOUNT,
+		t.RECEIVER_FEE,
+		COST,
+		t.STATUS,
+		CLEARING_STATUS,
+		CLEARING_FINISH_TIME,
+		ORDER_TIME,
+		TIMEOUT,
+		CLOSE_TIME,
+		SUCCESS_PAY_TIME,
+		REFUND_STATUS,
+		REFUND_AMOUNT,
+		REFUNDABLE_AMOUNT,
+		SUPPORT_REFUND_TYPE,
+		SUPPORT_REFUND_HANDLE_TYPE,
+		REDIRECT_URL,
+		NOTIFY_URL,
+		PRODUCTS,
+		PAY_TYPE
+		FROM
+		TRADE_ORDER t
+		<!-- 查询条件 params page -->
+		WHERE 1 = 1
+		<if test="params.system == null or params.system == ''">
+			AND t.RECEIVER IN
+			<foreach item="item" index="index" collection="list" open="("
+					 separator="," close=")">
+				#{item}
+			</foreach>
+		</if>
+		<if test="params.agentNo !=null and params.agentNo !='' ">
+			AND t.RECEIVER IN
+			<foreach item="item" index="index" collection="list" open="("
+					 separator="," close=")">
+				#{item}
+			</foreach>
+		</if>
+		<if test="params.interfaceType != null and params.interfaceType !='' ">
+			AND PAY_TYPE = #{params.interfaceType}
+		</if>
+		<if test="params.code != null and params.code !='' ">
+			AND t.CODE = #{params.code}
+		</if>
+		<if test="params.requestCode != null and params.requestCode !='' ">
+			AND REQUEST_CODE = #{params.requestCode}
+		</if>
+		<if test="params.receiver != null and params.receiver !='' ">
+			AND RECEIVER = #{params.receiver}
+		</if>
+		<if test="params.status != null and params.status !='' ">
+			AND t.STATUS = #{params.status}
+		</if>
+		<if test="params.clearingStatus != null and params.clearingStatus !='' ">
+			AND CLEARING_STATUS = #{params.clearingStatus}
+		</if>
+		<if test="params.refundStatus != null and params.refundStatus !='' ">
+			AND REFUND_STATUS = #{params.refundStatus}
+		</if>
+		<if test="params.amountStart != null and params.amountStart !='' ">
+			<if test="params.amountEnd != null and params.amountEnd !='' ">
+				AND t.AMOUNT BETWEEN #{params.amountStart} AND
+				#{params.amountEnd}
+			</if>
+			<if test="params.amountEnd == null or params.amountEnd =='' ">
+				AND t.AMOUNT &gt; #{params.amountStart}
+			</if>
+		</if>
+		<if test="params.amountEnd != null and params.amountEnd !='' ">
+			<if test="params.amountStart == null or params.amountStart =='' ">
+				AND t.AMOUNT &lt; #{params.amountEnd}
+			</if>
+		</if>
+		<if
+				test="params.receiverfeeStart != null and params.receiverfeeStart !='' ">
+			<if test="params.receiverfeeEnd != null and params.receiverfeeEnd !='' ">
+				AND t.RECEIVER_FEE BETWEEN #{params.receiverfeeStart} AND
+				#{params.receiverfeeEnd}
+			</if>
+			<if test="params.receiverfeeEnd == null or params.receiverfeeEnd =='' ">
+				AND t.RECEIVER_FEE &gt; #{params.receiverfeeStart}
+			</if>
+		</if>
+		<if
+				test="params.successPayTimeStart != null and params.successPayTimeStart !='' ">
+			<if
+					test="params.successPayTimeEnd != null and params.successPayTimeEnd !='' ">
+				AND SUCCESS_PAY_TIME BETWEEN #{params.successPayTimeStart} AND
+				#{params.successPayTimeEnd}
+			</if>
+			<if
+					test="params.successPayTimeEnd == null or params.successPayTimeEnd =='' ">
+				AND SUCCESS_PAY_TIME &gt; #{params.successPayTimeStart}
+			</if>
+		</if>
+		<if
+				test="params.successPayTimeEnd != null and params.successPayTimeEnd !='' ">
+			<if
+					test="params.successPayTimeStart == null or params.successPayTimeStart =='' ">
+				AND SUCCESS_PAY_TIME &lt; #{params.successPayTimeEnd}
+			</if>
+		</if>
+		<if test="params.orderTimeStart != null and params.orderTimeStart !='' ">
+			<if test="params.orderTimeEnd != null and params.orderTimeEnd !='' ">
+				AND ORDER_TIME BETWEEN #{params.orderTimeStart} AND
+				#{params.orderTimeEnd}
+			</if>
+			<if test="params.orderTimeEnd == null or params.orderTimeEnd =='' ">
+				AND ORDER_TIME &gt; #{params.orderTimeStart}
+			</if>
+		</if>
+		<if test="params.orderTimeEnd != null and params.orderTimeEnd !='' ">
+			<if test="params.orderTimeStart == null or params.orderTimeStart =='' ">
+				AND ORDER_TIME &lt; #{params.orderTimeEnd}
+			</if>
+		</if>
+		<if
+				test="params.payinterfaceRequestId != null and params.payinterfaceRequestId !=''
+			or params.payinterface != null and params.payinterface !='' 
+			or params.paymentCode != null and params.paymentCode !='' ">
+			and t.code in (
+			select p.order_code from payment p where 1 = 1
+			<if
+					test="params.payinterfaceRequestId != null and params.payinterfaceRequestId !='' ">
+				AND p.PAYINTERFACE_REQUEST_ID = #{params.payinterfaceRequestId}
+			</if>
+			<if test="params.payinterface != null and params.payinterface !='' ">
+				AND p.PAYINTERFACE = #{params.payinterface}
+			</if>
+			<if test="params.paymentCode != null and params.paymentCode !='' ">
+				AND p.CODE = #{params.paymentCode}
+			</if>
+			)
+		</if>
+
+
+		ORDER BY t.CREATE_TIME DESC
+	</select>
+
+	<select id="orderFeeSum" resultType="java.util.HashMap"
+			parameterType="Map">
+		SELECT
+		count(1) al,sum(t.AMOUNT) am,sum(t.RECEIVER_FEE) pf,sum(t.COST) rf
+		FROM
+		TRADE_ORDER t
+		<!-- 查询条件 params page -->
+		WHERE 1 = 1
+		<if test="params.system == null or params.system == ''">
+			AND t.RECEIVER IN
+			<foreach item="item" index="index" collection="list" open="("
+					 separator="," close=")">
+				#{item}
+			</foreach>
+		</if>
+		<if test="params.agentNo !=null and params.agentNo !='' ">
+			AND t.RECEIVER IN
+			<foreach item="item" index="index" collection="list" open="("
+					 separator="," close=")">
+				#{item}
+			</foreach>
+		</if>
+		<if test="params.code != null and params.code !='' ">
+			AND t.CODE = #{params.code}
+		</if>
+		<if test="params.requestCode != null and params.requestCode !='' ">
+			AND REQUEST_CODE = #{params.requestCode}
+		</if>
+		<if test="params.receiver != null and params.receiver !='' ">
+			AND RECEIVER = #{params.receiver}
+		</if>
+		<if test="params.status != null and params.status !='' ">
+			AND t.STATUS = #{params.status}
+		</if>
+		<if test="params.clearingStatus != null and params.clearingStatus !='' ">
+			AND CLEARING_STATUS = #{params.clearingStatus}
+		</if>
+		<if test="params.refundStatus != null and params.refundStatus !='' ">
+			AND REFUND_STATUS = #{params.refundStatus}
+		</if>
+		<if test="params.amountStart != null and params.amountStart !='' ">
+			<if test="params.amountEnd != null and params.amountEnd !='' ">
+				AND t.AMOUNT BETWEEN #{params.amountStart} AND
+				#{params.amountEnd}
+			</if>
+			<if test="params.amountEnd == null or params.amountEnd =='' ">
+				AND t.AMOUNT &gt; #{params.amountStart}
+			</if>
+		</if>
+		<if test="params.amountEnd != null and params.amountEnd !='' ">
+			<if test="params.amountStart == null or params.amountStart =='' ">
+				AND t.AMOUNT &lt; #{params.amountEnd}
+			</if>
+		</if>
+		<if
+				test="params.successPayTimeStart != null and params.successPayTimeStart !='' ">
+			<if
+					test="params.successPayTimeEnd != null and params.successPayTimeEnd !='' ">
+				AND SUCCESS_PAY_TIME BETWEEN #{params.successPayTimeStart} AND
+				#{params.successPayTimeEnd}
+			</if>
+			<if
+					test="params.successPayTimeEnd == null or params.successPayTimeEnd =='' ">
+				AND SUCCESS_PAY_TIME &gt; #{params.successPayTimeStart}
+			</if>
+		</if>
+		<if
+				test="params.successPayTimeEnd != null and params.successPayTimeEnd !='' ">
+			<if
+					test="params.successPayTimeStart == null or params.successPayTimeStart =='' ">
+				AND SUCCESS_PAY_TIME &lt; #{params.successPayTimeEnd}
+			</if>
+		</if>
+		<if test="params.orderTimeStart != null and params.orderTimeStart !='' ">
+			<if test="params.orderTimeEnd != null and params.orderTimeEnd !='' ">
+				AND ORDER_TIME BETWEEN #{params.orderTimeStart} AND
+				#{params.orderTimeEnd}
+			</if>
+			<if test="params.orderTimeEnd == null or params.orderTimeEnd =='' ">
+				AND ORDER_TIME &gt; #{params.orderTimeStart}
+			</if>
+		</if>
+		<if test="params.orderTimeEnd != null and params.orderTimeEnd !='' ">
+			<if test="params.orderTimeStart == null or params.orderTimeStart =='' ">
+				AND ORDER_TIME &lt; #{params.orderTimeEnd}
+			</if>
+		</if>
+		<if test="params.interfaceType != null and params.interfaceType !='' ">
+			AND PAY_TYPE = #{params.interfaceType}
+		</if>
+	</select>
+
+	<select id="exportTradeOrderInfo" resultMap="orderMap"
+			parameterType="Map">
+		SELECT
+		t.ID,
+		t.CODE,
+		t.VERSION,
+		t.CREATE_TIME,
+		BUSINESS_TYPE,
+		BUSINESS_FLAG1,
+		BUSINESS_FLAG2,
+		REQUEST_CODE,
+		PAYER_ROLE,
+		PAYER,
+		RECEIVER_ROLE,
+		RECEIVER,
+		REPEAT_FLAG,
+		CURRENCY,
+		t.AMOUNT,
+		PAID_AMOUNT,
+		t.RECEIVER_FEE,
+		COST,
+		t.STATUS,
+		CLEARING_STATUS,
+		CLEARING_FINISH_TIME,
+		ORDER_TIME,
+		TIMEOUT,
+		CLOSE_TIME,
+		SUCCESS_PAY_TIME,
+		REFUND_STATUS,
+		REFUND_AMOUNT,
+		REFUNDABLE_AMOUNT,
+		SUPPORT_REFUND_TYPE,
+		SUPPORT_REFUND_HANDLE_TYPE,
+		REDIRECT_URL,
+		NOTIFY_URL,
+		PRODUCTS,
+		PAY_TYPE
+		FROM
+		TRADE_ORDER t
+		<!-- 查询条件 params page -->
+		WHERE 1 = 1
+		<if test="params.system == null or params.system == ''">
+			AND t.RECEIVER IN
+			<foreach item="item" index="index" collection="list" open="("
+					 separator="," close=")">
+				#{item}
+			</foreach>
+		</if>
+		<if test="params.agentNo !=null and params.agentNo !='' ">
+			AND t.RECEIVER IN
+			<foreach item="item" index="index" collection="list" open="("
+					 separator="," close=")">
+				#{item}
+			</foreach>
+		</if>
+		<if test="params.code != null and params.code !='' ">
+			AND t.CODE = #{params.code}
+		</if>
+		<if test="params.requestCode != null and params.requestCode !='' ">
+			AND REQUEST_CODE = #{params.requestCode}
+		</if>
+		<if test="params.receiver != null and params.receiver !='' ">
+			AND RECEIVER = #{params.receiver}
+		</if>
+		<if test="params.status != null and params.status !='' ">
+			AND t.STATUS = #{params.status}
+		</if>
+		<if test="params.clearingStatus != null and params.clearingStatus !='' ">
+			AND CLEARING_STATUS = #{params.clearingStatus}
+		</if>
+		<if test="params.refundStatus != null and params.refundStatus !='' ">
+			AND REFUND_STATUS = #{params.refundStatus}
+		</if>
+		<if test="params.amountStart != null and params.amountStart !='' ">
+			<if test="params.amountEnd != null and params.amountEnd !='' ">
+				AND t.AMOUNT BETWEEN #{params.amountStart} AND
+				#{params.amountEnd}
+			</if>
+			<if test="params.amountEnd == null or params.amountEnd =='' ">
+				AND t.AMOUNT &gt; #{params.amountStart}
+			</if>
+		</if>
+		<if test="params.amountEnd != null and params.amountEnd !='' ">
+			<if test="params.amountStart == null or params.amountStart =='' ">
+				AND t.AMOUNT &lt; #{params.amountEnd}
+			</if>
+		</if>
+		<if test="params.receiverfeeEnd != null and params.receiverfeeEnd !='' ">
+			<if
+					test="params.receiverfeeStart == null or params.receiverfeeStart =='' ">
+				AND t.RECEIVER_FEE &lt; #{params.receiverfeeEnd}
+			</if>
+		</if>
+
+		<if
+				test="params.successPayTimeStart != null and params.successPayTimeStart !='' ">
+			<if
+					test="params.successPayTimeEnd != null and params.successPayTimeEnd !='' ">
+				AND SUCCESS_PAY_TIME BETWEEN #{params.successPayTimeStart} AND
+				#{params.successPayTimeEnd}
+			</if>
+			<if
+					test="params.successPayTimeEnd == null or params.successPayTimeEnd =='' ">
+				AND SUCCESS_PAY_TIME &gt; #{params.successPayTimeStart}
+			</if>
+		</if>
+		<if
+				test="params.successPayTimeEnd != null and params.successPayTimeEnd !='' ">
+			<if
+					test="params.successPayTimeStart == null or params.successPayTimeStart =='' ">
+				AND SUCCESS_PAY_TIME &lt; #{params.successPayTimeEnd}
+			</if>
+		</if>
+		<if test="params.orderTimeStart != null and params.orderTimeStart !='' ">
+			<if test="params.orderTimeEnd != null and params.orderTimeEnd !='' ">
+				AND ORDER_TIME BETWEEN #{params.orderTimeStart} AND
+				#{params.orderTimeEnd}
+			</if>
+			<if test="params.orderTimeEnd == null or params.orderTimeEnd =='' ">
+				AND ORDER_TIME &gt; #{params.orderTimeStart}
+			</if>
+		</if>
+		<if test="params.orderTimeEnd != null and params.orderTimeEnd !='' ">
+			<if test="params.orderTimeStart == null or params.orderTimeStart =='' ">
+				AND ORDER_TIME &lt; #{params.orderTimeEnd}
+			</if>
+		</if>
+		<if
+				test="params.payinterfaceRequestId != null and params.payinterfaceRequestId !=''
+			or params.payinterface != null and params.payinterface !='' 
+			or params.interfaceType != null and params.interfaceType !=''
+			or params.paymentCode != null and params.paymentCode !='' ">
+			and t.code in (
+			select p.order_code from payment p where 1 = 1
+			<if
+					test="params.payinterfaceRequestId != null and params.payinterfaceRequestId !='' ">
+				AND p.PAYINTERFACE_REQUEST_ID = #{params.payinterfaceRequestId}
+			</if>
+			<if test="params.payinterface != null and params.payinterface !='' ">
+				AND p.PAYINTERFACE = #{params.payinterface}
+			</if>
+			<if test="params.interfaceType != null and params.interfaceType !='' ">
+				AND p.PAY_TYPE = #{params.interfaceType}
+			</if>
+			<if test="params.paymentCode != null and params.paymentCode !='' ">
+				AND p.CODE = #{params.paymentCode}
+			</if>
+			)
+		</if>
+
+		ORDER BY t.ID ASC
+	</select>
+
+	<select id="payOrderGroupSum" resultMap="orderMap"
+			parameterType="Map">
+		SELECT
+		<include refid="orderColumns" />
+		FROM TRADE_ORDER
+		<!-- 查询条件 params orderTimeStart orderTimeEnd -->
+	</select>
+
+	<!-- 根据商户编号和交易方式查询日交易额度 -->
+	<select id="orderAmountSum" resultType="java.util.HashMap"
+			parameterType="Map">
+		select sum(t.amount) as amount from trade_order t
+		where
+		t.create_time &gt;= #{timeStart}
+		AND t.create_time &lt;= #{timeEnd}
+		AND t.RECEIVER = #{receiver}
+		<if test="payType != null and payType !='' ">
+			and t.PAY_TYPE = #{payType}
+		</if>
+	</select>
+
+	<!-- 日期 - 交易金额 笔数 -->
+	<select id="orderSumByDay" resultType="java.util.HashMap"
+			parameterType="Map">
+		select COUNT(ID),DATE_FORMAT(t.create_time,'%Y%m%d')
+		days,sum(t.amount) as amount from trade_order t
+		where
+		t.status =
+		'SUCCESS' and
+		DATE_FORMAT(t.create_time,'%Y%m%d') &lt;= DATE_FORMAT(#{orderTimeStart},'%Y%m%d') and
+		DATE_FORMAT(t.create_time,'%Y%m%d') &gt;=
+		DATE_FORMAT(#{orderTimeEnd},'%Y%m%d')
+		<if test="receiver != null and receiver !='' ">
+			AND RECEIVER IN (#{receiver})
+		</if>
+		group by days
+	</select>
+	<!-- 订单数 笔数 -->
+	<select id="orderSum" resultType="java.util.HashMap"
+			parameterType="Map">
+		select CONVERT(sum(amount),CHAR) as amount,count(1) as counts FROM
+		trade_order
+		where
+		<if test="status != null and status !='' ">
+			REFUND_STATUS = #{status} and
+		</if>
+		<if test="list != null and list.size()>0 ">
+			RECEIVER IN
+			<foreach item="item" index="index" collection="list" open="("
+					 separator="," close=")">
+				#{item}
+			</foreach>
+			and
+		</if>
+		create_time &lt;= #{orderTimeStart} and
+		create_time &gt;= #{orderTimeEnd}
+	</select>
+	<!--当日成功金额 - 笔数 -->
+	<select id="orderAmountSumByDay" resultType="java.util.HashMap"
+			parameterType="Map">
+		SELECT count(AMOUNT) as counts, sum(amount) as amount FROM trade_order
+		WHERE STATUS =
+		'SUCCESS'
+		and DATE_FORMAT(SUCCESS_PAY_TIME,'%Y%m%d') &lt;=
+		DATE_FORMAT(#{orderTimeStart},'%Y%m%d')
+		and
+		DATE_FORMAT(SUCCESS_PAY_TIME,'%Y%m%d') &gt;=
+		DATE_FORMAT(#{orderTimeEnd},'%Y%m%d')
+		<if test="receiver != null and receiver !='' ">
+			and RECEIVER = #{receiver}
+		</if>
+	</select>
+	<!-- 日-周-月-所有 成功笔数、金额、支付方式 -->
+	<select id="orderAmountSumByPayType" resultType="java.util.HashMap"
+			parameterType="Map">
+		SELECT PAY_TYPE, sum(AMOUNT),count(AMOUNT) FROM trade_order
+		WHERE
+		STATUS = 'SUCCESS'
+		and DATE_FORMAT(SUCCESS_PAY_TIME,'%Y%m%d') &lt;=
+		DATE_FORMAT(#{orderTimeStart},'%Y%m%d')
+		and
+		DATE_FORMAT(SUCCESS_PAY_TIME,'%Y%m%d') &gt;=
+		DATE_FORMAT(#{orderTimeEnd},'%Y%m%d')
+		<if test="receiver != null and receiver !='' ">
+			and RECEIVER IN (#{receiver})
+		</if>
+		GROUP BY PAY_TYPE
+	</select>
+	<!-- app交易订单查询返回数据 -->
+	<select id="selectTradeOrder" resultType="java.util.Map" parameterType="java.util.Map">
+		select
+		count(*) as count,Sum(AMOUNT) as sum,
+		PAY_TYPE as payType
+		from
+		trade_order
+		where
+		receiver=#{params.customerNo} and `STATUS`='SUCCESS'
+		<if test="params.startSuccessPayTime != '' and params.startSuccessPayTime != null " >
+			and SUCCESS_PAY_TIME &gt;= #{params.startSuccessPayTime}
+		</if>
+		<if test="params.endSuccessPayTime != '' and params.endSuccessPayTime != null " >
+			and SUCCESS_PAY_TIME &lt;= #{params.endSuccessPayTime}
+		</if>
+		group by  PAY_TYPE
+	</select>
+	<!-- app交易订单查询返回数据合 -->
+	<select id="selectTradeOrderSum" resultType="java.util.Map" parameterType="java.util.Map">
+		select
+		DATE_FORMAT(SUCCESS_PAY_TIME,"%Y-%m-%d %H:%i:%s") as successPayTime,
+		PAY_TYPE as PayType,amount TotalAmount,CODE
+		from
+		trade_order
+		where receiver=#{params.customerNo}
+		<if test="params.status != null and params.status != '' ">
+			and status = #{params.status}
+		</if>
+		<if test="params.payType != '' and params.payType != null " >
+			and PAY_TYPE=#{params.payType}
+		</if>
+		<if test="params.startSuccessPayTime != '' and params.startSuccessPayTime != null " >
+			and SUCCESS_PAY_TIME &gt;= #{params.startSuccessPayTime}
+		</if>
+		<if test="params.endSuccessPayTime != '' and params.endSuccessPayTime != null " >
+			and SUCCESS_PAY_TIME &lt;= #{params.endSuccessPayTime}
+		</if>
+		ORDER BY SUCCESS_PAY_TIME DESC
+		limit #{params.currentPage},#{params.pageSize}
+	</select>
+	<!-- app交易订单查询详细 -->
+	<select id="selectTradeOrderDetailed" resultType="java.util.Map" parameterType="java.util.Map">
+		select
+			receiver,request_Code as requestNo,CODE as code
+			,PAY_TYPE as payType,AMOUNT as amount,RECEIVER_FEE as receiverFee,
+			if((AMOUNT-RECEIVER_FEE)>0,AMOUNT-RECEIVER_FEE,0) as actualAmount ,status,
+			CLEARING_STATUS as clearingStatus,
+			DATE_FORMAT(ORDER_TIME,"%Y-%m-%d %H:%i:%s") as orderTime,
+			DATE_FORMAT(SUCCESS_PAY_TIME,"%Y-%m-%d %H:%i:%s") as successTime
+		 from trade_order
+		where 
+			RECEIVER=#{params.customerNo} and CODE=#{params.code}
+	</select>
+	<!-- 根据customerNo,angetNo查询总条数 -->
+	<select id="selectOrderCount" resultType="java.util.Map" parameterType="java.lang.Integer">
+		select count(1) from  trade_order  where  receiver=#{params.payer}
+		<if test="params.status != null and params.status != '' ">
+			and STATUS = #{params.status}
+		</if>
+		<if test="params.payType != '' and params.payType != null " >
+			and PAY_TYPE=#{params.payType}
+		</if>
+		<if test="params.startSuccessPayTime != '' and params.startSuccessPayTime != null " >
+			and SUCCESS_PAY_TIME &gt;= #{params.startSuccessPayTime}
+		</if>
+		<if test="params.endSuccessPayTime != '' and params.endSuccessPayTime != null " >
+			and SUCCESS_PAY_TIME &lt;= #{params.endSuccessPayTime}
+		</if>
+	</select>
+
+	<!-- 微信交易page 分页 -->
+	<select id="findAllTradeOrder" resultMap="orderMap" parameterType="Map" >
+		select
+		<include refid="orderColumns" />
+		from
+		trade_order
+		where receiver=#{params.payer}
+		<if test="params.payType != '' and params.payType != null " >
+			and PAY_TYPE=#{params.payType}
+		</if>
+		<if test="params.startSuccessPayTime != '' and params.startSuccessPayTime != null " >
+			and SUCCESS_PAY_TIME &gt;= #{params.startSuccessPayTime}
+		</if>
+		<if test="params.endSuccessPayTime != '' and params.endSuccessPayTime != null " >
+			and SUCCESS_PAY_TIME &lt;= #{params.endSuccessPayTime}
+		</if>
+		ORDER BY SUCCESS_PAY_TIME DESC
+	</select>
+	<!-- 微信详情 -->
+	<select id="findTradeOrderDetail" resultMap="orderMap" parameterType="Map">
+		select
+		<include refid="orderColumns" />
+		from trade_order
+		where 1=1
+		<if test="params.payer != '' and params.payer != null " >
+			AND RECEIVER = #{params.payer}
+		</if>
+		<if test="params.code != '' and params.code != null " >
+			AND CODE = #{params.code}
+		</if>
+	</select>
+
+
+
+	<!-- 7天内每日数据合计 -->
+	<select id="orderWeekSumByDay" resultType="java.util.HashMap"
+			parameterType="Map">
+		SELECT DATE_FORMAT(SUCCESS_PAY_TIME,"%Y%m%d") as day,SUM(AMOUNT) as AMOUNT,count(1) as count from trade_order
+			where SUCCESS_PAY_TIME &gt;= DATE_FORMAT(now(), "%Y-%m-%d") - interval 6 day and receiver=#{params.receiver}
+			group by day;
+	</select>
+	<select id="findOrderApp" resultType="java.util.HashMap"
+			parameterType="Map">
+		SELECT
+			ID,CODE,VERSION,CREATE_TIME,BUSINESS_TYPE,BUSINESS_FLAG1,BUSINESS_FLAG2,REQUEST_CODE,PAYER_ROLE,PAYER,RECEIVER_ROLE,RECEIVER,
+			REPEAT_FLAG,CURRENCY,AMOUNT,PAID_AMOUNT,RECEIVER_FEE,COST,STATUS,CLEARING_STATUS,CLEARING_FINISH_TIME,ORDER_TIME,
+			TIMEOUT,CLOSE_TIME,SUCCESS_PAY_TIME,REFUND_STATUS,REFUND_AMOUNT,REFUNDABLE_AMOUNT,SUPPORT_REFUND_TYPE,SUPPORT_REFUND_HANDLE_TYPE,
+			REDIRECT_URL,NOTIFY_URL,PRODUCTS,PAY_TYPE
+ 		from trade_order
+			where receiver=#{params.receiver}
+			order by SUCCESS_PAY_TIME desc
+			limit 0,4
+	</select>
+
+	<select id="findOrderByJob" resultMap="orderMap" parameterType="Map">
+		SELECT
+		<include refid="orderColumns" />
+		FROM TRADE_ORDER vouc
+		WHERE STATUS = 'SUCCESS'
+		<if test="params != null">
+			<if test="params.createStartTime != null and params.createEndTime == null">
+				and vouc.SUCCESS_PAY_TIME &gt;= #{params.createStartTime}
+			</if>
+			<if test="params.createStartTime == null and params.createEndTime != null">
+				and vouc.SUCCESS_PAY_TIME &lt;= #{params.createEndTime}
+			</if>
+			<if test="params.createStartTime != null and params.createEndTime != null">
+				and vouc.SUCCESS_PAY_TIME BETWEEN #{params.createStartTime} AND #{params.createEndTime}
+			</if>
+		</if>
+		ORDER BY ID DESC
+	</select>
+
+	<select id="findTotalByJob" resultType="java.util.HashMap" parameterType="Map">
+		SELECT SUM(AMOUNT) AS AMOUNT, COUNT(AMOUNT) AS COUNT FROM TRADE_ORDER vouc
+		WHERE STATUS = 'SUCCESS'
+		<if test="params != null">
+			<if test="params.createStartTime != null and params.createEndTime == null">
+				and vouc.SUCCESS_PAY_TIME &gt;= #{params.createStartTime}
+			</if>
+			<if test="params.createStartTime == null and params.createEndTime != null">
+				and vouc.SUCCESS_PAY_TIME &lt;= #{params.createEndTime}
+			</if>
+			<if test="params.createStartTime != null and params.createEndTime != null">
+				and vouc.SUCCESS_PAY_TIME BETWEEN #{params.createStartTime} AND #{params.createEndTime}
+			</if>
+		</if>
+	</select>
+</mapper>

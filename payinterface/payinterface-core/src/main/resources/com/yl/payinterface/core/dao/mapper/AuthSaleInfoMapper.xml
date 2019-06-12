@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yl.payinterface.core.dao.mapper.AuthSaleInfoMapper">
+
+	<resultMap id="authSaleMap" type="com.yl.payinterface.core.bean.AuthSaleBean">
+		<id 	property="id" 				column="ID"></id>
+		<result property="bankCardNo" 		column="BANK_CARD_NO"></result>
+		<result property="validityDay" 		column="VALIDITY_DAY"></result>
+		<result property="cvv" 				column="CVV"></result>
+		<result property="payerName" 		column="PAYER_NAME"></result>
+		<result property="certNo" 			column="CERT_NO"></result>
+		<result property="payerMobNo" 		column="PAYER_MOB_NO"></result>
+		<result property="merOrderId" 		column="MER_ORDER_ID"></result>
+		<result property="interfaceCode" 	column="INTERFACE_CODE"></result>
+		<result property="amount" 			column="AMOUNT"></result>
+		<result property="bankCode" 		column="BANK_CODE"></result>
+		<result property="createTime" 		column="CREATE_TIME"></result>
+	</resultMap>
+
+
+	<sql id="authSaleColumns">
+		ID,BANK_CARD_NO,VALIDITY_DAY,CVV,PAYER_NAME,CERT_NO,PAYER_MOB_NO,
+		MER_ORDER_ID,INTERFACE_CODE,AMOUNT,BANK_CODE,CREATE_TIME
+	</sql>
+
+
+	<insert id="save" parameterType="com.yl.payinterface.core.bean.AuthSaleBean"
+		useGeneratedKeys="true" keyProperty="id">
+		INSERT INTO AUTH_SALE_INFO (
+		BANK_CARD_NO,BANK_CARD_NO,VALIDITY_DAY,CVV,PAYER_NAME,CERT_NO,PAYER_MOB_NO,MER_ORDER_ID,INTERFACE_CODE,
+		AMOUNT,BANK_CODE,CREATE_TIME)
+		VALUES
+		(#{bankCardNo},#{validityDay},#{cvv},#{payerName},#{certNo},
+		#{payerMobNo},#{merOrderId},#{interfaceCode},#{amount},#{bankCode},#{createTime})
+	</insert>
+
+	<select id="findByInterfaceRequestId" resultMap="authSaleMap" parameterType="java.lang.String">
+		SELECT
+		<include refid="authSaleColumns" />
+		FROM AUTH_SALE_INFO
+		WHERE MER_ORDER_ID = #{interfaceRequestId}
+	</select>
+	
+	<delete id="delete" parameterType="com.yl.payinterface.core.bean.AuthSaleBean" flushCache="true">
+		DELETE FROM AUTH_SALE_INFO
+		WHERE ID = #{id}
+	</delete>
+
+</mapper> 

@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yl.dpay.front.mapper.CustomerReqInfoMapper">
+
+	<resultMap id="CustomerReqInfoMap" type="com.yl.dpay.front.model.CustomerReqInfo">
+		<id property="id" column="ID"></id>
+		<result property="optimistic" column="OPTIMISTIC"></result>
+		<result property="createDate" column="CREATE_DATE"></result>
+		<result property="requestType" column="REQUEST_TYPE"></result>
+		<result property="customerNo" column="CUSTOMER_NO"></result>
+		<result property="versionCode" column="VERSION_CODE"></result>
+		<result property="customerParam" column="CUSTOMER_PARAM"></result>
+		<result property="customerRequestTime" column="CUSTOMER_REQUEST_TIME"></result>
+		<result property="cipherText" column="CIPHER_TEXT"></result>
+		<result property="cutomerOrderCode" column="CUSTOMER_ORDER_CODE"></result>
+		<result property="accountNo" column="ACCOUNT_NO"></result>
+		<result property="accountName" column="ACCOUNT_NAME"></result>
+		<result property="amount" column="AMOUNT"></result>
+		<result property="accountType" column="ACCOUNT_TYPE"></result>
+		<result property="description" column="DESCRIPTION"></result>
+		<result property="notifyUrl" column="NOTIFY_URL"></result>
+		<result property="ip" column="IP"></result>
+		<result property="domain" column="DOMIAN"></result>
+		<result property="cardType" column="CARD_TYPE"></result>
+		<result property="cerType" column="CER_TYPE"></result>
+		<result property="cerNo" column="CER_NO"></result>
+		<result property="bankCode" column="BANK_CODE"></result>
+		<result property="validity" column="VALIDITY"></result>
+		<result property="cvv" column="CVV"></result>
+	</resultMap>
+
+
+	<sql id="customerReqInfoColumns">
+		ID,OPTIMISTIC,CREATE_DATE,REQUEST_TYPE,CUSTOMER_NO,VERSION_CODE,CUSTOMER_PARAM,
+		CUSTOMER_REQUEST_TIME,CIPHER_TEXT,CUSTOMER_ORDER_CODE,ACCOUNT_NO,ACCOUNT_NAME,AMOUNT,ACCOUNT_TYPE,
+		DESCRIPTION,NOTIF_YURL,IP,DOMIAN,CARD_TYPE,CER_TYPE,CER_NO,BANK_CODE,VALIDITY,CVV</sql>
+
+
+	<insert id="insert" parameterType="com.yl.dpay.front.model.CustomerReqInfo"
+		useGeneratedKeys="true" keyProperty="id">
+		INSERT INTO CUSTOMER_REQ_INFO (
+		CREATE_DATE,REQUEST_TYPE,CUSTOMER_NO,VERSION_CODE,CUSTOMER_PARAM,
+		CUSTOMER_REQUEST_TIME,CIPHER_TEXT,CUSTOMER_ORDER_CODE,ACCOUNT_NO,ACCOUNT_NAME,AMOUNT,ACCOUNT_TYPE,
+		DESCRIPTION,NOTIFY_URL,IP,DOMIAN,CARD_TYPE,CER_TYPE,CER_NO,BANK_CODE,VALIDITY,CVV)
+		VALUES
+		(#{createDate},#{requestType},#{customerNo},#{versionCode},#{customerParam},
+		#{customerRequestTime},#{cipherText},#{cutomerOrderCode},#{accountNo},#{accountName},#{amount},
+		#{accountType},#{description},#{notifyUrl},#{ip},#{domain},#{cardType},#{cerType},#{cerNo},#{bankCode},#{validity},
+		#{cvv})
+	</insert>
+
+	<select id="findByCutomerOrderCode" resultMap="CustomerReqInfoMap"
+		parameterType="Map">
+		SELECT
+		<include refid="customerReqInfoColumns" />
+		FROM CUSTOMER_REQ_INFO
+		WHERE CUSTOMER_NO = #{customerNo} AND CUSTOMER_ORDER_CODE =#{customerOrderCode} and REQUEST_TYPE = #{requestType}
+		ORDER BY ID DESC
+	</select>
+
+</mapper> 

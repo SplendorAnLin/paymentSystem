@@ -1,0 +1,142 @@
+@charset "utf-8";
+/**
+* Description: interface logo style 
+* Developers: WangRui <rui.wang@lefu8.com>
+**/
+.B2C_ABC-DEBIT_CARD,.B2C_BCM-DEBIT_CARD,.B2C_BEA-DEBIT_CARD,.B2C_BJRCB-DEBIT_CARD,.B2C_BOB-DEBIT_CARD,.B2C_BOC-DEBIT_CARD,.B2C_BOJS-DEBIT_CARD,.B2C_BOS-DEBIT_CARD,.B2C_CBHB-DEBIT_CARD,.B2C_BOJH-DEBIT_CARD,.B2C_CCB-DEBIT_CARD,.B2C_CDB-DEBIT_CARD,.B2C_CEB-DEBIT_CARD,.B2C_CGB-DEBIT_CARD,.B2C_CIB-DEBIT_CARD,.B2C_CMBC-DEBIT_CARD,.B2C_CMB-DEBIT_CARD,.B2C_CNCB-DEBIT_CARD,.B2C_CQCB-DEBIT_CARD,.B2C_CQRCB-DEBIT_CARD,.B2C_CZB-DEBIT_CARD,.B2C_EGB-DEBIT_CARD,.B2C_FDB-DEBIT_CARD,.B2C_FJHX-DEBIT_CARD,.B2C_GRCBANK-DEBIT_CARD,.B2C_GZCB-DEBIT_CARD,.B2C_HCCB-DEBIT_CARD,.B2C_HKB-DEBIT_CARD,.B2C_HSB-DEBIT_CARD,.B2C_HXB-DEBIT_CARD,.B2C_ICBC-DEBIT_CARD,.B2C_LTCCB-DEBIT_CARD,.B2C_NBCB-DEBIT_CARD,.B2C_NJCB-DEBIT_CARD,.B2C_PAB-DEBIT_CARD,.B2C_PSBC-DEBIT_CARD,.B2C_QDB-DEBIT_CARD,.B2C_SRCB-DEBIT_CARD,.B2C_SPDB-DEBIT_CARD,.B2C_WZYH-DEBIT_CARD,.B2C_UNIONPAY-DEBIT_CARD,.B2C_MOCK-DEBIT_CARD
+,.B2C_ABC-CREDIT_CARD,.B2C_BCM-CREDIT_CARD,.B2C_BEA-CREDIT_CARD,.B2C_BJRCB-CREDIT_CARD,.B2C_BOB-CREDIT_CARD,.B2C_BOC-CREDIT_CARD,.B2C_BOJS-CREDIT_CARD,.B2C_BOS-CREDIT_CARD,.B2C_CBHB-CREDIT_CARD,.B2C_BOJH-CREDIT_CARD,.B2C_CCB-CREDIT_CARD,.B2C_CDB-CREDIT_CARD,.B2C_CEB-CREDIT_CARD,.B2C_CGB-CREDIT_CARD,.B2C_CIB-CREDIT_CARD,.B2C_CMBC-CREDIT_CARD,.B2C_CMB-CREDIT_CARD,.B2C_CNCB-CREDIT_CARD,.B2C_CQCB-CREDIT_CARD,.B2C_CQRCB-CREDIT_CARD,.B2C_CZB-CREDIT_CARD,.B2C_EGB-CREDIT_CARD,.B2C_FDB-CREDIT_CARD,.B2C_FJHX-CREDIT_CARD,.B2C_GRCBANK-CREDIT_CARD,.B2C_GZCB-CREDIT_CARD,.B2C_HCCB-CREDIT_CARD,.B2C_HKB-CREDIT_CARD,.B2C_HSB-CREDIT_CARD,.B2C_HXB-CREDIT_CARD,.B2C_ICBC-CREDIT_CARD,.B2C_LTCCB-CREDIT_CARD,.B2C_NBCB-CREDIT_CARD,.B2C_NJCB-CREDIT_CARD,.B2C_PAB-CREDIT_CARD,.B2C_PSBC-CREDIT_CARD,.B2C_QDB-CREDIT_CARD,.B2C_SRCB-CREDIT_CARD,.B2C_SPDB-CREDIT_CARD,.B2C_WZYH-CREDIT_CARD,.B2C_UNIONPAY-CREDIT_CARD,.B2C_MOCK-CREDIT_CARD
+,.B2B_ABC,.B2B_BCM,.B2B_BEA,.B2B_BJRCB,.B2B_BOB,.B2B_BOC,.B2B_BOJS,.B2B_BOS,.B2B_CBHB,.B2B_BOJH,.B2B_CCB,.B2B_CDB,.B2B_CEB,.B2B_CGB,.B2B_CIB,.B2B_CMBC,.B2B_CMB,.B2B_CNCB,.B2B_CQCB,.B2B_CQRCB,.B2B_CZB,.B2B_EGB,.B2B_FDB,.B2B_FJHX,.B2B_GRCBANK,.B2B_GZCB,.B2B_HCCB,.B2B_HKB,.B2B_HSB,.B2B_HXB,.B2B_ICBC,.B2B_LTCCB,.B2B_NBCB,.B2B_NJCB,.B2B_PAB,.B2B_PSBC,.B2B_QDB,.B2B_SRCB,.B2B_SPDB,.B2B_WZYH,.B2B_UNIONPAY,.B2B_LEFU
+,.MASTERCARDD
+{background:url(../image/interfaceLogo.png) no-repeat 0 0;}
+
+.B2C_ABC-DEBIT_CARD{width:127px;height:40px;background-position:0 0;}
+.B2C_BCM-DEBIT_CARD{width:127px;height:40px;background-position:0 -38px;}
+.B2C_BEA-DEBIT_CARD{width:127px;height:40px;background-position:0 -76px;}
+.B2C_BJRCB-DEBIT_CARD{width:127px;height:40px;background-position:0 -116px;}
+.B2C_BOB-DEBIT_CARD{width:127px;height:40px;background-position:0 -156px;}
+.B2C_BOC-DEBIT_CARD{width:127px;height:40px;background-position:0 -194px;}
+.B2C_BOJS-DEBIT_CARD{width:127px;height:40px;background-position:0 -236px;}
+.B2C_BOS-DEBIT_CARD{width:127px;height:40px;background-position:0 -276px;}
+.B2C_CBHB-DEBIT_CARD{width:127px;height:39px;background-position:0 -316px;}
+.B2C_BOJH-DEBIT_CARD{width:127px;height:40px;background-position:0 -357px;}
+.B2C_CCB-DEBIT_CARD{width:127px;height:40px;background-position:0 -397px;}
+.B2C_CDB-DEBIT_CARD{width:127px;height:40px;background-position:0 -437px;}
+.B2C_CEB-DEBIT_CARD{width:127px;height:40px;background-position:0 -475px;}
+.B2C_CGB-DEBIT_CARD{width:127px;height:40px;background-position:0 -514px;}
+.B2C_CIB-DEBIT_CARD{width:127px;height:40px;background-position:0 -555px;}
+.B2C_CMBC-DEBIT_CARD{width:127px;height:40px;background-position:0 -594px;}
+.B2C_CMB-DEBIT_CARD{width:127px;height:40px;background-position:0 -635px;}
+.B2C_CNCB-DEBIT_CARD{width:127px;height:40px;background-position:0 -672px;}
+.B2C_CQCB-DEBIT_CARD{width:127px;height:40px;background-position:0 -713px;}
+.B2C_CQRCB-DEBIT_CARD{width:127px;height:40px;background-position:0 -747px;}
+.B2C_CZB-DEBIT_CARD{width:127px;height:40px;background-position:0 -785px;}
+.B2C_EGB-DEBIT_CARD{width:127px;height:40px;background-position:0 -822px;}
+.B2C_FDB-DEBIT_CARD{width:127px;height:40px;background-position:0 -861px;}
+.B2C_FJHX-DEBIT_CARD{width:127px;height:40px;background-position:0 -899px;}
+.B2C_GRCBANK-DEBIT_CARD{width:127px;height:40px;background-position:0 -940px;}
+.B2C_GZCB-DEBIT_CARD{width:127px;height:40px;background-position:0 -981px;}
+.B2C_HCCB-DEBIT_CARD{width:127px;height:40px;background-position:0 -1022px;}
+.B2C_HKB-DEBIT_CARD{width:127px;height:40px;background-position:0 -1061px;}
+.B2C_HSB-DEBIT_CARD{width:127px;height:40px;background-position:0 -1101px;}
+.B2C_HXB-DEBIT_CARD{width:127px;height:40px;background-position:0 -1141px;}
+.B2C_ICBC-DEBIT_CARD{width:127px;height:40px;background-position:0 -1178px;}
+.B2C_LTCCB-DEBIT_CARD{width:127px;height:40px;background-position:0 -1218px;}
+.B2C_NBCB-DEBIT_CARD{width:127px;height:40px;background-position:0 -1257px;}
+.B2C_NJCB-DEBIT_CARD{width:127px;height:40px;background-position:0 -1298px;}
+.B2C_PAB-DEBIT_CARD{width:127px;height:40px;background-position:0 -1338px;}
+.B2C_PSBC-DEBIT_CARD{width:127px;height:40px;background-position:0 -1378px;}
+.B2C_QDB-DEBIT_CARD{width:127px;height:40px;background-position:0 -1416px;}
+.B2C_SRCB-DEBIT_CARD{width:127px;height:40px;background-position:0 -1455px;}
+.B2C_SPDB-DEBIT_CARD{width:127px;height:40px;background-position:0 -1496px;}
+.B2C_WZYH-DEBIT_CARD{width:127px;height:40px;background-position:0 -1534px;}
+.B2C_UNIONPAY-DEBIT_CARD{width:127px;height:40px;background-position:0 -1576px;}
+.B2C_MOCK-DEBIT_CARD{width:127px;height:40px;background-position:0 -1616px;}
+.B2C_MASTERCARD-DEBIT_CARD{width:127px;height:40px;background-position:0 -1654px;}
+
+.B2C_ABC-CREDIT_CARD{width:127px;height:40px;background-position:0 0;}
+.B2C_BCM-CREDIT_CARD{width:127px;height:40px;background-position:0 -38px;}
+.B2C_BEA-CREDIT_CARD{width:127px;height:40px;background-position:0 -76px;}
+.B2C_BJRCB-CREDIT_CARD{width:127px;height:40px;background-position:0 -116px;}
+.B2C_BOB-CREDIT_CARD{width:127px;height:40px;background-position:0 -156px;}
+.B2C_BOC-CREDIT_CARD{width:127px;height:40px;background-position:0 -194px;}
+.B2C_BOJS-CREDIT_CARD{width:127px;height:40px;background-position:0 -236px;}
+.B2C_BOS-CREDIT_CARD{width:127px;height:40px;background-position:0 -276px;}
+.B2C_CBHB-CREDIT_CARD{width:127px;height:39px;background-position:0 -316px;}
+.B2C_BOJH-CREDIT_CARD{width:127px;height:40px;background-position:0 -357px;}
+.B2C_CCB-CREDIT_CARD{width:127px;height:40px;background-position:0 -397px;}
+.B2C_CDB-CREDIT_CARD{width:127px;height:40px;background-position:0 -437px;}
+.B2C_CEB-CREDIT_CARD{width:127px;height:40px;background-position:0 -475px;}
+.B2C_CGB-CREDIT_CARD{width:127px;height:40px;background-position:0 -514px;}
+.B2C_CIB-CREDIT_CARD{width:127px;height:40px;background-position:0 -555px;}
+.B2C_CMBC-CREDIT_CARD{width:127px;height:40px;background-position:0 -594px;}
+.B2C_CMB-CREDIT_CARD{width:127px;height:40px;background-position:0 -635px;}
+.B2C_CNCB-CREDIT_CARD{width:127px;height:40px;background-position:0 -672px;}
+.B2C_CQCB-CREDIT_CARD{width:127px;height:40px;background-position:0 -713px;}
+.B2C_CQRCB-CREDIT_CARD{width:127px;height:40px;background-position:0 -747px;}
+.B2C_CZB-CREDIT_CARD{width:127px;height:40px;background-position:0 -785px;}
+.B2C_EGB-CREDIT_CARD{width:127px;height:40px;background-position:0 -822px;}
+.B2C_FDB-CREDIT_CARD{width:127px;height:40px;background-position:0 -861px;}
+.B2C_FJHX-CREDIT_CARD{width:127px;height:40px;background-position:0 -899px;}
+.B2C_GRCBANK-CREDIT_CARD{width:127px;height:40px;background-position:0 -940px;}
+.B2C_GZCB-CREDIT_CARD{width:127px;height:40px;background-position:0 -981px;}
+.B2C_HCCB-CREDIT_CARD{width:127px;height:40px;background-position:0 -1022px;}
+.B2C_HKB-CREDIT_CARD{width:127px;height:40px;background-position:0 -1061px;}
+.B2C_HSB-CREDIT_CARD{width:127px;height:40px;background-position:0 -1101px;}
+.B2C_HXB-CREDIT_CARD{width:127px;height:40px;background-position:0 -1141px;}
+.B2C_ICBC-CREDIT_CARD{width:127px;height:40px;background-position:0 -1178px;}
+.B2C_LTCCB-CREDIT_CARD{width:127px;height:40px;background-position:0 -1218px;}
+.B2C_NBCB-CREDIT_CARD{width:127px;height:40px;background-position:0 -1257px;}
+.B2C_NJCB-CREDIT_CARD{width:127px;height:40px;background-position:0 -1298px;}
+.B2C_PAB-CREDIT_CARD{width:127px;height:40px;background-position:0 -1338px;}
+.B2C_PSBC-CREDIT_CARD{width:127px;height:40px;background-position:0 -1378px;}
+.B2C_QDB-CREDIT_CARD{width:127px;height:40px;background-position:0 -1416px;}
+.B2C_SRCB-CREDIT_CARD{width:127px;height:40px;background-position:0 -1455px;}
+.B2C_SPDB-CREDIT_CARD{width:127px;height:40px;background-position:0 -1496px;}
+.B2C_WZYH-CREDIT_CARD{width:127px;height:40px;background-position:0 -1534px;}
+.B2C_UNIONPAY-CREDIT_CARD{width:127px;height:40px;background-position:0 -1576px;}
+.B2C_MOCK-CREDIT_CARD{width:127px;height:40px;background-position:0 -1616px;}
+
+.B2B_ABC{width:127px;height:40px;background-position:0 0;}
+.B2B_BCM{width:127px;height:40px;background-position:0 -38px;}
+.B2B_BEA{width:127px;height:40px;background-position:0 -76px;}
+.B2B_BJRCB{width:127px;height:40px;background-position:0 -116px;}
+.B2B_BOB{width:127px;height:40px;background-position:0 -156px;}
+.B2B_BOC{width:127px;height:40px;background-position:0 -194px;}
+.B2B_BOJS{width:127px;height:40px;background-position:0 -236px;}
+.B2B_BOS{width:127px;height:40px;background-position:0 -276px;}
+.B2B_CBHB{width:127px;height:39px;background-position:0 -316px;}
+.B2B_BOJH{width:127px;height:40px;background-position:0 -357px;}
+.B2B_CCB{width:127px;height:40px;background-position:0 -397px;}
+.B2B_CDB{width:127px;height:40px;background-position:0 -437px;}
+.B2B_CEB{width:127px;height:40px;background-position:0 -475px;}
+.B2B_CGB{width:127px;height:40px;background-position:0 -514px;}
+.B2B_CIB{width:127px;height:40px;background-position:0 -555px;}
+.B2B_CMBC{width:127px;height:40px;background-position:0 -594px;}
+.B2B_CMB{width:127px;height:40px;background-position:0 -635px;}
+.B2B_CNCB{width:127px;height:40px;background-position:0 -672px;}
+.B2B_CQCB{width:127px;height:40px;background-position:0 -713px;}
+.B2B_CQRCB{width:127px;height:40px;background-position:0 -747px;}
+.B2B_CZB{width:127px;height:40px;background-position:0 -785px;}
+.B2B_EGB{width:127px;height:40px;background-position:0 -822px;}
+.B2B_FDB{width:127px;height:40px;background-position:0 -861px;}
+.B2B_FJHX{width:127px;height:40px;background-position:0 -899px;}
+.B2B_GRCBANK{width:127px;height:40px;background-position:0 -940px;}
+.B2B_GZCB{width:127px;height:40px;background-position:0 -981px;}
+.B2B_HCCB{width:127px;height:40px;background-position:0 -1022px;}
+.B2B_HKB{width:127px;height:40px;background-position:0 -1061px;}
+.B2B_HSB{width:127px;height:40px;background-position:0 -1101px;}
+.B2B_HXB{width:127px;height:40px;background-position:0 -1141px;}
+.B2B_ICBC{width:127px;height:40px;background-position:0 -1178px;}
+.B2B_LTCCB{width:127px;height:40px;background-position:0 -1218px;}
+.B2B_NBCB{width:127px;height:40px;background-position:0 -1257px;}
+.B2B_NJCB{width:127px;height:40px;background-position:0 -1298px;}
+.B2B_PAB{width:127px;height:40px;background-position:0 -1338px;}
+.B2B_PSBC{width:127px;height:40px;background-position:0 -1378px;}
+.B2B_QDB{width:127px;height:40px;background-position:0 -1416px;}
+.B2B_SRCB{width:127px;height:40px;background-position:0 -1455px;}
+.B2B_SPDB{width:127px;height:40px;background-position:0 -1496px;}
+.B2B_WZYH{width:127px;height:40px;background-position:0 -1534px;}
+.B2B_UNIONPAY{width:127px;height:40px;background-position:0 -1576px;}
+.B2B_LEFU{width:127px;height:40px;background-position:0 -1616px;}
+
+.MASTERCARD{width:127px;height:40px;background-position:0 -1654px;}

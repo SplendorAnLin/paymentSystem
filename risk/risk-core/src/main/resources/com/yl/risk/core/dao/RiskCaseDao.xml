@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.yl.risk.core.dao.RiskCaseDao">
+
+	<resultMap id="RiskCaseBean" type="com.yl.risk.core.entity.RiskCase">
+		<result column="ID" 						property="id" />
+		<result column="OPTIMISTIC" 	 			property="optimistic" />
+		<result column="CREATE_TIME" 				property="createTime" />
+		<result column="BUSINESS_TYPE"    			property="businessType" />
+		<result column="SOURCE"    			 		property="source" />
+		<result column="PAY_TYPE"    				property="payType" />
+		<result column="RULE_ID"    				property="ruleId" />
+		<result column="RISK_PROCESSOR_ID"    		property="riskProcessorId" />
+		<result column="STATUS"    					property="status" />
+	</resultMap>
+
+	<!-- 账户数据库模型字段 -->
+	<sql id="commonColumn">
+		ID, OPTIMISTIC, CREATE_TIME, BUSINESS_TYPE, SOURCE, PAY_TYPE, RULE_ID, RISK_PROCESSOR_ID, STATUS
+	</sql>
+
+	<select id="findByBusTypeAndPayType" resultMap="RiskCaseBean" parameterType="java.lang.String">
+		SELECT <include refid="commonColumn" /> FROM RISK_CASE WHERE PAY_TYPE = #{payType} AND BUSINESS_TYPE = #{businessType}
+		AND SOURCE = #{source} AND STATUS = 'TRUE'
+		LIMIT 1
+	</select>
+
+	<select id="findById" resultMap="RiskCaseBean" parameterType="java.lang.Integer">
+		SELECT <include refid="commonColumn" /> FROM risk_case WHERE ID = #{id}
+	</select>
+
+	<select id="findAllRiskCase" resultType="java.util.Map">
+		SELECT
+			rc.ID as id,
+			rc.OPTIMISTIC as optimistic,
+			rc.CREATE_TIME as createTime,
+			rc.BUSINESS_TYPE as businessType,
+			rc.SOURCE as source,
+			rc.PAY_TYPE as payType,
+			rrc.`NAME` as ruleName,
+			rp.RISK_PROCESSOR_NAME as riskProcessorName,
+			rc.STATUS as status
+		FROM
+			risk_case rc
+		LEFT JOIN risk_rule_config rrc ON rc.RULE_ID = rrc.ID
+		LEFT JOIN risk_processor rp ON rc.RISK_PROCESSOR_ID = rp.ID
+		WHERE 1 = 1
+		<if test="params.businessType != null and params.businessType != '' ">
+			AND rc.BUSINESS_TYPE = #{params.businessType}
+		</if>
+		<if test="params.source != null and params.source != '' ">
+			AND rc.SOURCE = #{params.source}
+		</if>
+		<if test="params.payType != null and params.payType != '' ">
+			AND rc.PAY_TYPE = #{params.payType}
+		</if>
+		<if test="params.ruleId != null and params.ruleId != '' ">
+			AND rc.RULE_ID = #{params.ruleId}
+		</if>
+		<if test="params.riskProcessorId != null and params.riskProcessorId != '' ">
+			AND rc.RISK_PROCESSOR_ID = #{params.riskProcessorId}
+		</if>
+		<if test="params.status != null and params.status != '' ">
+			AND rc.STATUS = #{params.status}
+		</if>
+		<if test="params.createTimeStart != null and params.createTimeStart != '' ">
+			AND rc.CREATE_TIME &gt;= #{params.createTimeStart}
+		</if>
+		<if test="params.createTimeEnd != null and params.createTimeEnd != '' ">
+			AND rc.CREATE_TIME &lt;= #{params.createTimeEnd}
+		</if>
+	</select>
+
+	<update id="modify" parameterType="com.yl.risk.core.entity.RiskCase">
+		UPDATE
+			risk_case
+		SET
+			OPTIMISTIC = #{optimistic} + 1,
+			BUSINESS_TYPE = #{businessType},
+			SOURCE = #{source},
+			PAY_TYPE = #{payType},
+			RULE_ID = #{ruleId},
+			RISK_PROCESSOR_ID = #{riskProcessorId},
+			STATUS = #{status}
+		where
+			ID = #{id}
+	</update>
+
+	<insert id="insert" parameterType="com.yl.risk.core.entity.RiskCase">
+		INSERT INTO
+		risk_case (OPTIMISTIC, CREATE_TIME, BUSINESS_TYPE, SOURCE, PAY_TYPE, RULE_ID, RISK_PROCESSOR_ID, STATUS)
+		VALUES
+		(#{optimistic}, #{createTime}, #{businessType}, #{source}, #{payType}, #{ruleId}, #{riskProcessorId}, #{status})
+	</insert>
+</mapper>

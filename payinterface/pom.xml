@@ -1,0 +1,33 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<artifactId>payinterface</artifactId>
+	<version>1.0.0</version>
+	<packaging>pom</packaging>
+	<name>支付接口</name>
+	<description>提供第三方支付接口的接入、交易、运营等服务的接口及实现</description>
+	<modules>
+		<module>payinterface-core</module>
+		<module>payinterface-hessian</module>
+		<module>payinterface-front</module>
+	</modules>
+	<groupId>com.yl</groupId>
+
+    <properties>
+        <maven.compiler.source>1.7</maven.compiler.source>
+        <maven.compiler.target>1.7</maven.compiler.target>
+    </properties>
+
+	<distributionManagement>
+		<repository>
+			<id>releases</id>
+			<name>releases</name>
+			<url>http://m.bank-pay.com:8081/nexus/content/repositories/releases/</url>
+		</repository>
+		<snapshotRepository>
+			<id>snapshots</id>
+			<name>snapshots</name>
+			<url>http://m.bank-pay.com:8081/nexus/content/repositories/snapshots/</url>
+		</snapshotRepository>
+	</distributionManagement>
+
+</project>

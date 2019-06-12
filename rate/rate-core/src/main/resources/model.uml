@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Diagram>
+  <ID>JAVA</ID>
+  <OriginalElement />
+  <nodes>
+    <node x="311.0" y="639.0">com.yl.rate.core.enums.ComputeMode</node>
+    <node x="16.0" y="0.0">com.yl.rate.core.enums.ProductType</node>
+    <node x="424.0" y="0.0">com.yl.rate.core.enums.OwnerRole</node>
+    <node x="170.0" y="662.0">com.yl.rate.core.enums.FeeType</node>
+    <node x="353.00000000000006" y="149.0">com.yl.rate.core.entity.OwnerRate</node>
+    <node x="28.5" y="811.0">com.yl.rate.core.entity.RateRule</node>
+    <node x="627.0" y="172.0">com.yl.rate.core.entity.RateTemplate</node>
+    <node x="-74.0" y="313.0">com.yl.rate.core.entity.BaseEntity</node>
+    <node x="0.0" y="639.0">com.yl.rate.core.enums.CompFeeType</node>
+    <node x="264.0" y="11.5">com.yl.rate.core.enums.OwnerRateType</node>
+    <node x="644.75" y="11.5">com.yl.rate.core.enums.Status</node>
+    <node x="558.0" y="639.0">Play</node>
+    <node x="0.0" y="518.0">com.yl.rate.core.entity.Rate</node>
+  </nodes>
+  <notes />
+  <edges>
+    <edge source="com.yl.rate.core.entity.RateTemplate" target="com.yl.rate.core.entity.BaseEntity">
+      <point x="0.0" y="0.0" />
+      <point x="0.0" y="0.0" />
+    </edge>
+    <edge source="com.yl.rate.core.entity.OwnerRate" target="com.yl.rate.core.entity.BaseEntity">
+      <point x="0.0" y="0.0" />
+      <point x="0.0" y="0.0" />
+    </edge>
+    <edge source="com.yl.rate.core.entity.RateRule" target="com.yl.rate.core.entity.BaseEntity">
+      <point x="0.0" y="0.0" />
+      <point x="0.0" y="0.0" />
+    </edge>
+    <edge source="com.yl.rate.core.entity.Rate" target="com.yl.rate.core.entity.BaseEntity">
+      <point x="0.0" y="0.0" />
+      <point x="0.0" y="0.0" />
+    </edge>
+  </edges>
+  <settings layout="Hierarchic Group" zoom="1.0" x="402.5" y="485.0" />
+  <SelectedNodes>
+    <node>com.yl.rate.core.entity.Rate</node>
+  </SelectedNodes>
+  <Categories>
+    <Category>Fields</Category>
+    <Category>Inner Classes</Category>
+    <Category>Properties</Category>
+    <Category>Methods</Category>
+    <Category>Constructors</Category>
+  </Categories>
+  <SCOPE>All</SCOPE>
+  <VISIBILITY>private</VISIBILITY>
+</Diagram>
+

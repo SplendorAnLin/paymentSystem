@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.yl.chat.mapper.UserMapper">
+
+    <resultMap id="User" type="com.yl.chat.wecaht.model.User">
+        <result column="W_OPENID" property="openid"/>
+        <result column="W_CUSTOMER" property="customer"/>
+        <result column="W_PHONE" property="phone"/>
+    </resultMap>
+
+    <!-- 账户数据库模型字段 -->
+    <sql id="commonColumn">
+		W_OPENID,W_CUSTOMER,W_PHONE
+	</sql>
+
+    <insert id="saveWechat" parameterType="com.yl.chat.wecaht.model.User">
+        INSERT INTO
+        user(<include refid="commonColumn"/>)
+        VALUES
+        (#{openid}, #{customer}, #{phone})
+    </insert>
+
+    <select id="findUserOpenid" resultMap="User">
+        SELECT
+        <include refid="commonColumn"/>
+        FROM user
+        WHERE W_OPENID = #{openid}
+    </select>
+
+    <select id="findOpenIdByCustomerNo" resultMap="User">
+        SELECT
+        <include refid="commonColumn"/>
+        FROM user
+        WHERE W_CUSTOMER = #{customerNo}
+    </select>
+
+    <update id="updateWechat" parameterType="com.yl.chat.wecaht.model.User">
+		UPDATE user SET W_CUSTOMER = #{customer},W_PHONE = #{phone}
+		WHERE W_OPENID = #{openid}
+	</update>
+</mapper>

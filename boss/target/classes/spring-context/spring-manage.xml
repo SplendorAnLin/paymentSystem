@@ -1,0 +1,157 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" ":/spring-beans.dtd">
+
+<beans default-autowire="byName">
+
+	<bean id="bankAction" class="com.yl.boss.action.BankAction" singleton="false"></bean>
+	<bean id="welcomeAction" class="com.yl.boss.action.WelcomeAction" singleton="false"></bean>
+	<!-- 权限角色 -->
+	<bean id="roleAction" class="com.yl.boss.action.RoleAction" singleton="false"></bean>
+	<!-- 公告  queryAccountAction-->
+	
+	<bean id="bulletinAction" class="com.yl.boss.action.BulletinAction" singleton="false"></bean>
+	<bean id="bulletinService" class="com.yl.boss.service.impl.BulletinServiceImpl"></bean>
+	<bean id="bulletinDao" class="com.yl.boss.dao.impl.BulletinDaoImpl"></bean>
+	
+	<!-- 商户 -->
+	<bean id="customerService" class="com.yl.boss.service.impl.CustomerServiceImpl"></bean>
+	<bean id="customerDao" class="com.yl.boss.dao.impl.CustomerDaoImpl"></bean>
+	<bean id="customerHistoryDao" class="com.yl.boss.dao.impl.CustomerHistoryDaoImpl"></bean>
+	
+	<bean id="customerCertService" class="com.yl.boss.service.impl.CustomerCertServiceImpl"></bean>
+	<bean id="customerCertDao" class="com.yl.boss.dao.impl.CustomerCertDaoImpl"></bean>
+	<bean id="customerCertHistoryDao" class="com.yl.boss.dao.impl.CustomerCertHistoryDaoImpl"></bean>
+	
+	<bean id="customerFeeAction" class="com.yl.boss.action.CustomerFeeAction"  singleton="false"></bean>
+	<bean id="customerFeeService" class="com.yl.boss.service.impl.CustomerFeeServiceImpl"></bean>
+	<bean id="customerFeeDao" class="com.yl.boss.dao.impl.CustomerFeeDaoImpl"></bean>
+	<bean id="customerFeeHistoryDao" class="com.yl.boss.dao.impl.CustomerFeeHistoryDaoImpl"></bean>
+	
+	<bean id="customerKeyService" class="com.yl.boss.service.impl.CustomerKeyServiceImpl"></bean>
+	<bean id="customerKeyDao" class="com.yl.boss.dao.impl.CustomerKeyDaoImpl"></bean>
+	<bean id="customerKeyHistoryDao" class="com.yl.boss.dao.impl.CustomerKeyHistoryDaoImpl"></bean>
+	
+	<bean id="customerSettleService" class="com.yl.boss.service.impl.CustomerSettleServiceImpl"></bean>
+	<bean id="customerSettleDao" class="com.yl.boss.dao.impl.CustomerSettleDaoImpl"></bean>
+	<bean id="customerSettleHistoryDao" class="com.yl.boss.dao.impl.CustomerSettleHistoryDaoImpl"></bean>
+	
+	<!-- 服务商 -->
+	<bean id="agentService" class="com.yl.boss.service.impl.AgentServiceImpl"></bean>
+	<bean id="agentDao" class="com.yl.boss.dao.impl.AgentDaoImpl"></bean>
+	<bean id="agentHistoryDao" class="com.yl.boss.dao.impl.AgentHistoryDaoImpl"></bean>
+	
+	<bean id="agentCertService" class="com.yl.boss.service.impl.AgentCertServiceImpl"></bean>
+	<bean id="agentCertDao" class="com.yl.boss.dao.impl.AgentCertDaoImpl"></bean>
+	<bean id="agentCertHistoryDao" class="com.yl.boss.dao.impl.AgentCertHistoryDaoImpl"></bean>
+	
+	<bean id="agentFeeService" class="com.yl.boss.service.impl.AgentFeeServiceImpl"></bean>
+	<bean id="agentFeeDao" class="com.yl.boss.dao.impl.AgentFeeDaoImpl"></bean>
+	<bean id="agentFeeHistoryDao" class="com.yl.boss.dao.impl.AgentFeeHistoryDaoImpl"></bean>
+	
+	<bean id="agentSettleService" class="com.yl.boss.service.impl.AgentSettleServiceImpl"></bean>
+	<bean id="agentSettleDao" class="com.yl.boss.dao.impl.AgentSettleDaoImpl"></bean>
+	<bean id="agentSettleHistoryDao" class="com.yl.boss.dao.impl.AgentSettleHistoryDaoImpl"></bean>
+	<bean id="agentSettleAction" class="com.yl.boss.action.AgentSettleAction" singleton="false"></bean>
+	<!-- 设备 -->
+	<bean id="deviceService" class="com.yl.boss.service.impl.DeviceServiceImpl"></bean>
+	<bean id="deviceDao" class="com.yl.boss.dao.impl.DeviceDaoImpl"></bean>
+	<bean id="devicePurchDao" class="com.yl.boss.dao.impl.DevicePurchDaoImpl"></bean>
+	<bean id="devicePurchHistoryDao" class="com.yl.boss.dao.impl.DevicePurchHistoryDaoImpl"></bean>
+	<bean id="agentDeviceOrderDao" class="com.yl.boss.dao.impl.AgentDeviceOrderDaoImpl"></bean>
+	<bean id="agentDeviceOrderHistoryDao" class="com.yl.boss.dao.impl.AgentDeviceOrderHistoryDaoImpl"></bean>
+	<bean id="deviceTypeDao" class="com.yl.boss.dao.impl.DeviceTypeDaoIpml"></bean>
+	
+	<bean id="deviceAction" class="com.yl.boss.action.DeviceAction" singleton="false"></bean>
+	
+	<!-- 账户信息 -->
+	<bean id="accountAction" class="com.yl.boss.action.AccountAction" singleton="false"></bean>
+	<bean id="accountService" class="com.yl.boss.service.impl.AccountServiceImpl" ></bean>
+	
+	<!-- 接口信息 -->
+	<bean id="payinterfaceAction" class="com.yl.boss.action.PayinterfaceAction" singleton="false"></bean>
+	
+	<!-- 接口请求 -->
+	<bean id="interfaceResultAction" class="com.yl.boss.action.InterfaceResultAction" singleton="false"></bean>
+	
+	<bean id="customerAction" class="com.yl.boss.action.CustomerAction" singleton="false"></bean>
+	<bean id="onlineAction" class="com.yl.boss.action.OnlineAction" singleton="false"></bean>
+	<bean id="interfaceProviderAction" class="com.yl.boss.action.InterfaceProviderAction" singleton="false"></bean>
+	<bean id="agentAction" class="com.yl.boss.action.AgentAction" singleton="false"></bean>
+	<bean id="agentFeeAction" class="com.yl.boss.action.AgentFeeAction" singleton="false"></bean>
+	<bean id="customerSettleAction" class="com.yl.boss.action.CustomerSettleAction" singleton="false"></bean>
+
+	<!-- 分润、经营分析 -->
+	<bean id="shareProfitService" class="com.yl.boss.service.impl.ShareProfitServiceImpl"></bean>
+	<bean id="shareProfitDao" class="com.yl.boss.dao.impl.ShareProfitDaoImpl"></bean>
+	<bean id="shareProfitAction" class="com.yl.boss.action.ShareProfitAction" singleton="false"></bean>
+	
+	<!-- 接口对账配置 -->
+	<bean id="reconBillAction" class="com.yl.boss.action.ReconBillAction" singleton="false"></bean>
+	<bean id="reconBillService" class="com.yl.boss.service.impl.ReconBillServiceImpl"></bean>
+	<bean id="reconBillDao" class="com.yl.boss.dao.impl.ReconBillDaoImpl"></bean>
+		
+	<!-- 扫码入网 -->
+	<bean id="qRCodeService" class="com.yl.boss.service.impl.QRCodeServiceImpl"></bean>
+	<bean id="qRCodeDao" class="com.yl.boss.dao.impl.QRCodeDaoImpl"></bean>
+	<bean id="customerHistoryService" class="com.yl.boss.service.impl.CustomerHistoryServiceImpl"></bean>
+
+	<!-- 协议管理 -->
+	<bean id="protocolManagementService" class="com.yl.boss.service.impl.ProtocolManagementServiceImpl"/>
+	<bean id="protocolManagementDao" class="com.yl.boss.dao.impl.ProtocolManagementDaoImpl"/>
+	
+	
+	<bean id="deviceConfigService" class="com.yl.boss.service.impl.DeviceConfigServiceImpl"/>
+	<bean id="deviceConfigDao" class="com.yl.boss.dao.impl.DeviceConfigDaoImpl"/>
+	<bean id="deviceConfigHistoryService" class="com.yl.boss.service.impl.DeviceConfigHistoryServiceImpl"/>
+	<bean id="deviceConfigHistoryDao" class="com.yl.boss.dao.impl.DeviceConfigHistoryDaoImpl"/>
+	
+	
+	<bean id="adService" class="com.yl.boss.service.impl.AdServiceImpl"/>
+	<bean id="adDao" class="com.yl.boss.dao.impl.AdDaoImpl"/>
+	<bean id="adAction" class="com.yl.boss.action.AdAction" singleton="false"></bean>
+
+	<bean id="userFeedBackService" class="com.yl.boss.service.impl.UserFeedBackServiceImpl"/>
+	<bean id="userFeedBackDao" class="com.yl.boss.dao.impl.UserFeedBackDaoImpl"/>
+	
+	<bean id="appVersionService" class="com.yl.boss.service.impl.AppVersionServiceImpl"/>
+	<bean id="appVersionDao" class="com.yl.boss.dao.impl.AppVersionDaoImpl"/>
+	<bean id="appVersionHistoryDao" class="com.yl.boss.dao.impl.AppVersionHistoryDaoImpl"/>
+	
+	
+	<bean id="secretKeyAction" class="com.yl.boss.action.SecretKeyAction" singleton="false"/>
+	<bean id="secretKeyService" class="com.yl.boss.service.impl.SecretKeyServiceImpl"/>
+	<bean id="secretKeyDao" class="com.yl.boss.dao.impl.SecretKeyDaoImpl"/>
+	
+	<bean id="shopAction" class="com.yl.boss.action.ShopAction" singleton="false"/>
+	<bean id="shopService" class="com.yl.boss.service.impl.ShopServiceImpl"/>
+	<bean id="shopDao" class="com.yl.boss.dao.impl.ShopDaoImpl"/>
+	
+	<bean id="posAction" class="com.yl.boss.action.PosAction" singleton="false" />
+	<bean id="posService" class="com.yl.boss.service.impl.PosServiceImpl" />
+	<bean id="posDao" class="com.yl.boss.dao.impl.PosDaoImpl" />
+	
+	<bean id="syncInfoDao" class="com.yl.boss.dao.impl.SyncInfoDaoImpl" />
+	<bean id="syncService" class="com.yl.boss.service.impl.SyncInfoServiceImpl" />
+	
+	<!-- 对账配置 -->
+	<bean id="reconAction" class="com.yl.boss.action.ReconAction" singleton="false"></bean>
+	
+	<!-- 交易卡 -->
+	<bean id="transCardAction" class="com.yl.boss.action.TransCardAction" singleton="false"></bean>
+	<bean id="transCardService" class="com.yl.boss.service.impl.TransCardServiceImpl" />
+	<bean id="transCardDao" class="com.yl.boss.dao.impl.TransCardDaoImpl" />
+	<bean id="transCardHistoryService" class="com.yl.boss.service.impl.TransCardHistoryServiceImpl" />
+	<bean id="transCardHistoryDao" class="com.yl.boss.dao.impl.TransCardHistoryDaoImpl" />
+	
+	<bean id="noticeManageAction" class="com.yl.boss.action.NoticeManageAction" singleton="false"></bean>
+	<bean id="noticeManageService" class="com.yl.boss.service.impl.NoticeManageServiceImpl" />
+	
+	<bean id="PosSynchronizationService" class="com.yl.boss.service.impl.PosSynchronizationServiceImpl" />
+	<bean id="PosSynchronizationDao" class="com.yl.boss.dao.impl.PosSynchronizationDaoImpl" />
+	
+	<!-- 银行商户 -->
+	<bean id="bankCustomerService" class="com.yl.boss.service.impl.BankCustomerServiceImpl" />
+	<bean id="bankCustomerDao" class="com.yl.boss.dao.impl.BankCustomerDaoImpl" />
+	
+	<bean id="oneCustomerMultiCodeService" class="com.yl.boss.service.impl.OneCustomerMultiCodeServiceImpl" />
+</beans>

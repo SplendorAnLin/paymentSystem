@@ -1,0 +1,277 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yl.dpay.core.mybatis.mapper.ServiceConfigHistoryMapper">
+  <resultMap id="BaseResultMap" type="com.yl.dpay.core.entity.ServiceConfigHistory">
+    <!--
+      WARNING - @mbggenerated
+      Generated on 2016-11-02 16:48:03.
+    -->
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="OPTIMISTIC" jdbcType="INTEGER" property="optimistic" />
+    <result column="OWNER_ID" jdbcType="VARCHAR" property="ownerId" />
+    <result column="CREATE_DATE" jdbcType="TIMESTAMP" property="createDate" />
+    <result column="OWNER_ROLE" jdbcType="VARCHAR" property="ownerRole" />
+    <result column="VALID" jdbcType="VARCHAR" property="valid" />
+    <result column="MANUAL_AUDIT" jdbcType="VARCHAR" property="manualAudit" />
+    <result column="PHONE" jdbcType="VARCHAR" property="phone" />
+    <result column="COMPLEX_PASSWORD" jdbcType="VARCHAR" property="complexPassword" />
+    <result column="USE_PHONE_CHECK" jdbcType="VARCHAR" property="usePhoneCheck" />
+    <result column="PUBLIC_KEY" jdbcType="VARCHAR" property="publicKey" />
+    <result column="PRIVATE_KEY" jdbcType="VARCHAR" property="privateKey" />
+    <result column="CUST_IP" jdbcType="VARCHAR" property="custIp" />
+    <result column="DOMAIN" jdbcType="VARCHAR" property="domain" />
+    <result column="MIN_AMOUNT" jdbcType="DOUBLE" property="minAmount" />
+    <result column="MAX_AMOUNT" jdbcType="DOUBLE" property="maxAmount" />
+    <result column="OPERATOR" jdbcType="VARCHAR" property="operator" />
+    <result column="HOLIDAYSTATUS" jdbcType="VARCHAR" property="holidayStatus" />
+    <result property="dayMaxAmount" column="DAY_MAX_AMOUNT"></result>
+	<result property="bossAudit" column="BOSS_AUDIT"></result>
+	<result property="startTime" column="START_TIME"></result>
+	<result property="endTime" column="END_TIME"></result>
+	<result property="fireType" column="FIRE_TYPE"></result>
+  </resultMap>
+  <sql id="Base_Column_List">
+    <!--
+      WARNING - @mbggenerated
+      Generated on 2016-11-02 16:48:03.
+    -->
+    id, OPTIMISTIC, OWNER_ID, CREATE_DATE, OWNER_ROLE, VALID, MANUAL_AUDIT, PHONE, COMPLEX_PASSWORD, FIRE_TYPE,
+    USE_PHONE_CHECK, PUBLIC_KEY, PRIVATE_KEY, CUST_IP, DOMAIN, MIN_AMOUNT, MAX_AMOUNT, 
+    OPERATOR,HOLIDAYSTATUS,DAY_MAX_AMOUNT,BOSS_AUDIT,START_TIME,END_TIME
+  </sql>
+  <select id="findById" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    <!--
+      WARNING - @mbggenerated
+      Generated on 2016-11-02 16:48:03.
+    -->
+    select 
+    <include refid="Base_Column_List" />
+    from service_config_history
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <insert id="insert" parameterType="com.yl.dpay.core.entity.ServiceConfigHistory">
+    <!--
+      WARNING - @mbggenerated
+      Generated on 2016-11-02 16:48:03.
+    -->
+    insert into service_config_history
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="optimistic != null">
+        OPTIMISTIC,
+      </if>
+      <if test="ownerId != null">
+        OWNER_ID,
+      </if>
+      <if test="createDate != null">
+        CREATE_DATE,
+      </if>
+      <if test="ownerRole != null">
+        OWNER_ROLE,
+      </if>
+      <if test="valid != null">
+        VALID,
+      </if>
+      <if test="manualAudit != null">
+        MANUAL_AUDIT,
+      </if>
+      <if test="phone != null">
+        PHONE,
+      </if>
+      <if test="complexPassword != null">
+        COMPLEX_PASSWORD,
+      </if>
+      <if test="usePhoneCheck != null">
+        USE_PHONE_CHECK,
+      </if>
+      <if test="publicKey != null">
+        PUBLIC_KEY,
+      </if>
+      <if test="privateKey != null">
+        PRIVATE_KEY,
+      </if>
+      <if test="custIp != null">
+        CUST_IP,
+      </if>
+      <if test="domain != null">
+        DOMAIN,
+      </if>
+      <if test="minAmount != null">
+        MIN_AMOUNT,
+      </if>
+      <if test="maxAmount != null">
+        MAX_AMOUNT,
+      </if>
+      <if test="operator != null">
+        OPERATOR,
+      </if>
+      <if test="holidayStatus != null">
+        HOLIDAYSTATUS,
+      </if>
+      <if test="dayMaxAmount != null">
+        DAY_MAX_AMOUNT,
+      </if>
+      <if test="bossAudit != null">
+        BOSS_AUDIT,
+      </if>
+      <if test="startTime != null">
+        START_TIME,
+      </if>
+      <if test="endTime != null">
+        END_TIME,
+      </if>
+       <if test="fireType != null">
+        FIRE_TYPE,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="optimistic != null">
+        #{optimistic,jdbcType=INTEGER},
+      </if>
+      <if test="ownerId != null">
+        #{ownerId,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null">
+        #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="ownerRole != null">
+        #{ownerRole,jdbcType=VARCHAR},
+      </if>
+      <if test="valid != null">
+        #{valid,jdbcType=VARCHAR},
+      </if>
+      <if test="manualAudit != null">
+        #{manualAudit,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null">
+        #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="complexPassword != null">
+        #{complexPassword,jdbcType=VARCHAR},
+      </if>
+      <if test="usePhoneCheck != null">
+        #{usePhoneCheck,jdbcType=VARCHAR},
+      </if>
+      <if test="publicKey != null">
+        #{publicKey,jdbcType=VARCHAR},
+      </if>
+      <if test="privateKey != null">
+        #{privateKey,jdbcType=VARCHAR},
+      </if>
+      <if test="custIp != null">
+        #{custIp,jdbcType=VARCHAR},
+      </if>
+      <if test="domain != null">
+        #{domain,jdbcType=VARCHAR},
+      </if>
+      <if test="minAmount != null">
+        #{minAmount,jdbcType=DOUBLE},
+      </if>
+      <if test="maxAmount != null">
+        #{maxAmount,jdbcType=DOUBLE},
+      </if>
+      <if test="operator != null">
+        #{operator,jdbcType=VARCHAR},
+      </if>
+      <if test="holidayStatus != null">
+        #{holidayStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="dayMaxAmount != null">
+        #{dayMaxAmount,jdbcType=DOUBLE},
+      </if>
+      <if test="bossAudit != null">
+        #{bossAudit,jdbcType=VARCHAR},
+      </if>
+      <if test="startTime != null">
+        #{startTime,jdbcType=VARCHAR},
+      </if>
+      <if test="endTime != null">
+        #{endTime,jdbcType=VARCHAR},
+      </if>
+       <if test="fireType != null">
+       	 #{fireType,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="update" parameterType="com.yl.dpay.core.entity.ServiceConfigHistory">
+    <!--
+      WARNING - @mbggenerated
+      Generated on 2016-11-02 16:48:03.
+    -->
+    update service_config_history
+    <set>
+      <if test="optimistic != null">
+        OPTIMISTIC = #{optimistic,jdbcType=INTEGER},
+      </if>
+      <if test="ownerId != null">
+        OWNER_ID = #{ownerId,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null">
+        CREATE_DATE = #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="ownerRole != null">
+        OWNER_ROLE = #{ownerRole,jdbcType=VARCHAR},
+      </if>
+      <if test="valid != null">
+        VALID = #{valid,jdbcType=VARCHAR},
+      </if>
+      <if test="manualAudit != null">
+        MANUAL_AUDIT = #{manualAudit,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null">
+        PHONE = #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="complexPassword != null">
+        COMPLEX_PASSWORD = #{complexPassword,jdbcType=VARCHAR},
+      </if>
+      <if test="usePhoneCheck != null">
+        USE_PHONE_CHECK = #{usePhoneCheck,jdbcType=VARCHAR},
+      </if>
+      <if test="publicKey != null">
+        PUBLIC_KEY = #{publicKey,jdbcType=VARCHAR},
+      </if>
+      <if test="privateKey != null">
+        PRIVATE_KEY = #{privateKey,jdbcType=VARCHAR},
+      </if>
+      <if test="custIp != null">
+        CUST_IP = #{custIp,jdbcType=VARCHAR},
+      </if>
+      <if test="domain != null">
+        DOMAIN = #{domain,jdbcType=VARCHAR},
+      </if>
+      <if test="minAmount != null">
+        MIN_AMOUNT = #{minAmount,jdbcType=DOUBLE},
+      </if>
+      <if test="maxAmount != null">
+        MAX_AMOUNT = #{maxAmount,jdbcType=DOUBLE},
+      </if>
+      <if test="holidayStatus != null">
+        HOLIDAYSTATUS = #{holidayStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="operator != null">
+        OPERATOR = #{operator,jdbcType=VARCHAR},
+      </if>
+      <if test="dayMaxAmount != null">
+        DAY_MAX_AMOUNT = #{dayMaxAmount,jdbcType=DOUBLE},
+      </if>
+      <if test="bossAudit != null">
+        BOSS_AUDIT = #{bossAudit,jdbcType=VARCHAR},
+      </if>
+      <if test="startTime != null">
+        START_TIME = #{startTime,jdbcType=VARCHAR},
+      </if>
+      <if test="endTime != null">
+        END_TIME = #{endTime,jdbcType=VARCHAR},
+      </if>
+       <if test="fireType != null">
+        FIRE_TYPE = #{fireType,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

@@ -1,0 +1,112 @@
+/*字体导入*/
+
+
+body {
+	font-family: pinfangSC;
+	font-size: 0.3rem;
+	background: #fff;
+}
+
+/*.header {
+	font-size: 0.4rem;
+	color: #FFFFFF;
+	padding: 0.2rem 0;
+	text-align: center;
+	background: -webkit-linear-gradient(left top, #27c3ff, #66aaff);
+	/* Safari 5.1 - 6.0 */
+	/*background: -o-linear-gradient(bottom right, #27c3ff, #66aaff);*/
+	/* Opera 11.1 - 12.0 */
+	/*background: -moz-linear-gradient(bottom right, #27c3ff, #66aaff);*/
+	/* Firefox 3.6 - 15 */
+	/*background: linear-gradient(to bottom right, #27c3ff, #66aaff);*/
+	/* 标准的语法 */
+/*}*/
+
+
+/*单个item*/
+
+.item {
+	border-bottom: 0.01rem solid rgba(240, 240, 240, 1);
+	padding: 0.2rem 0.5rem;
+	font-size: 0.24rem;
+}
+
+.item .left_title,
+.item .right_title {
+	height: 0.5rem;
+	line-height: 0.5rem;
+}
+
+.item .left_title {
+	color: #575757;
+	float: left;
+}
+
+.item .left_title img {
+	width: 0.5rem;
+	float: left;
+}
+
+.item .right_title {
+	float: right;
+	color: #a5a5a5;
+}
+
+.item .right_title span {
+	color: red;
+}
+
+
+/**多个平铺*/
+
+.text_item {
+	width: calc((100% / 2) - 0.02rem);
+	float: left;
+	text-align: center;
+}
+
+.font_20 {
+	font-size: 0.2rem;
+}
+
+.text_item p {
+	height: 0.4rem;
+	line-height: 0.4rem;
+}
+
+.border_right {
+	border-right: 0.01rem solid rgba(220, 220, 220, 1);
+}
+
+.columnar {
+	width: 100%;
+	height: 6rem;
+	background: white !important;
+	border-bottom: 0.01rem solid rgba(240, 240, 240, 1);
+}
+
+
+/*倒三角*/
+
+.square {
+	position: relative;
+	top: 11px;
+	left: 11px;
+	width: 0;
+	height: 0;
+	border-left: 6px solid transparent;
+	border-right: 6px solid transparent;
+	border-top: 8px solid gainsboro;
+}
+
+#date-selector-input {
+	background: transparent;
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	border: none;
+	outline: none;
+	color: transparent;
+	top: 0;
+	right: 0;
+}

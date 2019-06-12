@@ -1,0 +1,21 @@
+@charset "UTF-8";
+/** 联想列表 */
+.autocomplete-wrap {
+  position: absolute;
+  width: 100%;
+  background-color: #fff;
+  box-shadow: 1px 1px 11px rgba(0, 0, 0, 0.5);
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  overflow: auto;
+  z-index: 50; }
+
+.autocomplete-wrap li {
+  padding: 10px;
+  cursor: pointer;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis; }
+
+.autocomplete-wrap li:hover, .autocomplete-wrap li.active {
+  background-color: #999;
+  color: #eee; }

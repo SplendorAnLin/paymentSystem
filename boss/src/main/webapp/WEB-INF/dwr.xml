@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE dwr PUBLIC  
+    "-//GetAhead Limited//DTD Direct Web Remoting 3.0//EN"  
+    "http://directwebremoting.org/schema/dwr30.dtd">  
+<dwr>
+	<allow> 		
+		<!-- <create creator="spring" javascript="operatorService">
+			<param name="beanName" value="operatorService" />
+		</create>		
+		<create creator="spring" javascript="organizationService">
+			<param name="beanName" value="organizationService" />
+		</create>
+		
+		<convert converter="bean" match="com.pay.boss.entity.Operator" ></convert>
+		<convert converter="bean" match="com.pay.boss.entity.Organization"/>		 -->
+	</allow>
+</dwr>

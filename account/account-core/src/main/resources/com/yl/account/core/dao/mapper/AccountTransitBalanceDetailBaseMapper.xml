@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.yl.account.core.dao.mapper.AccountTransitBalanceDetailBaseMapper">
+	
+	<resultMap id="AccountTransitBalanceDetail" type="com.yl.account.model.AccountTransitBalanceDetail">
+		<result column="CODE" 						property="code" />
+		<result column="VERSION" 	 				property="version" />
+		<result column="CREATE_TIME" 				property="createTime" />
+		<result column="ACC_NO"						property="accountNo" />
+		<result column="FUND_SYMBOL"				property="symbol" />
+		<result column="TRANS_AMT"					property="transAmount" />
+		<result column="HAND_TIME"					property="handleTime" />
+		<result column="SYS_CODE"					property="systemCode" />
+		<result column="TRANS_FLOW"					property="transFlow" />
+		<result column="CURR_NO"					property="currency" />
+		<result column="BUSI_CODE"					property="bussinessCode" />
+		<result column="WAIT_ACC_DATE"				property="waitAccountDate" />
+	</resultMap>
+    
+	<!--通用的sql语句段-->
+	<sql id="commonColumn">
+		CODE, VERSION, CREATE_TIME, ACC_NO, FUND_SYMBOL, TRANS_AMT, HAND_TIME, SYS_CODE, TRANS_FLOW, CURR_NO, BUSI_CODE, WAIT_ACC_DATE
+	</sql>
+	
+	<!-- 持久化在途资金明细 -->
+	<insert id="insert" parameterType="com.yl.account.model.AccountTransitBalanceDetail">
+		INSERT INTO 
+			T_ACC_TRANS_DET (<include refid="commonColumn"/>)
+		VALUES 
+			(#{code}, #{version}, #{createTime}, #{accountNo}, #{symbol}, #{transAmount}, #{handleTime}, 
+			#{systemCode}, #{transFlow}, #{currency}, #{bussinessCode, jdbcType=VARCHAR}, #{waitAccountDate, jdbcType=DATE})
+	</insert>
+	
+	<!-- 账号、原交易订单号获取在途资金明细 -->
+	<select id="findTransitBalanceDetailBy" resultMap="AccountTransitBalanceDetail">
+		SELECT <include refid="commonColumn" /> FROM T_ACC_TRANS_DET WHERE ACC_NO = #{accountNo} AND TRANS_FLOW = #{origTransOrder} 
+		AND BUSI_CODE IN (#{origBussinessCode}, #{origBussinessCodeFee}) AND WAIT_ACC_DATE IS NULL 
+		ORDER BY FUND_SYMBOL 
+		<if test="transitDebitSeq == 'DESC'">
+			DESC
+		</if>
+	</select>
+	
+	<!-- 标识待入账日期 -->
+	<update id="modifyWaitAccountDate">
+		UPDATE 
+			T_ACC_TRANS_DET tatd
+		SET 
+			version = #{newVersion}, WAIT_ACC_DATE = #{originalAccountTransitBalanceDetail.waitAccountDate}
+		where
+			CODE = #{originalAccountTransitBalanceDetail.code} and version = #{originalAccountTransitBalanceDetail.version}
+	</update>
+	
+	<!-- 账号、原交易订单号获取在途资金明细 -->
+	<select id="findTransitBalanceDetailForAbleBy" resultMap="AccountTransitBalanceDetail">
+		SELECT <include refid="commonColumn" /> FROM T_ACC_TRANS_DET WHERE ACC_NO = #{accountNo} AND WAIT_ACC_DATE = #{accountDate}
+	</select>
+	
+</mapper>

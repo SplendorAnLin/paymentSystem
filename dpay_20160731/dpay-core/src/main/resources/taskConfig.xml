@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+	http://www.springframework.org/schema/beans/spring-beans-4.0.xsd"
+	default-autowire="byName">
+
+	<!-- 补单定时任务 -->
+    <bean id="queryOrderTask" class="com.yl.dpay.core.task.QueryTask"></bean>
+
+    <bean id="queryOrderTaskJob" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject" ref="queryOrderTask"/>
+		<property name="targetMethod" value="execute"/>
+		<property name="concurrent" value="false"/>
+	</bean>
+	<bean id="queryOrderTaskTrigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+		<property name="jobDetail" ref="queryOrderTaskJob"/>
+		<property name="cronExpression" value="0 0/3 * * * ? *"/>
+	</bean>
+	<!-- 对账定时任务 -->
+   	<!-- <bean id="reconTask" class="com.dpay.task.ReconTask"></bean>
+
+    <bean id="reconTaskJob" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject" ref="reconTask"/>
+		<property name="targetMethod" value="execute"/>
+		<property name="concurrent" value="false"/>
+	</bean>
+	<bean id="reconTaskTrigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+		<property name="jobDetail" ref="reconTaskJob"/>
+		<property name="cronExpression" value="0 0/30 * * * ? *"/>
+	</bean> -->
+	
+	
+	<!-- 通知定时任务 -->
+    <bean id="interfaceNotifyTask" class="com.yl.dpay.core.task.InterfaceNotifyTask"></bean>
+
+    <bean id="interfaceNotifyTaskJob" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject" ref="interfaceNotifyTask"/>
+		<property name="targetMethod" value="execute"/>
+		<property name="concurrent" value="false"/>
+	</bean>
+	<bean id="interfaceNotifyTaskTrigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+		<property name="jobDetail" ref="interfaceNotifyTaskJob"/>
+		<property name="cronExpression" value="0 0/3 * * * ? *"/>
+	</bean>
+	
+	<!-- 自动发起定时任务 -->
+    <bean id="autoRequestTask" class="com.yl.dpay.core.task.AutoRequestTask"></bean>
+
+    <bean id="autoRequestTaskJob" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject" ref="autoRequestTask"/>
+		<property name="targetMethod" value="execute"/>
+		<property name="concurrent" value="false"/>
+	</bean>
+	<bean id="autoRequestTaskTrigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+		<property name="jobDetail" ref="autoRequestTaskJob"/>
+		<property name="cronExpression" value="0 30 0 * * ? *"/>
+	</bean>
+	
+
+	
+	
+	<bean id="mCFileImportNoticeTrsTask" class="com.yl.dpay.core.task.MCFileImportNoticeTrsTask"></bean>
+
+    <bean id="mCFileImportNoticeTrsJob" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject" ref="mCFileImportNoticeTrsTask"/>
+		<property name="targetMethod" value="execute"/>
+		<property name="concurrent" value="false"/>
+	</bean>
+	<bean id="mCFileImportNoticeTaskTrigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+		<property name="jobDetail" ref="mCFileImportNoticeTrsJob"/>
+		<property name="cronExpression" value="0 0/2 * * * ? "/>
+	</bean>
+	
+	<!-- 总控制器 -->
+	<bean id="startQuertz" lazy-init="false" autowire="no" class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
+		<property name="triggers">
+			<list>
+				<!-- <ref bean="queryOrderTaskTrigger"/> -->
+				<ref bean="interfaceNotifyTaskTrigger"/>
+				<ref bean="autoRequestTaskTrigger"/>
+ 				<!-- <ref bean="mCFileImportNoticeTaskTrigger"/> -->
+			</list>
+		</property>
+	</bean>
+</beans>

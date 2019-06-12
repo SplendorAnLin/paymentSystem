@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <artifactId>recon</artifactId>
+        <groupId>com.yl</groupId>
+        <version>1.0.0</version>
+    </parent>
+    <modelVersion>4.0.0</modelVersion>
+
+    <name>对账系统-接口</name>
+    <description>对账接口</description>
+    <artifactId>recon-api</artifactId>
+
+    <properties>
+        <maven.test.skip>true</maven.test.skip>
+        <java.version>1.7</java.version>
+        <maven.compiler.source>${java.version}</maven.compiler.source>
+        <maven.compiler.target>${java.version}</maven.compiler.target>
+    </properties>
+    <dependencies>
+        <dependency>
+            <groupId>com.lefu</groupId>
+            <artifactId>commons-utils</artifactId>
+            <version>${lefu.commons-utils.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.yl</groupId>
+            <artifactId>yl-utils</artifactId>
+            <version>1.0.7</version>
+            <exclusions>
+                <exclusion>
+                    <artifactId>slf4j-api</artifactId>
+                    <groupId>org.slf4j</groupId>
+                </exclusion>
+                <exclusion>
+                    <artifactId>commons-utils</artifactId>
+                    <groupId>com.lefu</groupId>
+                </exclusion>
+                <exclusion>
+                    <artifactId>lombok</artifactId>
+                    <groupId>org.projectlombok</groupId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+
+    </dependencies>
+
+</project>

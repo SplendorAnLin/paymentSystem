@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+	http://www.springframework.org/schema/beans/spring-beans-4.0.xsd"
+	default-autowire="byName">
+
+	<!-- 在途金额转可用定时任务 -->
+    <bean id="accountTransitBalanceHandleTask" class="com.yl.account.core.task.AccountTransitBalanceHandleTask"></bean>
+
+    <bean id="accountTransitBalanceHandleTaskJob" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject" ref="accountTransitBalanceHandleTask"/>
+		<property name="targetMethod" value="execute"/>
+		<property name="concurrent" value="false"/>
+	</bean>
+	<bean id="accountTransitBalanceHandleTaskTrigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+		<property name="jobDetail" ref="accountTransitBalanceHandleTaskJob"/>
+		<property name="cronExpression" value="0 0 0/1 * * ? *"/>
+	</bean>
+	
+	<!-- 在途金额转可用定时任务 -->
+    <bean id="accountSummaryDebitTask" class="com.yl.account.core.task.AccountSummaryDebitJob"></bean>
+
+    <bean id="accountSummaryDebitJob" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject" ref="accountSummaryDebitTask"/>
+		<property name="targetMethod" value="execute"/>
+		<property name="concurrent" value="false"/>
+	</bean>
+	<bean id="accountSummaryDebitTrigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+		<property name="jobDetail" ref="accountSummaryDebitJob"/>
+		<property name="cronExpression" value="0 0 0/1 * * ? *"/>
+	</bean>
+
+
+	<!-- 总控制器 -->
+	<bean id="startQuertz" lazy-init="false" autowire="no" class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
+		<property name="triggers">
+			<list>
+				<!-- <ref bean="accountSummaryDebitTrigger"/> -->
+				<ref bean="accountTransitBalanceHandleTaskTrigger"/>
+ 			</list>
+		</property>
+	</bean>
+</beans>

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.yl.account.core.dao.mapper.AccountingVoucherMapper">
+
+	<!-- <resultMap id="AccountVoucher" type="com.lefu.account.model.AccountingVoucher">
+		<result column="CODE" 						property="code" />
+		<result column="VERSION" 	 				property="version" />
+		<result column="CREATE_TIME" 				property="createTime" />
+		<result column="SYSTEM_CODE" 				property="systemCode" />
+		<result column="SYSTEM_FLOW_ID" 			property="systemFlowId" />
+		<result column="BUSSINESS_CODE" 			property="bussinessCode" />
+		<result column="REQUEST_TIME" 				property="requestTime" />
+		<result column="SERVER_HOST" 				property="serverHost" />
+		<result column="TRADE_VOUCHER" 				property="tradeVoucher" />
+		<result column="OPERATOR" 					property="operator" />
+		<result column="REMARK" 					property="remark" />
+	</resultMap> -->
+
+	<!-- 账户数据库模型字段 -->
+	<sql id="commonColumn">
+		CODE, VERSION, CREATE_TIME, SYSTEM_CODE, SYSTEM_FLOW_ID, BUSSINESS_CODE, REQUEST_TIME, SERVER_HOST, TRADE_VOUCHER, OPERATOR,
+		REMARK
+	</sql>
+
+	<!-- 持久化账户 -->
+	<insert id="create" parameterType="com.yl.account.model.AccountingVoucher">
+		INSERT INTO
+			T_ACC_T_VOUC (<include refid="commonColumn"/>)
+		VALUES
+			(#{code}, #{version}, #{createTime}, #{systemCode}, #{systemFlowId}, #{bussinessCode}, #{requestTime}, #{serverHost}, #{tradeVoucher},
+			 #{operator}, #{remark})
+	</insert>
+	
+</mapper>

@@ -1,0 +1,230 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.yl.recon.core.mybatis.mapper.RealAuthOrderMapper">
+    <!--auto generated Code-->
+    <resultMap id="BaseResultMap" type="com.yl.recon.core.entity.order.RealAuthOrder">
+        <result column="trade_order_code" property="tradeOrderCode" jdbcType="VARCHAR"/>
+        <result column="trans_type" property="transType" jdbcType="VARCHAR"/>
+        <result column="pay_type" property="payType" jdbcType="VARCHAR"/>
+        <result column="interface_type" property="interfaceType" jdbcType="VARCHAR"/>
+        <result column="interface_code" property="interfaceCode" jdbcType="VARCHAR"/>
+        <result column="interface_order_code" property="interfaceOrderCode" jdbcType="VARCHAR"/>
+        <result column="amount" property="amount" jdbcType="DOUBLE"/>
+        <result column="fee" property="fee" jdbcType="DOUBLE"/>
+        <result column="trans_time" property="transTime" jdbcType="TIMESTAMP"/>
+        <result column="recon_date" property="reconDate" jdbcType="DATE"/>
+        <result column="remark" property="remark" jdbcType="VARCHAR"/>
+        <result column="code" property="code" jdbcType="BIGINT"/>
+        <result column="version" property="version" jdbcType="BIGINT"/>
+        <result column="create_time" property="createTime" jdbcType="TIMESTAMP"/>
+    </resultMap>
+
+    <!--auto generated Code-->
+    <sql id="Base_Column_List">
+        trade_order_code,
+        trans_type,
+        pay_type,
+        interface_type,
+        interface_code,
+        interface_order_code,
+        amount,
+        fee,
+        trans_time,
+        recon_date,
+        remark,
+        code,
+        version,
+        create_time
+    </sql>
+
+    <!--auto generated Code-->
+    <insert id="insert" useGeneratedKeys="true" keyProperty="realAuthOrder.code">
+        INSERT INTO real_auth_order (
+        trade_order_code,
+        trans_type,
+        pay_type,
+        interface_type,
+        interface_code,
+        interface_order_code,
+        amount,
+        fee,
+        trans_time,
+        recon_date,
+        remark,
+        code,
+        version,
+        create_time
+        ) VALUES (
+        #{realAuthOrder.tradeOrderCode,jdbcType=VARCHAR},
+        #{realAuthOrder.transType,jdbcType=VARCHAR},
+        #{realAuthOrder.payType,jdbcType=VARCHAR},
+        #{realAuthOrder.interfaceType,jdbcType=VARCHAR},
+        #{realAuthOrder.interfaceCode,jdbcType=VARCHAR},
+        #{realAuthOrder.interfaceOrderCode,jdbcType=VARCHAR},
+        #{realAuthOrder.amount,jdbcType=DOUBLE},
+        #{realAuthOrder.fee,jdbcType=DOUBLE},
+        #{realAuthOrder.transTime,jdbcType=TIMESTAMP},
+        #{realAuthOrder.reconDate,jdbcType=DATE},
+        #{realAuthOrder.remark,jdbcType=VARCHAR},
+        #{realAuthOrder.code,jdbcType=BIGINT},
+        #{realAuthOrder.version,jdbcType=BIGINT},
+        #{realAuthOrder.createTime,jdbcType=TIMESTAMP}
+        )
+    </insert>
+
+    <!--auto generated Code-->
+    <insert id="insertSelective" useGeneratedKeys="true" keyProperty="realAuthOrder.code">
+        INSERT INTO real_auth_order
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="realAuthOrder.tradeOrderCode!=null"> trade_order_code,</if>
+            <if test="realAuthOrder.transType!=null"> trans_type,</if>
+            <if test="realAuthOrder.payType!=null"> pay_type,</if>
+            <if test="realAuthOrder.interfaceType!=null"> interface_type,</if>
+            <if test="realAuthOrder.interfaceCode!=null"> interface_code,</if>
+            <if test="realAuthOrder.interfaceOrderCode!=null"> interface_order_code,</if>
+            <if test="realAuthOrder.amount!=null"> amount,</if>
+            <if test="realAuthOrder.fee!=null"> fee,</if>
+            <if test="realAuthOrder.transTime!=null"> trans_time,</if>
+            <if test="realAuthOrder.reconDate!=null"> recon_date,</if>
+            <if test="realAuthOrder.remark!=null"> remark,</if>
+            <if test="realAuthOrder.code!=null"> code,</if>
+            <if test="realAuthOrder.version!=null"> version,</if>
+            <if test="realAuthOrder.createTime!=null"> create_time,</if>
+        </trim>
+        VALUES
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="realAuthOrder.tradeOrderCode!=null">#{realAuthOrder.tradeOrderCode,jdbcType=VARCHAR},
+            </if>
+            <if test="realAuthOrder.transType!=null">#{realAuthOrder.transType,jdbcType=VARCHAR},
+            </if>
+            <if test="realAuthOrder.payType!=null">#{realAuthOrder.payType,jdbcType=VARCHAR},
+            </if>
+            <if test="realAuthOrder.interfaceType!=null">#{realAuthOrder.interfaceType,jdbcType=VARCHAR},
+            </if>
+            <if test="realAuthOrder.interfaceCode!=null">#{realAuthOrder.interfaceCode,jdbcType=VARCHAR},
+            </if>
+            <if test="realAuthOrder.interfaceOrderCode!=null">#{realAuthOrder.interfaceOrderCode,jdbcType=VARCHAR},
+            </if>
+            <if test="realAuthOrder.amount!=null">#{realAuthOrder.amount,jdbcType=DOUBLE},
+            </if>
+            <if test="realAuthOrder.fee!=null">#{realAuthOrder.fee,jdbcType=DOUBLE},
+            </if>
+            <if test="realAuthOrder.transTime!=null">#{realAuthOrder.transTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="realAuthOrder.reconDate!=null">#{realAuthOrder.reconDate,jdbcType=DATE},
+            </if>
+            <if test="realAuthOrder.remark!=null">#{realAuthOrder.remark,jdbcType=VARCHAR},
+            </if>
+            <if test="realAuthOrder.code!=null">#{realAuthOrder.code,jdbcType=BIGINT},
+            </if>
+            <if test="realAuthOrder.version!=null">#{realAuthOrder.version,jdbcType=BIGINT},
+            </if>
+            <if test="realAuthOrder.createTime!=null">#{realAuthOrder.createTime,jdbcType=TIMESTAMP},
+            </if>
+        </trim>
+    </insert>
+
+    <!--auto generated Code-->
+    <insert id="insertList">
+        INSERT INTO real_auth_order (
+        <include refid="Base_Column_List"/>
+        )VALUES
+        <foreach collection="realAuthOrders" item="realAuthOrder" index="index" separator=",">
+            (
+            #{realAuthOrder.tradeOrderCode,jdbcType=VARCHAR},
+            #{realAuthOrder.transType,jdbcType=VARCHAR},
+            #{realAuthOrder.payType,jdbcType=VARCHAR},
+            #{realAuthOrder.interfaceType,jdbcType=VARCHAR},
+            #{realAuthOrder.interfaceCode,jdbcType=VARCHAR},
+            #{realAuthOrder.interfaceOrderCode,jdbcType=VARCHAR},
+            #{realAuthOrder.amount,jdbcType=DOUBLE},
+            #{realAuthOrder.fee,jdbcType=DOUBLE},
+            #{realAuthOrder.transTime,jdbcType=TIMESTAMP},
+            #{realAuthOrder.reconDate,jdbcType=DATE},
+            #{realAuthOrder.remark,jdbcType=VARCHAR},
+            #{realAuthOrder.code,jdbcType=BIGINT},
+            #{realAuthOrder.version,jdbcType=BIGINT},
+            #{realAuthOrder.createTime,jdbcType=TIMESTAMP}
+            )
+        </foreach>
+    </insert>
+
+    <!--auto generated Code-->
+    <update id="update">
+        UPDATE real_auth_order
+        <set>
+            <if test="realAuthOrder.tradeOrderCode != null"> trade_order_code= #{realAuthOrder.tradeOrderCode,jdbcType=VARCHAR},</if>
+            <if test="realAuthOrder.transType != null"> trans_type= #{realAuthOrder.transType,jdbcType=VARCHAR},</if>
+            <if test="realAuthOrder.payType != null"> pay_type= #{realAuthOrder.payType,jdbcType=VARCHAR},</if>
+            <if test="realAuthOrder.interfaceType != null"> interface_type= #{realAuthOrder.interfaceType,jdbcType=VARCHAR},</if>
+            <if test="realAuthOrder.interfaceCode != null"> interface_code= #{realAuthOrder.interfaceCode,jdbcType=VARCHAR},</if>
+            <if test="realAuthOrder.interfaceOrderCode != null"> interface_order_code= #{realAuthOrder.interfaceOrderCode,jdbcType=VARCHAR},</if>
+            <if test="realAuthOrder.amount != null"> amount= #{realAuthOrder.amount,jdbcType=DOUBLE},</if>
+            <if test="realAuthOrder.fee != null"> fee= #{realAuthOrder.fee,jdbcType=DOUBLE},</if>
+            <if test="realAuthOrder.transTime != null"> trans_time= #{realAuthOrder.transTime,jdbcType=TIMESTAMP},</if>
+            <if test="realAuthOrder.reconDate != null"> recon_date= #{realAuthOrder.reconDate,jdbcType=DATE},</if>
+            <if test="realAuthOrder.remark != null"> remark= #{realAuthOrder.remark,jdbcType=VARCHAR},</if>
+            <if test="realAuthOrder.code != null"> code= #{realAuthOrder.code,jdbcType=BIGINT},</if>
+            <if test="realAuthOrder.version != null"> version= #{realAuthOrder.version,jdbcType=BIGINT},</if>
+            <if test="realAuthOrder.createTime != null"> create_time= #{realAuthOrder.createTime,jdbcType=TIMESTAMP}</if>
+        </set>
+        WHERE code = #{realAuthOrder.code,jdbcType=BIGINT}
+    </update>
+
+
+    <!--自定义 start-->
+    <resultMap id="ApiRealAuthOrderResultMap" type="com.yl.recon.api.core.bean.order.RealAuthOrder">
+        <result column="trade_order_code" property="tradeOrderCode" jdbcType="VARCHAR"/>
+        <result column="trans_type" property="transType" jdbcType="VARCHAR"/>
+        <result column="pay_type" property="payType" jdbcType="VARCHAR"/>
+        <result column="interface_type" property="interfaceType" jdbcType="VARCHAR"/>
+        <result column="interface_code" property="interfaceCode" jdbcType="VARCHAR"/>
+        <result column="interface_order_code" property="interfaceOrderCode" jdbcType="VARCHAR"/>
+        <result column="amount" property="amount" jdbcType="DOUBLE"/>
+        <result column="fee" property="fee" jdbcType="DOUBLE"/>
+        <result column="trans_time" property="transTime" jdbcType="TIMESTAMP"/>
+        <result column="recon_date" property="reconDate" jdbcType="DATE"/>
+        <result column="remark" property="remark" jdbcType="VARCHAR"/>
+        <result column="code" property="code" jdbcType="BIGINT"/>
+        <result column="version" property="version" jdbcType="BIGINT"/>
+        <result column="create_time" property="createTime" jdbcType="TIMESTAMP"/>
+    </resultMap>
+
+
+    <sql id="findSql">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM real_auth_order
+        WHERE 1=1
+        <if test="reconOrderDataQueryBean!=null">
+            <if test="reconOrderDataQueryBean.createStartTime != null  and reconOrderDataQueryBean.createEndTime != null  and reconOrderDataQueryBean.createStartTime != ''  and reconOrderDataQueryBean.createEndTime != '' ">
+                and create_time BETWEEN #{reconOrderDataQueryBean.createStartTime} AND
+                #{reconOrderDataQueryBean.createEndTime}
+            </if>
+            <if test="reconOrderDataQueryBean.createStartTime != null  and reconOrderDataQueryBean.createEndTime == null  and reconOrderDataQueryBean.createStartTime != ''">
+                and create_time &gt;= #{reconOrderDataQueryBean.createStartTime}
+            </if>
+            <if test="reconOrderDataQueryBean.createStartTime == null and reconOrderDataQueryBean.createEndTime != null and reconOrderDataQueryBean.createEndTime != ''">
+                and create_time &lt;= #{reconOrderDataQueryBean.createEndTime}
+            </if>
+            <if test="reconOrderDataQueryBean.reconDate != null">
+                AND recon_date = str_to_date(#{reconOrderDataQueryBean.reconDate,jdbcType=DATE}, '%Y-%m-%d')
+            </if>
+            <if test="reconOrderDataQueryBean.realAuthOrder != null">
+                <if test="reconOrderDataQueryBean.realAuthOrder.tradeOrderCode != null and reconOrderDataQueryBean.realAuthOrder.tradeOrderCode != ''">
+                    AND trade_order_code = #{reconOrderDataQueryBean.realAuthOrder.tradeOrderCode}
+                </if>
+            </if>
+        </if>
+    </sql>
+    <!--分页-->
+    <select id="findAllRealAuthOrders" resultMap="ApiRealAuthOrderResultMap">
+        <include refid="findSql"/>
+    </select>
+    <!--不分页-->
+    <select id="findRealAuthOrders" resultMap="ApiRealAuthOrderResultMap">
+        <include refid="findSql"/>
+    </select>
+    <!--自定义 end-->
+</mapper>
+

@@ -1,0 +1,115 @@
+.icon.success {
+	background-color: #09bb06;
+	position: relative
+}
+
+.icon.success:after {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	content: '';
+	width: 5px;
+	height: 10px;
+	border-bottom: 2px solid #fff;
+	border-right: 2px solid #fff;
+	-webkit-transform-origin: 50% 50%;
+	transform-origin: 50% 50%;
+	-webkit-transform: translate(-50%, -65%) rotate(45deg);
+	transform: translate(-50%, -65%) rotate(45deg)
+}
+
+.icon.success.middle:after {
+	width: 13px;
+	height: 30px
+}
+
+.icon.success.large:after {
+	width: 21px;
+	height: 50px;
+	border-width: 5px
+}
+
+.icon_loading_default {
+	width: 16px;
+	height: 16px;
+	background: transparent url(/mpres/htmledition/images/icon/common/icon32_loading_light218877.gif) no-repeat 0 0;
+	-webkit-background-size: 16px auto;
+	background-size: 16px auto
+}
+
+.toast_tips {
+	width: 120px;
+	height: 120px;
+	z-index: 20;
+	box-sizing: border-box;
+	text-align: center;
+	color: #fff;
+	border-radius: 5px;
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+	font-size: 14px;
+	background: rgba(40, 40, 40, 0.5)!important;
+	filter: progid: DXImageTransform.Microsoft.gradient(GradientType=0, startColorstr='#80282828', endcolorstr='#80282828');
+	position: fixed;
+	left: 50%;
+	top: 50%;
+	margin-top: -60px;
+	margin-left: -60px
+}
+
+.toast_tips .tips_msg {
+	padding-top: 30px;
+	position: relative;
+	z-index: 2
+}
+
+.toast_tips .wrp_icon {
+	position: relative;
+	z-index: 2
+}
+
+.toast_tips .wrp_icon .icon {
+	display: inline-block
+}
+
+.toast_tips .tips_icon {
+	position: relative;
+	z-index: 2
+}
+
+.toast_tips .tips_title {
+	font-size: 16px;
+	display: inline-block;
+	vertical-align: middle;
+	max-width: 98%;
+	padding: 0 10px;
+	color: #fff;
+	font-weight: 400;
+	font-style: normal;
+	position: relative;
+	z-index: 2
+}
+
+.toast_tips.hud_loading .tips_title {
+	display: none
+}
+
+.toast_tips.hud_texting .wrp_icon {
+	display: none
+}
+
+.toast_tips .vm_box {
+	display: inline-block;
+	height: 100%;
+	vertical-align: middle
+}
+
+.toast_tips .mask {
+	width: 100%;
+	height: 100%;
+	position: fixed;
+	left: 0;
+	top: 0;
+	background-color: rgba(0, 0, 0, 0);
+	z-index: 1
+}

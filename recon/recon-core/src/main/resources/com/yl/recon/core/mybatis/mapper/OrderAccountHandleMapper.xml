@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.yl.recon.core.mybatis.mapper.OrderAccountHandleMapper">
+	<sql id="Base_Column_List">
+		code, version, trade_order_code, trans_type, pay_type,
+		amount, fee,
+		trans_time, create_time,
+		recon_date, interface_type,
+		interface_order_code
+	</sql>
+	<resultMap id="BaseResultMap" type="com.yl.recon.core.entity.order.TradeOrder">
+		<id column="code" property="code" jdbcType="BIGINT" />
+		<result column="version" property="version" jdbcType="INTEGER" />
+		<result column="trade_order_code" property="tradeOrderCode" jdbcType="VARCHAR" />
+		<result column="trans_type" property="transType" jdbcType="VARCHAR" />
+		<result column="pay_type" property="payType" jdbcType="VARCHAR" />
+		<result column="amount" property="amount" jdbcType="DOUBLE" />
+		<result column="fee" property="fee" jdbcType="DOUBLE" />
+		<result column="trans_time" property="transTime" jdbcType="TIMESTAMP" />
+		<result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+		<result column="recon_date" property="reconDate" jdbcType="DATE" />
+		<result column="interface_type" property="interfaceType" jdbcType="VARCHAR" />
+		<result column="interface_order_code" property="interfaceOrderCode" jdbcType="VARCHAR" />
+	</resultMap>
+
+	<insert id="insert" parameterType="com.yl.recon.core.entity.order.TradeOrder"
+		useGeneratedKeys="true" keyProperty="code">
+		insert into trade_order
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="code != null">
+				code,
+			</if>
+			<if test="version != null">
+				version,
+			</if>
+			<if test="tradeOrderCode != null">
+				trade_order_code,
+			</if>
+			<if test="transType != null">
+				trans_type,
+			</if>
+			<if test="payType != null">
+				pay_type,
+			</if>
+			<if test="amount != null">
+				amount,
+			</if>
+			<if test="fee != null">
+				fee,
+			</if>
+			<if test="transTime != null">
+				trans_time,
+			</if>
+			<if test="createTime != null">
+				create_time,
+			</if>
+			<if test="reconDate != null">
+				recon_date,
+			</if>
+			<if test="interfaceType != null">
+				interface_type,
+			</if>
+			<if test="interfaceOrderCode != null">
+				interface_order_code,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="code != null">
+				#{code,jdbcType=BIGINT},
+			</if>
+			<if test="version != null">
+				#{version,jdbcType=INTEGER},
+			</if>
+			<if test="tradeOrderCode != null">
+				#{tradeOrderCode,jdbcType=VARCHAR},
+			</if>
+			<if test="transType != null">
+				#{transType,jdbcType=VARCHAR},
+			</if>
+			<if test="payType != null">
+				#{payType,jdbcType=VARCHAR},
+			</if>
+			<if test="amount != null">
+				#{amount,jdbcType=DOUBLE},
+			</if>
+			<if test="fee != null">
+				#{fee,jdbcType=DOUBLE},
+			</if>
+			<if test="transTime != null">
+				#{transTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="createTime != null">
+				#{createTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="reconDate != null">
+				#{reconDate,jdbcType=DATE},
+			</if>
+			<if test="interfaceType != null">
+				#{interfaceType,jdbcType=VARCHAR},
+			</if>
+			<if test="interfaceOrderCode != null">
+				#{interfaceOrderCode,jdbcType=VARCHAR},
+			</if>
+		</trim>
+	</insert>
+
+
+
+
+</mapper>

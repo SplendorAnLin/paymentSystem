@@ -1,0 +1,230 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yl.recon.core.mybatis.mapper.TradeOrderMapper">
+    <!--auto generated Code-->
+    <resultMap id="BaseResultMap" type="com.yl.recon.core.entity.order.TradeOrder">
+        <result column="trade_order_code" property="tradeOrderCode" jdbcType="VARCHAR"/>
+        <result column="trans_type" property="transType" jdbcType="VARCHAR"/>
+        <result column="pay_type" property="payType" jdbcType="VARCHAR"/>
+        <result column="interface_type" property="interfaceType" jdbcType="VARCHAR"/>
+        <result column="interface_code" property="interfaceCode" jdbcType="VARCHAR"/>
+        <result column="interface_order_code" property="interfaceOrderCode" jdbcType="VARCHAR"/>
+        <result column="amount" property="amount" jdbcType="DOUBLE"/>
+        <result column="fee" property="fee" jdbcType="DOUBLE"/>
+        <result column="trans_time" property="transTime" jdbcType="TIMESTAMP"/>
+        <result column="recon_date" property="reconDate" jdbcType="DATE"/>
+        <result column="remark" property="remark" jdbcType="VARCHAR"/>
+        <result column="code" property="code" jdbcType="BIGINT"/>
+        <result column="version" property="version" jdbcType="BIGINT"/>
+        <result column="create_time" property="createTime" jdbcType="TIMESTAMP"/>
+    </resultMap>
+
+    <!--auto generated Code-->
+    <sql id="Base_Column_List">
+        trade_order_code,
+        trans_type,
+        pay_type,
+        interface_type,
+        interface_code,
+        interface_order_code,
+        amount,
+        fee,
+        trans_time,
+        recon_date,
+        remark,
+        code,
+        version,
+        create_time
+    </sql>
+
+    <!--auto generated Code-->
+    <insert id="insert" useGeneratedKeys="true" keyProperty="tradeOrder.code">
+        INSERT INTO trade_order (
+        trade_order_code,
+        trans_type,
+        pay_type,
+        interface_type,
+        interface_code,
+        interface_order_code,
+        amount,
+        fee,
+        trans_time,
+        recon_date,
+        remark,
+        code,
+        version,
+        create_time
+        ) VALUES (
+        #{tradeOrder.tradeOrderCode,jdbcType=VARCHAR},
+        #{tradeOrder.transType,jdbcType=VARCHAR},
+        #{tradeOrder.payType,jdbcType=VARCHAR},
+        #{tradeOrder.interfaceType,jdbcType=VARCHAR},
+        #{tradeOrder.interfaceCode,jdbcType=VARCHAR},
+        #{tradeOrder.interfaceOrderCode,jdbcType=VARCHAR},
+        #{tradeOrder.amount,jdbcType=DOUBLE},
+        #{tradeOrder.fee,jdbcType=DOUBLE},
+        #{tradeOrder.transTime,jdbcType=TIMESTAMP},
+        #{tradeOrder.reconDate,jdbcType=DATE},
+        #{tradeOrder.remark,jdbcType=VARCHAR},
+        #{tradeOrder.code,jdbcType=BIGINT},
+        #{tradeOrder.version,jdbcType=BIGINT},
+        #{tradeOrder.createTime,jdbcType=TIMESTAMP}
+        )
+    </insert>
+
+    <!--auto generated Code-->
+    <insert id="insertSelective" useGeneratedKeys="true" keyProperty="tradeOrder.code">
+        INSERT INTO trade_order
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="tradeOrder.tradeOrderCode!=null"> trade_order_code,</if>
+            <if test="tradeOrder.transType!=null"> trans_type,</if>
+            <if test="tradeOrder.payType!=null"> pay_type,</if>
+            <if test="tradeOrder.interfaceType!=null"> interface_type,</if>
+            <if test="tradeOrder.interfaceCode!=null"> interface_code,</if>
+            <if test="tradeOrder.interfaceOrderCode!=null"> interface_order_code,</if>
+            <if test="tradeOrder.amount!=null"> amount,</if>
+            <if test="tradeOrder.fee!=null"> fee,</if>
+            <if test="tradeOrder.transTime!=null"> trans_time,</if>
+            <if test="tradeOrder.reconDate!=null"> recon_date,</if>
+            <if test="tradeOrder.remark!=null"> remark,</if>
+            <if test="tradeOrder.code!=null"> code,</if>
+            <if test="tradeOrder.version!=null"> version,</if>
+            <if test="tradeOrder.createTime!=null"> create_time,</if>
+        </trim>
+        VALUES
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="tradeOrder.tradeOrderCode!=null">#{tradeOrder.tradeOrderCode,jdbcType=VARCHAR},
+            </if>
+            <if test="tradeOrder.transType!=null">#{tradeOrder.transType,jdbcType=VARCHAR},
+            </if>
+            <if test="tradeOrder.payType!=null">#{tradeOrder.payType,jdbcType=VARCHAR},
+            </if>
+            <if test="tradeOrder.interfaceType!=null">#{tradeOrder.interfaceType,jdbcType=VARCHAR},
+            </if>
+            <if test="tradeOrder.interfaceCode!=null">#{tradeOrder.interfaceCode,jdbcType=VARCHAR},
+            </if>
+            <if test="tradeOrder.interfaceOrderCode!=null">#{tradeOrder.interfaceOrderCode,jdbcType=VARCHAR},
+            </if>
+            <if test="tradeOrder.amount!=null">#{tradeOrder.amount,jdbcType=DOUBLE},
+            </if>
+            <if test="tradeOrder.fee!=null">#{tradeOrder.fee,jdbcType=DOUBLE},
+            </if>
+            <if test="tradeOrder.transTime!=null">#{tradeOrder.transTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="tradeOrder.reconDate!=null">#{tradeOrder.reconDate,jdbcType=DATE},
+            </if>
+            <if test="tradeOrder.remark!=null">#{tradeOrder.remark,jdbcType=VARCHAR},
+            </if>
+            <if test="tradeOrder.code!=null">#{tradeOrder.code,jdbcType=BIGINT},
+            </if>
+            <if test="tradeOrder.version!=null">#{tradeOrder.version,jdbcType=BIGINT},
+            </if>
+            <if test="tradeOrder.createTime!=null">#{tradeOrder.createTime,jdbcType=TIMESTAMP},
+            </if>
+        </trim>
+    </insert>
+
+    <!--auto generated Code-->
+    <insert id="insertList">
+        INSERT INTO trade_order (
+        <include refid="Base_Column_List"/>
+        )VALUES
+        <foreach collection="tradeOrders" item="tradeOrder" index="index" separator=",">
+            (
+            #{tradeOrder.tradeOrderCode,jdbcType=VARCHAR},
+            #{tradeOrder.transType,jdbcType=VARCHAR},
+            #{tradeOrder.payType,jdbcType=VARCHAR},
+            #{tradeOrder.interfaceType,jdbcType=VARCHAR},
+            #{tradeOrder.interfaceCode,jdbcType=VARCHAR},
+            #{tradeOrder.interfaceOrderCode,jdbcType=VARCHAR},
+            #{tradeOrder.amount,jdbcType=DOUBLE},
+            #{tradeOrder.fee,jdbcType=DOUBLE},
+            #{tradeOrder.transTime,jdbcType=TIMESTAMP},
+            #{tradeOrder.reconDate,jdbcType=DATE},
+            #{tradeOrder.remark,jdbcType=VARCHAR},
+            #{tradeOrder.code,jdbcType=BIGINT},
+            #{tradeOrder.version,jdbcType=BIGINT},
+            #{tradeOrder.createTime,jdbcType=TIMESTAMP}
+            )
+        </foreach>
+    </insert>
+
+    <!--auto generated Code-->
+    <update id="update">
+        UPDATE trade_order
+        <set>
+            <if test="tradeOrder.tradeOrderCode != null"> trade_order_code= #{tradeOrder.tradeOrderCode,jdbcType=VARCHAR},</if>
+            <if test="tradeOrder.transType != null"> trans_type= #{tradeOrder.transType,jdbcType=VARCHAR},</if>
+            <if test="tradeOrder.payType != null"> pay_type= #{tradeOrder.payType,jdbcType=VARCHAR},</if>
+            <if test="tradeOrder.interfaceType != null"> interface_type= #{tradeOrder.interfaceType,jdbcType=VARCHAR},</if>
+            <if test="tradeOrder.interfaceCode != null"> interface_code= #{tradeOrder.interfaceCode,jdbcType=VARCHAR},</if>
+            <if test="tradeOrder.interfaceOrderCode != null"> interface_order_code= #{tradeOrder.interfaceOrderCode,jdbcType=VARCHAR},</if>
+            <if test="tradeOrder.amount != null"> amount= #{tradeOrder.amount,jdbcType=DOUBLE},</if>
+            <if test="tradeOrder.fee != null"> fee= #{tradeOrder.fee,jdbcType=DOUBLE},</if>
+            <if test="tradeOrder.transTime != null"> trans_time= #{tradeOrder.transTime,jdbcType=TIMESTAMP},</if>
+            <if test="tradeOrder.reconDate != null"> recon_date= #{tradeOrder.reconDate,jdbcType=DATE},</if>
+            <if test="tradeOrder.remark != null"> remark= #{tradeOrder.remark,jdbcType=VARCHAR},</if>
+            <if test="tradeOrder.code != null"> code= #{tradeOrder.code,jdbcType=BIGINT},</if>
+            <if test="tradeOrder.version != null"> version= #{tradeOrder.version,jdbcType=BIGINT},</if>
+            <if test="tradeOrder.createTime != null"> create_time= #{tradeOrder.createTime,jdbcType=TIMESTAMP}</if>
+        </set>
+        WHERE code = #{tradeOrder.code,jdbcType=BIGINT}
+    </update>
+
+    <!--自定义 start-->
+    <resultMap id="ApiTradeOrderResultMap" type="com.yl.recon.api.core.bean.order.TradeOrder">
+        <result column="trade_order_code" property="tradeOrderCode" jdbcType="VARCHAR"/>
+        <result column="trans_type" property="transType" jdbcType="VARCHAR"/>
+        <result column="pay_type" property="payType" jdbcType="VARCHAR"/>
+        <result column="interface_type" property="interfaceType" jdbcType="VARCHAR"/>
+        <result column="interface_code" property="interfaceCode" jdbcType="VARCHAR"/>
+        <result column="interface_order_code" property="interfaceOrderCode" jdbcType="VARCHAR"/>
+        <result column="amount" property="amount" jdbcType="DOUBLE"/>
+        <result column="fee" property="fee" jdbcType="DOUBLE"/>
+        <result column="trans_time" property="transTime" jdbcType="TIMESTAMP"/>
+        <result column="recon_date" property="reconDate" jdbcType="DATE"/>
+        <result column="remark" property="remark" jdbcType="VARCHAR"/>
+        <result column="code" property="code" jdbcType="BIGINT"/>
+        <result column="version" property="version" jdbcType="BIGINT"/>
+        <result column="create_time" property="createTime" jdbcType="TIMESTAMP"/>
+    </resultMap>
+
+
+    <sql id="findSql">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM trade_order
+        WHERE 1=1
+        <if test="reconOrderDataQueryBean!=null">
+            <if test="reconOrderDataQueryBean.createStartTime != null  and reconOrderDataQueryBean.createEndTime != null  and reconOrderDataQueryBean.createStartTime != ''  and reconOrderDataQueryBean.createEndTime != '' ">
+                and create_time BETWEEN #{reconOrderDataQueryBean.createStartTime} AND
+                #{reconOrderDataQueryBean.createEndTime}
+            </if>
+            <if test="reconOrderDataQueryBean.createStartTime != null  and reconOrderDataQueryBean.createEndTime == null  and reconOrderDataQueryBean.createStartTime != ''">
+                and create_time &gt;= #{reconOrderDataQueryBean.createStartTime}
+            </if>
+            <if test="reconOrderDataQueryBean.createStartTime == null and reconOrderDataQueryBean.createEndTime != null and reconOrderDataQueryBean.createEndTime != ''">
+                and create_time &lt;= #{reconOrderDataQueryBean.createEndTime}
+            </if>
+            <if test="reconOrderDataQueryBean.reconDate != null">
+                AND recon_date = str_to_date(#{reconOrderDataQueryBean.reconDate,jdbcType=DATE}, '%Y-%m-%d')
+            </if>
+            <if test="reconOrderDataQueryBean.tradeOrder != null">
+                <if test="reconOrderDataQueryBean.tradeOrder.tradeOrderCode != null and reconOrderDataQueryBean.tradeOrder.tradeOrderCode != ''">
+                    AND trade_order_code = #{reconOrderDataQueryBean.tradeOrder.tradeOrderCode}
+                </if>
+            </if>
+        </if>
+    </sql>
+    <!--分页-->
+    <select id="findAllTradeOrders" resultMap="ApiTradeOrderResultMap">
+        <include refid="findSql"/>
+    </select>
+    <!--不分页-->
+    <select id="findTradeOrders" resultMap="ApiTradeOrderResultMap">
+        <include refid="findSql"/>
+    </select>
+    <!--自定义 end-->
+
+
+</mapper>

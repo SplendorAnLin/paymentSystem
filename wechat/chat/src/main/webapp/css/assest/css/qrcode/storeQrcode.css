@@ -1,0 +1,50 @@
+body{
+	width: 100%;
+	height: 100%;
+	overflow: hidden;
+}
+.body{
+	top: 0;
+	width: 100%;
+	height: 100%;
+	overflow: hidden;
+	position: absolute;
+	max-width: 1024px;
+	margin: auto;
+	/*background:url(${pageContext.request.contextPath}/image/assest/qcordelast.png) ;*/
+
+}
+.bodyimg{
+	width: 100%;
+	height: 100%;
+	overflow: hidden;
+}
+.qrcode{
+	/*box-shadow: 4px 6px 6px 6px rgba(20,20,20,0.1);*/
+    width: 2.4rem;
+    height: 2.4rem;
+    background: white;
+    position: absolute;
+    bottom: 34%;
+    left: calc(50% - 1.2rem);
+    border-radius: 6px;
+}
+.download{
+	    position: absolute;
+    width: 0.4rem;
+    z-index: 10;
+    top: 0.6rem;
+    right: 0.2rem;
+}
+.qrcode canvas{
+	width: 100%;
+	height: 100%;
+}
+.savepic{
+	    z-index: 10;
+    position: absolute;
+	bottom: 28%;
+    margin: auto;
+    width: 100%;
+    text-align: center;
+}

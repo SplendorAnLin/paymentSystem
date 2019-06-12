@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yl.realAuth.core.dao.mapper.BindCardInfoMapper">
+	<resultMap id="BaseResultMap" type="com.yl.realAuth.model.BindCardInfo">
+		<id column="ID" property="id" />
+		<result column="CODE" property="code" />
+		<result column="VERSION" property="version" />
+		<result column="CREATE_TIME" 		property="createTime" />
+		<result column="PAYER_NAME" property="payerName" />
+		<result column="CERT_NO" property="certNo" />
+		<result column="CERT_NO_ENCRYPT" property="certNoEncrypt" />
+		<result column="PAYER_MOB_NO" property="payerMobNo" />
+		<result column="BANK_CARD_NO" property="bankCardNo" />
+		<result column="BANK_CARD_NO_ENCRYPT" property="bankCardNoEncrypt" />
+		<result column="LAST_UPDATE_TIME" property="lastUpdateTime" />
+	</resultMap>
+	<sql id="base_Column_List">
+		ID,CODE,VERSION,CREATE_TIME,PAYER_NAME,CERT_NO,CERT_NO_ENCRYPT,PAYER_MOB_NO,
+		BANK_CARD_NO,BANK_CARD_NO_ENCRYPT,LAST_UPDATE_TIME
+	</sql>
+
+
+	<insert id="insertBindCardInfo" parameterType="com.yl.realAuth.model.BindCardInfo"
+		useGeneratedKeys="true" keyProperty="id">
+		INSERT INTO BIND_CARD_INFO (
+		ID,CODE,VERSION,CREATE_TIME,PAYER_NAME,CERT_NO,CERT_NO_ENCRYPT,PAYER_MOB_NO,
+		BANK_CARD_NO,BANK_CARD_NO_ENCRYPT,LAST_UPDATE_TIME
+		) VALUES (
+		#{code},#{version},#{createTime},#{payerName},#{certNo},#{certNoEncrypt},#{payerMobNo},#{bankCardNo},
+		#{bankCardNoEncrypt},#{lastUpdateTime}
+		)
+	</insert>
+
+	<update id="updateBindCardInfo" parameterType="com.yl.realAuth.model.BindCardInfo">
+		UPDATE
+		BIND_CARD_INFO
+		set PAYER_NAME = #{payerName},
+		CERT_NO =
+		#{certNo},
+		CERT_NO_ENCRYPT = #{certNoEncrypt},
+		PAYER_MOB_NO = #{payerMobNo},
+		BANK_CARD_NO =
+		#{bankCardNo},
+		BANK_CARD_NO_ENCRYPT = #{bankCardNoEncrypt},
+		LAST_UPDATE_TIME =
+		#{lastUpdateTime}
+		WHERE CODE = #{code}
+	</update>
+	<select id="findAlldynamicBindCardInfoBean" parameterType="Map"
+		resultMap="BaseResultMap">
+		SELECT
+		<include refid="base_Column_List" />
+		FROM 
+		BIND_CARD_INFO
+		WHERE 1=1
+		<if test="params.payerName !=null and params.payerName != '' ">
+			and PAYER_NAME=#{params.payerName}
+		</if>
+		<if test="params.customerNo !=null and params.customerNo != '' ">
+			and CUSTOMER_NO1=#{params.customerNo}
+		</if>
+		<if test="params.certNoEncrypt !=null and params.certNoEncrypt != '' ">
+			and CERT_NO_ENCRYPT=#{params.certNoEncrypt}
+		</if>
+		<if test="params.payerMobNo != null and params.payerMobNo != '' ">
+			and PAYER_MOB_NO=#{params.payerMobNo}
+		</if>
+		<if test="params.bankCardNo != null and params.bankCardNo != '' ">
+			and BANK_CARD_NO=#{params.bankCardNo}
+		</if>
+		<if test="params.startLastUpdateTime != null and params.startLastUpdateTime != '' ">
+			and LAST_UPDATE_TIME&gt;=#{params.startLastUpdateTime}
+		</if>
+		<if test="params.endLastUpdateTime != null and params.endLastUpdateTime != ''">
+			and LAST_UPDATE_TIME&lt;=#{params.endLastUpdateTime}
+		</if>
+		<if test="params.bankCardNoEncrypt != null and params.bankCardNoEncrypt != '' ">
+			and BANK_CARD_NO_ENCRYPT=#{params.bankCardNoEncrypt}
+		</if>
+		<if test="params.startCreateTime != null and params.startCreateTime != '' ">
+			and CREATE_TIME&gt;=#{params.startCreateTime}
+		</if>
+		<if test="params.endCreateTime != null and params.endCreateTime != '' ">
+			and CREATE_TIME&lt;=#{params.endCreateTime}
+		</if>
+		ORDER BY ID DESC
+	</select>
+
+</mapper>

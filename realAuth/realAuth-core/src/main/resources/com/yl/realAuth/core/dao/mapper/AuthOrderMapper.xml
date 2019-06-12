@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yl.realAuth.core.dao.mapper.AuthOrderMapper">
+	<resultMap id="BaseResultMap" type="com.yl.realAuth.model.RealNameAuthOrder">
+		<id column="ID" 					property="id" />
+		<result column="CODE"  				property="code" />
+		<result column="VERSION" 		    property="version" />
+		<result column="CREATE_TIME" 		property="createTime" />
+		<result column="BUSI_TYPE" 			property="busiType" />
+		<result column="BUSINESS_FLAG1" 	property="businessFlag1" />
+		<result column="REQUEST_CODE" 		property="requestCode" />
+		<result column="CUSTOMER_NO" 		property="customerNo" />
+		<result column="FEE" 				property="fee" />
+		<result column="COST" 				property="cost" />
+		<result column="AUTH_ORDER_STATUS" 	property="authOrderStatus" />
+		<result column="AUTH_RESULT" 		property="authResult" />
+		<result column="NOTIFY_URL" 			property="notifyURL" />
+		<result column="IS_ACTUAL" 			property="isActual" />
+		<result column="COMPLETE_TIME" 		property="completeTime" />
+		<result column="CLOSE_TIME" 			property="closeTime" />
+		<result column="CLEAR_TIME" 			property="clearTime" />
+		<result column="TIME_OUT" 			property="timeOut" />
+		<result column="INTERFACE_REQUEST_ID" property="interfaceRequestId" />
+		<result column="INTERFACE_CODE" 		property="interfaceCode" />
+		<result column="PAYER_NAME" 			property="payerName" />
+		<result column="PAYER_MOB_NO" 		property="payerMobNo" />
+		<result column="BANK_CARD_NO" 		property="bankCardNo" />
+		<result column="BANK_CARD_NO_ENCRYPT" 	property="bankCardNoEncrypt" />
+		<result column="CERT_NO" 			property="certNo" />
+		<result column="CERT_NO_ENCRYPT" 		property="certNoEncrypt" />
+		<result column="CARD_TYPE" 			property="cardType" />
+		<result column="RESPONSE_MSG" 		property="responseMsg" />
+		<result column="INNER_ERROR_CODE" 	property="innerErrorCode" />
+		<result column="INNER_ERROR_MSG" 		property="innerErrorMsg" />
+		<result column="BANK_CODE" 			property="bankCode" />
+		
+	</resultMap>
+	<sql id="Base_Column_List">
+		ID,CODE,VERSION,CREATE_TIME,BUSI_TYPE,BUSINESS_FLAG1,REQUEST_CODE,CUSTOMER_NO,FEE,
+		COST,AUTH_ORDER_STATUS,AUTH_RESULT,NOTIFY_URL,IS_ACTUAL,COMPLETE_TIME,CLOSE_TIME,
+		CLEAR_TIME,TIME_OUT,INTERFACE_REQUEST_ID,INTERFACE_CODE,PAYER_NAME,PAYER_MOB_NO,
+		BANK_CARD_NO,BANK_CARD_NO_ENCRYPT,CERT_NO,CERT_NO_ENCRYPT,CARD_TYPE,RESPONSE_MSG,
+		INNER_ERROR_CODE,INNER_ERROR_MSG,BANK_CODE
+	</sql>
+	
+	<select id="authOrderQuery" parameterType="Map" resultMap="BaseResultMap">
+		SELECT 
+		<include refid="Base_Column_List" />
+		FROM REAL_NAME_AUTH_ORDER 
+	</select>
+	
+	<select id="authOrderTotal" parameterType="Map" resultType="java.util.Map">
+		SELECT 
+		<include refid="Base_Column_List" />
+		FROM REAL_NAME_AUTH_ORDER 
+	</select>
+	
+	<select id="authOrderExport" parameterType="Map" resultMap="BaseResultMap">
+		SELECT 
+		<include refid="Base_Column_List" />
+		FROM REAL_NAME_AUTH_ORDER 
+	</select>
+	
+	<insert id="insertAuthOrder" parameterType="com.yl.realAuth.model.RealNameAuthOrder" useGeneratedKeys="true" keyProperty="id">
+		INSERT INTO REAL_NAME_AUTH_ORDER (
+			CODE,VERSION,CREATE_TIME,BUSI_TYPE,BUSINESS_FLAG1,REQUEST_CODE,CUSTOMER_NO,FEE,
+			COST,AUTH_ORDER_STATUS,AUTH_RESULT,NOTIFY_URL,IS_ACTUAL,COMPLETE_TIME,CLOSE_TIME,
+			CLEAR_TIME,TIME_OUT,INTERFACE_REQUEST_ID,INTERFACE_CODE,PAYER_NAME,PAYER_MOB_NO,
+			BANK_CARD_NO,BANK_CARD_NO_ENCRYPT,CERT_NO,CERT_NO_ENCRYPT,CARD_TYPE,RESPONSE_MSG,
+			INNER_ERROR_CODE,INNER_ERROR_MSG,BANK_CODE
+		) VALUES (
+			#{code},#{version},#{createTime},#{busiType},#{businessFlag1},#{requestCode},
+			#{customerNo},#{fee},#{cost},#{authOrderStatus},#{authResult},#{notifyURL},#{isActual},
+			#{completeTime},#{closeTime},#{clearTime},#{timeOut},#{interfaceRequestId},#{interfaceCode},
+			#{payerName},#{payerMobNo},#{bankCardNo},#{bankCardNoEncrypt},#{certNo},#{certNoEncrypt},
+			#{cardType},#{responseMsg},#{innerErrorCode},#{innerErrorMsg},#{bankCode}
+		)
+	
+	</insert>
+
+	<select id="queryOrderByRequestCode" parameterType="Map" resultMap="BaseResultMap">
+		SELECT 
+		<include refid="Base_Column_List" />
+		FROM REAL_NAME_AUTH_ORDER 
+	   WHERE CUSTOMER_NO = #{customerNo}
+	     AND REQUEST_CODE = #{requestCode}
+	</select>
+	
+	<select id="queryWaitCloseOrder" parameterType="Map" resultMap="BaseResultMap">
+	</select>
+	
+	<select id="closeTimeoutOrder" resultMap="BaseResultMap" parameterType="com.yl.realAuth.model.RealNameAuthOrder">
+		SELECT 
+		<include refid="Base_Column_List" />
+		FROM REAL_NAME_AUTH_ORDER 
+	</select>
+	<select id="queryAuthOrderByCode" parameterType="String" resultMap="BaseResultMap">
+		SELECT 
+		<include refid="Base_Column_List" />
+		FROM REAL_NAME_AUTH_ORDER 
+	   WHERE CODE = #{orderCode}
+	</select>
+	
+	<update id="updateOrderStatus" parameterType="com.yl.realAuth.model.RealNameAuthOrder">
+		UPDATE REAL_NAME_AUTH_ORDER
+		set FEE = #{fee},
+		    COST = #{cost},
+		    AUTH_ORDER_STATUS = #{authOrderStatus},
+		    AUTH_RESULT = #{authResult},
+		    INTERFACE_REQUEST_ID = #{interfaceRequestId},
+		    INTERFACE_CODE = #{interfaceCode},
+		    BUSINESS_FLAG1 = #{businessFlag1},
+		    CLEAR_TIME = #{clearTime},
+		    COMPLETE_TIME = #{completeTime},
+		    RESPONSE_MSG = #{responseMsg},
+		    VERSION = #{version},
+		    BANK_CODE = #{bankCode}
+		WHERE CODE = #{code}
+	</update>
+	
+	<select id="queryWaitProcessOrder" parameterType="Map" resultMap="BaseResultMap">
+		SELECT 
+		<include refid="Base_Column_List" />
+		FROM REAL_NAME_AUTH_ORDER 
+	</select>
+	
+	<select id="findSuccessOrderBy" parameterType="Map" resultMap="BaseResultMap">
+		SELECT 
+		<include refid="Base_Column_List" />
+		FROM REAL_NAME_AUTH_ORDER 
+	</select>
+	
+	<select id="findRequestBy" parameterType="Map" resultMap="BaseResultMap">
+		SELECT 
+		<include refid="Base_Column_List" />
+		FROM REAL_NAME_AUTH_ORDER 
+	</select>
+</mapper>

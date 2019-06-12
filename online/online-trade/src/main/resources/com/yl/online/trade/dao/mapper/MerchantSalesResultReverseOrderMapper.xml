@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yl.online.trade.dao.mapper.MerchantSalesResultReverseOrderMapper">
+
+	<resultMap id="merchantSalesResultReverseOrderMap" type="com.yl.online.model.model.MerchantSalesResultReverseOrder">
+		<id 	property="id" 					column="ID"></id>
+		<result property="code" 				column="CODE"></result>
+		<result property="version" 				column="VERSION"></result>
+		<result property="createTime" 			column="CREATE_TIME"></result>
+		<result property="requestCode" 			column="REQUEST_CODE"></result>
+		<result property="orderCode" 			column="ORDER_CODE"></result>
+		<result property="status" 				column="STATUS"></result>
+		<result property="reverseStatus" 		column="REVERSE_STATUS"></result>
+		<result property="reverseCount" 		column="REVERSE_COUNT"></result>
+		<result property="receiver"				column="RECEIVER"></result>
+	</resultMap>
+
+	<sql id="merchantSalesResultReverseOrderMapColumns">
+		ID,CODE,VERSION,CREATE_TIME,REQUEST_CODE,ORDER_CODE,STATUS,REVERSE_STATUS,REVERSE_COUNT,RECEIVER
+	</sql>
+
+
+	<insert id="createReverseOrder" parameterType="com.yl.online.model.model.MerchantSalesResultReverseOrder"
+		useGeneratedKeys="true" keyProperty="id">
+		INSERT INTO NOTIFY_REVERSE_ORDER (
+		CODE,VERSION,CREATE_TIME,REQUEST_CODE,ORDER_CODE,STATUS,REVERSE_STATUS,REVERSE_COUNT,RECEIVER)
+		VALUES
+		(#{code},#{version},#{createTime},#{requestCode},#{orderCode},#{status},#{reverseStatus},#{reverseCount},#{receiver})
+	</insert>
+
+	<select id="queryByOrderCode" resultMap="merchantSalesResultReverseOrderMap"
+		parameterType="Map">
+		SELECT
+		<include refid="merchantSalesResultReverseOrderMapColumns" />
+		FROM NOTIFY_REVERSE_ORDER
+		WHERE ORDER_CODE = #{orderCode}
+	</select>
+	
+	<select id="queryBy" resultMap="merchantSalesResultReverseOrderMap" parameterType="Map">
+		SELECT
+		<include refid="merchantSalesResultReverseOrderMapColumns" />
+		FROM NOTIFY_REVERSE_ORDER
+		WHERE REVERSE_COUNT &lt; #{maxCount}
+		LIMIT #{maxNums}
+		ORDER BY ID ASC
+	</select>
+	
+	<update id="updateMerchantSalesResultReverseOrder">
+		update NOTIFY_REVERSE_ORDER
+		set REVERSE_STATUS = #{merchantSalesResultReverseOrder.reverseStatus}
+		where ORDER_CODE = #{merchantSalesResultReverseOrder.orderCode}
+	</update>
+	
+	<update id="updateMerchantSalesResultReverseOrderCount">
+		update NOTIFY_REVERSE_ORDER
+		set NOTIFY_COUNT = #{merchantSalesResultReverseOrder.reverseCount} + 1
+		where ORDER_CODE = #{merchantSalesResultReverseOrder.orderCode}
+	</update>
+
+</mapper> 

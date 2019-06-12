@@ -1,0 +1,205 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yl.receive.core.mybatis.mapper.ReceiveRequestMapper">
+
+	<resultMap id="requestMap" type="com.yl.receive.core.entity.ReceiveRequest">
+		<id property="id" column="ID"></id>
+		<result property="payerBankNo" column="PAYER_BANK_NO"></result>
+		<result property="ownerId" column="OWNER_ID"></result>
+		<result property="ownerRole" column="OWNER_ROLE"></result>
+		<result property="contractId" column="CONTRACT_ID"></result>
+		<result property="receiveId" column="RECEIVE_ID"></result>
+		<result property="batchNo" column="BATCH_NO"></result>
+		<result property="seqId" column="SEQ_ID"></result>
+		<result property="accountNo" column="ACCOUNT_NO"></result>
+		<result property="accountNoEncrpty" column="ACCOUNT_NO_ENCRPTY"></result>
+		<result property="accountName" column="ACCOUNT_NAME"></result>
+		<result property="accType" column="ACC_TYPE"></result>
+		<result property="accNoType" column="ACC_NO_TYPE"></result>
+		<result property="amount" column="AMOUNT"></result>
+		<result property="fee" column="FEE"></result>
+		<result property="notifyUrl" column="NOTIFY_URL"></result>
+		<result property="remark" column="REMARK"></result>
+		<result property="sourceType" column="SOURCE_TYPE"></result>
+		<result property="createTime" column="CREATE_TIME"></result>
+		<result property="lastUpdateTime" column="LAST_UPDATE_TIME"></result>
+		<result property="auditStatus" column="AUDIT_STATUS"></result>
+		<result property="applyStatus" column="APPLY_STATUS"></result>
+		<result property="version" column="VERSION"></result>
+		<result property="openBank" column="OPEN_BANK"></result>
+		<result property="ownerName" column="OWNER_NAME"></result>
+		<result property="province" column="PROVINCE"></result>
+		<result property="city" column="CITY"></result>
+		<result property="certificatesType" column="CERTIFICATES_TYPE"></result>
+		<result property="certificatesCode" column="CERTIFICATES_CODE"></result>
+		<result property="certificatesCodeEncrpty" column="CERTIFICATES_CODE_ENCRPTY"></result>
+		<result property="cost" column="COST"></result>
+		<result property="orderStatus" column="ORDER_STATUS"></result>
+		<result property="phone" column="PHONE"></result>
+		<result property="interfaceRequestId" column="INTERFACE_REQUEST_ID"></result>
+		<result property="clearingStatus" column="CLEARING_STATUS"></result>
+	</resultMap>
+	
+	<sql id="requestColumns">
+		ID,PAYER_BANK_NO,OWNER_ID,OWNER_ROLE,CONTRACT_ID,RECEIVE_ID,BATCH_NO,SEQ_ID,ACCOUNT_NO,
+		ACCOUNT_NO_ENCRPTY,ACCOUNT_NAME,ACC_TYPE,ACC_NO_TYPE,AMOUNT,FEE,NOTIFY_URL,REMARK,SOURCE_TYPE,
+		CREATE_TIME,LAST_UPDATE_TIME,AUDIT_STATUS,APPLY_STATUS,VERSION,OPEN_BANK,OWNER_NAME,
+		PROVINCE,CITY,CERTIFICATES_TYPE,CERTIFICATES_CODE,CERTIFICATES_CODE_ENCRPTY,COST,ORDER_STATUS,PHONE,
+		INTERFACE_REQUEST_ID,CLEARING_STATUS
+	</sql>
+	
+	<update id="update">
+		UPDATE RECEIVE_REQUEST
+		   SET ORDER_STATUS = #{receiveRequest.orderStatus},
+		       LAST_UPDATE_TIME = #{receiveRequest.lastUpdateTime},
+		       COST = #{receiveRequest.cost},
+		       INTERFACE_REQUEST_ID = #{receiveRequest.interfaceRequestId},
+		       CLEARING_STATUS = #{receiveRequest.clearingStatus},
+		       VERSION = #{newVersion}
+		 WHERE RECEIVE_ID = #{receiveRequest.receiveId} 
+		   AND VERSION = #{receiveRequest.version}
+	</update>
+	
+	<select id="queryByReceiveId" resultMap="requestMap" parameterType="String">
+		SELECT 
+		<include refid="requestColumns" />
+		FROM RECEIVE_REQUEST
+	   WHERE RECEIVE_ID = #{receiveId}
+	</select>
+	
+	<select id="queryBySeqId" resultMap="requestMap" parameterType="String">
+		SELECT 
+		<include refid="requestColumns" />
+		FROM RECEIVE_REQUEST
+	   WHERE SEQ_ID = #{seqId}
+	     AND OWNER_ID = #{ownerId}
+	</select>
+	
+	<insert id="save" parameterType="com.yl.receive.core.entity.ReceiveRequest" useGeneratedKeys="true" keyProperty="id">
+		INSERT INTO RECEIVE_REQUEST (
+			PAYER_BANK_NO,OWNER_ID,OWNER_ROLE,CONTRACT_ID,RECEIVE_ID,BATCH_NO,SEQ_ID,ACCOUNT_NO,
+			ACCOUNT_NO_ENCRPTY,ACCOUNT_NAME,ACC_TYPE,ACC_NO_TYPE,AMOUNT,FEE,NOTIFY_URL,REMARK,SOURCE_TYPE,
+			CREATE_TIME,LAST_UPDATE_TIME,AUDIT_STATUS,APPLY_STATUS,VERSION,OPEN_BANK,OWNER_NAME,
+			PROVINCE,CITY,CERTIFICATES_TYPE,CERTIFICATES_CODE,CERTIFICATES_CODE_ENCRPTY,COST,ORDER_STATUS,PHONE
+			,CLEARING_STATUS
+		) VALUES (
+			#{payerBankNo},#{ownerId},#{ownerRole},#{contractId},#{receiveId},#{batchNo},#{seqId},#{accountNo},
+			#{accountNoEncrpty},#{accountName},#{accType},#{accNoType},#{amount},#{fee},#{notifyUrl},#{remark},
+			#{sourceType},#{createTime},#{lastUpdateTime},#{auditStatus},#{applyStatus},#{version},
+			#{openBank},#{ownerName},#{province},#{city},#{certificatesType},#{certificatesCode},
+			#{certificatesCodeEncrpty},#{cost},#{orderStatus},#{phone},#{clearingStatus}
+		)
+	</insert>
+	
+	<select id="customerRecon" resultMap="requestMap">
+		SELECT
+        <include refid="requestColumns"/>
+        FROM RECEIVE_REQUEST WHERE ORDER_STATUS = 'SUCCESS'
+        <if test="params.starTime != null and params.starTime != ''">
+        	<if test="params.starEnd != null and params.starEnd != ''">
+        		AND CREATE_TIME BETWEEN #{params.starTime} AND #{params.starEnd}
+        	</if>
+        </if>
+		<if test="params.ownerId != null and params.ownerId !='' ">
+			AND OWNER_ID = #{params.ownerId}
+		</if>
+	</select>
+	
+	<select id="customerReconSum" resultType="java.util.HashMap"
+		parameterType="Map">
+		SELECT COUNT(1) count, SUM(AMOUNT) sum, SUM(FEE) fee
+		FROM RECEIVE_REQUEST WHERE ORDER_STATUS = 'SUCCESS'
+        <if test="params.starTime != null and params.starTime != ''">
+        	<if test="params.starEnd != null and params.starEnd != ''">
+        		AND CREATE_TIME BETWEEN #{params.starTime} AND #{params.starEnd}
+        	</if>
+        </if>
+		<if test="params.ownerId != null and params.ownerId !='' ">
+			AND OWNER_ID = #{params.ownerId}
+		</if>
+	</select>
+	
+	<select id="customerReconHead" resultType="java.util.HashMap"
+		parameterType="Map">
+		SELECT COUNT(1) count, SUM(AMOUNT) sum, SUM(FEE) fee
+		FROM RECEIVE_REQUEST WHERE ORDER_STATUS = 'SUCCESS'
+        <if test="params.starTime != null and params.starTime != ''">
+        	<if test="params.starEnd != null and params.starEnd != ''">
+        		AND CREATE_TIME BETWEEN #{params.starTime} AND #{params.starEnd}
+        	</if>
+        </if>
+		<if test="params.ownerId != null and params.ownerId !='' ">
+			AND OWNER_ID = #{params.ownerId}
+		</if>
+	</select>
+	
+	<!-- 代收金额  笔数 -->
+	<select id="orderSumByDay" resultType="java.util.HashMap" parameterType="Map">
+		select count(r.id) as counts, DATE_FORMAT(r.create_time,'%Y%m%d') days,sum(r.amount) as amount from receive_request r
+		where
+		ORDER_STATUS = 'SUCCESS' and 
+ 		DATE_FORMAT(r.create_time,'%Y%m%d') &lt;= DATE_FORMAT(#{orderTimeStart},'%Y%m%d') and 
+		DATE_FORMAT(r.create_time,'%Y%m%d') &gt;= DATE_FORMAT(#{orderTimeEnd},'%Y%m%d')
+		<if test="owner != null and owner !='' ">
+			and OWNER_ID IN (#{owner})
+		</if>
+		group by days
+	</select>
+	<!-- 代收成功 收入金额 笔数 -->
+	<select id="orderSum" resultType="java.util.HashMap" parameterType="Map">
+		SELECT count(AMOUNT),sum(AMOUNT) FROM receive_request
+		WHERE ORDER_STATUS = 'SUCCESS'
+		AND DATE_FORMAT(LAST_UPDATE_TIME,'%Y%m%d') &lt;= DATE_FORMAT(#{orderTimeStart},'%Y%m%d')
+		AND DATE_FORMAT(LAST_UPDATE_TIME,'%Y%m%d') &gt;= DATE_FORMAT(#{orderTimeEnd},'%Y%m%d')
+		<if test="owner != null and owner !='' ">
+			and OWNER_ID IN (#{owner})
+		</if>
+	</select>
+	<!-- 查询总笔数  金额-->
+	<select id="orderSumCount" resultType="java.util.HashMap" parameterType="Map">
+		SELECT SUM(AMOUNT) AS AMOUNT, COUNT(AMOUNT) AS COUNTS FROM receive_request r
+		WHERE 
+			DATE_FORMAT(r.CREATE_TIME,'%Y%m%d') &lt;= DATE_FORMAT(#{orderTimeStart},'%Y%m%d')
+		AND DATE_FORMAT(r.CREATE_TIME,'%Y%m%d') &gt;= DATE_FORMAT(#{orderTimeEnd},'%Y%m%d')
+		<if test="owner != null and owner !='' ">
+			and OWNER_ID IN (#{owner})
+		</if>
+	</select>
+	
+	<select id="findByReconJob" resultMap="requestMap" parameterType="Map">
+		SELECT 
+		<include refid="requestColumns" />
+		FROM RECEIVE_REQUEST vouc
+		WHERE ORDER_STATUS = 'SUCCESS'
+			<if test="params != null">
+				<if test="params.createStartTime != null and params.createEndTime == null">
+					and vouc.CREATE_TIME &gt;= #{params.createStartTime}
+				</if>
+				<if test="params.createStartTime == null and params.createEndTime != null">
+					and vouc.CREATE_TIME &lt;= #{params.createEndTime}
+				</if>
+				<if test="params.createStartTime != null and params.createEndTime != null">
+					and vouc.CREATE_TIME BETWEEN #{params.createStartTime} AND #{params.createEndTime}
+				</if>
+			</if>
+	</select>
+	
+	<select id="findTotalByJob" resultType="java.util.HashMap" parameterType="Map">
+		SELECT SUM(AMOUNT) AS AMOUNT, COUNT(AMOUNT) AS COUNT, SUM(FEE) AS FEE
+		FROM RECEIVE_REQUEST vouc
+		WHERE ORDER_STATUS = 'SUCCESS'
+		<if test="params != null">
+			<if test="params.createStartTime != null and params.createEndTime == null">
+				and vouc.CREATE_TIME &gt;= #{params.createStartTime}
+			</if>
+			<if test="params.createStartTime == null and params.createEndTime != null">
+				and vouc.CREATE_TIME &lt;= #{params.createEndTime}
+			</if>
+			<if test="params.createStartTime != null and params.createEndTime != null">
+				and vouc.CREATE_TIME BETWEEN #{params.createStartTime} AND #{params.createEndTime}
+			</if>
+		</if>
+	</select>
+</mapper>

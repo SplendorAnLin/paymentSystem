@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.yl.rate.core.dao.NormalRateMapper">
+    <!--auto generated Code-->
+    <resultMap id="BaseResultMap" type="com.yl.rate.core.entity.NormalRate">
+        <result column="rate_rule_code" property="rateRuleCode" jdbcType="VARCHAR"/>
+        <result column="fee" property="fee" jdbcType="DOUBLE"/>
+        <result column="compute_mode" property="computeMode" jdbcType="VARCHAR"/>
+        <result column="max_fee" property="maxFee" jdbcType="DOUBLE"/>
+        <result column="min_fee" property="minFee" jdbcType="DOUBLE"/>
+        <result column="id" property="id" jdbcType="BIGINT"/>
+        <result column="code" property="code" jdbcType="VARCHAR"/>
+        <result column="create_time" property="createTime"/>
+    </resultMap>
+
+    <!--auto generated Code-->
+    <sql id="Base_Column_List">
+        rate_rule_code,
+        fee,
+        compute_mode,
+        max_fee,
+        min_fee,
+        id,
+        code,
+        create_time
+    </sql>
+
+    <!--auto generated Code-->
+    <insert id="insert" useGeneratedKeys="true" keyProperty="normalRate.id">
+        INSERT INTO normal_rate (
+            rate_rule_code,
+            fee,
+            compute_mode,
+            max_fee,
+            min_fee,
+            id,
+            code,
+            create_time
+        ) VALUES (
+            #{normalRate.rateRuleCode,jdbcType=VARCHAR},
+            #{normalRate.fee,jdbcType=DOUBLE},
+            #{normalRate.computeMode,jdbcType=VARCHAR},
+            #{normalRate.maxFee,jdbcType=DOUBLE},
+            #{normalRate.minFee,jdbcType=DOUBLE},
+            #{normalRate.id,jdbcType=BIGINT},
+            #{normalRate.code,jdbcType=VARCHAR},
+            #{normalRate.createTime}
+        )
+    </insert>
+
+    <!--auto generated Code-->
+    <insert id="insertSelective" useGeneratedKeys="true" keyProperty="normalRate.id">
+        INSERT INTO normal_rate
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="normalRate.rateRuleCode!=null"> rate_rule_code,</if>
+            <if test="normalRate.fee!=null"> fee,</if>
+            <if test="normalRate.computeMode!=null"> compute_mode,</if>
+            <if test="normalRate.maxFee!=null"> max_fee,</if>
+            <if test="normalRate.minFee!=null"> min_fee,</if>
+            <if test="normalRate.id!=null"> id,</if>
+            <if test="normalRate.code!=null"> code,</if>
+            <if test="normalRate.createTime!=null"> create_time,</if>
+        </trim>
+        VALUES
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="normalRate.rateRuleCode!=null">#{normalRate.rateRuleCode,jdbcType=VARCHAR},
+            </if>
+            <if test="normalRate.fee!=null">#{normalRate.fee,jdbcType=DOUBLE},
+            </if>
+            <if test="normalRate.computeMode!=null">#{normalRate.computeMode,jdbcType=VARCHAR},
+            </if>
+            <if test="normalRate.maxFee!=null">#{normalRate.maxFee,jdbcType=DOUBLE},
+            </if>
+            <if test="normalRate.minFee!=null">#{normalRate.minFee,jdbcType=DOUBLE},
+            </if>
+            <if test="normalRate.id!=null">#{normalRate.id,jdbcType=BIGINT},
+            </if>
+            <if test="normalRate.code!=null">#{normalRate.code,jdbcType=VARCHAR},
+            </if>
+            <if test="normalRate.createTime!=null">#{normalRate.createTime}
+            </if>
+        </trim>
+    </insert>
+
+    <!--auto generated Code-->
+    <insert id="insertList">
+        INSERT INTO normal_rate (
+        <include refid="Base_Column_List"/>
+        )VALUES
+        <foreach collection="normalRates" item="normalRate" index="index" separator=",">
+            (
+            #{normalRate.rateRuleCode,jdbcType=VARCHAR},
+            #{normalRate.fee,jdbcType=DOUBLE},
+            #{normalRate.computeMode,jdbcType=VARCHAR},
+            #{normalRate.maxFee,jdbcType=DOUBLE},
+            #{normalRate.minFee,jdbcType=DOUBLE},
+            #{normalRate.id,jdbcType=BIGINT},
+            #{normalRate.code,jdbcType=VARCHAR},
+            #{normalRate.createTime}
+            )
+        </foreach>
+    </insert>
+
+    <!--auto generated Code-->
+    <update id="update">
+        UPDATE normal_rate
+        <set>
+            <if test="normalRate.rateRuleCode != null"> rate_rule_code= #{normalRate.rateRuleCode,jdbcType=VARCHAR},</if>
+            <if test="normalRate.fee != null"> fee= #{normalRate.fee,jdbcType=DOUBLE},</if>
+            <if test="normalRate.computeMode != null"> compute_mode= #{normalRate.computeMode,jdbcType=VARCHAR},</if>
+            <if test="normalRate.maxFee != null"> max_fee= #{normalRate.maxFee,jdbcType=DOUBLE},</if>
+            <if test="normalRate.minFee != null"> min_fee= #{normalRate.minFee,jdbcType=DOUBLE},</if>
+        </set>
+        WHERE id = #{normalRate.id,jdbcType=BIGINT}
+    </update>
+    <select id="queryByRateRuleCode" resultMap="BaseResultMap">
+      SELECT
+        <include refid="Base_Column_List" />
+      FROM normal_rate
+      WHERE rate_rule_code = #{rateRuleCode}
+    </select>
+
+    <select id="checkRateByCode" resultType="java.lang.Integer" parameterType="java.lang.String">
+        SELECT COUNT(1) FROM normal_rate WHERE code = #{code}
+    </select>
+
+    <delete id="delete">
+        DELETE FROM normal_rate
+        WHERE id = #{id}
+    </delete>
+
+    <delete id="deleteByRateRuleCode" parameterType="java.lang.String">
+        DELETE FROM normal_rate
+        WHERE rate_rule_code = #{rateRuleCode}
+    </delete>
+</mapper>
+

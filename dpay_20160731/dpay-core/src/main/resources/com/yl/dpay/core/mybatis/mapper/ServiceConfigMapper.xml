@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yl.dpay.core.mybatis.mapper.ServiceConfigMapper">
+	
+	<resultMap id="ServiceConfigMap" type="com.yl.dpay.core.entity.ServiceConfig">
+		<id property="id" column="ID"></id>
+		<result property="optimistic" column="OPTIMISTIC"></result>
+		<result property="ownerId" column="OWNER_ID"></result>
+		<result property="ownerRole" column="OWNER_ROLE"></result>
+		<result property="createDate" column="CREATE_DATE"></result>
+		<result property="valid" column="VALID"></result>
+		<result property="manualAudit" column="MANUAL_AUDIT"></result>
+		<result property="phone" column="PHONE"></result>
+		<result property="complexPassword" column="COMPLEX_PASSWORD"></result>
+		<result property="usePhoneCheck" column="USE_PHONE_CHECK"></result>
+		<result property="publicKey" column="PUBLIC_KEY"></result>
+		<result property="privateKey" column="PRIVATE_KEY"></result>
+		<result property="custIp" column="CUST_IP"></result>
+		<result property="domain" column="DOMAIN"></result>
+		<result property="minAmount" column="MIN_AMOUNT"></result>
+		<result property="maxAmount" column="MAX_AMOUNT"></result>
+		<result property="holidayStatus" column="HOLIDAYSTATUS"></result>
+		<result property="dayMaxAmount" column="DAY_MAX_AMOUNT"></result>
+		<result property="bossAudit" column="BOSS_AUDIT"></result>
+		<result property="startTime" column="START_TIME"></result>
+		<result property="endTime" column="END_TIME"></result>
+		<result property="fireType" column="FIRE_TYPE"></result>
+	</resultMap>
+	
+	
+	<sql id="serviceConfigColumns"> ID,OPTIMISTIC,OWNER_ID,OWNER_ROLE,CREATE_DATE,VALID,MANUAL_AUDIT,PHONE,
+		COMPLEX_PASSWORD,USE_PHONE_CHECK,PUBLIC_KEY,PRIVATE_KEY,CUST_IP,DOMAIN,MIN_AMOUNT,MAX_AMOUNT,HOLIDAYSTATUS,
+		DAY_MAX_AMOUNT,BOSS_AUDIT,START_TIME,END_TIME,FIRE_TYPE
+	 </sql>
+	
+	
+	<insert id="insert"  parameterType="com.yl.dpay.core.entity.ServiceConfig"  useGeneratedKeys="true" keyProperty="id">
+		INSERT INTO SERVICE_CONFIG (
+			OWNER_ID,CREATE_DATE,VALID,OWNER_ROLE,MANUAL_AUDIT,PHONE,COMPLEX_PASSWORD,USE_PHONE_CHECK,PUBLIC_KEY,
+			PRIVATE_KEY,CUST_IP,DOMAIN,MIN_AMOUNT,MAX_AMOUNT,HOLIDAYSTATUS,DAY_MAX_AMOUNT,BOSS_AUDIT,START_TIME,END_TIME,FIRE_TYPE)
+		VALUES (#{ownerId},#{createDate},#{valid},#{ownerRole},#{manualAudit},#{phone},#{complexPassword},#{usePhoneCheck},
+			#{publicKey},#{privateKey},#{custIp},#{domain},#{minAmount},#{maxAmount},#{holidayStatus},
+			#{dayMaxAmount},#{bossAudit},#{startTime},#{endTime},#{fireType})
+	</insert>
+	
+	<select id="find" resultMap="ServiceConfigMap" parameterType="java.util.Map">
+	SELECT
+		<include refid="serviceConfigColumns"/>
+	FROM
+	SERVICE_CONFIG
+	WHERE OWNER_ID = #{ownerId} and VALID = #{valid}
+	</select>
+
+	<select id="findByOwnerId" resultMap="ServiceConfigMap" parameterType="java.util.Map">
+		SELECT
+		<include refid="serviceConfigColumns"/>
+		FROM
+		SERVICE_CONFIG
+		WHERE OWNER_ID = #{ownerId}
+	</select>
+	<select id="findByPhone" resultMap="ServiceConfigMap" parameterType="java.util.Map">
+		SELECT
+		<include refid="serviceConfigColumns"/>
+		FROM
+		SERVICE_CONFIG
+		WHERE PHONE = #{phone}
+	</select>
+	  <update id="update" parameterType="com.yl.dpay.core.entity.ServiceConfig">
+    <!--
+      WARNING - @mbggenerated
+      Generated on 2016-11-03 15:40:50.
+    -->
+    update service_config
+    <set>
+      OPTIMISTIC = OPTIMISTIC + 1,
+      <if test="ownerId != null">
+        OWNER_ID = #{ownerId,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null">
+        CREATE_DATE = #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="ownerRole != null">
+        OWNER_ROLE = #{ownerRole,jdbcType=VARCHAR},
+      </if>
+      <if test="valid != null">
+        VALID = #{valid,jdbcType=VARCHAR},
+      </if>
+      <if test="manualAudit != null">
+        MANUAL_AUDIT = #{manualAudit,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null">
+        PHONE = #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="complexPassword != null">
+        COMPLEX_PASSWORD = #{complexPassword,jdbcType=VARCHAR},
+      </if>
+      <if test="usePhoneCheck != null">
+        USE_PHONE_CHECK = #{usePhoneCheck,jdbcType=VARCHAR},
+      </if>
+      <if test="publicKey != null">
+        PUBLIC_KEY = #{publicKey,jdbcType=VARCHAR},
+      </if>
+      <if test="privateKey != null">
+        PRIVATE_KEY = #{privateKey,jdbcType=VARCHAR},
+      </if>
+      <if test="custIp != null">
+        CUST_IP = #{custIp,jdbcType=VARCHAR},
+      </if>
+      <if test="domain != null">
+        DOMAIN = #{domain,jdbcType=VARCHAR},
+      </if>
+      <if test="minAmount != null">
+        MIN_AMOUNT = #{minAmount,jdbcType=DOUBLE},
+      </if>
+      <if test="maxAmount != null">
+        MAX_AMOUNT = #{maxAmount,jdbcType=DOUBLE},
+      </if>
+      <if test="holidayStatus != null">
+        HOLIDAYSTATUS = #{holidayStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="dayMaxAmount != null">
+        DAY_MAX_AMOUNT = #{dayMaxAmount,jdbcType=DOUBLE},
+      </if>
+      <if test="bossAudit != null">
+        BOSS_AUDIT = #{bossAudit,jdbcType=VARCHAR},
+      </if>
+      <if test="startTime != null">
+        START_TIME = #{startTime,jdbcType=VARCHAR},
+      </if>
+      <if test="endTime != null">
+        END_TIME = #{endTime,jdbcType=VARCHAR},
+      </if>
+       <if test="fireType != null">
+        FIRE_TYPE = #{fireType,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=INTEGER} and OPTIMISTIC = #{optimistic}
+  </update>
+
+	<update id="updateComplexPwd" parameterType="com.yl.dpay.core.entity.ServiceConfig">
+		UPDATE SERVICE_CONFIG
+		SET COMPLEX_PASSWORD = #{complexPassword,jdbcType=VARCHAR},OPTIMISTIC = OPTIMISTIC + 1
+		WHERE OWNER_ID = #{ownerId,jdbcType=VARCHAR} and OPTIMISTIC = #{optimistic}
+	</update>
+	
+	<select id="findById" resultMap="ServiceConfigMap" parameterType="Long">
+		select 
+			<include refid="serviceConfigColumns"/> 
+		from SERVICE_CONFIG where id = #{id}
+	</select>
+	
+	<update id="updateServiceConfig" parameterType="com.yl.dpay.core.entity.ServiceConfig">
+		
+	</update>
+	
+	<select id="findByFireType" resultMap="ServiceConfigMap" parameterType="java.util.Map">
+		SELECT
+			<include refid="serviceConfigColumns"/>
+		FROM
+			SERVICE_CONFIG
+		WHERE FIRE_TYPE = #{fireType} and valid = #{valid}
+	</select>
+	
+</mapper>

@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yl.dpay.core.mybatis.mapper.AutoRequestMapper">
+	<resultMap id="BaseResultMap" type="com.yl.dpay.core.entity.AutoRequest">
+		<id column="id" 					property="id" />
+		<result column="optimistic" 		property="optimistic" />
+		<result column="OWNER_ID" 			property="ownerId" />
+		<result column="OWNER_ROLE"			property="ownerRole"/>
+		<result column="AMOUNT"				property="amount" />
+		<result column="OPERATOR"			property="operator" />
+		<result column="BANK_CODE"			property="bankCode" />
+		<result column="BANK_NAME"			property="bankName" />
+		<result column="ACCOUNT_NAME"		property="accountName" />
+		<result column="ACCOUNT_NO"			property="accountNo" />
+		<result column="ACCOUNT_TYPE"		property="accountType" />
+		<result column="AUTO_REQUEST_STATUS"	property="autoRequestStatus" />
+		<result column="ORDER_CODE"			property="orderCode" />
+		<result column="FLOW_NO"			property="flowNo" />
+		<result column="CODE"  				property="code" />
+		<result column="ACCOUNT_DATE"  		property="accountDate" />
+		<result column="CREATE_DATE" 		property="createDate" />
+		<result column="APPLY_DATE" 		property="applyDate" />
+		
+	</resultMap>
+	<sql id="Base_Column_List">
+		id, optimistic, OWNER_ID, OWNER_ROLE, AMOUNT, OPERATOR, BANK_CODE, BANK_NAME,
+		ACCOUNT_NAME, ACCOUNT_NO, ACCOUNT_TYPE, AUTO_REQUEST_STATUS,
+		ORDER_CODE, FLOW_NO,CODE, ACCOUNT_DATE, CREATE_DATE, APPLY_DATE
+	</sql>
+	
+	<select id="selectByPrimaryKey" parameterType="java.lang.Integer"
+		resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from auto_request
+		where id = #{id,jdbcType=INTEGER}
+	</select>
+	
+	<select id="findAllWait" resultType="java.util.Map">
+		select
+			a.OWNER_ID as ownerId, a.OWNER_ROLE as ownerRole 
+		from auto_request a
+		where TO_DAYS(a.ACCOUNT_DATE) = TO_DAYS(NOW()) and AUTO_REQUEST_STATUS != 'SUCCESS' 
+	  	GROUP BY a.OWNER_ID, a.OWNER_ROLE
+	</select>
+	
+	<select id="findWaitByOwner" resultMap="BaseResultMap">
+		select
+			<include refid="Base_Column_List" />
+		from auto_request a
+			where a.OWNER_ID = #{ownerId} and a.OWNER_ROLE = #{ownerRole} and TO_DAYS(a.ACCOUNT_DATE) = TO_DAYS(NOW())
+			 and AUTO_REQUEST_STATUS != 'SUCCESS' 
+	</select>
+	
+	<insert id="insert" parameterType="com.yl.dpay.core.entity.AutoRequest" useGeneratedKeys="true" keyProperty="id">
+		insert into auto_request (optimistic, OWNER_ID,OWNER_ROLE,
+		AMOUNT, 
+		OPERATOR, BANK_CODE, BANK_NAME,
+		ACCOUNT_NAME, ACCOUNT_NO, ACCOUNT_TYPE,
+		AUTO_REQUEST_STATUS, ORDER_CODE, FLOW_NO,
+		CODE, ACCOUNT_DATE, CREATE_DATE
+		)
+		values (#{optimistic,jdbcType=INTEGER},
+		#{ownerId,jdbcType=VARCHAR},#{ownerRole},
+		#{amount,jdbcType=DOUBLE}, 
+		#{operator,jdbcType=VARCHAR}, #{bankCode,jdbcType=VARCHAR}, #{bankName,jdbcType=VARCHAR},
+		#{accountName,jdbcType=VARCHAR}, #{accountNo,jdbcType=VARCHAR},
+		#{accountType,jdbcType=VARCHAR},
+		#{autoRequestStatus,jdbcType=VARCHAR}, #{orderCode,jdbcType=VARCHAR},
+		#{flowNo,jdbcType=INTEGER},
+		#{code,jdbcType=VARCHAR}, #{accountDate,jdbcType=TIMESTAMP}, #{createDate,jdbcType=TIMESTAMP}
+		)
+	</insert>
+
+	<update id="update" parameterType="com.yl.dpay.core.entity.AutoRequest">
+		UPDATE auto_request
+		SET 
+			FLOW_NO = #{flowNo},AUTO_REQUEST_STATUS = #{autoRequestStatus},
+			APPLY_DATE = #{applyDate}, OPTIMISTIC = OPTIMISTIC + 1
+		WHERE ID = #{id} and OPTIMISTIC = #{optimistic}
+	</update>
+</mapper>

@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yl.online.gateway.mapper.LicenseMapper">
+	<resultMap id="licenseMap" type="com.yl.online.gateway.bean.License">
+		<id property="id" 						column="ID"></id>
+		<result property="phone" 				column="PHONE"></result>
+		<result property="cardNo" 				column="CARDNO"></result>
+		<result property="checkCode" 			column="CHECKCODE"></result>
+		<result property="passWord" 			column="PASSWORD"></result>
+		<result property="publicPWD" 			column="PUB_PWD"></result>
+		<result property="fullName" 			column="FULL_NAME"></result>
+		<result property="province" 			column="PROVINCE"></result>
+		<result property="city" 				column="CITY"></result>
+		<result property="addr" 				column="ADDR"></result>
+		<result property="linkName" 			column="LINK_NAME"></result>
+		<result property="idCard" 				column="ID_CARD"></result>
+		<result property="accName" 				column="ACC_NAME"></result>
+		<result property="accNo" 				column="ACC_NO"></result>
+		<result property="bankName" 			column="BANK_NAME"></result>
+		<result property="createTime"			column="CREATE_TIME"></result>
+		<result property="updateTime"			column="UPDATE_TIME"></result>
+	</resultMap>
+	
+	<sql id="licenseColumns">
+		ID,PHONE,CARDNO,CHECKCODE,PASSWORD,PUB_PWD,FULL_NAME,PROVINCE,CITY,ADDR,LINK_NAME,ID_CARD,ACC_NAME,ACC_NO,BANK_NAME
+	</sql>
+	
+	<insert id="licenseLoginInfo" parameterType="com.yl.online.gateway.bean.License">
+		INSERT INTO license_access (PHONE, PASSWORD ,PUB_PWD, CARDNO, CHECKCODE, CREATE_TIME, UPDATE_TIME) 
+		VALUES (#{phone}, #{passWord}, #{publicPWD}, #{cardNo}, #{checkCode}, #{createTime}, #{updateTime})
+	</insert>
+	
+	<update id="licenseBaseInfo">
+		update license_access
+		set FULL_NAME = #{fullName}, PROVINCE = #{province}, CITY = #{city}, ADDR = #{addr}, LINK_NAME = #{linkName},
+		ID_CARD = #{idCard}, UPDATE_TIME = #{updateTime}
+		where id = #{id}
+	</update>
+	
+	<update id="licenseBankCard">
+		update license_access
+		set ACC_NAME = #{accName}, ACC_NO = #{accNo}, BANK_NAME = #{bankName}, UPDATE_TIME = #{updateTime}
+		where id = #{id}
+	</update>
+	
+	<select id="checkPhone" resultMap="licenseMap" parameterType="Map">
+		SELECT
+		<include refid="licenseColumns" />
+		FROM license_access
+		WHERE phone = #{phone}
+	</select>
+	
+	<select id="checkFullName" resultMap="licenseMap" parameterType="Map">
+		SELECT
+		<include refid="licenseColumns" />
+		FROM license_access
+		WHERE fullName = #{fullName}
+	</select>
+	
+	<select id="getInfo" resultMap="licenseMap" parameterType="Map">
+		SELECT
+		<include refid="licenseColumns" />
+		FROM license_access
+		WHERE cardNo = #{cardNo} and checkCode = #{checkCode}
+	</select> 
+	
+	<select id="findById" resultMap="licenseMap" parameterType="Map">
+		SELECT
+		<include refid="licenseColumns" />
+		FROM license_access
+		WHERE id = #{id}
+	</select>
+	
+	<update id="again">
+		update license_access
+		set UPDATE_TIME = #{updateTime}
+		where id = #{id}
+	</update>
+	
+</mapper>

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN"         ":/spring-beans.dtd">
+<beans default-autowire="byName">
+	<bean name="/agentOperInterface" class="org.springframework.remoting.caucho.HessianServiceExporter">   
+		<property name="service">
+			<ref bean="agentOperInterface"/>
+		</property>   
+		<property name="serviceInterface">
+			<value>com.yl.agent.api.interfaces.AgentOperInterface</value>
+		</property>
+	</bean>
+	<bean name="/agentMenuInterface" class="org.springframework.remoting.caucho.HessianServiceExporter">   
+		<property name="service">
+			<ref bean="agentMenuInterface"/>
+		</property>   
+		<property name="serviceInterface">
+			<value>com.yl.agent.api.interfaces.AgentMenuInterface</value>
+		</property>
+	</bean>
+	<bean name="/agentFunctionInterface" class="org.springframework.remoting.caucho.HessianServiceExporter">   
+		<property name="service">
+			<ref bean="agentFunctionInterface"/>
+		</property>   
+		<property name="serviceInterface">
+			<value>com.yl.agent.api.interfaces.AgentFunctionInterface</value>
+		</property>
+	</bean>
+	<bean name="/agentFacade" class="org.springframework.remoting.caucho.HessianServiceExporter">   
+		<property name="service">
+			<ref bean="agentFacade"/>
+		</property>   
+		<property name="serviceInterface">
+			<value>com.yl.agent.api.interfaces.AgentFacade</value>
+		</property>
+	</bean>
+</beans>

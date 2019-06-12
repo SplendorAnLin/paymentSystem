@@ -1,0 +1,222 @@
+#idcardbox{text-align: center;padding-top: 10px;}
+#idcardbox h1{font-size: 16px;text-align: center;color: #333333;height: 35px;line-height: 35px;font-family:'Microsoft Yahei','Simsun';font-weight: normal;}
+#idcardbox h2{font-size: 14px;height: 25px;line-height: 25px;margin-top: 15px;}
+.roundinput{width: 90%;height: 32px;border: 1px solid #ccc;-webkit-border-radius: 4px;-moz-border-radius: 4px;border-radius: 4px;padding-left: 3px;margin: 10px auto;box-shadow: 1px 1px 1px #ddd;}
+#getidcard,#getidcard2,.greenbtn{}
+#resultbox{text-align: left;width: 93%;padding: 5px;min-height: 100px;font-size: 14px;line-height: 20px;}
+#resultbox a{font-size: 14px;}
+#resultbox h3{font-size: 16px;}
+#resultbox .green{color: #559717;}
+.hint{line-height:22px;color: #999;text-align: left;margin-left: 5px;}
+
+#fdbox{border: 1px solid #9dc08d;border-radius: 4px;width: 95%;padding: 5px;margin: 5px auto;}
+.loading{height: 60px;line-height: 60px;text-align: center;}
+.loading img{vertical-align: middle;}
+
+.hotnews{padding: 5px 0;background-color: #fff;overflow: hidden;}
+.hotnews h3{background:-webkit-gradient(linear, left top, left bottom, from(#FBFBFB), color-stop(0.5, #F6F6F6), to(#EFEFEF));background:-moz-linear-gradient(top,#FBFBFB, #EFEFEF);background:-ms-linear-gradient(top, #FBFBFB, #EFEFEF);filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#FBFBFB', endColorstr='#EFEFEF',GradientType=0);border-top: 1px solid #C6C6C6;border-bottom: 1px solid #C6C6C6;height: 40px;line-height: 42px;padding-left: 10px;font-size: 18px;}
+.hotnews h3 span{display: block;width: 100%;background: url(../images/tool.png) 0 10px no-repeat;background-size:15px 19px;-webkit-background-size:15px 19px;padding-left: 20px;}
+.hotnews ul{}
+.hotnews ul li{height: 35px;line-height: 35px;border-bottom: 1px solid #DDDDDD;padding-left: 10px;}
+.hotnews ul li a{color: #6C6C6C;}
+
+.toollist ul li{float: left;width: 30%;margin-bottom:10px; overflow: hidden;line-height: 22px;margin-left: 10px;height: 93px;text-align: center;background-color: #1AA6FE;}
+.toollist ul li:nth-child(3n+1){margin-left: 6px;}
+.toollist ul li a{color: #36a603;font-size: 14px;position: relative;width: 100%;display: block;margin: 0 auto;text-decoration: none;color: #fff;height: 100%;-moz-background-size: 48px 48px; -webkit-background-size: 48px 48px; -o-background-size: 48px 48px; background-size: 48px 48px;background-repeat: no-repeat;background-position: center 12px;}
+.toollist ul li a span{position: absolute;top: 63px;left: 0;right: 0;font-size: 14px;}
+.toollist ul li.tblue{background-color: #1AA6FE;}
+.toollist ul li.tgreen{background-color: #ADD655;}
+.toollist ul li.torange{background-color: #FF7F19;}
+.toollistset ul li{background-color: #F1F1F1;border: 1px solid #CACECF;}
+.toollistset ul li a{color: #797979;}
+#wxset{height: 50px;line-height: 50px;text-align: center;color: #7F7F7F;font-size: 24px;}
+.toollistset img{margin-top: 10px;}
+.toollistset ul li a.on{background: #6391AF;color: #FFFFFF;}
+.toollistset ul li a.on:before{position: absolute;width: 15px;height: 13px;left: 10px;top:10px;background: url(../images/tool2.png) 0 0 no-repeat;color: #FFFFFF;-moz-background-size: 24px 90px; -webkit-background-size: 24px 90px; -o-background-size: 24px 90px; background-size: 24px 90px;display: inline-block;content: "";}
+#setbotline{height: 50px;line-height: 50px;background-color: #009BFF;position: relative;text-align: center;}
+#setbotline a:first-child{display: inline-block;height: 24px;width: 24px;background: url(../images/tool2.png) 0 -66px no-repeat;color: #FFFFFF;-moz-background-size: 24px 90px; -webkit-background-size: 24px 90px; -o-background-size: 24px 90px; background-size: 24px 90px;text-indent: -9999px;top: 13px;left: 20px;position: absolute;}
+#setbotline a:nth-child(2){display: inline-block;height: 50px;width: 100px;background: url(../images/tool2.png) 0 -14px no-repeat;color: #FFFFFF;-moz-background-size: 24px 90px; -webkit-background-size: 24px 90px; -o-background-size: 24px 90px; background-size: 24px 90px;padding-left: 10px;font-size: 16px;}
+
+#toolzfxx{background-image: url(../images/weixin/zfxx.png);}
+#toolerssc{background-image: url(../images/weixin/erssc.png);}
+#toolzpqz{background-image: url(../images/weixin/zpqz.png);}
+#toolszk{background-image: url(../images/weixin/szk.png);}
+#tooldzyhq{background-image: url(../images/weixin/dzyhq.png);}
+#toolzgyd{background-image: url(../images/weixin/zgyd.png);}
+#toolzgdx{background-image: url(../images/weixin/zgdx.png);}
+#toolzglt{background-image: url(../images/weixin/zglt.png);}
+#toolcjcx{background-image: url(../images/weixin/cjcx.png);}
+#toolcpms{background-image: url(../images/weixin/cpms.png);}
+#toolwnzhq{background-image: url(../images/weixin/wnzhq.png);}
+#toolcz{background-image: url(../images/weixin/cz.png);}
+#toolshxqm{background-image: url(../images/weixin/shxqm.png);}
+#toolbank{background-image: url(../images/weixin/bank.png);}
+#toolyhwd{background-image: url(../images/weixin/yhwd.png);}
+#tooldxx{background-image: url(../images/weixin/dxx.png);}
+#toolwz{background-image: url(../images/weixin/wz.png);}
+#toollc{background-image: url(../images/weixin/lc.png);}
+#toolct{background-image: url(../images/weixin/ct.png);}
+#toolgj{background-image: url(../images/weixin/gj.png);}
+#tooltq{background-image: url(../images/weixin/tq.png);}
+#toolwnl{background-image: url(../images/weixin/wnl.png);}
+#tooljp{background-image: url(../images/weixin/jp.png);}
+#tooljd{background-image: url(../images/weixin/jd.png);}
+#toolmap{background-image: url(../images/weixin/map.png);}
+#tooldj{background-image: url(../images/weixin/dj.png);}
+#toolbike{background-image: url(../images/weixin/bike.png);}
+#toollyjd{background-image: url(../images/weixin/lyjd.png);}
+#tooltaxi{background-image: url(../images/weixin/taxi.png);}
+#toolcpjc{background-image: url(../images/weixin/cpjc.png);}
+#toollkcx{background-image: url(../images/weixin/lkcx.png);}
+#toolgpzs{background-image: url(../images/weixin/gpzs.png);}
+#toolhlcx{background-image: url(../images/weixin/hlcx.png);}
+#tooljjcx{background-image: url(../images/weixin/jjcx.png);}
+#toolhjjg{background-image: url(../images/weixin/hjjg.png);}
+#toolgs{background-image: url(../images/weixin/gs.png);}
+#toolcdjs{background-image: url(../images/weixin/cdjs.png);}
+#toolfdjs{background-image: url(../images/weixin/fdjs.png);}
+#toolbx{background-image: url(../images/weixin/bx.png);}
+#toolckjs{background-image: url(../images/weixin/ckjs.png);}
+#toolkd{background-image: url(../images/weixin/kd.png);}
+#toolpm{background-image: url(../images/weixin/pm.png);}
+#toolsfz{background-image: url(../images/weixin/sfz.png);}
+#toolqh{background-image: url(../images/weixin/qh.png);}
+#toolemail{background-image: url(../images/weixin/email.png);}
+#tooltel{background-image: url(../images/weixin/tel.png);}
+#toolsjgsd{background-image: url(../images/weixin/sjgsd.png);}
+#toolyb{background-image: url(../images/weixin/yb.png);}
+#tooldwhscd{background-image: url(../images/weixin/dwhscd.png);}
+#toolzgjm{background-image: url(../images/weixin/zgjm.png);}
+#toolxzcx{background-image: url(../images/weixin/xzcx.png);}
+#toolxzys{background-image: url(../images/weixin/xzys.png);}
+#toolxmcs{background-image: url(../images/weixin/xmcs.png);}
+#toolcgsm{background-image: url(../images/weixin/cgsm.png);}
+#toolxgcs{background-image: url(../images/weixin/xgcs.png);}
+#toolqlsp{background-image: url(../images/weixin/qlsp.png);}
+#toolhl{background-image: url(../images/weixin/hl.png);}
+#toolhmxj{background-image: url(../images/weixin/hmxj.png);}
+#toolfsds{background-image: url(../images/weixin/fsds.png);}
+#tooltlzb{background-image: url(../images/weixin/tlzb.png);}
+#toolsesx{background-image: url(../images/weixin/sesx.png);}
+#toolxlcs{background-image: url(../images/weixin/xlcs.png);}
+#toolsscy{background-image: url(../images/weixin/sscy.png);}
+#toolmfxp{background-image: url(../images/weixin/mfxp.png);}
+#toolzxqm{background-image: url(../images/weixin/zxqm.png);}
+#toolsnsn{background-image: url(../images/weixin/snsn.png);}
+#toolcp{background-image: url(../images/weixin/cp.png);}
+#tooltv{background-image: url(../images/weixin/tv.png);}
+#toolgame{background-image: url(../images/weixin/game.png);}
+#toolktv{background-image: url(../images/weixin/ktv.png);}
+#tooldyy{background-image: url(../images/weixin/dyy.png);}
+#toolxh{background-image: url(../images/weixin/xh.png);}
+#toolylbg{background-image: url(../images/weixin/ylbg.png);}
+#toolgou{background-image: url(../images/weixin/gou.png);}
+#toolnjjzw{background-image: url(../images/weixin/njjzw.png);}
+#toolxhy{background-image: url(../images/weixin/xhy.png);}
+#toolrkl{background-image: url(../images/weixin/rkl.png);}
+#toolsmsq{background-image: url(../images/weixin/smsq.png);}
+#toolmusic{background-image: url(../images/weixin/music.png);}
+#toolxs{background-image: url(../images/weixin/xs.png);}
+#toolbeaty{background-image: url(../images/weixin/beaty.png);}
+#toolfy{background-image: url(../images/weixin/fy.png);}
+#toolxhzd{background-image: url(../images/weixin/xhzd.png);}
+#toolxlcx{background-image: url(../images/weixin/xlcx.png);}
+#toolbkqs{background-image: url(../images/weixin/bkqs.png);}
+#toolyxks{background-image: url(../images/weixin/yxks.png);}
+#toolfl{background-image: url(../images/weixin/fl.png);}
+#tooljtbz{background-image: url(../images/weixin/jtbz.png);}
+#tooljxydt{background-image: url(../images/weixin/jxydt.png);}
+#toolzx{background-image: url(../images/weixin/zx.png);}
+#tooljr{background-image: url(../images/weixin/jr.png);}
+#toolsjly{background-image: url(../images/weixin/sjly.png);}
+#toolgcbd{background-image: url(../images/weixin/gcbd.png);}
+#tooljsq{background-image: url(../images/weixin/jsq.png);}
+#toolgh{background-image: url(../images/weixin/gh.png);}
+#toolypdq{background-image: url(../images/weixin/ypdq.png);}
+#tooljbcx{background-image: url(../images/weixin/jbcx.png);}
+#toolzydq{background-image: url(../images/weixin/zydq.png);}
+#toollxjk{background-image: url(../images/weixin/lxjk.png);}
+#toolys{background-image: url(../images/weixin/ys.png);}
+#toolssyy{background-image: url(../images/weixin/ssyy.png);}
+#toolyycx{background-image: url(../images/weixin/yycx.png);}
+#tooljjzj{background-image: url(../images/weixin/jjzj.png);}
+#toolcycq{background-image: url(../images/weixin/cycq.png);}
+#toolcaqq{background-image: url(../images/weixin/caqq.png);}
+#toolylmr{background-image: url(../images/weixin/ylmr.png);}
+#toolswrl{background-image: url(../images/weixin/swrl.png);}
+#toolbyzs{background-image: url(../images/weixin/byzs.png);}
+#toolcarlogo{background-image: url(../images/weixin/carlogo.png);}
+#toolfangshui{background-image: url(../images/weixin/fangshui.png);}
+#toolhjzs{background-image: url(../images/weixin/hjzs.png);}
+#toolsxlogo{background-image: url(../images/weixin/sxlogo.png);}
+#toolsxpdlogo{background-image: url(../images/weixin/sxpdlogo.png);}
+#tooltdlogo{background-image: url(../images/weixin/tdlogo.png);}
+#toolyx{background-image: url(../images/weixin/yx.png);}
+#toolcy{background-image: url(../images/weixin/cy.png);}
+#toolbjx{background-image: url(../images/weixin/bjx.png);}
+#toolbztz{background-image: url(../images/weixin/bztz.png);}
+#tooljx{background-image: url(../images/weixin/jx.png);}
+#toolmydq{background-image: url(../images/weixin/mydq.png);}
+#tooliphone{background-image: url(../images/weixin/iphone.png);}
+#toolcgsm{background-image: url(../images/weixin/cgsm.png);}
+#toolhxwzh{background-image: url(../images/weixin/hxwzh.png);}
+#tooljryj{background-image: url(../images/weixin/jryj.png);}
+#toolsmsr{background-image: url(../images/weixin/smsr.png);}
+#toolxfcm{background-image: url(../images/weixin/xfcm.png);}
+#toolzgcz{background-image: url(../images/weixin/zgcz.png);}
+#toolzwsm{background-image: url(../images/weixin/zwsm.png);}
+#toolgylq{background-image: url(../images/weixin/gylq.png);}
+#toollz{background-image: url(../images/weixin/lz.png);}
+#toolmz{background-image: url(../images/weixin/mz.png);}
+#toolsc{background-image: url(../images/weixin/sc.png);}
+#toolts{background-image: url(../images/weixin/ts.png);}
+#toolxmpd{background-image: url(../images/weixin/xmpd.png);}
+#toolyq{background-image: url(../images/weixin/yq.png);}
+#toolly{background-image: url(../images/weixin/ly.png);}
+#tooldzg{background-image: url(../images/weixin/dzg.png);}
+#toolnxsw{background-image: url(../images/weixin/nxsw.png);}
+#toolqzw{background-image: url(../images/weixin/qzw.png);}
+#toolzz{background-image: url(../images/weixin/zz.png);}
+#toolsxsm{background-image: url(../images/weixin/sxsm.png);}
+#toolszbf{background-image: url(../images/weixin/szbf.png);}
+#toolszj{background-image: url(../images/weixin/szj.png);}
+#toolzgxw{background-image: url(../images/weixin/zgxw.png);}
+#toolgx{background-image: url(../images/weixin/gx.png);}
+#tooljq{background-image: url(../images/weixin/jq.png);}
+#toolwhois{background-image: url(../images/weixin/whois.png);}
+#toolxhzd{background-image: url(../images/weixin/xhzd.png);}
+#toolxxxg{background-image: url(../images/weixin/xxxg.png);}
+
+#tooldpt{background-image: url(../images/weixin/dpt.png);}
+#toolsfzd{background-image: url(../images/weixin/sfzd.png);}
+#toolqq{background-image: url(../images/weixin/qq.png);}
+#toolsmdq{background-image: url(../images/weixin/smdq.png);}
+#toolsscy{background-image: url(../images/weixin/sscy.png);}
+#toolswxk{background-image: url(../images/weixin/swxk.png);}
+#toolsxys{background-image: url(../images/weixin/sxys.png);}
+#toolypxj{background-image: url(../images/weixin/ypxj.png);}
+#toolbzhh{background-image: url(../images/weixin/bzhh.png);}
+#tooljy{background-image: url(../images/weixin/jy.png);}
+
+#toolhycd{background-image: url(../images/weixin/hycd.png);}
+#toolpfdq{background-image: url(../images/weixin/pfdq.png);}
+#toolxmcs{background-image: url(../images/weixin/xmcs.png);}
+
+#tooljyfy{background-image: url(../images/weixin/jyfy.png);}
+#toolgsqm{background-image: url(../images/weixin/gsqm.png);}
+#toolyoulai{background-image: url(../images/weixin/youlai.png);}
+
+#toolth{background-image: url(../images/weixin/th.png);}
+#tooldl{background-image: url(../images/weixin/dl.png);}
+#toolyy{background-image: url(../images/weixin/yy.png);}
+#toolwhy{background-image: url(../images/weixin/why.png);}
+#toolyuyan{background-image: url(../images/weixin/yuyan.png);}
+#toolwjzm{background-image: url(../images/weixin/wjzm.png);}
+#toolhdx{background-image: url(../images/weixin/hdx.png);}
+
+
+#tooljhs{background-image: url(../images/weixin/jhs.png);}
+#tooltao{background-image: url(../images/weixin/tao.png);}
+#tooltttj{background-image: url(../images/weixin/tttj.png);}
+#tooljxx{background-image: url(../images/weixin/jxx.png);}
+#toolsf{background-image: url(../images/weixin/sf.png);}

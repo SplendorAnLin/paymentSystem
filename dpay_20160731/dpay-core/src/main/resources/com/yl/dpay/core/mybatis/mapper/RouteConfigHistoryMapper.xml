@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yl.dpay.core.mybatis.mapper.RouteConfigHistoryMapper">
+	<resultMap id="routeConfigHistoryMap" type="com.yl.dpay.core.entity.RouteConfigHistory">
+		<id property="id" column="ID"></id>
+		<result property="optimistic" column="OPTIMISTIC"></result>
+		<result property="createDate" column="CREATE_DATE"></result>
+		<result property="code" column="CODE"></result>
+		<result property="name" column="NAME"></result>
+		<result property="routeInfo" column="ROUTE_INFO"></result>
+		<result property="status" column="STATUS"></result>
+		<result property="oper" column="OPER"></result>
+	</resultMap>
+ 
+	<sql id="routeConfigHistoryColumns">
+		ID,OPTIMISTIC,CREATE_DATE,CODE,NAME,ROUTE_INFO,STATUS,OPER
+	</sql>
+
+	<insert id="insert" parameterType="com.yl.dpay.core.entity.RouteConfigHistory"
+		useGeneratedKeys="true" keyProperty="id">
+		INSERT INTO ROUTE_CONFIG_HISTORY (
+			OPTIMISTIC,CREATE_DATE,CODE,NAME,ROUTE_INFO,STATUS,OPER
+		)
+		VALUES (
+			#{optimistic},#{createDate},#{code},#{name},#{routeInfo},#{status},#{oper}
+		)
+	</insert>
+
+	<select id="findByCode" resultMap="routeConfigHistoryMap" parameterType="String">
+		SELECT
+		<include refid="routeConfigHistoryColumns" />
+		FROM ROUTE_CONFIG WHERE code = #{code}
+	</select>
+
+</mapper>

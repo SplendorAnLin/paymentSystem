@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yl.online.trade.dao.mapper.InterfacePolicyMapper">
+
+	<resultMap id="interfacePolicyMap" type="com.yl.online.model.model.InterfacePolicy">
+		<id 	property="id" 					column="ID"></id>
+		<result property="code" 				column="CODE"></result>
+		<result property="version" 				column="VERSION"></result>
+		<result property="createTime" 			column="CREATE_TIME"></result>
+		<result property="name" 				column="NAME"></result>
+		<result property="interfaceType" 		column="INTERFACE_TYPE"></result>
+		<result property="profiles" 			column="PROFILES"></result>
+		<result property="status" 				column="STATUS"></result>
+	</resultMap>
+
+	<sql id="interfacePolicyColumns">
+		ID,CODE,VERSION,CREATE_TIME,NAME,INTERFACE_TYPE,PROFILES,STATUS
+	</sql>
+
+	<insert id="createInterfacePolicy" parameterType="com.yl.online.model.model.InterfacePolicy"
+		useGeneratedKeys="true" keyProperty="id">
+		INSERT INTO INTERFACE_POLICY (
+		CODE,VERSION,CREATE_TIME,NAME,INTERFACE_TYPE,PROFILES,STATUS)
+		VALUES
+		(#{code},#{version},#{createTime},#{name},#{interfaceType},#{profiles},#{status})
+	</insert>
+
+	<select id="queryInterfacePolicyByCode" resultMap="interfacePolicyMap"
+		parameterType="Map">
+		SELECT
+		<include refid="interfacePolicyColumns" />
+		FROM INTERFACE_POLICY
+		WHERE CODE = #{code}
+	</select>
+	
+	<select id="queryInterfacePolicyByPage" resultMap="interfacePolicyMap">
+		SELECT
+		<include refid="interfacePolicyColumns" />
+		FROM INTERFACE_POLICY
+		ORDER BY ID DESC
+	</select>
+	
+	<update id="updateInterfacePolicy">
+		update INTERFACE_POLICY
+		set CODE = #{interfacePolicy.code},
+		NAME = #{interfacePolicy.name},
+		INTERFACE_TYPE = #{interfacePolicy.interfaceType},
+		PROFILES = #{interfacePolicy.profiles},
+		STATUS = #{interfacePolicy.status}
+		where id = #{interfacePolicy.id}
+	</update>
+	
+	<select id="queryInterfacePolicyByInterfaceType" resultMap="interfacePolicyMap" parameterType="Map">
+		SELECT
+		<include refid="interfacePolicyColumns" />
+		FROM INTERFACE_POLICY
+		WHERE INTERFACE_TYPE = #{interfaceType}
+		ORDER BY ID DESC
+	</select>
+	
+	<select id="queryInterfacePolicyBy" resultMap="interfacePolicyMap">
+		SELECT
+		<include refid="interfacePolicyColumns" />
+		FROM INTERFACE_POLICY
+		where code = #{params.code} and status = #{params.status}
+		ORDER BY ID DESC
+	</select>
+	
+	<select id="findAllInterfacePolicy" resultMap="interfacePolicyMap"
+		parameterType="Map">
+		SELECT 
+		   <include refid="interfacePolicyColumns" />
+		FROM
+		    INTERFACE_POLICY t 
+		<!--  查询条件 params page -->
+		WHERE 1 = 1
+		<if test="params.code != null and params.code !='' ">
+			AND t.CODE = #{params.code}
+		</if>
+		<if test="params.name != null and params.name !='' ">
+			AND t.NAME = #{params.name}
+		</if>
+		<if test="params.status != null and params.status !='' ">
+			AND t.status = #{params.status}
+		</if>
+		<if test="params.interfaceType != null and params.interfaceType !='' ">
+			AND t.INTERFACE_TYPE = #{params.interfaceType}
+		</if>
+		
+		<foreach collection="params.profiles" index="key"  item="interfacePolicyProfileBean" separator="">
+			<if test="interfacePolicyProfileBean!=null and interfacePolicyProfileBean!=''">
+	            <if test=" interfacePolicyProfileBean.cardType != null and interfacePolicyProfileBean.cardType !='' ">
+					  AND t.PROFILES  like CONCAT('%"cardType":"',#{interfacePolicyProfileBean.cardType},'"%' )
+				</if>
+				<if test="interfacePolicyProfileBean.interfaceProviderCode != null and interfacePolicyProfileBean.interfaceProviderCode !='' ">
+					  AND t.PROFILES  like CONCAT('%"interfaceProviderCode":"',#{interfacePolicyProfileBean.interfaceProviderCode},'"%' )
+				</if> 
+				<if test="interfacePolicyProfileBean.policyType != null and interfacePolicyProfileBean.policyType !='' ">
+					  AND t.PROFILES  like CONCAT('%"policyType":"',#{interfacePolicyProfileBean.policyType},'"%' )
+				</if>   
+			</if>
+        </foreach>
+		<if test="params.createStartTime != null and params.createStartTime !='' ">
+			and UNIX_TIMESTAMP(DATE_FORMAT(t.CREATE_TIME,'%Y-%m-%d')) &gt;=  #{params.createStartTime}
+		</if>
+		<if test="params.createEndTime != null and params.createEndTime !='' ">
+			and UNIX_TIMESTAMP(DATE_FORMAT(t.CREATE_TIME,'%Y-%m-%d')) &lt;=  #{params.createEndTime}
+		</if>
+		 
+		ORDER BY t.ID DESC
+	</select>
+
+    <select id="queryInterfacePolicyByCodes" resultMap="interfacePolicyMap"
+            parameterType="Map">
+        SELECT
+        <include refid="interfacePolicyColumns" />
+        FROM INTERFACE_POLICY
+        WHERE
+            CODE IN
+            <foreach item="item" index="index" collection="codes" open="("
+                     separator="," close=")">
+                #{item}
+            </foreach>
+    </select>
+
+</mapper> 

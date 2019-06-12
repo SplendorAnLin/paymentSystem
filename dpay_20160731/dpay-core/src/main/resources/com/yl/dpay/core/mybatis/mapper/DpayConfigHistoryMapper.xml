@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yl.dpay.core.mybatis.mapper.DpayConfigHistoryMapper">
+	<resultMap id="dpayConfigHistoryMap" type="com.yl.dpay.core.entity.DpayConfigHistory">
+		<id property="id" column="ID"></id>
+		<result property="optimistic" column="OPTIMISTIC"></result>
+		<result property="createDate" column="CREATE_DATE"></result>
+		<result property="remitType"  column="REMIT_TYPE"></result>
+		<result property="minAmount"  column="MIN_AMOUNT"></result>
+		<result property="maxAmount"  column="MAX_AMOUNT"></result>
+		<result property="auditAmount"  column="AUDIT_AMOUNT"></result>
+		<result property="reRemitFlag"  column="REREMIT_FLAG"></result>
+		<result property="startTime"  column="START_TIME"></result>
+		<result property="endTime"  column="END_TIME"></result>
+		<result property="holidayStatus"  column="HOLIDAY_STATUS"></result>
+		<result property="status" column="STATUS"></result>
+		<result property="oper" column="OPER"></result>
+	</resultMap>
+ 
+	<sql id="dpayConfigHistoryColumns">
+		ID,OPTIMISTIC,CREATE_DATE,REMIT_TYPE,MIN_AMOUNT,MAX_AMOUNT,AUDIT_AMOUNT,REREMIT_FLAG,START_TIME,END_TIME,
+		HOLIDAY_STATUS,STATUS,OPER
+	</sql>
+
+	<insert id="insert" parameterType="com.yl.dpay.core.entity.DpayConfigHistory"
+		useGeneratedKeys="true" keyProperty="id">
+		INSERT INTO DPAY_CONFIG_HISTORY (
+			OPTIMISTIC,CREATE_DATE,REMIT_TYPE,MIN_AMOUNT,MAX_AMOUNT,AUDIT_AMOUNT,REREMIT_FLAG,START_TIME,END_TIME,
+			HOLIDAY_STATUS,STATUS,OPER
+		)
+		VALUES (
+			#{optimistic},#{createDate},#{remitType},#{minAmount},#{maxAmount},#{auditAmount},#{reRemitFlag},#{startTime},
+			#{endTime},#{holidayStatus},#{status},#{oper}
+		)
+	</insert>
+
+</mapper>

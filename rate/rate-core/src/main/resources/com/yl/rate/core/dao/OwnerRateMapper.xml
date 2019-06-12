@@ -1,0 +1,227 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.yl.rate.core.dao.OwnerRateMapper">
+    <!--auto generated Code-->
+    <resultMap id="BaseResultMap" type="com.yl.rate.core.entity.OwnerRate">
+        <result column="owner_role" property="ownerRole" jdbcType="VARCHAR"/>
+        <result column="owner_id" property="ownerId" jdbcType="VARCHAR"/>
+        <result column="owner_rate_type" property="ownerRateType" jdbcType="VARCHAR"/>
+        <result column="rate_code" property="rateCode" jdbcType="VARCHAR"/>
+        <result column="status" property="status" jdbcType="VARCHAR"/>
+        <result column="fee_type" property="feeType" jdbcType="VARCHAR"/>
+        <result column="product_type" property="productType" jdbcType="VARCHAR"/>
+        <result column="product_code" property="productCode" jdbcType="VARCHAR"/>
+        <result column="remarks" property="remarks" jdbcType="VARCHAR"/>
+        <result column="last_updated_time" property="lastUpdatedTime"/>
+        <result column="id" property="id" jdbcType="BIGINT"/>
+        <result column="code" property="code" jdbcType="VARCHAR"/>
+        <result column="create_time" property="createTime"/>
+    </resultMap>
+
+    <!--auto generated Code-->
+    <sql id="Base_Column_List">
+        owner_role,
+        owner_id,
+        owner_rate_type,
+        rate_code,
+        status,
+        fee_type,
+        product_type,
+        product_code,
+        id,
+        code,
+        create_time,
+        remarks,
+        last_updated_time
+    </sql>
+
+    <!--auto generated Code-->
+    <insert id="insert" useGeneratedKeys="true" keyProperty="ownerRate.id">
+        INSERT INTO owner_rate (
+            owner_role,
+            owner_id,
+            owner_rate_type,
+            rate_code,
+            status,
+            fee_type,
+            product_type,
+            product_code,
+            id,
+            code,
+            create_time,
+            remarks,
+            last_updated_time
+        ) VALUES (
+            #{ownerRate.ownerRole,jdbcType=VARCHAR},
+            #{ownerRate.ownerId,jdbcType=VARCHAR},
+            #{ownerRate.ownerRateType,jdbcType=VARCHAR},
+            #{ownerRate.rateCode,jdbcType=VARCHAR},
+            #{ownerRate.status,jdbcType=VARCHAR},
+            #{ownerRate.feeType,jdbcType=VARCHAR},
+            #{ownerRate.productType,jdbcType=VARCHAR},
+            #{ownerRate.productCode,jdbcType=VARCHAR},
+            #{ownerRate.id,jdbcType=BIGINT},
+            #{ownerRate.code,jdbcType=VARCHAR},
+            #{ownerRate.createTime},
+            #{ownerRate.remarks,jdbcType=VARCHAR},
+            #{ownerRate.lastUpdatedTime}
+        )
+    </insert>
+
+    <!--auto generated Code-->
+    <insert id="insertSelective" useGeneratedKeys="true" keyProperty="ownerRate.id">
+        INSERT INTO owner_rate
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="ownerRate.ownerRole!=null"> owner_role,</if>
+            <if test="ownerRate.ownerId!=null"> owner_id,</if>
+            <if test="ownerRate.ownerRateType!=null"> owner_rate_type,</if>
+            <if test="ownerRate.rateCode!=null"> rate_code,</if>
+            <if test="ownerRate.status!=null"> status,</if>
+            <if test="ownerRate.feeType!=null"> fee_type,</if>
+            <if test="ownerRate.productType!=null"> product_type,</if>
+            <if test="ownerRate.productCode!=null"> product_code,</if>
+            <if test="ownerRate.id!=null"> id,</if>
+            <if test="ownerRate.code!=null"> code,</if>
+            <if test="ownerRate.createTime!=null"> create_time,</if>
+            <if test="ownerRate.remarks!=null"> remarks,</if>
+            <if test="ownerRate.lastUpdatedTime!=null"> last_updated_time,</if>
+        </trim>
+        VALUES
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="ownerRate.ownerRole!=null">#{ownerRate.ownerRole,jdbcType=VARCHAR},
+            </if>
+            <if test="ownerRate.ownerId!=null">#{ownerRate.ownerId,jdbcType=VARCHAR},
+            </if>
+            <if test="ownerRate.ownerRateType!=null">#{ownerRate.ownerRateType,jdbcType=VARCHAR},
+            </if>
+            <if test="ownerRate.rateCode!=null">#{ownerRate.rateCode,jdbcType=VARCHAR},
+            </if>
+            <if test="ownerRate.status!=null">#{ownerRate.status,jdbcType=VARCHAR},
+            </if>
+            <if test="ownerRate.feeType!=null">#{ownerRate.feeType,jdbcType=VARCHAR},
+            </if>
+            <if test="ownerRate.productType!=null">#{ownerRate.productType,jdbcType=VARCHAR},
+            </if>
+            <if test="ownerRate.productCode!=null">#{ownerRate.productCode,jdbcType=VARCHAR},
+            </if>
+            <if test="ownerRate.id!=null">#{ownerRate.id,jdbcType=BIGINT},
+            </if>
+            <if test="ownerRate.code!=null">#{ownerRate.code,jdbcType=VARCHAR},
+            </if>
+            <if test="ownerRate.createTime!=null">#{ownerRate.createTime},
+            </if>
+            <if test="ownerRate.remarks!=null">#{ownerRate.remarks,jdbcType=VARCHAR},
+            </if>
+            <if test="ownerRate.lastUpdatedTime!=null">#{ownerRate.lastUpdatedTime},
+            </if>
+        </trim>
+    </insert>
+
+    <!--auto generated Code-->
+    <insert id="insertList">
+        INSERT INTO owner_rate (
+        <include refid="Base_Column_List"/>
+        )VALUES
+        <foreach collection="ownerRates" item="ownerRate" index="index" separator=",">
+            (
+            #{ownerRate.ownerRole,jdbcType=VARCHAR},
+            #{ownerRate.ownerId,jdbcType=VARCHAR},
+            #{ownerRate.ownerRateType,jdbcType=VARCHAR},
+            #{ownerRate.rateCode,jdbcType=VARCHAR},
+            #{ownerRate.status,jdbcType=VARCHAR},
+            #{ownerRate.feeType,jdbcType=VARCHAR},
+            #{ownerRate.productType,jdbcType=VARCHAR},
+            #{ownerRate.productCode,jdbcType=VARCHAR},
+            #{ownerRate.id,jdbcType=BIGINT},
+            #{ownerRate.code,jdbcType=VARCHAR},
+            #{ownerRate.createTime,jdbcType=DATE},
+            #{ownerRate.remarks,jdbcType=VARCHAR},
+            #{ownerRate.lastUpdatedTime}
+            )
+        </foreach>
+    </insert>
+
+    <!--auto generated Code-->
+    <update id="update">
+        UPDATE owner_rate
+        <set>
+            <if test="ownerRate.ownerRole != null"> owner_role= #{ownerRate.ownerRole,jdbcType=VARCHAR},</if>
+            <if test="ownerRate.ownerId != null"> owner_id= #{ownerRate.ownerId,jdbcType=VARCHAR},</if>
+            <if test="ownerRate.ownerRateType != null"> owner_rate_type= #{ownerRate.ownerRateType,jdbcType=VARCHAR},</if>
+            <if test="ownerRate.rateCode != null"> rate_code= #{ownerRate.rateCode,jdbcType=VARCHAR},</if>
+            <if test="ownerRate.status != null"> status= #{ownerRate.status,jdbcType=VARCHAR},</if>
+            <if test="ownerRate.feeType != null"> fee_type= #{ownerRate.feeType,jdbcType=VARCHAR},</if>
+            <if test="ownerRate.productType != null"> product_type= #{ownerRate.productType,jdbcType=VARCHAR},</if>
+            product_code= #{ownerRate.productCode,jdbcType=VARCHAR},
+            <if test="ownerRate.id != null"> id= #{ownerRate.id,jdbcType=BIGINT},</if>
+            <if test="ownerRate.code != null"> code= #{ownerRate.code,jdbcType=VARCHAR},</if>
+            <if test="ownerRate.createTime != null"> create_time= #{ownerRate.createTime},</if>
+            <if test="ownerRate.remarks != null"> remarks= #{ownerRate.remarks,jdbcType=VARCHAR},</if>
+            <if test="ownerRate.lastUpdatedTime != null"> last_updated_time= #{ownerRate.lastUpdatedTime}</if>
+        </set>
+        WHERE id = #{ownerRate.id,jdbcType=BIGINT}
+    </update>
+
+    <select id="queryByOwnerId" resultMap="BaseResultMap">
+      SELECT
+        <include refid="Base_Column_List" />
+      FROM owner_rate WHERE fee_type = 'PRODUCT'
+        AND  owner_role= #{ownerRole,jdbcType=VARCHAR}
+        AND  owner_id= #{ownerId,jdbcType=VARCHAR}
+        AND  product_type= #{productType,jdbcType=VARCHAR}
+    </select>
+
+    <select id="queryByOwnerIdAndProductCode" resultMap="BaseResultMap">
+        SELECT
+        <include refid="Base_Column_List" />
+        FROM owner_rate WHERE fee_type = 'CHANNEL'
+        AND owner_role= #{ownerRole,jdbcType=VARCHAR}
+        AND owner_id= #{ownerId,jdbcType=VARCHAR}
+        AND product_type= #{productType,jdbcType=VARCHAR}
+        AND product_code= #{productCode,jdbcType=VARCHAR}
+    </select>
+
+    <select id="queryByCode" resultMap="BaseResultMap">
+        SELECT
+        <include refid="Base_Column_List" />
+        FROM owner_rate
+        WHERE code = #{code,jdbcType=VARCHAR}
+    </select>
+
+    <select id="findAllFeeConfig" parameterType="Map" resultType="java.util.HashMap">
+        SELECT
+        o.owner_role,
+        o.owner_id,
+        o.owner_rate_type,
+        o.rate_code,
+        o.status,
+        o.fee_type,
+        o.product_type,
+        o.product_code,
+        o.id,
+        o.code,
+        o.create_time,
+        o.remarks,
+        o.last_updated_time,
+        r.`name`
+        FROM owner_rate o
+        LEFT JOIN rate_template r ON o.rate_code = r.`code`
+        WHERE 1 = 1
+        <if test="params.ownerId != null and params.ownerId !='' ">
+            AND owner_id = #{params.ownerId,jdbcType=VARCHAR}
+        </if>
+        <if test="params.ownerRole != null and params.ownerRole !='' ">
+            AND owner_role = #{params.ownerRole,jdbcType=VARCHAR}
+        </if>
+        <if test="params.feeType != null and params.feeType !='' ">
+            AND fee_type = #{params.feeType,jdbcType=VARCHAR}
+        </if>
+        <if test="params.productType != null and params.productType !='' ">
+            AND product_type = #{params.productType,jdbcType=VARCHAR}
+        </if>
+        <if test="params.status != null and params.status !='' ">
+            AND status = #{params.status,jdbcType=VARCHAR}
+        </if>
+        ORDER BY id DESC
+    </select>
+</mapper>

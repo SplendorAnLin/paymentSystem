@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN"         ":/spring-beans.dtd">
+<beans default-autowire="byName">
+	<bean name="/custOperInterface" class="org.springframework.remoting.caucho.HessianServiceExporter">   
+		<property name="service">
+			<ref bean="custOperInterface"/>
+		</property>   
+		<property name="serviceInterface">
+			<value>com.yl.customer.api.interfaces.CustOperInterface</value>
+		</property>
+	</bean>
+	<bean name="/custMenuInterface" class="org.springframework.remoting.caucho.HessianServiceExporter">   
+		<property name="service">
+			<ref bean="custMenuInterface"/>
+		</property>   
+		<property name="serviceInterface">
+			<value>com.yl.customer.api.interfaces.CustMenuInterface</value>
+		</property>
+	</bean>
+	<bean name="/custFacade" class="org.springframework.remoting.caucho.HessianServiceExporter">   
+		<property name="service">
+			<ref bean="custFacade"/>
+		</property>   
+		<property name="serviceInterface">
+			<value>com.yl.customer.api.interfaces.CustFacade</value>
+		</property>
+	</bean>
+		<bean name="/custFunctionInterface" class="org.springframework.remoting.caucho.HessianServiceExporter">   
+		<property name="service">
+			<ref bean="custFunctionInterface"/>
+		</property>   
+		<property name="serviceInterface">
+			<value>com.yl.customer.api.interfaces.CustFunctionInterface</value>
+		</property>
+	</bean>
+</beans>

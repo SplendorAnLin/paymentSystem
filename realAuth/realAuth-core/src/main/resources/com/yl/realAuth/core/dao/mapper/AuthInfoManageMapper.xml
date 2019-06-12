@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yl.realAuth.core.dao.mapper.AuthInfoManageMapper">
+	<resultMap id="identityInfoResultMap" type="com.yl.realAuth.model.IdentityInfo">
+		<id column="ID" 					property="id" />
+		<result column="CODE"  				property="code" />
+		<result column="VERSION" 		    property="version" />
+		<result column="CREATE_TIME" 		property="createTime" />
+		<result column="PAYER_NAME" 		property="payerName" />
+		<result column="CERT_NO" 		property="certNo" />
+		<result column="CERT_NO_ENCRYPT" 		property="certNoEncrypt" />
+		<result column="LAST_UPDATE_TIME" 		property="lastUpdateTime" />
+	</resultMap>
+	<sql id="identityInfo_Column_List">
+		ID,CODE,VERSION,CREATE_TIME,PAYER_NAME,CERT_NO,CERT_NO_ENCRYPT,LAST_UPDATE_TIME
+	</sql>
+	
+	<resultMap id="bindCardInfoResultMap" type="com.yl.realAuth.model.BindCardInfo">
+		<id column="ID" 					property="id" />
+		<result column="CODE"  				property="code" />
+		<result column="VERSION" 		    property="version" />
+		<result column="CREATE_TIME" 		property="createTime" />
+		<result column="PAYER_NAME" 		property="payerName" />
+		<result column="CERT_NO" 		property="certNo" />
+		<result column="CERT_NO_ENCRYPT" 		property="certNoEncrypt" />
+		<result column="PAYER_MOB_NO" 		property="payerMobNo" />
+		<result column="BANK_CARD_NO" 		property="bankCardNo" />
+		<result column="BANK_CARD_NO_ENCRYPT" 		property="bankCardNoEncrypt" />
+		<result column="LAST_UPDATE_TIME" 		property="lastUpdateTime" />
+	</resultMap>
+	<sql id="bindCardInfo_Column_List">
+		ID,CODE,VERSION,CREATE_TIME,PAYER_NAME,CERT_NO,CERT_NO_ENCRYPT,PAYER_MOB_NO,
+		BANK_CARD_NO,BANK_CARD_NO_ENCRYPT,LAST_UPDATE_TIME
+	</sql>
+	
+	<select id="queryByCertNoEncrypt" parameterType="String" resultMap="identityInfoResultMap">
+		SELECT 
+		<include refid="identityInfo_Column_List" />
+		FROM IDENTITY_INFO 
+	   WHERE CERT_NO_ENCRYPT = #{certNoEncrypt}
+	</select>
+	
+	<insert id="insertAuthOrderByIdentity" parameterType="com.yl.realAuth.model.IdentityInfo" useGeneratedKeys="true" keyProperty="id">
+		INSERT INTO IDENTITY_INFO (
+			CODE,VERSION,CREATE_TIME,PAYER_NAME,CERT_NO,CERT_NO_ENCRYPT,LAST_UPDATE_TIME
+		) VALUES (
+			#{code},#{version},#{createTime},#{payerName},#{certNo},#{certNoEncrypt},#{lastUpdateTime}
+		)
+	</insert>
+	<insert id="insertAuthOrderByBind" parameterType="com.yl.realAuth.model.BindCardInfo" useGeneratedKeys="true" keyProperty="id">
+		INSERT INTO BIND_CARD_INFO (
+			CODE,VERSION,CREATE_TIME,PAYER_NAME,CERT_NO,CERT_NO_ENCRYPT,PAYER_MOB_NO,
+			BANK_CARD_NO,BANK_CARD_NO_ENCRYPT,LAST_UPDATE_TIME
+		) VALUES (
+			#{code},#{version},#{createTime},#{payerName},#{certNo},#{certNoEncrypt},#{payerMobNo},
+			#{bankCardNo},#{bankCardNoEncrypt},#{lastUpdateTime}
+		)
+	</insert>
+	
+	<update id="updateBindCardInfo" parameterType="com.yl.realAuth.model.BindCardInfo">
+		UPDATE BIND_CARD_INFO
+		set CERT_NO = #{certNo},
+		    CERT_NO_ENCRYPT = #{certNoEncrypt},
+		    PAYER_MOB_NO = #{payerMobNo},
+		    PAYER_NAME = #{payerName},
+		    LAST_UPDATE_TIME = #{lastUpdateTime}
+		WHERE CODE = #{code}
+	</update>
+	<update id="updateIdentityInfo" parameterType="com.yl.realAuth.model.IdentityInfo">
+		UPDATE IDENTITY_INFO
+		set PAYER_NAME = #{payerName},
+		    LAST_UPDATE_TIME = #{lastUpdateTime}
+		WHERE CODE = #{code}
+	</update>
+	
+	<select id="queryBy" parameterType="Map" resultMap="bindCardInfoResultMap">
+		SELECT 
+		<include refid="identityInfo_Column_List" />
+		FROM BIND_CARD_INFO
+	 	WHERE CERT_NO_ENCRYPT = #{certNo}
+	 	AND PAYER_NAME = #{payerName}
+	 	AND BANK_CARD_NO_ENCRYPT = #{bankCardNo}
+	 	<if test="payerMobNo != null and payerMobNo !='' ">
+	 	AND PAYER_MOB_NO = #{payerMobNo}
+	 	</if>
+	</select>
+	
+</mapper>

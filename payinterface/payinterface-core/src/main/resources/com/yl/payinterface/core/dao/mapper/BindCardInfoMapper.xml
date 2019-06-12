@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yl.payinterface.core.dao.mapper.BindCardInfoMapper">
+
+	<resultMap id="bindCardInfo" type="com.yl.payinterface.core.model.BindCardInfo">
+		<id 	property="id" 					column="ID"></id>
+		<result property="code" 				column="CODE"></result>
+		<result property="version" 				column="VERSION"></result>
+		<result property="createTime" 			column="CREATE_TIME"></result>
+		<result property="interfaceInfoCode" 	column="INTERFACE_INFO_CODE"></result>
+		<result property="token" 			column="TOKEN"></result>
+		<result property="cardNo" 			column="CARD_NO"></result>
+		<result property="remark" 			column="REMARK"></result>
+		<result property="status" 			column="STATUS"></result>
+		<result property="cvv" 				column="CVV"></result>
+		<result property="validityYear" 	column="VALIDITY_YEAR"></result>
+		<result property="validityMonth" 	column="VALIDITY_MONTH"></result>
+		<result property="effectiveDate" 	column="EFFECTIVE_DATE"></result>
+		<result property="expiryDate" 		column="EXPIRY_DATE"></result>
+	</resultMap>
+
+
+	<sql id="commonSql">
+		ID,CODE,VERSION,CREATE_TIME,INTERFACE_INFO_CODE,TOKEN,CARD_NO,REMARK,STATUS,EXPIRY_DATE,EFFECTIVE_DATE,CVV,VALIDITY_MONTH,VALIDITY_YEAR
+	</sql>
+
+
+	<insert id="save" parameterType="com.yl.payinterface.core.model.BindCardInfo"
+		useGeneratedKeys="true" keyProperty="id">
+		INSERT INTO BIND_CARD_INFO (CODE,VERSION,CREATE_TIME,INTERFACE_INFO_CODE,TOKEN,CARD_NO,REMARK,STATUS,EFFECTIVE_DATE,EXPIRY_DATE,CVV,VALIDITY_MONTH,VALIDITY_YEAR)
+		VALUES
+		(#{code},#{version},#{createTime},#{interfaceInfoCode},#{token},#{cardNo},#{remark},#{status},#{effectiveDate},#{expiryDate},#{cvv},#{validityMonth},#{validityYear})
+	</insert>
+	
+	<update id="update" parameterType="com.yl.payinterface.core.model.BindCardInfo">
+		UPDATE BIND_CARD_INFO 
+		   SET TOKEN = #{token},
+		   STATUS = #{status},
+		   EFFECTIVE_DATE = #{effectiveDate},
+		   EXPIRY_DATE = #{expiryDate},
+		   CVV = #{cvv},
+		   VALIDITY_MONTH = #{validityMonth},
+		   VALIDITY_YEAR = #{validityYear}
+		WHERE CODE = #{code}
+	</update>
+	<update id="updateFailed" parameterType="com.yl.payinterface.core.model.BindCardInfo">
+		UPDATE BIND_CARD_INFO 
+		   SET STATUS = 'FAILED'
+		 WHERE CARD_NO = #{cardNo}
+		   AND INTERFACE_INFO_CODE = #{interfaceInfoCode}
+	</update>
+	
+	<select id="find" resultMap="bindCardInfo" parameterType="java.lang.String">
+		SELECT
+		<include refid="commonSql" />
+		FROM BIND_CARD_INFO
+	   WHERE CARD_NO = #{cardNo}
+		 AND INTERFACE_INFO_CODE = #{interfaceInfoCode}
+	</select>
+	
+	<select id="findEffective" resultMap="bindCardInfo" parameterType="java.lang.String">
+		SELECT
+		<include refid="commonSql" />
+		FROM BIND_CARD_INFO
+	   WHERE CARD_NO = #{cardNo}
+		 AND INTERFACE_INFO_CODE = #{interfaceInfoCode}
+		 AND STATUS = 'SUCCESS'
+		 AND EFFECTIVE_DATE &lt; SYSDATE()
+		 AND EXPIRY_DATE &gt; SYSDATE()
+	</select>
+
+
+</mapper> 

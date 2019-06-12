@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" ":/spring-beans.dtd">
+
+<beans default-autowire="byName">
+
+	<bean id="bankAction" class="com.yl.customer.action.BankAction" singleton="false"></bean>
+	<bean id="accountAction" class="com.yl.customer.action.AccountAction" singleton="false"></bean>
+	<bean id="welcomeAction" class="com.yl.customer.action.WelcomeAction" singleton="false"></bean>
+	
+	<!-- 公告 -->
+	<bean id="bulletinAction" class="com.yl.customer.action.BulletinAction" singleton="false"></bean>
+	<bean id="bulletinService" class="com.yl.customer.service.impl.BulletinServiceImpl"></bean>
+	<!-- 收款人 -->
+	<bean id="payeeAction" class="com.yl.customer.action.PayeeAction" singleton="false"></bean>
+	<!-- <bean id="bulletinDao" class="com.pay.boss.dao.impl.BulletinDaoImpl"></bean>
+	<bean id="bulletinReadDao" class="com.pay.boss.dao.impl.BulletinReadDaoImpl"></bean>
+	 -->
+	<bean id="roleAction" class="com.yl.customer.action.RoleAction" singleton="false"></bean>
+	
+	<bean id="onlineAction" class="com.yl.customer.action.OnlineAction" singleton="false"></bean>
+	<bean id="customerInfoAction" class="com.yl.customer.action.CustomerInfoAction" singleton="false"></bean>	
+</beans>
+

@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+	http://www.springframework.org/schema/beans/spring-beans-4.0.xsd"
+	default-autowire="byName">
+
+	<!-- 补单定时任务 -->
+    <bean id="autoOutterReverseTask" class="com.yl.payinterface.core.task.AutoOutterReverseJob"></bean>
+
+    <bean id="autoOutterReverseTaskJob" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject" ref="autoOutterReverseTask"/>
+		<property name="targetMethod" value="execute"/>
+		<property name="concurrent" value="false"/>
+	</bean>
+	<bean id="autoOutterReverseTaskTrigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+		<property name="jobDetail" ref="autoOutterReverseTaskJob"/>
+		<property name="cronExpression" value="0 0/10 * * * ? *"/>
+	</bean>
+	
+	<!-- 条码补单定时任务 -->
+    <bean id="autoOutterMicropayReverseTask" class="com.yl.payinterface.core.task.AutoOutterMicropayReverseJob"></bean>
+
+    <bean id="autoOutterMicropayReverseTaskJob" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject" ref="autoOutterMicropayReverseTask"/>
+		<property name="targetMethod" value="execute"/>
+		<property name="concurrent" value="false"/>
+	</bean>
+	<bean id="autoOutterMicropayReverseTaskTrigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+		<property name="jobDetail" ref="autoOutterMicropayReverseTaskJob"/>
+		<property name="cronExpression" value="0 0/1 * * * ? "/>
+	</bean>
+	
+	<!-- 对账定时任务 -->
+    <bean id="channelRecionTask" class="com.yl.payinterface.core.task.ChannelRecionTask"></bean>
+
+    <bean id="channelRecionTaskJob" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject" ref="channelRecionTask"/>
+		<property name="targetMethod" value="execute"/>
+		<property name="concurrent" value="false"/>
+	</bean>
+	<bean id="channelRecionTaskTrigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+		<property name="jobDetail" ref="channelRecionTaskJob"/>
+		<property name="cronExpression" value="0 0 7 * * ? *"/>
+	</bean>
+	
+	<!-- 接口对账文件生成定时任务 -->
+	<bean id="interfaceReconTask" class="com.yl.payinterface.core.task.InterfaceReconDayJob"></bean>
+	
+	<bean id="interfaceReconTaskJob" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject" ref="interfaceReconTask"/>
+		<property name="targetMethod" value="execute"/>
+		<property name="concurrent" value="false"/>
+	</bean>
+	<bean id="interfaceReconTaskTrigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+		<property name="jobDetail" ref="interfaceReconTaskJob"/>
+		<property name="cronExpression" value="0 15 1 * * ? "/>
+	</bean>
+	
+	<!-- 接口通道扫描 -->
+    <bean id="aisleMonitorTask" class="com.yl.payinterface.core.task.AisleMonitorJob"></bean>
+
+    <bean id="aisleMonitorTaskJob" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject" ref="aisleMonitorTask"/>
+		<property name="targetMethod" value="execute"/>
+		<property name="concurrent" value="false"/>
+	</bean>
+	<bean id="aisleMonitorTaskTaskTrigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+		<property name="jobDetail" ref="aisleMonitorTaskJob"/>
+		<property name="cronExpression" value="0 0/10 * * * ? *"/>
+	</bean>
+
+	<!-- 支付宝对账单 -->
+	<bean id="aliPayCollectionCodeTask" class="com.yl.payinterface.core.task.AliPayCollectionCodeTask"></bean>
+
+	<bean id="aliPayCollectionCodeTaskJob" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject" ref="aliPayCollectionCodeTask"/>
+		<property name="targetMethod" value="execute"/>
+		<property name="concurrent" value="false"/>
+	</bean>
+
+	<bean id="aliPayCollectionCodeTaskTrigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+		<property name="jobDetail" ref="aliPayCollectionCodeTaskJob"/>
+		<property name="cronExpression" value="0/10 * * * * ? "/>
+	</bean>
+
+	<!-- 总控制器 -->
+	<bean id="startQuertz" lazy-init="false" autowire="no" class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
+		<property name="triggers">
+			<list>
+				<ref bean="autoOutterReverseTaskTrigger"/>
+				<!--<ref bean="channelRecionTaskTrigger"/>-->
+                <!--<ref bean="autoOutterMicropayReverseTaskTrigger"/>-->
+				<!--<ref bean="interfaceReconTaskTrigger"/>-->
+				<!--<ref bean="aisleMonitorTaskTaskTrigger"/>-->
+				<ref bean="aliPayCollectionCodeTaskTrigger"/>
+			</list>
+		</property>
+	</bean>
+</beans>

@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.yl.rate.core.dao.RateTemplateMapper">
+    <!--auto generated Code-->
+    <resultMap id="BaseResultMap" type="com.yl.rate.core.entity.RateTemplate">
+        <result column="name" property="name" jdbcType="VARCHAR"/>
+        <result column="status" property="status" jdbcType="VARCHAR"/>
+        <result column="rate_code" property="rateCode" jdbcType="VARCHAR"/>
+        <result column="default_rate" property="defaultRate" jdbcType="VARCHAR"/>
+        <result column="product_type" property="productType" jdbcType="VARCHAR"/>
+        <result column="owner_role" property="ownerRole" jdbcType="VARCHAR"/>
+        <result column="id" property="id" jdbcType="BIGINT"/>
+        <result column="code" property="code" jdbcType="VARCHAR"/>
+        <result column="create_time" property="createTime"/>
+        <result column="update_time" property="updateTime"/>
+        <result column="remarks" property="remarks" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <!--auto generated Code-->
+    <sql id="Base_Column_List">
+        name,
+        status,
+        rate_code,
+        default_rate,
+        product_type,
+        owner_role,
+        id,
+        code,
+        create_time,
+        update_time,
+        remarks
+    </sql>
+
+    <!--auto generated Code-->
+    <insert id="insert" useGeneratedKeys="true" keyProperty="rateTemplate.id">
+        INSERT INTO rate_template (
+            name,
+            status,
+            rate_code,
+            default_rate,
+            product_type,
+            owner_role,
+            id,
+            code,
+            create_time,
+            update_time,
+            remarks
+        ) VALUES (
+            #{rateTemplate.name,jdbcType=VARCHAR},
+            #{rateTemplate.status,jdbcType=VARCHAR},
+            #{rateTemplate.rateCode,jdbcType=VARCHAR},
+            #{rateTemplate.defaultRate,jdbcType=VARCHAR},
+            #{rateTemplate.productType,jdbcType=VARCHAR},
+            #{rateTemplate.ownerRole,jdbcType=VARCHAR},
+            #{rateTemplate.id,jdbcType=BIGINT},
+            #{rateTemplate.code,jdbcType=VARCHAR},
+            #{rateTemplate.createTime},
+            #{rateTemplate.updateTime},
+            #{rateTemplate.remarks,jdbcType=VARCHAR}
+        )
+    </insert>
+
+    <select id="queryRateTemplate" resultMap="BaseResultMap">
+      SELECT
+        <include refid="Base_Column_List" />
+      FROM rate_template
+      WHERE code = #{code}
+        AND product_type = #{productType}
+    </select>
+    <select id="queryDefaultRateTemplate" resultMap="BaseResultMap">
+      SELECT
+        <include refid="Base_Column_List" />
+      FROM rate_template
+      WHERE product_type = #{productType}
+        AND owner_role = #{ownerRole}
+    </select>
+
+    <select id="findAllRateTemplate" resultMap="BaseResultMap" parameterType="java.util.Map">
+      SELECT
+        <include refid="Base_Column_List" />
+      FROM rate_template
+      WHERE 1 = 1
+      <if test="params.code != null and params.code != '' ">
+          AND code = #{params.code}
+      </if>
+      <if test="params.name != null and params.name != '' ">
+          AND name = #{params.name}
+      </if>
+      <if test="params.ownerRole != null and params.ownerRole != '' ">
+          AND owner_role = #{params.ownerRole}
+      </if>
+      <if test="params.productType != null and params.productType != '' ">
+          AND product_type = #{params.productType}
+      </if>
+      <if test="params.defaultRate != null and params.defaultRate != '' ">
+          AND default_rate = #{params.defaultRate}
+      </if>
+      <if test="params.status != null and params.status != '' ">
+          AND status = #{params.status}
+      </if>
+      <if test="params.createTimeStart != null and params.createTimeStart != '' ">
+          AND create_time &gt;= #{params.createTimeStart}
+      </if>
+      <if test="params.createTimeEnd != null and params.createTimeEnd != '' ">
+          AND create_time &lt;= #{params.createTimeEnd}
+      </if>
+      <if test="params.updateTimeStart != null and params.updateTimeStart != '' ">
+          AND update_time &gt;= #{params.updateTimeStart}
+      </if>
+      <if test="params.updateTimeEnd != null and params.updateTimeEnd != '' ">
+          AND update_time &lt;= #{params.updateTimeEnd}
+      </if>
+      ORDER BY create_time DESC
+    </select>
+
+    <select id="checkRateByCode" resultType="java.lang.Integer" parameterType="java.lang.String">
+        SELECT COUNT(1) FROM rate_template WHERE code = #{code}
+    </select>
+
+    <select id="queryRateTemplateDetails" resultMap="BaseResultMap" parameterType="java.lang.String">
+        SELECT
+        <include refid="Base_Column_List" />
+        FROM rate_template
+        WHERE code = #{code}
+    </select>
+
+    <select id="getTemplateInfo" resultType="java.util.HashMap" parameterType="java.lang.String">
+        SELECT name AS label, code AS value
+        FROM rate_template
+        WHERE owner_role = #{ownerRole}
+        AND status = 'TRUE'
+        AND product_type = #{productType}
+        ORDER BY id
+    </select>
+
+    <update id="update">
+        UPDATE rate_template
+        <set>
+            <if test="rateTemplate.name != null"> name= #{rateTemplate.name},</if>
+            <if test="rateTemplate.status != null"> status= #{rateTemplate.status},</if>
+            <if test="rateTemplate.rateCode != null"> rate_code= #{rateTemplate.rateCode},</if>
+            <if test="rateTemplate.defaultRate != null"> default_rate= #{rateTemplate.defaultRate},</if>
+            <if test="rateTemplate.productType != null"> product_type= #{rateTemplate.productType},</if>
+            <if test="rateTemplate.ownerRole != null"> owner_role= #{rateTemplate.ownerRole},</if>
+            <if test="rateTemplate.remarks != null"> remarks = #{rateTemplate.remarks},</if>
+            <if test="rateTemplate.updateTime != null"> update_time = #{rateTemplate.updateTime}</if>
+        </set>
+        WHERE code = #{rateTemplate.code}
+    </update>
+
+    <select id="checkDefaultRate" resultType="java.lang.Integer" parameterType="java.lang.String">
+        SELECT COUNT(1) FROM rate_template WHERE product_type = #{productType} AND owner_role = #{ownerRole} AND default_rate = 'TRUE'
+    </select>
+
+    <update id="defaultRateUpdate">
+        UPDATE rate_template
+        SET
+        status = #{status}
+        WHERE product_type = #{productType} AND owner_role = #{ownerRole}
+    </update>
+
+</mapper>
+

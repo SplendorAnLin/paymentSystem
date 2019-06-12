@@ -1,0 +1,190 @@
+.head .inner:after{content: "\200B";display: block;height: 0;clear: both;}
+.head .inner.wrp{width: 1200px;margin-left: auto;margin-right: auto}
+.head .inner{*zoom:1; height: 70px;}
+	.headbox{position: relative;background-color: #fff;border-top: 4px solid #55a7e3;border-bottom: 1px solid #d9dadc}
+		.logo{float: left;padding-top: 5px;font-size: 24px}
+		.logo a{display: block;width: 248px;height: 60px;overflow: hidden;text-decoration: none; *line-height:120px}
+		
+	
+		.headRight{padding-top:10px;}
+		.headRight .hrNav{font-size:14px; padding-top:15px; display:inline-block;}
+		.headRight .hrNav a{color:#333; margin-left:15px;}
+		.headRight .hrNav a:hover{color:#0474c8;}
+		
+	.Chat-contbox{  border: 1px solid #d9dadc; background-color: #fff;  min-height: 755px; width:1200px;margin-left: auto;margin-right: auto}
+	.Chat-contbox .con-nav{border-bottom: 1px solid #d9dadc; padding: 7px 10px; height: 40px;}
+		.Chat-contbox .con-nav .cnav-col{ width:400px; height:40px;}
+		.Chat-contbox .con-nav .cnav-col li{margin-top:12px;margin-left:10px;}
+		.Chat-contbox .con-nav .cnav-col li.trans{transition: all 0.2s ease 0s;}
+		.Chat-contbox .con-nav .cnav-col li,.Chat-contbox .con-nav .cnav-col li.bgcBtn strong{width:18px; height:18px; display:inline-block; float:left; border-radius:2px; cursor:pointer;color:#fff;}
+		.Chat-contbox .con-nav .cnav-col li.bgcrev{ background-image:url('../../images/weixin/color.png'); background-repeat:no-repeat; background-size:100%;}
+		.Chat-contbox .con-nav .cnav-col li.bgc01{ background-color:#c53f46;}
+		.Chat-contbox .con-nav .cnav-col li.bgc02{ background-color:#ffcb15;}
+		.Chat-contbox .con-nav .cnav-col li.bgc03{ background-color:#ffa921;}
+		.Chat-contbox .con-nav .cnav-col li.bgc04{ background-color:#fde800;}
+		.Chat-contbox .con-nav .cnav-col li.bgc05{ background-color:#87c943;}
+		.Chat-contbox .con-nav .cnav-col li.bgc06{ background-color:#129527;}
+		.Chat-contbox .con-nav .cnav-col li.bgc07{ background-color:#00589c;}
+		.Chat-contbox .con-nav .cnav-col li.bgc08{ background-color:#009e96;}
+		.Chat-contbox .con-nav .cnav-col li.bgc09{ background-color:#aa89bd;}
+		.Chat-contbox .con-nav .cnav-col li.bgcBtn{ background:none; z-index:9;}
+		.Chat-contbox .con-nav .cnav-col li.bgcBtn strong{background-color:#5faaff; text-align:center; line-height:15px; font-size:16px;}
+		.Chat-contbox .con-nav .cnav-col li.trans:hover{box-shadow: 1px 1px 4px #444 inset, 0 0 5px #60d0ff;transform: scale(1.1);}
+		.bgcBtn-show{ width:300px; height:300px; background-color:#B97779; position:absolute; top:18px; left:0; z-index:8; display:none;}
+		
+	
+	.Chat-contbox .con-nav .conBtnw,.conBtnW{ padding-top:5px;}
+	.Chat-contbox .con-nav .conBtnw a,.conBtnW a{  text-align:center; border-radius:5px; margin-left:10px;}
+	.Chat-contbox .con-nav .conBtnw a.btn,.conBtnW a.btn{ border:1px solid #e8e8e8; background-color:#fff; color:#333;width:104px; height:30px; line-height:30px;}
+	.Chat-contbox .con-nav .conBtnw a.btncol,.conBtnW a.btncol{background-color:#199bfc; color:#fff;width:106px; height:32px; line-height:32px;}
+	.Chat-contbox .con-nav .conBtnw a.btncol:hover,.conBtnW a.btncol:hover{ text-decoration:none;background-color:#55a7e3;}
+	.Chat-contbox .con-nav .conBtnw a.btn:hover,.conBtnW a.btn:hover{ text-decoration:none; background-color:#e8e8e8;}
+	
+	
+	.Chat-contbox .con-side,.Chat-contbox .con-main{display: table-cell; vertical-align: top;word-wrap: break-word;word-break: break-all; min-height:700px;}
+	.Chat-contbox .con-side{ width:398px;}
+	.Chat-contbox .con-side,.Chat-contbox .con-side .sideNav{border-right: 1px solid #e7e7eb; min-height: 700px;background-color: #fff;}
+	.Chat-contbox .con-side .sideNav{ width:100px;}
+	.Chat-contbox .con-side .sideNav ul li{ border-bottom:1px solid #e8e8e8;}
+	.Chat-contbox .con-side .sideNav ul li.curt a{ border-right:4px solid #55a7e3; color:#0474c8;}
+	.Chat-contbox .con-side .sideNav ul li a{ display:block; padding:10px 0px 10px 10px; color:#333;}
+	.Chat-contbox .con-side .sideNav ul li a:hover{ text-decoration:none; background-color:#f8f8f8;}
+	.Chat-contbox .con-side .sideNavList{ width:295px;height: 700px; }
+	.Chat-contbox .con-side .sideNavList .item{ cursor:pointer; padding: 10px 0px; border-bottom: 1px solid #e8e8e8;}	
+	
+	.Chat-contbox .con-side .sideCont{ width:298px; min-height: 700px;}
+	
+	.Chat-contbox .con-main{ width:800px;}
+	.Chat-contbox .con-main .conExdit,.conBtnW{ padding:10px;} 
+		
+		 
+
+.ChatPhonewrp{ display:none;}
+.Cprev-closed{position: absolute;right: -15px;top: 0;background:url(../../images/weixin/ChatPhonewrp.png) 0 -690px no-repeat;width: 45px;height: 45px;vertical-align: middle;display: inline-block;cursor: pointer}
+.ChatPhonebg{position: fixed; top: 0; left: 0; width: 100%; height: 100%; filter: alpha(opacity = 75); -moz-opacity: .75; -khtml-opacity: .75; opacity: .75; background-color: #000; z-index: 9995;}
+.ChatPhone-wrp{position: fixed;top: 50%;left: 50%;margin-top: -365px;margin-left: -180px;z-index: 9997;width: 360px;height: 680px;background:url(../../images/weixin/ChatPhonewrp.png) 0 0 no-repeat;}
+.ChatPhone-wrp .Chatprev{padding: 84px 56px 0 17px}
+/*.ChatPhone-wrp .Chatprev .Chatcon{padding: 15px 10px;}*/
+
+.Chatprev-hd{text-align: center;color: #fff;line-height: 38px;height: 38px;width: auto;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;word-wrap: normal;padding: 0 20px}
+.Chatprev-bd{position: relative;overflow: auto;background-color: #fff;height: 470px}
+
+
+
+.fotwrap{ padding:0px 10px; height:25px; line-height:25px;} 
+.fotwrap,.num,.ts{ color:#8c8c8c;}
+.fotwrap .bz{ color:#607fb9;}
+.fotwrap .flow em{ background:url(../../images/weixin/flower.png) 0px 0px / 100% no-repeat; width: 13px; height: 13px;display: inline-block; position: relative; top: 1px;}
+
+.pusmall .Chat-contbox{ width:1000px;}
+.pusmall .Chat-contbox .con-main{ width:600px;} 
+ 
+
+    .edit-header {
+      padding: 13px 10px;
+      border-bottom: 1px solid #d9dadc;
+    }
+    .color-list li {
+      width: 18px;
+      height: 18px;
+      border-radius: 2px;
+      display: inline-block;
+      vertical-align: middle;
+      cursor: pointer;
+      color: #fff;
+      margin-left: 10px;
+    }
+    .color-list .more {
+      font-size: 12px;
+      line-height: initial;
+      width: 40px;
+      background-color: #5faaff;
+      text-align: center;
+    }
+    .bgcrev {
+      background-image: url(../../images/weixin/color.png);
+      background-repeat: no-repeat;
+      background-size: 100%;
+    }
+    .trans {
+      transition: all 0.2s ease 0s;
+    }
+    .trans:hover {
+      box-shadow: 1px 1px 4px #444 inset, 0 0 5px #60d0ff;
+      transform: scale(1.1);
+    }
+
+    .btn-white {
+      display: inline-block;
+      border: 1px solid #e8e8e8;
+      background-color: #fff;
+      color: #333;
+      width: 104px;
+      height: 30px;
+      line-height: 30px;
+      text-align: center;
+      border-radius: 5px;
+    }
+    .btn-white:hover {
+      text-decoration: none;
+      background-color: #e8e8e8;
+    }
+
+
+    .material-library {
+      vertical-align: middle;
+      width: 398px;
+      border-right: 1px solid #e7e7eb;
+    }
+    .edit-main {
+      vertical-align: middle;
+      width: 71%;
+    }
+
+    .h-700 {
+      height: 700px;
+    }
+    .h-600 {
+      height: 600px;
+    }
+
+    .itemTab-list li {
+      border-bottom: 1px solid #e8e8e8;
+    }
+    .itemTab-list li a {
+      display: block;
+      padding: 10px 0px 10px 10px;
+      color: #333;
+      width: 100px;
+    }
+    .itemTab-list li a:hover {
+      background-color: #f8f8f8;
+    }
+    .itemTab-list li.curt a {
+      border-right: 4px solid #55a7e3;
+      color: #0474c8;
+    }
+
+    .right-side {
+      position: relative;
+      overflow: hidden;
+      border-left: 1px solid #e7e7eb;
+    }
+
+    .content2 {
+      display: none;
+      overflow-y: scroll;
+      overflow-x: hidden;
+      height: 700px;
+    }
+    .content2.curt {
+      display: block;
+    }
+
+
+    .content2 .item {
+      cursor: pointer;
+      padding: 10px 0px;
+      border-bottom: 1px solid #e8e8e8;
+    }
+

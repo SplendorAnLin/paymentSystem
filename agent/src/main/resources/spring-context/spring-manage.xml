@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" ":/spring-beans.dtd">
+
+<beans default-autowire="byName">
+	
+	<!-- 自助问题查询 -->
+	<bean id="welcomeAction" class="com.yl.agent.action.WelcomeAction" singleton="false"></bean>
+	<bean id="customerAction" class="com.yl.agent.action.CustomerAction"
+		singleton="false"></bean>
+	<!-- 公告展示 -->
+	<bean id="bulletinService" class="com.yl.agent.service.impl.BulletinServiceImpl"></bean>
+	<bean id="bulletinAction" class="com.yl.agent.action.BulletinAction"
+		singleton="false"></bean>
+	<!-- 经营信息 -->
+	<bean id="shareProfitAction" class="com.yl.agent.action.SareProfitAction"
+		singleton="false"></bean>
+	<!-- 订单查询 -->
+	<bean id="onlineAction" class="com.yl.agent.action.OnlineAction" singleton="false"></bean>
+	<bean id="agentAction" class="com.yl.agent.action.AgentAction" singleton="false"></bean>
+	<bean id="accountAction" class="com.yl.agent.action.AccountAction" singleton="false"></bean>
+	<bean id="roleAction" class="com.yl.agent.action.RoleAction" singleton="false"></bean>
+	<bean id="deviceOrderAction" class="com.yl.agent.action.DeviceOrderAction" singleton="false"></bean>
+	
+</beans>
+

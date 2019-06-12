@@ -1,0 +1,46 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+	http://www.springframework.org/schema/beans/spring-beans-4.0.xsd"
+	default-autowire="byName">
+	<bean id="valueListAction" class="com.yl.dpay.core.valuelist.ValueListAction"/>
+	
+	<bean id="valueListHelper" class="net.mlw.vlh.web.mvc.ValueListHandlerHelper">
+		<property name="valueListHandler">
+			<ref bean="valueListHandler" />
+		</property>
+	</bean>
+
+	<bean id="dpayConfig" class="com.yl.dpay.core.valuelist.MapAdapter" scope="prototype" abstract="true">
+		<property name="connectionCreator">
+          <bean class="net.mlw.vlh.adapter.jdbc.util.StandardConnectionCreator">
+            <property name="dataSource"><ref bean="dataSource"/></property>
+          </bean>
+        </property>
+        
+<!--         <property name="sqlPagingSupport"> -->
+<!--            <bean class="net.mlw.vlh.adapter.jdbc.util.SqlPagingSupport"> -->
+<!--              <property name="database"><value>mysql</value></property> -->
+<!--            </bean> -->
+<!--          </property> -->
+		
+		<property name="showSql">
+			<value>true</value>
+		</property>
+		<property name="defaultNumberPerPage">
+			<value>10</value>
+		</property>
+		<property name="defaultSortColumn">
+			<value>id</value>
+		</property>
+		<property name="defaultSortDirection">
+			<value>desc</value>
+		</property>
+		<property name="adapterType">
+			<value>0</value>
+		</property>		
+	</bean>
+
+</beans>

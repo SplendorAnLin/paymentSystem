@@ -1,0 +1,1037 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+		http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
+
+	<bean id="valueListHandler" scope="prototype"
+		class="net.mlw.vlh.DefaultValueListHandlerImpl">
+		<property name="config.adapters">
+			<map>
+				<!-- 订单管理 -->
+				<entry key="order">
+					<bean parent="defConfig">
+						<property name="sql">
+							<value>
+							<![CDATA[
+							 select o.id                    as   id,                             
+                                    o.EXTERNAL_ID           as   external_id ,        
+                                    o.TRANS_TYPE            as   trans_type  ,        
+                                    o.CUSTOMER_NO           as   customer_no ,      
+                                    o.POS_CATI              as   pos_cati ,       
+                                    o.PAN                   as   pan ,       
+                                    o.AMOUNT                as   amount ,        
+                                    o.CARD_TYPE             as   card_type  ,         
+                                    o.ISSUER                as   issuer  ,      
+                                    o.STATUS                as   status ,   
+                                    o.CREDIT_STATUS         as   credit_status   ,    
+                                    o.POS_BATCH             as   pos_batch ,    
+                                    o.POS_REQUEST_ID        as   pos_request_id     , 
+                                    o.AUTHORIZATION_CODE    as   authorization_code  ,
+                                    o.CUSTOMER_ORDER_CODE   as   customer_order_code ,
+                                    o.CURRENCY_TYPE         as   currency_type ,
+                                    o.CREATE_TIME           as   create_time ,
+                                    o.COMPLETE_TIME         as   complete_time ,
+                                    o.SETTLE_TIME           as   settle_time ,
+                                    o.CREDIT_TIME           as   credit_time ,
+                                    o.DESCRIPTION           as   description ,
+                                    o.OPTIMISTIC            as   optimistic  ,
+                                    o.year_commission 		as   year_commission,
+                                    o.quarter_commission 	as   quarter_commission,
+                                    o.month_commission      as   month_commission ,
+                                    c.SHORT_NAME		    as   customer_name   ,
+                                    p.customer_fee			as   customer_fee ,
+                                    rtcb.status				as	 check_bill_record_status ,
+                                    rtcb.AUDIT_REMARK		as	 audit_remark,
+                                    rtcb.AGENT_REMARK		as   agent_remark
+                               from pos_order o left join pos_payment p on o.id=p.order_id and 
+                               P.STATUS='SUCCESS' AND P.TRANS_TYPE in ('PURCHASE','PRE_AUTH_COMP','SPECIFY_QUANCUN','NOT_SPECIFY_QUANCUN','CASH_RECHARGE_QUNCUN','OFFLINE_PURCHASE')
+                               left join REAL_TIME_CHECK_BILL rtcb 
+                               		on (rtcb.BUSINESS_TYPE = 'POS_ORDER' and rtcb.BUSINESS_ID = o.EXTERNAL_ID)
+                               left join customer c on o.CUSTOMER_NO = c.CUSTOMER_NO 
+                              where 1=1
+							  	/~id: and o.id = [id]~/
+							  	/~externalId: and o.EXTERNAL_ID = [externalId]~/
+							  	/~transType: and o.TRANS_TYPE ='[transType]' ~/
+							  	/~customerNo: and o.customer_no ='[customerNo]' ~/
+							  	/~posCati: and o.pos_cati ='[posCati]' ~/
+							  	/~pan: and o.pan ='[pan]' ~/
+							  	/~panEnd: and o.pan like '%[panEnd]' ~/
+							  	/~amountStart: and o.amount >= [amountStart] ~/
+							  	/~amountEnd: and o.amount <= [amountEnd] ~/
+							  	/~cardType: and o.CARD_TYPE ='[cardType]' ~/							  	
+							  	/~issuer: and o.ISSUER ='[issuer]' ~/
+							  	/~status: and o.STATUS in ('[status]') ~/
+							  	/~creditStatus: and o.CREDIT_STATUS ='[creditStatus]' ~/
+							    /~authorizationCode: and o.authorization_code ='[authorizationCode]' ~/ 							    
+							    /~createTimeStart: and o.create_time >= to_date('[createTimeStart] 00:00:00','yyyy-mm-dd hh24:mi:ss') ~/
+							    /~createTimeEnd: and o.create_time <= to_date('[createTimeEnd] 23:59:59','yyyy-mm-dd hh24:mi:ss')~/	
+							    /~agentNo: and o.agent_no = '[agentNo]' ~/
+							     /~mcc: and c.mcc = '[mcc]' ~/
+							    /~check_bill_record_status: and rtcb.status [check_bill_record_status] ~/
+							 order by o.id desc
+							]]>
+							</value>
+						</property>
+					</bean>
+				</entry>
+
+				<entry key="exportOrderInfo">
+					<bean parent="defConfig">
+						<property name="defaultNumberPerPage">
+							<value>3000</value>
+						</property>
+						<property name="sql">
+							<value>
+							<![CDATA[
+						 		select o.id                    as   id,                             
+                                    o.EXTERNAL_ID           as   external_id ,        
+                                    o.TRANS_TYPE            as   trans_type  ,        
+                                    o.CUSTOMER_NO           as   customer_no ,      
+                                    o.POS_CATI              as   pos_cati ,       
+                                    o.PAN                   as   pan ,       
+                                    o.AMOUNT                as   amount ,        
+                                    o.CARD_TYPE             as   card_type  ,         
+                                    o.ISSUER                as   issuer  ,      
+                                    o.STATUS                as   status ,   
+                                    o.CREDIT_STATUS         as   credit_status   ,    
+                                    o.POS_BATCH             as   pos_batch ,    
+                                    o.POS_REQUEST_ID        as   pos_request_id     , 
+                                    o.AUTHORIZATION_CODE    as   authorization_code  ,
+                                    o.CUSTOMER_ORDER_CODE   as   customer_order_code ,
+                                    o.CURRENCY_TYPE         as   currency_type ,
+                                    o.CREATE_TIME           as   create_time ,
+                                    o.COMPLETE_TIME         as   complete_time ,
+                                    o.SETTLE_TIME           as   settle_time ,
+                                    o.CREDIT_TIME           as   credit_time ,
+                                    o.DESCRIPTION           as   description ,
+                                    o.OPTIMISTIC            as   optimistic  ,
+                                    o.year_commission 		as   year_commission,
+                                    o.quarter_commission 	as   quarter_commission,
+                                    o.month_commission      as   month_commission ,
+                                    c.SHORT_NAME		    as   customer_name   ,
+                                    p.customer_fee			as   customer_fee
+                               from pos_order o left join pos_payment p on o.id=p.order_id and 
+                               P.STATUS='SUCCESS' AND P.TRANS_TYPE in ('PURCHASE','PRE_AUTH_COMP','PRE_AUTH','SPECIFY_QUANCUN','NOT_SPECIFY_QUANCUN','CASH_RECHARGE_QUNCUN','OFFLINE_PURCHASE'), customer c 
+                              where o.CUSTOMER_NO = c.CUSTOMER_NO 
+							  	/~id: and o.id = [id]~/
+							  	/~externalId: and o.EXTERNAL_ID = [externalId]~/
+							  	/~transType: and o.TRANS_TYPE ='[transType]' ~/
+							  	/~customerNo: and o.customer_no ='[customerNo]' ~/
+							  	/~posCati: and o.pos_cati ='[posCati]' ~/
+							  	/~pan: and o.pan ='[pan]' ~/
+							  	/~panEnd: and o.pan like '%[panEnd]' ~/
+							  	/~amountStart: and o.amount >= [amountStart] ~/
+							  	/~amountEnd: and o.amount <= [amountEnd] ~/
+							  	/~cardType: and o.CARD_TYPE ='[cardType]' ~/							  	
+							  	/~issuer: and o.ISSUER ='[issuer]' ~/
+							  	/~status: and o.STATUS in ('[status]') ~/
+							  	/~creditStatus: and o.CREDIT_STATUS ='[creditStatus]' ~/
+							    /~authorizationCode: and o.authorization_code ='[authorizationCode]' ~/ 							    
+							    /~createTimeStart: and o.create_time >= to_date('[createTimeStart] 00:00:00','yyyy-mm-dd hh24:mi:ss') ~/
+							    /~createTimeEnd: and o.create_time <= to_date('[createTimeEnd] 23:59:59','yyyy-mm-dd hh24:mi:ss')~/	
+							    /~agentNo: and o.agent_no = '[agentNo]' ~/
+							     /~mcc: and c.mcc = '[mcc]' ~/
+							 order by o.id desc
+							]]>
+							</value>
+						</property>
+					</bean>
+				</entry>
+
+				<entry key="totalOrderInfo">
+					<bean parent="defConfig">
+						<property name="sql">
+							<value>
+							<![CDATA[
+						 SELECT count(*) as ordercount,
+						        sum(o.amount) as trxamount
+						   from pos_order o left join pos_payment p on o.id=p.order_id and 
+                               P.STATUS='SUCCESS' AND P.TRANS_TYPE in ('PURCHASE','PRE_AUTH_COMP')
+                               left join REAL_TIME_CHECK_BILL rtcb 
+                               		on (rtcb.BUSINESS_TYPE = 'POS_ORDER' and rtcb.BUSINESS_ID = o.EXTERNAL_ID)
+                               left join customer c on o.CUSTOMER_NO = c.CUSTOMER_NO 
+                              where 1=1
+							  	/~id: and o.id = [id]~/
+							  	/~externalId: and o.EXTERNAL_ID = [externalId]~/
+							  	/~transType: and o.TRANS_TYPE ='[transType]' ~/
+							  	/~customerNo: and o.customer_no ='[customerNo]' ~/
+							  	/~posCati: and o.pos_cati ='[posCati]' ~/
+							  	/~pan: and o.pan ='[pan]' ~/
+							  	/~panEnd: and o.pan like '%[panEnd]' ~/
+							  	/~amountStart: and o.amount >= [amountStart] ~/
+							  	/~amountEnd: and o.amount <= [amountEnd] ~/
+							  	/~cardType: and o.CARD_TYPE ='[cardType]' ~/							  	
+							  	/~issuer: and o.ISSUER ='[issuer]' ~/
+							  	/~status: and o.STATUS in ('[status]') ~/
+							  	/~creditStatus: and o.CREDIT_STATUS ='[creditStatus]' ~/
+							    /~authorizationCode: and o.authorization_code ='[authorizationCode]' ~/ 							    
+							    /~createTimeStart: and o.create_time >= to_date('[createTimeStart] 00:00:00','yyyy-mm-dd hh24:mi:ss') ~/
+							    /~createTimeEnd: and o.create_time <= to_date('[createTimeEnd] 23:59:59','yyyy-mm-dd hh24:mi:ss')~/	
+							    /~agentNo: and o.agent_no = '[agentNo]' ~/
+							     /~mcc: and c.mcc = '[mcc]' ~/
+							    /~check_bill_record_status: and rtcb.status [check_bill_record_status] ~/
+							 order by o.id desc							
+							
+							]]>
+							</value>
+						</property>
+					</bean>
+				</entry>
+
+				<!-- 订单总计 -->
+				<entry key="orderCount">
+					<bean parent="defConfig">
+						<property name="sql">
+							<value>
+							<![CDATA[
+							select                   
+								s.SHOP_NAME         as      shopname,
+								o.POS_CATI          as      pos_cati,
+								sum(o.AMOUNT)       as   	amount ,           
+								sum(p.customer_fee) as   	customer_fee ,
+								count(*)            as 		ordercount
+								from pos_order o 
+								left join pos_payment p on o.id=p.order_id and P.STATUS='SUCCESS' AND P.TRANS_TYPE in ('PURCHASE','PRE_AUTH_COMP')
+								left join shop s on s.SHOP_NO = o.SHOP_NO
+								where 1=1 and o.status in ('SUCCESS','SETTLED')
+								/~customerNo: and o.customer_no ='[customerNo]' ~/
+							    /~createTimeStart: and o.create_time >= to_date('[createTimeStart] 00:00:00','yyyy-mm-dd hh24:mi:ss') ~/
+							    /~createTimeEnd: and o.create_time <= to_date('[createTimeEnd] 23:59:59','yyyy-mm-dd hh24:mi:ss')~/	
+							  group by o.POS_CATI,s.SHOP_NAME
+							]]>
+							</value>
+						</property>
+					</bean>
+				</entry>
+
+				<entry key="exportOrderCountInfo">
+					<bean parent="defConfig">
+						<property name="defaultNumberPerPage">
+							<value>3000</value>
+						</property>
+						<property name="sql">
+							<value>
+							<![CDATA[
+						 		select                   
+								s.SHOP_NAME         as      shopname,
+								o.POS_CATI          as      pos_cati,
+								sum(o.AMOUNT)       as   	amount ,           
+								sum(p.customer_fee) as   	customer_fee ,
+								count(*)            as 		ordercount
+								from pos_order o 
+								left join pos_payment p on o.id=p.order_id and P.STATUS='SUCCESS' AND P.TRANS_TYPE in ('PURCHASE','PRE_AUTH_COMP')
+								left join shop s on s.SHOP_NO = o.SHOP_NO
+								where 1=1 and o.status in ('SUCCESS','SETTLED')
+								/~customerNo: and o.customer_no ='[customerNo]' ~/
+							    /~createTimeStart: and o.create_time >= to_date('[createTimeStart] 00:00:00','yyyy-mm-dd hh24:mi:ss') ~/
+							    /~createTimeEnd: and o.create_time <= to_date('[createTimeEnd] 23:59:59','yyyy-mm-dd hh24:mi:ss')~/	
+							 group by o.POS_CATI,s.SHOP_NAME
+							]]>
+							</value>
+						</property>
+					</bean>
+				</entry>
+
+				<entry key="totalOrderCountInfo">
+					<bean parent="defConfig">
+						<property name="sql">
+							<value>
+							<![CDATA[
+						 	select
+								sum(o.AMOUNT)       as   	amount ,           
+								sum(p.customer_fee) as   	customer_fee ,
+								count(*)            as 		ordercount
+								from pos_order o 
+								left join pos_payment p on o.id=p.order_id and P.STATUS='SUCCESS' AND P.TRANS_TYPE in ('PURCHASE','PRE_AUTH_COMP')
+								left join shop s on s.SHOP_NO = o.SHOP_NO
+								where 1=1 and o.status in ('SUCCESS','SETTLED')
+								/~customerNo: and o.customer_no ='[customerNo]' ~/
+							    /~createTimeStart: and o.create_time >= to_date('[createTimeStart] 00:00:00','yyyy-mm-dd hh24:mi:ss') ~/
+							    /~createTimeEnd: and o.create_time <= to_date('[createTimeEnd] 23:59:59','yyyy-mm-dd hh24:mi:ss')~/	
+							]]>
+							</value>
+						</property>
+					</bean>
+				</entry>
+
+				<!-- 登录日志 -->
+				<entry key="loginLog">
+					<bean parent="defConfig">
+						<property name="sql">
+							<value>
+							<![CDATA[
+							 select l.id           as   id,
+							   l.OPTIMISTIC        as 	optimistic,
+							   l.USERNAME          as   username,
+							   l.REMARKS           as   remarks,
+							   l.SESSION_ID        as   session_id,
+							   l.LOGOUT_TIME       as   logout_time,
+							   l.LOGIN_TIME        as   login_time,
+							   l.LOGIN_IP          as   login_ip,
+							   l.LOGIN_STATUS      as   login_status					 
+							   from login_log l 
+							  where 1=1
+							  	/~id: and id = [id]~/
+							    /~optimistic: and l.optimistic ='[optimistic]' ~/
+							    /~userName: and l.username ='[userName]' ~/
+							    /~remarks: and l.remarks ='[remarks]' ~/
+							    /~sessionId: and l.session_id ='[sessionId]' ~/ 
+							    /~logoutTimeStart: and l.logout_time >= to_date('[logoutTimeStart] 00:00:00','yyyy-mm-dd hh24:mi:ss') ~/							    
+							    /~logoutTimeEnd: and l.logout_time <= to_date('[logoutTimeEnd] 23:59:59','yyyy-mm-dd hh24:mi:ss') ~/
+							    /~loginTimeStart: and l.login_time >= to_date('[loginTimeStart] 00:00:00','yyyy-mm-dd hh24:mi:ss') ~/							    
+							    /~loginTimeEnd: and l.login_time <= to_date('[loginTimeEnd] 23:59:59','yyyy-mm-dd hh24:mi:ss') ~/
+							    /~loginIp: and l.login_ip = '[loginIp]'~/
+							    /~loginStatus: and l.login_status = '[loginStatus]'~/							 
+							 order by l.id desc
+							]]>
+							</value>
+						</property>
+					</bean>
+				</entry>
+
+				<!-- 操作员 -->
+				<entry key="operator">
+					<bean parent="defConfig">
+						<property name="sql">
+							<value>
+							<![CDATA[
+							 select o.id          			  as   id,
+							   o.OPTIMISTIC       			  as 	optimistic,
+							   o.USERNAME        			  as    username,
+							   o.STATUS			 			  as	status,		
+							   o.PASSWORD         			  as    password,
+							   o.MAX_ERROR_TIMES              as    max_error_times,
+							   o.LAST_LOGIN_ERR_TIME          as    last_login_err_time,
+							   o.MODIFY_PASSWD_CYCLE		  as    modify_passwd_cycle,
+							   o.PASSWD_MODIFY_TIME			  as	passwd_modify_time,
+							   o.ALLOW_BEGIN_TIME			  as    allow_begin_time,
+							   o.ALLOW_END_TIME               as    allow_end_time,
+							   r.NAME                	  	  as    role_name,
+							   o.REALNAME 					  as    realname,
+							   o.CREATE_TIME                  as    create_time,
+							   o.CREATE_OPERATOR			  as    create_operator,
+							   o.RELOGIN_FLAG				  as    relogin_flag,
+							   o.PASSWD_EXPIRE_TIME           as    passwd_expire_time,
+							   o.PASSWD_EFFECT_TIME           as    passwd_effect_time,
+							   o.TRY_TIMES                    as    try_times,
+							   o.ORG_CODE			          as    org_code,
+							   o.CUSTOMER_NO                  as    customer_no
+							   from operator o,roles r
+							  where 1=1 and o.ROLE_ID=r.id
+							  	/~id: and id = [id]~/
+							  	 /~customer_no: and o.CUSTOMER_NO ='[customer_no]' ~/
+							    /~userName: and o.username ='[userName]' ~/
+							    /~realName: and o.realname ='[realName]' ~/
+							    /~createOperator: and o.create_operator ='[createOperator]' ~/ 
+							    /~ROLE_ID: and o.role_id ='[role_id]' ~/
+								/~orgCode: and o.org_code ='[orgCode]' ~/
+							    /~status: and o.status ='[status]' ~/
+						 		/~createTimeStart: and o.create_time >= to_date('[createTimeStart] 00:00:00','yyyy-mm-dd hh24:mi:ss') ~/							    
+							    /~createTimeEnd: and o.create_time <= to_date('[createTimeEnd] 23:59:59','yyyy-mm-dd hh24:mi:ss') ~/
+							    /~allowBeginTimeStart: and o.allow_begin_time >= '[allowBeginTimeStart]' ~/							    
+							    /~allowBeginTimeEnd: and o.allow_begin_time <= '[allowBeginTimeEnd]' ~/
+							    /~passwdEffectTimeStart: and o.passwd_effect_time >= to_date('[passwdEffectTimeStart] 00:00:00','yyyy-mm-dd hh24:mi:ss') ~/							    
+							    /~passwdEffectTimeEnd: and o.passwd_effect_time <= to_date('[passwdEffectTimeEnd] 23:59:59','yyyy-mm-dd hh24:mi:ss') ~/
+							    /~passwdExpireTimeStart: and o.passwd_expire_time >= to_date('[passwdExpireTimeStart] 00:00:00','yyyy-mm-dd hh24:mi:ss') ~/							    
+							    /~passwdExpireTimeEnd: and o.passwd_expire_time <= to_date('[passwdExpireTimeEnd] 23:59:59','yyyy-mm-dd hh24:mi:ss') ~/	
+							    /~passwdModifyTimeStart: and o.passwd_modify_time >= to_date('[~passwdModifyTimeStart] 00:00:00','yyyy-mm-dd hh24:mi:ss') ~/							    
+							    /~passwdModifyTimeEnd: and o.passwd_modify_time <= to_date('[passwdModifyTimeEnd] 23:59:59','yyyy-mm-dd hh24:mi:ss') ~/	
+							 order by o.id desc
+							]]>
+							</value>
+						</property>
+					</bean>
+				</entry>
+
+				<!-- 角色管理 -->
+				<entry key="roleInfo">
+					<bean parent="defConfig">
+						<property name="defaultNumberPerPage">
+							<value>10</value>
+						</property>
+						<property name="sql">
+							<value>
+							<![CDATA[
+							select
+							  r.ID         as id,
+							  r.NAME       as name,
+							  r.STATUS     as status,
+							  r.REMARK	   as remark
+   				           from roles r
+                         	 where 1 = 1
+                           		/~name: and r.name = '[name]%'~/ 
+                           		/~customer_no: and r.CUSTOMER_NO = '[customer_no]'~/ 
+							]]>
+							</value>
+						</property>
+					</bean>
+				</entry>
+
+				<!-- 功能管理 -->
+				<entry key="function">
+					<bean parent="defConfig">
+						<property name="sql">
+							<value>
+							<![CDATA[
+							 select f.ID                     as id,
+							        f.OPTIMISTIC             as optimistic,
+							        f.NAME 					 as name,
+							        f.TYPE					 as type,
+							        f.STATUS				 as status,
+							        f.REMARK				 as remark,
+							        f.ACTION 				 as action,
+							        f.IS_CHECK				 as is_check,
+							      m.NAME					 as menu_name
+							      from functions f ,menu m
+							  		where 1=1	and m.id=f.menu_id		 
+							 	/~id: and f.id = [id]~/
+							    /~name: and f.name ='[name]' ~/
+							    /~action: and f.action ='[action]' ~/
+							     order by f.id desc
+							]]>
+							</value>
+						</property>
+					</bean>
+				</entry>
+
+				<!-- 结算账户信息 -->
+				<entry key="settleaccountinfo">
+					<bean parent="defConfig">
+						<property name="sql">
+							<value>
+							<![CDATA[
+							  select s.Id                 as id,
+                                     s.FINANCE_ADDRESS            as address,
+                                     s.STATUS             as status,
+                                     s.CODE                  as code,
+                                     s.OWNER_ID             as ownerid,
+                                     s.OWNER_ROLE          as ownerrole,
+                                     s.SETTLE_ACCOUNT_TYPE   as settle_account_type,
+                                     s.BANK_ACCOUNT_NAME     as bank_accout_name,
+                                     s.BANK_ACCOUNT_NO          as bank_card_no,
+                                     s.BANK_CODE                    as bank,
+                                     s.OPEN_BANK_NAME                as bank_name,
+                                     s.IS_NEED_BILL          as is_need_bill,
+                                     s.BILL_HEADER_NAME      as bill_header_name,
+                                     s.OWNER_FINANCE            as owner_finance,
+                                     s.FINANCE_TELEPHONE               as telephone,
+                                     s.FINANCE_POSTCODE                as postcode,
+                                     s.EFF_TIME                as eff_time,
+                                     s.EXP_TIME                as exp_time,
+                                     s.CREATE_TIME            as create_time,
+                                      s.ALLIED_BANK_CODE 	    as allied_bank_code,
+                                      s.PRIORITY			 	as priority
+                                    from settle_account_info s
+                                    where 1=1
+									 	 /~id: and s.id = [id]~/
+									  /~ownerId: and s.owner_id = '[ownerId]'~/
+			                           /~ownerRole: and s.owner_Role='[ownerRole]'  ~/
+			                           /~settleAcountType: and s.settle_account_type=  '[settleAcountType]'~/
+			                           /~ownerId: and s.owner_Id=  '[ownerId]'~/
+			                           /~status: and s.status=  '[status]'~/
+			                           /~bank: and s.bank=  '[bank]'~/
+			                           /~bankCardNo: and s.bank_Card_No=  '[bankCardNo]'~/
+			                           /~bankAccountName: and s.bank_Account_Name=  '[bankAccountName]'~/
+			                           /~effTimeStart: and s.EFF_TIME >= to_date('[effTimeStart] 00:00:00','yyyy-mm-dd hh24:mi:ss') ~/							    
+									   /~effTimeEnd: and s.EFF_TIME <= to_date('[effTimeEnd] 23:59:59','yyyy-mm-dd hh24:mi:ss') ~/	
+									   /~expTimeStart: and s.EXP_TIME >= to_date('[expTimeStart] 00:00:00','yyyy-mm-dd hh24:mi:ss') ~/							    
+								       /~expTimeEnd: and s.EXP_TIME <= to_date('[expTimeEnd] 23:59:59','yyyy-mm-dd hh24:mi:ss') ~/	
+								       
+								       order by s.id desc
+							]]>
+							</value>
+						</property>
+					</bean>
+				</entry>
+
+				<!-- 结算记录 -->
+				<entry key="settlebill">
+					<bean parent="defConfig">
+						<property name="sql">
+							<value>
+							<![CDATA[
+							 select ID            as id ,
+								  OPTIMISTIC        as optimistic,
+									OWNER_ID          as owner_id,
+								  OWNER_ROLE        as owner_role,
+								  SETTLE_AMOUNT     as settle_amount,
+								  SETTLE_DATE       as settle_date,
+								  SETTLE_FEE        as settle_fee,
+								  START_CLEAN_DATE  as start_clean_date,
+								  FINAL_CLEAN_DATE   as final_clean_date,
+								  REMIT_AMOUNT      as remit_amount,
+								  STATUS      as settle_status,
+								  SETTLERULE_ID     as settlerule_id
+									from settle_bill s
+									 where 1 = 1
+									 /~id: and s.id = [id]~/
+									 /~ownerId: and s.owner_id = '[ownerId]'~/
+									 /~ownerRole: and s.owner_role = '[ownerRole]'~/
+									 /~settleAmountMin: and s.settle_amount >= [settleAmountMin]~/
+									 /~settleAmountMax: and s.settle_amount <= [settleAmountMax]~/
+									 /~settleDateStart: and s.settle_date >= to_date('[settleDateStart] 00:00:00','yyyy-mm-dd hh24:mi:ss')~/
+									 /~settleDateEnd: and s.settle_date <= to_date('[settleDateEnd] 23:59:59','yyyy-mm-dd hh24:mi:ss')~/
+									 /~settleFee: and s.settle_fee = [settleFee]~/
+									 /~startCleanDateStart: and s.start_clean_date >= to_date('[startCleanDateStart] 00:00:00','yyyy-mm-dd hh24:mi:ss')~/
+									 /~startCleanDateEnd: and s.start_clean_date <= to_date('[startCleanDateEnd] 23:59:59','yyyy-mm-dd hh24:mi:ss') ~/
+									 /~finalCleanDateStart: and s.final_clean_date >= to_date('[finalCleanDateStart] 00:00:00','yyyy-mm-dd hh24:mi:ss') ~/							    
+							   		 /~finalCleanDateEnd: and s.final_clean_date <= to_date('[finalCleanDateEnd] 23:59:59','yyyy-mm-dd hh24:mi:ss') ~/
+							   		 /~remitAmount: and s.remit_amount = '[remitAmount]'~/ 
+							   		 /~settleStatus: and s.status = '[settleStatus]'~/ 
+							   		 /~settleruleId: and s.settlerule_id = '[settleruleId]'~/ 
+							   		 
+							   		 order by s.id desc
+							]]>
+							</value>
+						</property>
+					</bean>
+				</entry>
+
+				<entry key="customerInfo">
+					<bean parent="defConfig">
+						<property name="sql">
+							<value>
+							<![CDATA[
+								select 
+								  c.ID                     			as id,
+								  c.OPTIMISTIC           			as optimistic,
+								  c.STATUS               			as status,
+								  c.FULL_NAME            			as full_name,
+								  c.SHORT_NAME           			as short_name,
+								  c.CUSTOMER_NO          			as customer_no,
+								  c.MCC                  			as mcc,
+								  c.CREATE_TIME          			as create_time,
+								  c.USE_CUSTOM_PERMISSION			as use_custom_permission,
+								  c.CONTRACT_NO          			as contract_no,
+								  c.EXP_TIME             			as exp_time,
+								  c.ORGANIZATION_CODE    			as organization_code,
+								  c.AGENT_ID             			as agent_id,
+								  c.IS_RECKON_IN         			as is_reckon_in,
+								  c.ENTERPRISEINFO_ID    			as enterpriseinfo_id,
+								  c.PHONE_NO             			as phone_no,
+								  c.RECEIVE_ADDRESS      			as receive_address,
+								  c.LINKMAN              			as linkman,
+								  c.SALES_NO             			as sales_no,
+								  c.CUSTOMER_TYPE  					as customer_type
+								FROM CUSTOMER c   
+								where 1=1
+								/~customer_no: and c.customer_no = '[customer_no]'~/  
+								order by c.id desc
+							]]>
+							</value>
+						</property>
+					</bean>
+				</entry>
+
+				<!-- 组织机构 -->
+				<entry key="organization">
+					<bean parent="defConfig">
+						<property name="sql">
+							<value>
+										<![CDATA[
+											SELECT 
+													  o.CODE					as 		code,         
+													  o.PARENT_CODE 			as 		parent_code,
+													  o.NAME        			as		name,
+													  o.OPTIMISTIC  			as		optimistic,
+													  o.IS_LEAF					as     is_leaf
+											FROM	  ORGANIZATION					o
+											where 1=1 
+											/~pid: and o.PARENT_CODE = '[pid]'~/
+											ORDER BY o.CODE ASC
+										]]>
+							</value>
+						</property>
+					</bean>
+				</entry>
+				<entry key="bank">
+					<bean parent="defConfig">
+						<property name="sql">
+							<value>
+										<![CDATA[
+											SELECT 
+												  o.CODE        	as code,
+												  o.SHORT_NAME  	as short_name,
+												  o.FULL_NAME   	as full_name
+											FROM	  BANK					o
+											where 1=1 
+											/~bankNameStart: and o.SHORT_NAME like '[bankNameStart]%'~/
+											ORDER BY o.CODE ASC
+										]]>
+							</value>
+						</property>
+					</bean>
+				</entry>
+
+				<!-- 商户帮助中心 -->
+				<entry key="custHelp">
+					<bean parent="defConfig">
+						<property name="sql">
+							<value>
+							<![CDATA[
+								select 
+								  chc.NAME		as name,
+								  chc.DESCRIBE	as describe
+								FROM CUST_HELP_CENTRE chc   
+								where 1=1
+							]]>
+							</value>
+						</property>
+					</bean>
+				</entry>
+
+				<!-- 查询商户 -->
+				<entry key="customerByMap">
+					<bean parent="defConfig">
+						<property name="sql">
+							<value>
+							<![CDATA[
+								select 
+									    cm.SHORT_NAME as short_name,
+									    cm.RECEIVE_ADDRESS as receive_address,
+									    cm.CUSTOMER_NO as 	customer_no								    									    
+									 from POSP_BOSS.CUSTOMER cm
+									 where 1=1
+									 	/~customer_no: and cm.customer_no ='[customer_no]'~/
+									 	/~receive_address: and cm.receive_address like '[customer_no]%'~/
+									 	/~short_name: and cm.short_name like '[short_name]%'~/
+									 
+							]]>
+							</value>
+						</property>
+					</bean>
+				</entry>
+
+
+
+				<!-- 商户产品费用查询 -->
+				<entry key="custProductFeeQuery">
+					<bean parent="defConfig">
+						<property name="sql">
+							<value>
+				                <![CDATA[ 
+				                   select pf.id             as id,
+				                   		  pf.request_id     as requestId,
+									      pf.product_no     as productNo,
+									      pf.product_name   as productName,
+									      pf.billing_source as billingSource,
+									      pf.agent_no       as agentNo,
+									      pf.customer_no    as customerNo,
+									      cust.short_name   as customerName,
+									      pf.trans_amount   as transAmount,
+									      pf.trans_time     as transTime,
+									      pf.product_fee    as productFee,
+									      pf.create_time    as createTime
+									 from posp_boss.product_fee pf
+									 left join posp_boss.customer cust on cust.customer_no = pf.customer_no
+									where 1 = 1 
+									/~customerNo: and cust.customer_no = '[customerNo]'~/
+									/~requestId: and pf.request_id = '[requestId]'~/
+									/~productNo: and pf.product_no = '[productNo]'~/
+									/~productName: and pf.product_name like '%[productName]%'~/
+									/~billingSource: and pf.billing_source = '[billingSource]'~/
+									/~transTimeBegin: and pf.trans_time >= to_date('[transTimeBegin] 00:00:00','yyyy-mm-dd hh24:mi:ss')~/
+									/~transTimeEnd: and pf.trans_time <=to_date('[transTimeEnd] 23:59:59','yyyy-mm-dd hh24:mi:ss') ~/
+									/~prodFeeBegin: and pf.product_fee >= [prodFeeBegin]~/
+									/~prodFeeEnd: and pf.product_fee <= [prodFeeEnd]~/
+									order by pf.create_time desc, pf.trans_time desc
+				                ]]>
+							</value>
+						</property>
+					</bean>
+				</entry>
+
+				<!-- 商户产品费用合计查询 -->
+				<entry key="custProductFeeTotalQuery">
+					<bean parent="defConfig">
+						<property name="sql">
+							<value>
+				                <![CDATA[ 
+				                    select sum(pf.trans_amount) as totalTransAmount,
+				                     	   count(pf.id) 		as totalNum,
+				                     	   sum(pf.product_fee) 	as totalProductFee
+									from posp_boss.product_fee pf
+									left join posp_boss.customer cust on cust.customer_no = pf.customer_no
+									where 1 = 1
+									/~customerNo: and cust.customer_no = '[customerNo]'~/
+									/~requestId: and pf.request_id = '[requestId]'~/
+									/~productNo: and pf.product_no = '[productNo]'~/
+									/~productName: and pf.product_name like '%[productName]%'~/
+									/~billingSource: and pf.billing_source = '[billingSource]'~/
+									/~transTimeBegin: and pf.trans_time >= to_date('[transTimeBegin] 00:00:00','yyyy-mm-dd hh24:mi:ss')~/
+									/~transTimeEnd: and pf.trans_time <=to_date('[transTimeEnd] 23:59:59','yyyy-mm-dd hh24:mi:ss') ~/
+									/~prodFeeBegin: and pf.product_fee >= [prodFeeBegin]~/
+									/~prodFeeEnd: and pf.product_fee <= [prodFeeEnd]~/
+				                ]]>
+							</value>
+						</property>
+					</bean>
+				</entry>
+
+				<!-- 商户产品费用计算明细查询 -->
+				<entry key="custProductFeeDetailQuery">
+					<bean parent="defConfig">
+						<property name="sql">
+							<value>
+				                <![CDATA[ 
+				                    select pfd.id                 as id,
+									       pfd.product_fee_id     as productFeeId,
+									       pfd.product_no         as productNo,
+									       pfd.product_name       as productName,
+									       pfd.billing_source     as billingSource,
+									       pfd.agent_no           as agentNo,
+									       pfd.customer_no        as customerNo,
+									       pfd.stair_cap          as stairCap,
+									       pfd.stair_floor        as stairFloor,
+									       pfd.compute_mode       as computeMode,
+									       pfd.rate               as rate,
+									       pfd.fixation_cost      as fixationCost,
+									       pfd.upper_limit_cost   as upperLimitCost,
+									       pfd.lower_limit_cost   as lowerLimitCost,
+									       pfd.effect_time        as effectTime,
+									       pfd.expire_time        as expireTime,
+									       pfd.ladder_stati_scope as ladderStatiScope,
+									       pfd.trans_amount       as transAmount,
+									       pfd.trans_time         as transTime,
+									       pfd.product_fee        as productFee,
+									       pfd.create_time        as createTime
+									  from posp_boss.product_fee_detail pfd
+									  left join posp_boss.customer cust on cust.customer_no = pfd.customer_no
+									  where 1 = 1
+									  /~productFeeId: and pfd.product_fee_id = [productFeeId]~/								  
+									  order by pfd.stair_floor
+				                ]]>
+							</value>
+						</property>
+					</bean>
+				</entry>
+				<!-- 公告 -->
+				<entry key="bulletin">
+					<bean parent="defConfig">
+						<property name="defaultNumberPerPage">
+							<value>20</value>
+						</property>
+						<property name="sql">
+							<value>
+						<![CDATA[
+						select b.ID             as id,
+						               b.CONTENT        as content,
+						               b.STATUS         as status,
+						               b.CREATE_TIME    as create_time,
+						               b.EFF_TIME       as eff_time,
+						               b.EXT_TIME       as ext_time,
+						               b.TITLE          as title
+						          from BULLETIN b
+						         where b.flag = 'NEW';
+						]]>
+							</value>
+						</property>
+					</bean>
+				</entry>
+
+				<!-- 公交商户查询 -->
+				<entry key="customerQuery">
+					<bean parent="defConfig">
+						<property name="sql">
+							<value>
+							<![CDATA[
+								select 
+									    id as id,
+									    name as name,
+									    customer_no as 	customer_no,
+									    link_man as link_man,
+									    phone as phone,
+									    addr as addr,
+									    create_time as create_time,
+									    operator as operator,
+									    manual_audit as audit,
+									    use_phone_check as use_phone_check,
+									    status as status
+									 from customer
+									 where 1=1
+									 	/~customer_no: and customer_no ='[customer_no]'~/
+									 	/~name: and name like '%[name]%'~/
+									 	/~phone: and phone like '[phone]%'~/
+									 	/~status: and status = '[status]'~/
+									 	order by create_time desc
+							]]>
+							</value>
+						</property>
+					</bean>
+				</entry>
+				
+				<!-- 公交广告查询 -->
+				<entry key="busNoticeQuery">
+					<bean parent="defConfig">
+						<property name="sql">
+							<value>
+							<![CDATA[
+								select 
+									    id as id,
+									    content as content,
+									    title 	as title,
+									    phone 	as phone,
+									    create_time as create_time,
+									    operator as operator,
+									    status as status
+									 from bus_notice
+									 where 1=1
+									 	/~title: and title like '%[title]%'~/
+									 	/~status: and status = '[status]'~/
+									 	order by create_time desc
+							]]>
+							</value>
+						</property>
+					</bean>
+				</entry>
+				
+				<!-- 公交广告查询Moble -->
+				<entry key="busNoticeMobleQuery">
+					<bean parent="defConfig">
+						<property name="sql">
+							<value>
+							<![CDATA[
+								select 
+									    id as id,
+									    content as content,
+									    title 	as title,
+									    phone 	as phone,
+									    create_time as create_time,
+									    operator as operator,
+									    status as status
+									 from bus_notice
+									 where 1=1
+									 	/~title: and title like '%[title]%'~/
+									 	/~status: and status = '[status]'~/
+									 	order by create_time desc
+							]]>
+							</value>
+						</property>
+					</bean>
+				</entry>
+				
+				<!-- 失物信息查询 -->
+				<entry key="lostRegRecQuery">
+					<bean parent="defConfig">
+						<property name="sql">
+							<value>
+							<![CDATA[
+								select 
+									    id as id,
+									    type as type,
+									    link_man as link_man,
+									    content as content,
+									    title 	as title,
+									    phone 	as phone,
+									    create_time as create_time,
+									    operator as operator,
+									    status as status
+									 from lost_reg_rec
+									 where 1=1
+									 	/~title: and title like '%[title]%'~/
+									 	/~status: and status = '[status]'~/
+									 	/~type: and type = '[type]'~/
+									 	/~linkMan: and link_man = '[linkMan]'~/
+									 	order by create_time desc
+							]]>
+							</value>
+						</property>
+					</bean>
+				</entry>
+				
+				<!-- 失物信息查询Moble -->
+				<entry key="lostRegRecMobleQuery">
+					<bean parent="defConfig">
+						<property name="sql">
+							<value>
+							<![CDATA[
+								select 
+									    id as id,
+									    type as type,
+									    link_man as link_man,
+									    content as content,
+									    title 	as title,
+									    phone 	as phone,
+									    create_time as create_time,
+									    operator as operator,
+									    status as status
+									 from lost_reg_rec
+									 where 1=1
+									 	/~title: and title like '%[title]%'~/
+									 	/~status: and status = '[status]'~/
+									 	/~type: and type = '[type]'~/
+									 	/~linkMan: and link_man = '[linkMan]'~/
+									 	order by create_time desc
+							]]>
+							</value>
+						</property>
+					</bean>
+				</entry>
+				
+				<!-- 地图周边查询 -->
+				<entry key="mapPeripheryQuery">
+					<bean parent="defConfig">
+						<property name="sql">
+							<value>
+							<![CDATA[
+								select 
+									    id as id,
+									    customer_name 	as customer_name,
+									    customer_no 	as customer_no,
+									    longitude 		as longitude,
+									    latitude 		as latitude,
+									    content 		as content,
+									    img 			as img,
+									    display_type 	as display_type,
+									    map_icon 		as map_icon,
+									    link_man 		as link_man,
+									    phone 			as phone,
+									    addr 			as addr,
+									    create_time 	as create_time,
+									    effTime 		as effTime,
+									    expTime 		as expTime,
+									    operator 		as operator,
+									    status 			as status
+									 from map_periphery
+									 where 1=1
+									 	/~customer_name: and customer_name like '%[customer_name]%'~/
+									 	/~customer_no: and status = '[customer_no]'~/
+									 	/~status: and status = '[status]'~/
+									 	order by create_time desc
+							]]>
+							</value>
+						</property>
+					</bean>
+				</entry>
+				
+				<!-- 服务类型查询 -->
+				<entry key="convenientServiceTypeQuery">
+					<bean parent="defConfig">
+						<property name="sql">
+							<value>
+							<![CDATA[
+								select 
+									    id as id,
+									    name as name,
+									    level as level,
+									    parent_level as parent_level,
+									    display_order 	as display_order,
+									    create_time as create_time,
+									    operator as operator,
+									    status as status
+									 from convenient_service_type
+									 where 1=1
+									 	/~name: and name like '%[name]%'~/
+									 	/~status: and status = '[status]'~/
+									 	/~level: and level = '[level]'~/
+									 	order by create_time desc
+							]]>
+							</value>
+						</property>
+					</bean>
+				</entry>
+				
+				<!-- 服务信息查询 -->
+				<entry key="convenientServiceInfoQuery">
+					<bean parent="defConfig">
+						<property name="sql">
+							<value>
+							<![CDATA[
+								select 
+									    csi.id as id,
+									    csi.type_id as type_id,
+									    csi.title 	as title,
+									    csi.content as content,
+									    csi.customer_no as customer_no,
+									    csi.customer_name as customer_name,
+									    csi.img as img,
+									    csi.link_man as link_man,
+									    csi.phone 	as phone,
+									    csi.addr as addr,
+									    csi.create_time as create_time,
+									    csi.operator as operator,
+									    csi.status as status,
+									    cst.name as name
+									 from convenient_service_info csi 
+									 left join convenient_service_type cst on csi.type_id = cst.id
+									 where 1=1
+									 	/~title: and csi.title like '%[title]%'~/
+									 	/~status: and csi.status = '[status]'~/
+									 	/~customer_no: csi.and type = '[customer_no]'~/
+									 	/~name: and cst.name like '%[name]%'~/
+									 	/~type_id: and csi.type_id = [type_id]~/
+									 	order by csi.create_time desc
+							]]>
+							</value>
+						</property>
+					</bean>
+				</entry>
+				
+				<!-- 服务信息查询_Moble -->
+				<entry key="serviceInfoQuery">
+					<bean parent="defConfig">
+						<property name="sql">
+							<value>
+							<![CDATA[
+								select 
+									    csi.id as id,
+									    csi.type_id as type_id,
+									    csi.title 	as title,
+									    csi.content as content,
+									    csi.customer_no as customer_no,
+									    csi.customer_name as customer_name,
+									    csi.img as img,
+									    csi.link_man as link_man,
+									    csi.phone 	as phone,
+									    csi.addr as addr,
+									    csi.create_time as create_time,
+									    csi.operator as operator,
+									    csi.status as status,
+									    cst.name as name
+									 from convenient_service_info csi 
+									 left join convenient_service_type cst on csi.type_id = cst.id
+									 where 1=1
+									 	/~title: and csi.title like '%[title]%'~/
+									 	/~status: and csi.status = '[status]'~/
+									 	/~customer_no: csi.and type = '[customer_no]'~/
+									 	/~name: and cst.name like '%[name]%'~/
+									 	/~type_id: and csi.type_id = [type_id]~/
+									 	order by csi.create_time desc
+							]]>
+							</value>
+						</property>
+					</bean>
+				</entry>
+				<!-- 登陆日志查看 -->
+				<entry key="loginLogQuery">
+					<bean parent="defConfig">
+						<property name="sql">
+							<value>
+							<![CDATA[
+								select 
+									    l.login_ip as ip,
+									    l.login_status as status,
+									    l.login_time 	as login_time,
+									    l.logout_time as login_out_time,
+									    l.username as username,
+									    o.customer_no as customer_no,
+									    o.realname as realname,
+									    l.remarks  as remarks
+									 from login_log l,operator o
+								WHERE l.username=o.username
+									/~customer_no: and o.customer_no = '[customer_no]'~/
+									/~username: and l.username = '[username]'~/
+									/~realname: and o.realname = '[realname]'~/
+									/~login_time_start: and l.login_time >= str_to_date('[login_time_start] 00:00:00','%Y-%m-%d %H:%i:%s') ~/
+							    	/~login_time_end: and l.login_time <= str_to_date('[login_time_end] 23:59:59','%Y-%m-%d %H:%i:%s')~/	
+									 	order by l.login_time desc
+							]]>
+							</value>
+						</property>
+					</bean>
+				</entry>
+			</map>
+		</property>
+	</bean>
+</beans>

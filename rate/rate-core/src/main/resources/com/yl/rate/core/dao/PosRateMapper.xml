@@ -1,0 +1,192 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.yl.rate.core.dao.PosRateMapper">
+    <!--auto generated Code-->
+    <resultMap id="BaseResultMap" type="com.yl.rate.core.entity.PosRate">
+        <result column="standard" property="standard" jdbcType="VARCHAR"/>
+        <result column="card_type" property="cardType" jdbcType="VARCHAR"/>
+        <result column="rate_rule_code" property="rateRuleCode" jdbcType="VARCHAR"/>
+        <result column="fee" property="fee" jdbcType="DOUBLE"/>
+        <result column="compute_mode" property="computeMode" jdbcType="VARCHAR"/>
+        <result column="max_fee" property="maxFee" jdbcType="DOUBLE"/>
+        <result column="min_fee" property="minFee" jdbcType="DOUBLE"/>
+        <result column="id" property="id" jdbcType="BIGINT"/>
+        <result column="code" property="code" jdbcType="VARCHAR"/>
+        <result column="create_time" property="createTime" jdbcType="DATE"/>
+    </resultMap>
+    <resultMap id="posRateBean" type="com.yl.rate.core.bean.PosRateBean">
+        <result column="standard" property="standard" jdbcType="VARCHAR"/>
+        <result column="card_type" property="cardType" jdbcType="VARCHAR"/>
+        <result column="rate_rule_code" property="rateRuleCode" jdbcType="VARCHAR"/>
+        <result column="fee" property="fee" jdbcType="DOUBLE"/>
+        <result column="compute_mode" property="computeMode" jdbcType="VARCHAR"/>
+        <result column="max_fee" property="maxFee" jdbcType="DOUBLE"/>
+        <result column="min_fee" property="minFee" jdbcType="DOUBLE"/>
+        <result column="id" property="id" jdbcType="BIGINT"/>
+        <result column="code" property="code" jdbcType="VARCHAR"/>
+        <result column="create_time" property="createTime" jdbcType="DATE"/>
+        <result column="rate_code" property="rateCode" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <!--auto generated Code-->
+    <sql id="Base_Column_List">
+        standard,
+        card_type,
+        rate_rule_code,
+        fee,
+        compute_mode,
+        max_fee,
+        min_fee,
+        id,
+        code,
+        create_time
+    </sql>
+
+    <!--auto generated Code-->
+    <insert id="insert" useGeneratedKeys="true" keyProperty="posRate.id">
+        INSERT INTO pos_rate (
+            standard,
+            card_type,
+            rate_rule_code,
+            fee,
+            compute_mode,
+            max_fee,
+            min_fee,
+            id,
+            code,
+            create_time
+        ) VALUES (
+            #{posRate.standard,jdbcType=VARCHAR},
+            #{posRate.cardType,jdbcType=VARCHAR},
+            #{posRate.rateRuleCode,jdbcType=VARCHAR},
+            #{posRate.fee,jdbcType=DOUBLE},
+            #{posRate.computeMode,jdbcType=VARCHAR},
+            #{posRate.maxFee,jdbcType=DOUBLE},
+            #{posRate.minFee,jdbcType=DOUBLE},
+            #{posRate.id,jdbcType=BIGINT},
+            #{posRate.code,jdbcType=VARCHAR},
+            #{posRate.createTime,jdbcType=DATE}
+        )
+    </insert>
+
+    <!--auto generated Code-->
+    <insert id="insertSelective" useGeneratedKeys="true" keyProperty="posRate.id">
+        INSERT INTO pos_rate
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="posRate.standard!=null">standard,</if>
+            <if test="posRate.cardType!=null">card_type,</if>
+            <if test="posRate.rateRuleCode!=null">rate_rule_code,</if>
+            <if test="posRate.fee!=null">fee,</if>
+            <if test="posRate.computeMode!=null">compute_mode,</if>
+            <if test="posRate.maxFee!=null">max_fee,</if>
+            <if test="posRate.minFee!=null">min_fee,</if>
+            <if test="posRate.id!=null">id,</if>
+            <if test="posRate.code!=null">code,</if>
+            <if test="posRate.createTime!=null">create_time,</if>
+        </trim>
+        VALUES
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="posRate.standard!=null">#{posRate.standard,jdbcType=VARCHAR},
+            </if>
+            <if test="posRate.cardType!=null">#{posRate.cardType,jdbcType=VARCHAR},
+            </if>
+            <if test="posRate.rateRuleCode!=null">#{posRate.rateRuleCode,jdbcType=VARCHAR},
+            </if>
+            <if test="posRate.fee!=null">#{posRate.fee,jdbcType=DOUBLE},
+            </if>
+            <if test="posRate.computeMode!=null">#{posRate.computeMode,jdbcType=VARCHAR},
+            </if>
+            <if test="posRate.maxFee!=null">#{posRate.maxFee,jdbcType=DOUBLE},
+            </if>
+            <if test="posRate.minFee!=null">#{posRate.minFee,jdbcType=DOUBLE},
+            </if>
+            <if test="posRate.id!=null">#{posRate.id,jdbcType=BIGINT},
+            </if>
+            <if test="posRate.code!=null">#{posRate.code,jdbcType=VARCHAR},
+            </if>
+            <if test="posRate.createTime!=null">#{posRate.createTime,jdbcType=DATE},
+            </if>
+        </trim>
+    </insert>
+
+    <!--auto generated Code-->
+    <insert id="insertList">
+        INSERT INTO pos_rate (
+        <include refid="Base_Column_List"/>
+        )VALUES
+        <foreach collection="posRates" item="posRate" index="index" separator=",">
+            (
+            #{posRate.standard,jdbcType=VARCHAR},
+            #{posRate.cardType,jdbcType=VARCHAR},
+            #{posRate.rateRuleCode,jdbcType=VARCHAR},
+            #{posRate.fee,jdbcType=DOUBLE},
+            #{posRate.computeMode,jdbcType=VARCHAR},
+            #{posRate.maxFee,jdbcType=DOUBLE},
+            #{posRate.minFee,jdbcType=DOUBLE},
+            #{posRate.id,jdbcType=BIGINT},
+            #{posRate.code,jdbcType=VARCHAR},
+            #{posRate.createTime,jdbcType=DATE}
+            )
+        </foreach>
+    </insert>
+
+    <!--auto generated Code-->
+    <update id="update">
+        UPDATE pos_rate
+        <set>
+            <if test="posRate.standard != null">standard= #{posRate.standard,jdbcType=VARCHAR},</if>
+            <if test="posRate.cardType != null">card_type= #{posRate.cardType,jdbcType=VARCHAR},</if>
+            <if test="posRate.rateRuleCode != null">rate_rule_code= #{posRate.rateRuleCode,jdbcType=VARCHAR},</if>
+            <if test="posRate.fee != null">fee= #{posRate.fee,jdbcType=DOUBLE},</if>
+            <if test="posRate.computeMode != null">compute_mode= #{posRate.computeMode,jdbcType=VARCHAR},</if>
+            <if test="posRate.maxFee != null">max_fee= #{posRate.maxFee,jdbcType=DOUBLE},</if>
+            <if test="posRate.minFee != null">min_fee= #{posRate.minFee,jdbcType=DOUBLE},</if>
+        </set>
+        WHERE id = #{posRate.id,jdbcType=BIGINT}
+    </update>
+    <select id="queryByRateCode" resultMap="posRateBean">
+      SELECT
+        standard,
+        card_type,
+        rate_rule_code,
+        fee,
+        compute_mode,
+        max_fee,
+        min_fee,
+        pr.id,
+        pr.code,
+        pr.create_time,
+        rr.rate_code
+      FROM pos_rate pr INNER JOIN rate_rule rr ON rr.code = pr.rate_rule_code
+      WHERE rr.rate_code = #{rateCode}
+        AND card_type = #{cardType}
+        AND standard = #{standard}
+    </select>
+    <select id="queryByRateRuleCode" resultMap="BaseResultMap">
+        SELECT <include refid="Base_Column_List"/>
+        FROM pos_rate
+        WHERE rate_rule_code = #{rateRuleCode,jdbcType=VARCHAR}
+    </select>
+
+    <delete id="delete">
+        DELETE FROM pos_rate
+        WHERE id = #{id}
+    </delete>
+
+    <select id="checkRateByCode" resultType="java.lang.Integer" parameterType="java.lang.String">
+        SELECT COUNT(1) FROM pos_rate WHERE code = #{code}
+    </select>
+
+    <select id="queryPosRateDetails" resultMap="BaseResultMap" parameterType="java.lang.String">
+        SELECT
+        <include refid="Base_Column_List" />
+        FROM pos_rate
+        WHERE rate_rule_code = #{rateRuleCode}
+    </select>
+
+    <delete id="deleteByRateRuleCode">
+        DELETE FROM pos_rate
+        WHERE rate_rule_code = #{rateRuleCode}
+    </delete>
+</mapper>
+

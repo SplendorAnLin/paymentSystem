@@ -1,0 +1,13 @@
+  <script src="${pageContext.request.contextPath}/js/plugin/jquery-1.8.3.js"></script>
+  <script src="${pageContext.request.contextPath}/js/plugin/lodash.min.js"></script>
+  <script src="${pageContext.request.contextPath}/js/plugin/clipboard.js"></script>
+  <script src="${pageContext.request.contextPath}/js/plugin/datepicker/WdatePicker.js"></script>
+  <script src="${pageContext.request.contextPath}/js/lib/utils.js"></script>
+  <script src="${pageContext.request.contextPath}/js/lib/drag.js"></script>
+  <script src="${pageContext.request.contextPath}/js/component/component.js"></script>
+  <script src="${pageContext.request.contextPath}/js/system.js"></script>
+  <script src="${pageContext.request.contextPath}/js/core.js"></script>
+  <script src="${pageContext.request.contextPath}/js/ui.js"></script>
+  <script src="${pageContext.request.contextPath}/js/profile/config.js"></script>
+  <script src="${pageContext.request.contextPath}/js/profile/api.js"></script>
+  <script src="${pageContext.request.contextPath}/js/profile/general.js"></script>

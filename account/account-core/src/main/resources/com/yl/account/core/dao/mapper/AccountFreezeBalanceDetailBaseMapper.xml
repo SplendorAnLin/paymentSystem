@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.yl.account.core.dao.mapper.AccountFreezeBalanceDetailBaseMapper">
+	
+	<resultMap id="AccountFreezeBalanceDetail" type="com.yl.account.model.AccountFreezeBalanceDetail">
+		<result column="CODE" 						property="code" />
+		<result column="VERSION" 	 				property="version" />
+		<result column="CREATE_TIME" 				property="createTime" />
+		<result column="ACC_NO" 					property="accountNo" />
+		<result column="AMT" 						property="transAmount" />
+		<result column="HAD_TIME" 					property="handleTime" />
+		<result column="SYS_CODE" 					property="systemCode" />
+		<result column="SYS_TRAN_FLOW" 				property="transFlow" />
+		<result column="CURR_NO" 					property="currency" />
+		<result column="FREEZE_LIMIT" 				property="freezeLimit" />
+		<result column="FRZ_TYPE" 					property="freezeHandleType" />
+	</resultMap>
+    
+	<!--通用的sql语句段-->
+	<sql id="commonColumn">
+		CODE, VERSION, CREATE_TIME, ACC_NO, AMT, HAD_TIME, SYS_CODE, SYS_TRAN_FLOW, CURR_NO, FREEZE_LIMIT, FRZ_TYPE
+	</sql>
+	
+	<!--持久化账户冻结资金明细 -->
+	<insert id="create" parameterType="com.yl.account.model.AccountFreezeBalanceDetail">
+		INSERT INTO 
+			T_ACC_FRZ_DET (<include refid="commonColumn"/>)
+		VALUES 
+			(#{code}, #{version}, #{createTime}, #{accountNo}, #{transAmount}, #{handleTime}, #{systemCode}, #{transFlow}, #{currency}, #{freezeLimit, jdbcType=TIMESTAMP}, #{freezeHandleType})
+	</insert>
+	
+	<!--系统编码、系统请求流水、业务类型、请款金额做幂等 -->
+	<select id="findBy" resultType="int">
+		SELECT COUNT(CODE) FROM T_ACC_FRZ_DET WHERE SYS_CODE = #{systemCode}
+		AND SYS_TRAN_FLOW = #{systemFlowId} AND FRZ_TYPE = #{bussinessCode} AND AMT = #{consultAmt}
+	</select>
+</mapper>

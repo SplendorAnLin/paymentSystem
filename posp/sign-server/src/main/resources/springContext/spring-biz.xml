@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" ":/spring-beans.dtd">
+
+<beans>
+	
+	<!-- 处理服务工厂配置 -->
+	<bean id="terminalBusinessFactory" class="com.pay.sign.business.TerminalBusinessFactory">
+		<property name="serviceMap">
+			<map>
+				<!-- 手机图片签名 -->
+				<entry key="SIGNATURE"><ref bean="signBusiness" /></entry>				
+			</map>
+		</property>
+	</bean> 
+	
+</beans>

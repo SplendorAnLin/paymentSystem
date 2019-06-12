@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.yl.rate.core.dao.LadderRateMapper">
+    <!--auto generated Code-->
+    <resultMap id="BaseResultMap" type="com.yl.rate.core.entity.LadderRate">
+        <result column="rate_condition" property="rateCondition" jdbcType="VARCHAR"/>
+        <result column="begin_condition" property="beginCondition" jdbcType="VARCHAR"/>
+        <result column="end_condition" property="endCondition" jdbcType="VARCHAR"/>
+        <result column="rate_rule_code" property="rateRuleCode" jdbcType="VARCHAR"/>
+        <result column="fee" property="fee" jdbcType="DOUBLE"/>
+        <result column="compute_mode" property="computeMode" jdbcType="VARCHAR"/>
+        <result column="max_fee" property="maxFee" jdbcType="DOUBLE"/>
+        <result column="min_fee" property="minFee" jdbcType="DOUBLE"/>
+        <result column="id" property="id" jdbcType="BIGINT"/>
+        <result column="code" property="code" jdbcType="VARCHAR"/>
+        <result column="create_time" property="createTime"/>
+    </resultMap>
+
+    <!--auto generated Code-->
+    <sql id="Base_Column_List">
+        rate_condition,
+        begin_condition,
+        end_condition,
+        rate_rule_code,
+        fee,
+        compute_mode,
+        max_fee,
+        min_fee,
+        id,
+        code,
+        create_time
+    </sql>
+
+    <!--auto generated Code-->
+    <insert id="insert" useGeneratedKeys="true" keyProperty="ladderRate.id">
+        INSERT INTO ladder_rate (
+            rate_condition,
+            begin_condition,
+            end_condition,
+            rate_rule_code,
+            fee,
+            compute_mode,
+            max_fee,
+            min_fee,
+            id,
+            code,
+            create_time
+        ) VALUES (
+            #{ladderRate.rateCondition,jdbcType=VARCHAR},
+            #{ladderRate.beginCondition,jdbcType=VARCHAR},
+            #{ladderRate.endCondition,jdbcType=VARCHAR},
+            #{ladderRate.rateRuleCode,jdbcType=VARCHAR},
+            #{ladderRate.fee,jdbcType=DOUBLE},
+            #{ladderRate.computeMode,jdbcType=VARCHAR},
+            #{ladderRate.maxFee,jdbcType=DOUBLE},
+            #{ladderRate.minFee,jdbcType=DOUBLE},
+            #{ladderRate.id,jdbcType=BIGINT},
+            #{ladderRate.code,jdbcType=VARCHAR},
+            #{ladderRate.createTime}
+        )
+    </insert>
+
+    <!--auto generated Code-->
+    <insert id="insertSelective" useGeneratedKeys="true" keyProperty="ladderRate.id">
+        INSERT INTO ladder_rate
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="ladderRate.rateCondition!=null"> rateCondition,</if>
+            <if test="ladderRate.beginCondition!=null"> begin_condition,</if>
+            <if test="ladderRate.endCondition!=null"> end_condition,</if>
+            <if test="ladderRate.rateRuleCode!=null"> rate_rule_code,</if>
+            <if test="ladderRate.fee!=null"> fee,</if>
+            <if test="ladderRate.computeMode!=null"> compute_mode,</if>
+            <if test="ladderRate.maxFee!=null"> max_fee,</if>
+            <if test="ladderRate.minFee!=null"> min_fee,</if>
+            <if test="ladderRate.id!=null"> id,</if>
+            <if test="ladderRate.code!=null"> code,</if>
+            <if test="ladderRate.createTime!=null"> create_time,</if>
+        </trim>
+        VALUES
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="ladderRate.rateCondition!=null">#{ladderRate.rateCondition,jdbcType=VARCHAR},
+            </if>
+            <if test="ladderRate.beginCondition!=null">#{ladderRate.beginCondition,jdbcType=VARCHAR},
+            </if>
+            <if test="ladderRate.endCondition!=null">#{ladderRate.endCondition,jdbcType=VARCHAR},
+            </if>
+            <if test="ladderRate.rateRuleCode!=null">#{ladderRate.rateRuleCode,jdbcType=VARCHAR},
+            </if>
+            <if test="ladderRate.fee!=null">#{ladderRate.fee,jdbcType=DOUBLE},
+            </if>
+            <if test="ladderRate.computeMode!=null">#{ladderRate.computeMode,jdbcType=VARCHAR},
+            </if>
+            <if test="ladderRate.maxFee!=null">#{ladderRate.maxFee,jdbcType=DOUBLE},
+            </if>
+            <if test="ladderRate.minFee!=null">#{ladderRate.minFee,jdbcType=DOUBLE},
+            </if>
+            <if test="ladderRate.id!=null">#{ladderRate.id,jdbcType=BIGINT},
+            </if>
+            <if test="ladderRate.code!=null">#{ladderRate.code,jdbcType=VARCHAR},
+            </if>
+            <if test="ladderRate.createTime!=null">#{ladderRate.createTime},
+            </if>
+        </trim>
+    </insert>
+
+    <!--auto generated Code-->
+    <insert id="insertList">
+        INSERT INTO ladder_rate (
+        <include refid="Base_Column_List"/>
+        )VALUES
+        <foreach collection="ladderRates" item="ladderRate" index="index" separator=",">
+            (
+            #{ladderRate.rateCondition,jdbcType=VARCHAR},
+            #{ladderRate.beginCondition,jdbcType=VARCHAR},
+            #{ladderRate.endCondition,jdbcType=VARCHAR},
+            #{ladderRate.rateRuleCode,jdbcType=VARCHAR},
+            #{ladderRate.fee,jdbcType=DOUBLE},
+            #{ladderRate.computeMode,jdbcType=VARCHAR},
+            #{ladderRate.maxFee,jdbcType=DOUBLE},
+            #{ladderRate.minFee,jdbcType=DOUBLE},
+            #{ladderRate.id,jdbcType=BIGINT},
+            #{ladderRate.code,jdbcType=VARCHAR},
+            #{ladderRate.createTime}
+            )
+        </foreach>
+    </insert>
+
+    <!--auto generated Code-->
+    <update id="update">
+        UPDATE ladder_rate
+        <set>
+            <if test="ladderRate.rateCondition != null"> rate_condition= #{ladderRate.rateCondition,jdbcType=VARCHAR},</if>
+            <if test="ladderRate.beginCondition != null"> begin_condition= #{ladderRate.beginCondition,jdbcType=VARCHAR},</if>
+            <if test="ladderRate.endCondition != null"> end_condition= #{ladderRate.endCondition,jdbcType=VARCHAR},</if>
+            <if test="ladderRate.rateRuleCode != null"> rate_rule_code= #{ladderRate.rateRuleCode,jdbcType=VARCHAR},</if>
+            <if test="ladderRate.fee != null"> fee= #{ladderRate.fee,jdbcType=DOUBLE},</if>
+            <if test="ladderRate.computeMode != null"> compute_mode= #{ladderRate.computeMode,jdbcType=VARCHAR},</if>
+            <if test="ladderRate.maxFee != null"> max_fee= #{ladderRate.maxFee,jdbcType=DOUBLE},</if>
+            <if test="ladderRate.minFee != null"> min_fee= #{ladderRate.minFee,jdbcType=DOUBLE},</if>
+        </set>
+        WHERE id = #{ladderRate.id,jdbcType=BIGINT}
+    </update>
+    <select id="queryByRateRuleCode" resultMap="BaseResultMap">
+      SELECT
+        <include refid="Base_Column_List" />
+      FROM ladder_rate
+      WHERE rate_rule_code = #{rateRuleCode}
+    </select>
+
+    <delete id="delete">
+        DELETE FROM ladder_rate
+        WHERE id = #{id}
+    </delete>
+
+    <select id="checkRateByCode" resultType="java.lang.Integer" parameterType="java.lang.String">
+        SELECT COUNT(1) FROM ladder_rate WHERE code = #{code}
+    </select>
+
+    <delete id="deleteByRateRuleCode" parameterType="java.lang.String">
+        DELETE FROM ladder_rate
+        WHERE rate_rule_code = #{rateRuleCode}
+    </delete>
+</mapper>
+

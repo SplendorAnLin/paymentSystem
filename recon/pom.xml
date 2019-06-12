@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.yl</groupId>
+    <artifactId>recon</artifactId>
+    <packaging>pom</packaging>
+    <version>1.0.0</version>
+    <name>对账系统</name>
+    <parent>
+        <groupId>com.yl</groupId>
+        <artifactId>yl-parent</artifactId>
+        <version>1.0-SNAPSHOT</version>
+    </parent>
+
+    <modules>
+        <module>recon-core</module>
+        <module>recon-api</module>
+    </modules>
+	<properties>
+        <maven.test.skip>true</maven.test.skip>
+		<recon-core.version>1.0.0</recon-core.version>
+		<recon-api.version>1.0.0</recon-api.version>
+	</properties>
+
+
+</project>

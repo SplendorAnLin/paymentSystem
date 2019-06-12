@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yl.realAuth.core.dao.mapper.RoutingTemplateMapper">
+	<resultMap id="BaseResultMap" type="com.yl.realAuth.model.RoutingTemplate">
+		<id column="ID" 					property="id" />
+		<result column="CODE"  				property="code" />
+		<result column="VERSION" 		    property="version" />
+		<result column="CREATE_TIME" 		property="createTime" />
+		<result column="STATUS" 		property="status" />
+		<result column="BUSINESS_TYPE" 		property="businessType" />
+		<result column="NAME" 		property="name" />
+	</resultMap>
+	<resultMap id="RuleInfoResultMap" type="com.yl.realAuth.model.RoutingRuleInfo">
+		<id column="ID" 					property="id" />
+		<result column="CODE"  				property="code" />
+		<result column="VERSION" 		    property="version" />
+		<result column="CREATE_TIME" 		property="createTime" />
+		<result column="ROUTING_TEMPLATE_CODE" 		property="routingTemplateCode" />
+		<result column="BANK_CODE" 		property="bankCode" />
+		<result column="CARD_TYPE" 		property="cardType" />
+		<result column="PRIORITY" 		property="priority" />
+		<result column="CHANNEL_CODE" 		property="channelCode" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		ID,CODE,VERSION,CREATE_TIME,STATUS,BUSINESS_TYPE,NAME
+	</sql>
+	<sql id="RuleInfo_Column_List">
+		ID,CODE,VERSION,CREATE_TIME,ROUTING_TEMPLATE_CODE,BANK_CODE,CARD_TYPE,PRIORITY,CHANNEL_CODE
+	</sql>
+
+	<select id="findRoutingRuleByTemplateCode" parameterType="Map" resultMap="RuleInfoResultMap">
+		SELECT 
+		<include refid="RuleInfo_Column_List" />
+		FROM ROUTING_RULE_INFO 
+	   WHERE ROUTING_TEMPLATE_CODE = #{routingTemplateCode}
+	   	<if test="bankCode != null and bankCode != '' ">
+	     AND BANK_CODE = #{bankCode}
+	   	</if>
+	   	<if test="cardType != null and cardType != '' ">
+	     AND CARD_TYPE = #{cardType}
+	    </if>
+	    ORDER BY PRIORITY
+	</select>
+	<select id="findRoutingTemplate" resultType="Map">
+		SELECT
+		<include refid="Base_Column_List" />
+		FROM ROUTING_TEMPLATE
+	</select>
+	<insert id="insert" parameterType="com.yl.realAuth.model.RoutingTemplate" useGeneratedKeys="true" keyProperty="id">
+		SELECT
+		<include refid="Base_Column_List" />
+		FROM ROUTING_TEMPLATE
+	</insert>
+	
+	<update id="modifyRoutingTemplate" parameterType="com.yl.realAuth.model.RoutingTemplate">
+		SELECT
+		<include refid="Base_Column_List" />
+		FROM ROUTING_TEMPLATE
+	</update>
+	
+	<select id="findByCode" parameterType="String" resultMap="BaseResultMap">
+		SELECT
+		<include refid="Base_Column_List" />
+		FROM ROUTING_TEMPLATE
+		WHERE CODE = #{code}
+	
+	</select>
+	
+</mapper>

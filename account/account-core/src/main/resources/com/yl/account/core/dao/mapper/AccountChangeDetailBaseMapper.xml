@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.yl.account.core.dao.mapper.AccountChangeDetailBaseMapper">
+
+	<resultMap id="AccountChangeDetail" type="com.yl.account.model.AccountChangeDetail">
+		<result column="CODE" 						property="code" />
+		<result column="VERSION" 	 				property="version" />
+		<result column="CREATE_TIME" 				property="createTime" />
+		<result column="ACC_NO" 					property="accountNo" />
+		<result column="ACC_TYPE" 					property="accountType" />
+		<result column="STATUS" 					property="accountStatus" />
+		<result column="SYS_CODE" 					property="systemCode" />
+		<result column="TRANS_FLOW" 				property="systemFlow" />
+		<result column="TRANS_TIME" 				property="requestTime" />
+		<result column="BUSI_CODE" 					property="bussinessCode" />
+		<result column="USER_NO" 					property="userNo" />
+		<result column="USER_ROLE" 					property="userRole" />
+		<result column="BALANCE"	 				property="balance" />
+		<result column="TRANSIT_BAL" 				property="transitBalance" />
+		<result column="FRZE_BAL"	 				property="freezeBalance" />
+		<result column="FUND_SYMBOL"				property="symbol" />
+		<result column="AMT"	 					property="amount" />
+		<result column="OPER" 						property="operator" />
+		<result column="REASON"						property="changeReason" />
+		<result column="ABLE_DATE" 					property="ableDate" />
+		<result column="CYCLE" 						property="cycle" />
+	</resultMap>
+
+	<!--通用的sql语句段-->
+	<sql id="commonColumn">
+		CODE, VERSION, CREATE_TIME, ACC_NO, ACC_TYPE, STATUS, SYS_CODE, TRANS_FLOW, TRANS_TIME, BUSI_CODE, USER_NO,
+		USER_ROLE, BALANCE, TRANSIT_BAL, FRZE_BAL, FUND_SYMBOL, AMT, OPER, REASON, ABLE_DATE, CYCLE
+	</sql>
+
+	<!-- 持久化账户变更记录 -->
+	<insert id="insert" parameterType="com.yl.account.model.AccountChangeDetail">
+		INSERT INTO
+			T_ACC_CHANGE_REG (<include refid="commonColumn"/>)
+		VALUES
+			(#{code}, #{version}, #{createTime}, #{accountNo, jdbcType=VARCHAR}, #{accountType, jdbcType=VARCHAR}, #{accountStatus, jdbcType=VARCHAR},
+			#{systemCode}, #{systemFlow}, #{requestTime}, #{bussinessCode}, #{userNo, jdbcType=VARCHAR}, #{userRole, jdbcType=VARCHAR},
+			#{balance, jdbcType=DOUBLE}, #{transitBalance, jdbcType=DOUBLE}, #{freezeBalance, jdbcType=DOUBLE}, #{symbol, jdbcType=VARCHAR},
+			#{amount, jdbcType=DOUBLE}, #{operator, jdbcType=VARCHAR}, #{changeReason, jdbcType=VARCHAR}, #{ableDate}, #{cycle})
+	</insert>
+
+	<!-- 账号、账户类型获取账户属性 -->
+	<select id="findAccountBySystemId" resultMap="AccountChangeDetail">
+		SELECT <include refid="commonColumn" /> FROM T_ACC_CHANGE_REG WHERE SYS_CODE = #{systemCode} AND TRANS_FLOW = #{systemFlowId} AND BUSI_CODE = #{bussinessCode}
+	</select>
+
+	<!-- 账户冻结、解冻金额汇总 -->
+	<select id="findFreezeBalanceBy" resultType="java.util.Map" >
+		SELECT TRUNC(r.CREATE_TIME) AS CREATE_TIME, SUM(r.BALANCE) AS BALANCE, r.STATUS FROM T_ACC_CHANGE_REG r
+		WHERE r.BUSI_CODE = 'MODIFY_ACCOUNT' AND r.CREATE_TIME &gt;= #{dailyStart} AND r.CREATE_TIME &lt;= #{dailyEnd}
+		GROUP BY TRUNC(r.CREATE_TIME), r.STATUS
+	</select>
+	
+	<!-- 根据参数查询账户变更信息  -->
+	<select id="findAccountBySystemFlowId" resultMap="AccountChangeDetail">
+		SELECT <include refid="commonColumn" /> FROM T_ACC_CHANGE_REG reg WHERE reg.SYS_CODE = #{systemCode} AND reg.TRANS_FLOW = #{systemFlowId}
+	</select>
+	
+	<!-- 分页查询变更明细信息  -->
+	<select id="findAllAccountChangeRecordsBy" resultMap="AccountChangeDetail">
+		SELECT <include refid="commonColumn" /> FROM T_ACC_CHANGE_REG reg 
+		<where> 1 = 1
+			<if test="queryParams != null">
+				<if test="queryParams.accountNo != '' and queryParams.accountNo != null">
+					and reg.ACC_NO = #{queryParams.accountNo}
+				</if>
+				<if test="queryParams.symbol != '' and queryParams.symbol != null">
+					and reg.FUND_SYMBOL = #{queryParams.symbol}
+				</if>
+				<if test="queryParams.systemCode != '' and queryParams.systemCode != null">
+					and reg.SYS_CODE = #{queryParams.systemCode}
+				</if>
+				<if test="queryParams.systemFlow != '' and queryParams.systemFlow != null">
+					and reg.TRANS_FLOW = #{queryParams.systemFlow}
+				</if>
+				<if test="queryParams.bussinessCode != '' and queryParams.bussinessCode != null">
+					and reg.BUSI_CODE = #{queryParams.bussinessCode}
+				</if>
+				<if test="queryParams.userNo != '' and queryParams.userNo != null">
+					and reg.USER_NO = #{queryParams.userNo}
+				</if>
+				<if test="queryParams.startCreateDate != null and queryParams.endCreateDate == null">
+					and reg.CREATE_TIME &gt;= #{queryParams.startCreateDate}
+				</if>
+				<if test="queryParams.startCreateDate == null and queryParams.endCreateDate != null">
+					and reg.CREATE_TIME &lt;= #{queryParams.endCreateDate}
+				</if>
+				<if test="queryParams.startCreateDate != null and queryParams.endCreateDate != null">
+					and reg.CREATE_TIME BETWEEN #{queryParams.startCreateDate} AND #{queryParams.endCreateDate}
+				</if>
+			</if>
+		</where>
+		ORDER BY reg.CREATE_TIME DESC  
+	</select>
+	 
+	<select id="queryAllAccountChangeRecordsBy" resultType="java.util.Map">
+		SELECT <include refid="commonColumn" /> FROM T_ACC_CHANGE_REG reg 
+		<where> 1 = 1
+			<if test="queryParams != null">
+				<if test="queryParams.accountNo != '' and queryParams.accountNo != null">
+					and reg.ACC_NO = #{queryParams.accountNo}
+				</if>
+				<if test="queryParams.code != '' and queryParams.code != null">
+					and reg.CODE = #{queryParams.code}
+				</if>
+				<if test="queryParams.systemCode != '' and queryParams.systemCode != null">
+					and reg.SYS_CODE = #{queryParams.systemCode}
+				</if>
+				<if test="queryParams.systemFlow != '' and queryParams.systemFlow != null">
+					and reg.TRANS_FLOW = #{queryParams.systemFlow}
+				</if>
+				<if test="queryParams.bussinessCode != '' and queryParams.bussinessCode != null">
+					and reg.BUSI_CODE = #{queryParams.bussinessCode}
+				</if>
+				<if test="queryParams.customerNo != '' and queryParams.customerNo != null">
+					and reg.USER_NO = #{queryParams.customerNo}
+				</if>
+					<if test="queryParams.symbol != '' and queryParams.symbol != null">
+					and reg.FUND_SYMBOL = #{queryParams.symbol}
+				</if>
+				<if test="queryParams.startCreateDate != null and queryParams.endCreateDate == null">
+					and reg.CREATE_TIME &gt;= #{queryParams.startCreateDate}
+				</if>
+				<if test="queryParams.startCreateDate == null and queryParams.endCreateDate != null">
+					and reg.CREATE_TIME &lt;= #{queryParams.endCreateDate}
+				</if>
+				<if test="queryParams.startCreateDate != null and queryParams.endCreateDate != null">
+					and reg.CREATE_TIME BETWEEN #{queryParams.startCreateDate} AND #{queryParams.endCreateDate}
+				</if>
+			</if>
+		</where>
+		ORDER BY reg.CREATE_TIME DESC limit  #{queryParams.pageCode},#{queryParams.showCount}
+	</select>
+</mapper>

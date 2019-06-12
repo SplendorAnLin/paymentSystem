@@ -1,0 +1,352 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yl.dpay.core.mybatis.mapper.RequestMapper">
+    <resultMap id="RequestMap" type="com.yl.dpay.core.entity.Request">
+        <id property="id" column="ID"></id>
+        <result property="optimistic" column="OPTIMISTIC"></result>
+        <result property="requestNo" column="REQUEST_NO"></result>
+        <result property="flowNo" column="FLOW_NO"></result>
+        <result property="requestType" column="REQUEST_TYPE"></result>
+        <result property="amount" column="AMOUNT"></result>
+        <result property="description" column="DESCRIPTION"></result>
+        <result property="status" column="STATUS"></result>
+        <result property="auditStatus" column="AUDIT_STATUS"></result>
+        <result property="ownerId" column="OWNER_ID"></result>
+        <result property="ownerRole" column="OWNER_ROLE"></result>
+        <result property="accountName" column="ACCOUNT_NAME"></result>
+        <result property="accountNo" column="ACCOUNT_NO"></result>
+        <result property="createDate" column="CREATE_DATE"></result>
+        <result property="bankCode" column="BANK_CODE"></result>
+        <result property="completeMsg" column="COMPLETE_MSG"></result>
+        <result property="accountType" column="ACCOUNT_TYPE"></result>
+        <result property="cardType" column="CARD_TYPE"></result>
+        <result property="cerType" column="CER_TYPE"></result>
+        <result property="cerNo" column="CER_NO"></result>
+        <result property="auditDate" column="AUDIT_DATE"></result>
+        <result property="completeDate" column="COMPLETE_DATE"></result>
+        <result property="operator" column="OPERATOR"></result>
+        <result property="validity" column="VALIDITY"></result>
+        <result property="cvv" column="CVV"></result>
+
+        <result property="bankName" column="BANK_NAME"></result>
+        <result property="fee" column="FEE"></result>
+        <result property="cost" column="COST"></result>
+        <result property="notifyStatus" column="NOTIFY_STATUS"></result>
+        <result property="notifyCount" column="NOTIFY_COUNT"></result>
+        <result property="notifyTime" column="NOTIFY_TIME"></result>
+        <result property="remitAdutiReason" column="REMIT_ADUTI_REASON"></result>
+        <result property="interfaceInfoCode" column="INTERFACE_INFO_CODE"></result>
+    </resultMap>
+
+
+    <sql id="requestColumns">
+		ID,OPTIMISTIC,REQUEST_NO,FLOW_NO,REQUEST_TYPE,AMOUNT,DESCRIPTION,STATUS,AUDIT_STATUS,OWNER_ID,OWNER_ROLE,ACCOUNT_NAME,
+		ACCOUNT_NO,CREATE_DATE,BANK_CODE,COMPLETE_MSG,ACCOUNT_TYPE,CARD_TYPE,CER_TYPE,CER_NO,AUDIT_DATE,COMPLETE_DATE,
+		OPERATOR,VALIDITY,CVV,BANK_NAME,FEE,COST,NOTIFY_STATUS,NOTIFY_COUNT,NOTIFY_TIME,REMIT_ADUTI_REASON
+	</sql>
+
+
+    <insert id="insert" parameterType="com.yl.dpay.core.entity.Request"
+            useGeneratedKeys="true" keyProperty="id">
+		INSERT INTO REQUEST (
+		REQUEST_NO,FLOW_NO,REQUEST_TYPE,AMOUNT,DESCRIPTION,STATUS,AUDIT_STATUS,OWNER_ID,OWNER_ROLE,ACCOUNT_NAME,
+		ACCOUNT_NO,CREATE_DATE,BANK_CODE,COMPLETE_MSG,ACCOUNT_TYPE,CARD_TYPE,CER_TYPE,CER_NO,AUDIT_DATE,COMPLETE_DATE,
+		OPERATOR,VALIDITY,CVV,BANK_NAME,FEE,COST,NOTIFY_STATUS,NOTIFY_COUNT,NOTIFY_TIME,REMIT_ADUTI_REASON
+		)
+		VALUES (
+		#{requestNo},#{flowNo},#{requestType},#{amount},#{description},#{status},#{auditStatus},
+		#{ownerId},#{ownerRole},#{accountName},#{accountNo},#{createDate},#{bankCode},#{completeMsg},
+		#{accountType},#{cardType},#{cerType},#{cerNo},#{auditDate},#{completeDate},#{operator},
+		#{validity},#{cvv},#{bankName},#{fee},#{cost},#{notifyStatus},#{notifyCount},#{notifyTime},#{remitAdutiReason}
+		)
+	</insert>
+
+
+    <select id="findById" resultMap="RequestMap" parameterType="Long">
+        SELECT
+        <include refid="requestColumns"/>
+        FROM REQUEST WHERE ID = #{id}
+    </select>
+
+    <update id="update" parameterType="com.yl.dpay.core.entity.Request">
+		UPDATE REQUEST
+		SET STATUS= #{status},
+		AUDIT_DATE=#{auditDate},
+		AUDIT_STATUS=#{auditStatus},
+		OPERATOR=#{operator},
+		COMPLETE_DATE=#{completeDate},
+		COMPLETE_MSG=#{completeMsg},
+		ACCOUNT_NAME=#{accountName},
+		ACCOUNT_NO=#{accountNo},
+		ACCOUNT_TYPE=#{accountType},
+		AMOUNT=#{amount},
+		BANK_CODE=#{bankCode},
+		CARD_TYPE=#{cardType},
+		CER_NO=#{cerNo},
+		CER_TYPE=#{cerType},
+		CVV=#{cvv},
+		VALIDITY=#{validity},
+		NOTIFY_STATUS=#{notifyStatus},
+		NOTIFY_COUNT=#{notifyCount},
+		NOTIFY_TIME=#{notifyTime},
+		REMIT_ADUTI_REASON=#{remitAdutiReason},
+		INTERFACE_INFO_CODE=#{interfaceInfoCode},
+		OPTIMISTIC = OPTIMISTIC + 1
+		WHERE ID = #{id} AND OPTIMISTIC = #{optimistic}
+	</update>
+
+    <select id="findByFlowNo" resultMap="RequestMap" parameterType="String">
+        SELECT
+        <include refid="requestColumns"/>
+        FROM REQUEST WHERE FLOW_NO = #{flowNo}
+    </select>
+
+    <select id="find" resultMap="RequestMap" parameterType="Map">
+        SELECT
+        <include refid="requestColumns"/>
+        FROM REQUEST WHERE REQUEST_NO = #{requestNo} AND OWNER_ID =
+        #{ownerId}
+    </select>
+
+    <select id="findByRequestNo" resultMap="RequestMap"
+            parameterType="String">
+        SELECT
+        <include refid="requestColumns"/>
+        FROM REQUEST WHERE REQUEST_NO = #{requestNo} and owner_id = #{ownerId}
+    </select>
+
+
+	<select id="findByCreateTime" resultMap="RequestMap">
+		SELECT
+        <include refid="requestColumns"/>
+        FROM REQUEST WHERE STATUS = 'SUCCESS'
+        <if test="params.starTime != null and params.starTime != ''">
+        	<if test="params.starEnd != null and params.starEnd != ''">
+        		AND CREATE_DATE BETWEEN #{params.starTime} AND #{params.starEnd}
+        	</if>
+        </if>
+		<if test="params.ownerId != null and params.ownerId !='' ">
+			AND OWNER_ID = #{params.ownerId}
+		</if>
+	</select>
+	
+	
+	<select id="customerReconHead" resultType="java.util.HashMap"
+		parameterType="Map">
+		SELECT COUNT(1) count, SUM(AMOUNT) sum, SUM(FEE) fee
+		FROM REQUEST WHERE STATUS = 'SUCCESS'
+        <if test="params.starTime != null and params.starTime != ''">
+        	<if test="params.starEnd != null and params.starEnd != ''">
+        		AND CREATE_DATE BETWEEN #{params.starTime} AND #{params.starEnd}
+        	</if>
+        </if>
+		<if test="params.ownerId != null and params.ownerId !='' ">
+			AND OWNER_ID = #{params.ownerId}
+		</if>
+	</select>
+
+
+    <select id="findByStatus" resultMap="RequestMap">
+        SELECT
+        <include refid="requestColumns"/>
+        FROM REQUEST WHERE STATUS = #{status}
+    </select>
+
+    <select id="findWaitNotifyRequest" resultMap="RequestMap">
+        SELECT
+        <include refid="requestColumns"/>
+        FROM REQUEST WHERE STATUS in ('SUCCESS','FAILED')
+        and NOTIFY_STATUS in ('WAIT','FAILED')
+        and REQUEST_TYPE = 'INTERFACE'
+        and notify_count &lt; #{count}
+        limit #{nums}
+    </select>
+
+    <select id="findByAccNameAmtDay" resultMap="RequestMap">
+        SELECT
+        <include refid="requestColumns"/>
+        FROM REQUEST WHERE ACCOUNT_NAME = #{accountName} and AMOUNT = #{amount} and ACCOUNT_NO = #{accountNo}
+        and CREATE_DATE &gt;= #{startDate} and CREATE_DATE &lt;= #{endDate} and AUDIT_STATUS != 'REFUSE'
+        <!-- and (STATUS = 'SUCCESS' or STATUS = 'FAILED') -->
+    </select>
+    <!--所有状态订单  日期-笔数-金额 -->
+    <select id="orderAllSumByDay" resultType="java.util.HashMap" parameterType="Map">
+        select COUNT(id) as count, DATE_FORMAT(r.create_date,'%Y%m%d') days,sum(r.amount) as amount from request r
+        where
+        DATE_FORMAT(r.create_date,'%Y%m%d') &lt;= DATE_FORMAT(#{orderTimeStart},'%Y%m%d') and
+        DATE_FORMAT(r.create_date,'%Y%m%d') &gt;= DATE_FORMAT(#{orderTimeEnd},'%Y%m%d')
+        <if test="owner != null and owner !='' ">
+            AND OWNER_ID IN (#{owner})
+        </if>
+        group by days
+    </select>
+
+    <!-- 代付 日期-金额 笔数 -->
+    <select id="orderSumByDay" resultType="java.util.HashMap" parameterType="Map">
+        select COUNT(id) as count, DATE_FORMAT(r.create_date,'%Y%m%d') days,sum(r.amount) as amount from request r
+        where
+        status = 'SUCCESS' and
+        DATE_FORMAT(r.create_date,'%Y%m%d') &lt;= DATE_FORMAT(#{orderTimeStart},'%Y%m%d') and
+        DATE_FORMAT(r.create_date,'%Y%m%d') &gt;= DATE_FORMAT(#{orderTimeEnd},'%Y%m%d')
+        <if test="owner != null and owner !='' ">
+            AND OWNER_ID IN (#{owner})
+        </if>
+        group by days
+    </select>
+    
+	<!-- 代付成功数据合计 -->
+	<select id="findSumCountAndFee" resultType="java.util.HashMap" parameterType="Map">
+		SELECT count(AMOUNT) AS COUNT, SUM(amount) AS AMOUNT, SUM(FEE) AS FEE FROM REQUEST vouc
+		WHERE STATUS = 'SUCCESS'
+		<if test="params != null">
+			<if test="params.createStartTime != null and params.createEndTime == null">
+				and vouc.COMPLETE_DATE &gt;= #{params.createStartTime}
+			</if>
+			<if test="params.createStartTime == null and params.createEndTime != null">
+				and vouc.COMPLETE_DATE &lt;= #{params.createEndTime}
+			</if>
+			<if test="params.createStartTime != null and params.createEndTime != null">
+				and vouc.COMPLETE_DATE BETWEEN #{params.createStartTime} AND #{params.createEndTime}
+			</if>
+		</if>
+	</select>
+	
+	<!-- 代付成功所有订单 -->
+	<select id="findByParams" resultMap="RequestMap">
+		SELECT
+		<include refid="requestColumns" /> FROM REQUEST vouc
+		WHERE STATUS = 'SUCCESS'
+		<if test="params != null">
+			<if test="params.createStartTime != null and params.createEndTime == null">
+				and vouc.COMPLETE_DATE &gt;= #{params.createStartTime}
+			</if>
+			<if test="params.createStartTime == null and params.createEndTime != null">
+				and vouc.COMPLETE_DATE &lt;= #{params.createEndTime}
+			</if>
+			<if test="params.createStartTime != null and params.createEndTime != null">
+				and vouc.COMPLETE_DATE BETWEEN #{params.createStartTime} AND #{params.createEndTime}
+			</if>
+		</if>
+	</select>
+    
+    <!-- 代付成功 - 笔数、金额 -->
+    <select id="dfSuccess" resultType="java.util.HashMap" parameterType="Map">
+        SELECT count(AMOUNT) AS COUNTS , SUM(amount) AS AMOUNT FROM REQUEST
+        WHERE STATUS = 'SUCCESS'
+        AND AUDIT_STATUS = 'PASS'
+        AND DATE_FORMAT(AUDIT_DATE,'%Y%m%d') &lt;= DATE_FORMAT(#{orderTimeStart},'%Y%m%d')
+        AND DATE_FORMAT(AUDIT_DATE,'%Y%m%d') &gt;= DATE_FORMAT(#{orderTimeEnd},'%Y%m%d')
+        <if test="owner != null and owner.size()>0 ">
+            AND OWNER_ID IN
+            <foreach item="item" index="index" collection="owner" open="(" separator="," close=")">
+                #{item}
+            </foreach>
+        </if>
+    </select>
+    <!-- 代付总笔数  金额 -->
+    <select id="dfSuccessCount" resultType="java.util.HashMap" parameterType="Map">
+        SELECT COUNT(AMOUNT) , AMOUNT FROM REQUEST
+        WHERE
+        DATE_FORMAT(AUDIT_DATE,'%Y%m%d') &lt;= DATE_FORMAT(#{orderTimeStart},'%Y%m%d')
+        AND DATE_FORMAT(AUDIT_DATE,'%Y%m%d') &gt;= DATE_FORMAT(#{orderTimeEnd},'%Y%m%d')
+        <if test="owner != null and owner !='' ">
+            AND OWNER_ID IN (#{owner})
+        </if>
+    </select>
+    <!-- app外部调用提现查询接口 -->
+    <select id="selectRequest" resultType="Map" parameterType="Map">
+        select
+        ID,OPTIMISTIC,REQUEST_NO,FLOW_NO,REQUEST_TYPE,AMOUNT,DESCRIPTION,STATUS,AUDIT_STATUS,OWNER_ID,OWNER_ROLE,ACCOUNT_NAME,
+        ACCOUNT_NO,CREATE_DATE,BANK_CODE,COMPLETE_MSG,ACCOUNT_TYPE,CARD_TYPE,CER_TYPE,CER_NO,AUDIT_DATE,COMPLETE_DATE,
+        OPERATOR,VALIDITY,CVV,BANK_NAME,FEE,COST,NOTIFY_STATUS,NOTIFY_COUNT,NOTIFY_TIME
+        from
+        request
+        where
+        owner_id =#{params.customerNo}
+        <if test="params.status != null and params.status != '' ">
+            and status=#{params.status}
+        </if>
+        <if test="params.startCompleteDate != null and params.startCompleteDate != ''">
+            and CREATE_DATE&gt;=#{params.startCompleteDate}
+        </if>
+        <if test="params.endCompleteDate != null and params.endCompleteDate != ''">
+            and CREATE_DATE&lt;=#{params.endCompleteDate}
+        </if>
+        order by id DESC
+        limit #{params.currentPage},#{params.pageSize}
+    </select>
+    <!-- weixin结算查询page分页 -->
+    <select id="findAllrequest" resultType="map" parameterType="Map">
+        select
+        ID,OPTIMISTIC,REQUEST_NO,FLOW_NO,REQUEST_TYPE,AMOUNT,DESCRIPTION,STATUS,AUDIT_STATUS,OWNER_ID,OWNER_ROLE,ACCOUNT_NAME,
+        ACCOUNT_NO,CREATE_DATE,BANK_CODE,COMPLETE_MSG,ACCOUNT_TYPE,CARD_TYPE,CER_TYPE,CER_NO,AUDIT_DATE,COMPLETE_DATE,
+        OPERATOR,VALIDITY,CVV,BANK_NAME,FEE,COST,NOTIFY_STATUS,NOTIFY_COUNT,NOTIFY_TIME
+        from
+        request
+        where
+        OWNER_ID =#{params.ownerId}
+        <if test="params.status != null and params.status != '' ">
+            and STATUS=#{params.status}
+        </if>
+        <if test="params.requestType !=null and params.requestType != '' ">
+            and request_Type=#{params.requestType}
+        </if>
+        <if test="params.startCompleteDate != null and params.startCompleteDate != ''">
+            and CREATE_DATE&gt;=#{params.startCompleteDate}
+        </if>
+        <if test="params.endCompleteDate != null and params.endCompleteDate != ''">
+            and CREATE_DATE&lt;=#{params.endCompleteDate}
+        </if>
+        order by CREATE_DATE DESC
+    </select>
+
+
+
+
+    <!-- 根据ownerId查询结算订单总条数 -->
+    <select id="selectRequestsum" resultType="Map" parameterType="Map"	>
+        select  count(1)  from  request
+        where
+        owner_id =#{params.ownerId}
+        <if test="params.status != null and params.status != '' ">
+            and STATUS=#{params.status}
+        </if>
+        <if test="params.requestType !=null and params.requestType != '' ">
+            and request_Type=#{params.requestType}
+        </if>
+        <if test="params.startCompleteDate != null and params.startCompleteDate != ''">
+            and COMPLETE_DATE&gt;=#{params.startCompleteDate}
+        </if>
+        <if test="params.endCompleteDate != null and params.endCompleteDate != ''">
+            and COMPLETE_DATE&lt;=#{params.endCompleteDate}
+        </if>
+    </select>
+
+    <!-- app外部调用提现查询接口 -->
+    <select id="selectRequestDetailed" resultType="Map" parameterType="Map">
+		select
+		OWNER_ID,DESCRIPTION,AMOUNT as COST,FEE,AMOUNT,STATUS,ACCOUNT_NAME,ACCOUNT_NO,BANK_NAME AS OPEN_BANK_NAME
+		,REQUEST_TYPE,AUDIT_STATUS,DATE_FORMAT(CREATE_DATE,"%Y-%m-%d %H:%i:%s") as CREATE_DATE
+		,DATE_FORMAT(COMPLETE_DATE,"%Y-%m-%d %H:%i:%s") as COMPLETE_DATE
+		from
+		request
+		where
+		owner_id=#{params.customerNo}
+		and
+		FLOW_NO=#{params.requestNo}
+	</select>
+
+
+    <select id="findrequestDetail" resultType="Map" parameterType="Map"	>
+        select
+        <include refid="requestColumns" />
+        from
+        request
+        where
+        owner_id=#{params.ownerId}
+        and
+        FLOW_NO=#{params.requestNo}
+    </select>
+</mapper>

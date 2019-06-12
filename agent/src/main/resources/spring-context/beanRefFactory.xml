@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN"         ":/spring-beans.dtd">
+
+
+<beans>
+
+    <bean id="beanRefFactory" lazy-init="true"
+         class="org.springframework.context.support.ClassPathXmlApplicationContext">
+        <constructor-arg>
+           <list>
+               <value>spring-context/spring-hessian.xml</value>
+			</list>
+        </constructor-arg>
+    </bean>
+</beans>								
+
+
+					

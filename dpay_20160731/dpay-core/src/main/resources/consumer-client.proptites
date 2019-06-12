@@ -1,0 +1,5 @@
+consumerId=CID-bf-dpay-dev
+accessKey=LTAI5xEkGkIpDm7R
+secretKey=lqcyC3j6c0n5kVeLUgULFBISXXRWW3
+topic=bf-dpay-topic
+QUICKPAY_AUTO_DPAY_TOPIC=bf-qp-dp-topic

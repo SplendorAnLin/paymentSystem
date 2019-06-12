@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN"         ":/spring-beans.dtd">
+
+
+<beans>
+
+    <bean id="beanRefFactory" lazy-init="true"
+         class="org.springframework.context.support.ClassPathXmlApplicationContext">
+        <constructor-arg>
+           <list>
+               <value>springContext/applicationContext.xml</value>
+               <value>springContext/spring-dao.xml</value>
+               <value>springContext/spring-trans.xml</value>
+               <value>springContext/spring-hessian.xml</value>
+               <value>springContext/bankInterface/spring-*.xml</value>
+               <value>com/pay/pos/interfaces/spring-*.xml</value>
+			   <value>com/pay/pos/interfaces/*/spring-*.xml</value>
+			</list>
+        </constructor-arg>
+    </bean>
+</beans>								
+
+
+					

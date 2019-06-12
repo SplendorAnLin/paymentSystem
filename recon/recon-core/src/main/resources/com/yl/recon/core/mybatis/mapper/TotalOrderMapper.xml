@@ -1,0 +1,381 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.yl.recon.core.mybatis.mapper.TotalOrderMapper">
+    <!--auto generated Code-->
+    <resultMap id="BaseResultMap" type="com.yl.recon.core.entity.order.TotalOrder">
+        <result column="file" property="file" jdbcType="VARCHAR"/>
+        <result column="recon_file_type" property="reconFileType" jdbcType="VARCHAR"/>
+        <result column="total_amount" property="totalAmount" jdbcType="VARCHAR"/>
+        <result column="total_fee" property="totalFee" jdbcType="VARCHAR"/>
+        <result column="total_num" property="totalNum" jdbcType="VARCHAR"/>
+        <result column="recon_date" property="reconDate" jdbcType="DATE"/>
+        <result column="code" property="code" jdbcType="BIGINT"/>
+        <result column="version" property="version" jdbcType="BIGINT"/>
+        <result column="create_time" property="createTime" jdbcType="TIMESTAMP"/>
+    </resultMap>
+
+    <!--auto generated Code-->
+    <sql id="Base_Column_List">
+        file,
+        recon_file_type,
+        total_amount,
+        total_fee,
+        total_num,
+        recon_date,
+        code,
+        version,
+        create_time
+    </sql>
+
+    <!--auto generated Code-->
+    <insert id="insert" useGeneratedKeys="true" keyProperty="totalOrder.code">
+        INSERT INTO total_order (
+            file,
+            recon_file_type,
+            total_amount,
+            total_fee,
+            total_num,
+            recon_date,
+            code,
+            version,
+            create_time
+        ) VALUES (
+            #{totalOrder.file,jdbcType=VARCHAR},
+            #{totalOrder.reconFileType,jdbcType=VARCHAR},
+            #{totalOrder.totalAmount,jdbcType=VARCHAR},
+            #{totalOrder.totalFee,jdbcType=VARCHAR},
+            #{totalOrder.totalNum,jdbcType=VARCHAR},
+            #{totalOrder.reconDate,jdbcType=DATE},
+            #{totalOrder.code,jdbcType=BIGINT},
+            #{totalOrder.version,jdbcType=BIGINT},
+            #{totalOrder.createTime,jdbcType=TIMESTAMP}
+        )
+    </insert>
+
+    <!--auto generated Code-->
+    <insert id="insertSelective" useGeneratedKeys="true" keyProperty="totalOrder.code">
+        INSERT INTO total_order
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="totalOrder.file!=null">file,</if>
+            <if test="totalOrder.reconFileType!=null">recon_file_type,</if>
+            <if test="totalOrder.totalAmount!=null">total_amount,</if>
+            <if test="totalOrder.totalFee!=null">total_fee,</if>
+            <if test="totalOrder.totalNum!=null">total_num,</if>
+            <if test="totalOrder.reconDate!=null">recon_date,</if>
+            <if test="totalOrder.code!=null">code,</if>
+            <if test="totalOrder.version!=null">version,</if>
+            <if test="totalOrder.createTime!=null">create_time,</if>
+        </trim>
+        VALUES
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="totalOrder.file!=null">#{totalOrder.file,jdbcType=VARCHAR},
+            </if>
+            <if test="totalOrder.reconFileType!=null">#{totalOrder.reconFileType,jdbcType=VARCHAR},
+            </if>
+            <if test="totalOrder.totalAmount!=null">#{totalOrder.totalAmount,jdbcType=VARCHAR},
+            </if>
+            <if test="totalOrder.totalFee!=null">#{totalOrder.totalFee,jdbcType=VARCHAR},
+            </if>
+            <if test="totalOrder.totalNum!=null">#{totalOrder.totalNum,jdbcType=VARCHAR},
+            </if>
+            <if test="totalOrder.reconDate!=null">#{totalOrder.reconDate,jdbcType=DATE},
+            </if>
+            <if test="totalOrder.code!=null">#{totalOrder.code,jdbcType=BIGINT},
+            </if>
+            <if test="totalOrder.version!=null">#{totalOrder.version,jdbcType=BIGINT},
+            </if>
+            <if test="totalOrder.createTime!=null">#{totalOrder.createTime,jdbcType=TIMESTAMP},
+            </if>
+        </trim>
+    </insert>
+
+    <!--auto generated Code-->
+    <insert id="insertList">
+        INSERT INTO total_order (
+        <include refid="Base_Column_List"/>
+        )VALUES
+        <foreach collection="totalOrders" item="totalOrder" index="index" separator=",">
+            (
+            #{totalOrder.file,jdbcType=VARCHAR},
+            #{totalOrder.reconFileType,jdbcType=VARCHAR},
+            #{totalOrder.totalAmount,jdbcType=VARCHAR},
+            #{totalOrder.totalFee,jdbcType=VARCHAR},
+            #{totalOrder.totalNum,jdbcType=VARCHAR},
+            #{totalOrder.reconDate,jdbcType=DATE},
+            #{totalOrder.code,jdbcType=BIGINT},
+            #{totalOrder.version,jdbcType=BIGINT},
+            #{totalOrder.createTime,jdbcType=TIMESTAMP}
+            )
+        </foreach>
+    </insert>
+
+    <!--auto generated Code-->
+    <update id="update">
+        UPDATE total_order
+        <set>
+            <if test="totalOrder.file != null">file= #{totalOrder.file,jdbcType=VARCHAR},</if>
+            <if test="totalOrder.reconFileType != null">recon_file_type= #{totalOrder.reconFileType,jdbcType=VARCHAR},
+            </if>
+            <if test="totalOrder.totalAmount != null">total_amount= #{totalOrder.totalAmount,jdbcType=VARCHAR},</if>
+            <if test="totalOrder.totalFee != null">total_fee= #{totalOrder.totalFee,jdbcType=VARCHAR},</if>
+            <if test="totalOrder.totalNum != null">total_num= #{totalOrder.totalNum,jdbcType=VARCHAR},</if>
+            <if test="totalOrder.reconDate != null">recon_date= #{totalOrder.reconDate,jdbcType=DATE},</if>
+            <if test="totalOrder.code != null">code= #{totalOrder.code,jdbcType=BIGINT},</if>
+            <if test="totalOrder.version != null">version= #{totalOrder.version,jdbcType=BIGINT},</if>
+            <if test="totalOrder.createTime != null">create_time= #{totalOrder.createTime,jdbcType=TIMESTAMP}</if>
+        </set>
+        WHERE code = #{totalOrder.code,jdbcType=BIGINT}
+    </update>
+
+
+    <!--Mybatis自动生成代码-->
+
+    <sql id="Example_Where_Clause">
+        <!--
+          WARNING - @mbggenerated
+          This element is automatically generated by MyBatis Generator, do not modify.
+          This element was generated on Fri Jan 12 16:15:46 CST 2018.
+        -->
+        <where>
+            <foreach collection="oredCriteria" item="criteria" separator="or">
+                <if test="criteria.valid">
+                    <trim prefix="(" suffix=")" prefixOverrides="and">
+                        <foreach collection="criteria.criteria" item="criterion">
+                            <choose>
+                                <when test="criterion.noValue">
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue">
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue">
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue">
+                                    and ${criterion.condition}
+                                    <foreach collection="criterion.value" item="listItem" open="(" close=")"
+                                             separator=",">
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+    <sql id="Update_By_Example_Where_Clause">
+        <!--
+          WARNING - @mbggenerated
+          This element is automatically generated by MyBatis Generator, do not modify.
+          This element was generated on Fri Jan 12 16:15:46 CST 2018.
+        -->
+        <where>
+            <foreach collection="example.oredCriteria" item="criteria" separator="or">
+                <if test="criteria.valid">
+                    <trim prefix="(" suffix=")" prefixOverrides="and">
+                        <foreach collection="criteria.criteria" item="criterion">
+                            <choose>
+                                <when test="criterion.noValue">
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue">
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue">
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue">
+                                    and ${criterion.condition}
+                                    <foreach collection="criterion.value" item="listItem" open="(" close=")"
+                                             separator=",">
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+    <select id="selectByExample" resultMap="BaseResultMap"
+            parameterType="com.yl.recon.core.entity.order.TotalOrderExample">
+        <!--
+          WARNING - @mbggenerated
+          This element is automatically generated by MyBatis Generator, do not modify.
+          This element was generated on Fri Jan 12 16:15:46 CST 2018.
+        -->
+        select
+        <if test="distinct">
+            distinct
+        </if>
+        <include refid="Base_Column_List"/>
+        from total_order
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+        <if test="orderByClause != null">
+            order by ${orderByClause}
+        </if>
+    </select>
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long">
+        <!--
+          WARNING - @mbggenerated
+          This element is automatically generated by MyBatis Generator, do not modify.
+          This element was generated on Fri Jan 12 16:15:46 CST 2018.
+        -->
+        select
+        <include refid="Base_Column_List"/>
+        from total_order
+        where code = #{code,jdbcType=BIGINT}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+        <!--
+          WARNING - @mbggenerated
+          This element is automatically generated by MyBatis Generator, do not modify.
+          This element was generated on Fri Jan 12 16:15:46 CST 2018.
+        -->
+        DELETE FROM total_order
+        WHERE code = #{code,jdbcType=BIGINT}
+    </delete>
+    <delete id="deleteByExample" parameterType="com.yl.recon.core.entity.order.TotalOrderExample">
+        <!--
+          WARNING - @mbggenerated
+          This element is automatically generated by MyBatis Generator, do not modify.
+          This element was generated on Fri Jan 12 16:15:46 CST 2018.
+        -->
+        delete from total_order
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+    </delete>
+    <select id="countByExample" parameterType="com.yl.recon.core.entity.order.TotalOrderExample"
+            resultType="java.lang.Integer">
+        <!--
+          WARNING - @mbggenerated
+          This element is automatically generated by MyBatis Generator, do not modify.
+          This element was generated on Fri Jan 12 16:15:46 CST 2018.
+        -->
+        select count(*) from total_order
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+    </select>
+    <update id="updateByExampleSelective" parameterType="map">
+        <!--
+          WARNING - @mbggenerated
+          This element is automatically generated by MyBatis Generator, do not modify.
+          This element was generated on Fri Jan 12 16:15:46 CST 2018.
+        -->
+        update total_order
+        <set>
+            <if test="record.code != null">
+                code = #{record.code,jdbcType=BIGINT},
+            </if>
+            <if test="record.version != null">
+                version = #{record.version,jdbcType=BIGINT},
+            </if>
+            <if test="record.createTime != null">
+                create_time = #{record.createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="record.totalAmount != null">
+                total_amount = #{record.totalAmount,jdbcType=VARCHAR},
+            </if>
+            <if test="record.totalFee != null">
+                total_fee = #{record.totalFee,jdbcType=VARCHAR},
+            </if>
+            <if test="record.totalNum != null">
+                total_num = #{record.totalNum,jdbcType=VARCHAR},
+            </if>
+            <if test="record.reconDate != null">
+                recon_date = #{record.reconDate,jdbcType=DATE},
+            </if>
+            <if test="record.file != null">
+                file = #{record.file,jdbcType=VARCHAR},
+            </if>
+            <if test="record.reconFileType != null">
+                recon_file_type = #{record.reconFileType,jdbcType=VARCHAR},
+            </if>
+        </set>
+        <if test="_parameter != null">
+            <include refid="Update_By_Example_Where_Clause"/>
+        </if>
+    </update>
+    <update id="updateByExample" parameterType="map">
+        <!--
+          WARNING - @mbggenerated
+          This element is automatically generated by MyBatis Generator, do not modify.
+          This element was generated on Fri Jan 12 16:15:46 CST 2018.
+        -->
+        update total_order
+        set code = #{record.code,jdbcType=BIGINT},
+        version = #{record.version,jdbcType=BIGINT},
+        create_time = #{record.createTime,jdbcType=TIMESTAMP},
+        total_amount = #{record.totalAmount,jdbcType=VARCHAR},
+        total_fee = #{record.totalFee,jdbcType=VARCHAR},
+        total_num = #{record.totalNum,jdbcType=VARCHAR},
+        recon_date = #{record.reconDate,jdbcType=DATE},
+        file = #{record.file,jdbcType=VARCHAR},
+        recon_file_type = #{record.reconFileType,jdbcType=VARCHAR}
+        <if test="_parameter != null">
+            <include refid="Update_By_Example_Where_Clause"/>
+        </if>
+    </update>
+    <update id="updateByPrimaryKeySelective" parameterType="com.yl.recon.core.entity.order.TotalOrder">
+        <!--
+          WARNING - @mbggenerated
+          This element is automatically generated by MyBatis Generator, do not modify.
+          This element was generated on Fri Jan 12 16:15:46 CST 2018.
+        -->
+        update total_order
+        <set>
+            <if test="version != null">
+                version = #{version,jdbcType=BIGINT},
+            </if>
+            <if test="createTime != null">
+                create_time = #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="totalAmount != null">
+                total_amount = #{totalAmount,jdbcType=VARCHAR},
+            </if>
+            <if test="totalFee != null">
+                total_fee = #{totalFee,jdbcType=VARCHAR},
+            </if>
+            <if test="totalNum != null">
+                total_num = #{totalNum,jdbcType=VARCHAR},
+            </if>
+            <if test="reconDate != null">
+                recon_date = #{reconDate,jdbcType=DATE},
+            </if>
+            <if test="file != null">
+                file = #{file,jdbcType=VARCHAR},
+            </if>
+            <if test="reconFileType != null">
+                recon_file_type = #{reconFileType,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where code = #{code,jdbcType=BIGINT}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.yl.recon.core.entity.order.TotalOrder">
+        <!--
+          WARNING - @mbggenerated
+          This element is automatically generated by MyBatis Generator, do not modify.
+          This element was generated on Fri Jan 12 16:15:46 CST 2018.
+        -->
+        UPDATE total_order
+        SET version = #{version,jdbcType=BIGINT},
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+        total_amount = #{totalAmount,jdbcType=VARCHAR},
+        total_fee = #{totalFee,jdbcType=VARCHAR},
+        total_num = #{totalNum,jdbcType=VARCHAR},
+        recon_date = #{reconDate,jdbcType=DATE},
+        file = #{file,jdbcType=VARCHAR},
+        recon_file_type = #{reconFileType,jdbcType=VARCHAR}
+        WHERE code = #{code,jdbcType=BIGINT}
+    </update>
+
+
+</mapper>
+

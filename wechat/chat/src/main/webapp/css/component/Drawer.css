@@ -1,0 +1,56 @@
+.drawer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  z-index: 9999;
+  opacity: 1;
+  pointer-events: none; }
+
+.drawer .content {
+  box-sizing: border-box;
+  height: 100%;
+  position: relative;
+  z-index: 5;
+  transition: 0.3s;
+  opacity: 0;
+  display: inline-block;
+  transform: translateX(-100%); }
+
+.drawer .obfuscator {
+  background-color: transparent;
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  z-index: 4;
+  visibility: hidden;
+  /*transition-property: background-color;*/
+  transition-duration: .3s;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1); }
+
+.drawer .obfuscator {
+  background-color: rgba(0, 0, 0, 0.5);
+  opacity: 0;
+  /*transition-property: opacity;*/
+  visibility: visible; }
+
+.drawer.is-visible {
+  opacity: 1;
+  height: 100%;
+  width: 100%;
+  z-index: 9999;
+  pointer-events: auto; }
+
+.drawer.is-visible .obfuscator {
+  pointer-events: auto;
+  opacity: 1; }
+
+.drawer.is-visible .content {
+  pointer-events: auto;
+  opacity: 1;
+  transform: translateX(0); }
+
+/*# sourceMappingURL=../maps/component/Drawer.css.map */

@@ -1,0 +1,200 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.yl.recon.core.mybatis.mapper.BaseBankChannelOrderMapper">
+    <!--auto generated Code-->
+    <resultMap id="BaseResultMap" type="com.yl.recon.core.entity.order.BaseBankChannelOrder">
+        <result column="interface_info_code" property="interfaceInfoCode" jdbcType="VARCHAR"/>
+        <result column="bank_order_code" property="bankOrderCode" jdbcType="VARCHAR"/>
+        <result column="interface_order_code" property="interfaceOrderCode" jdbcType="VARCHAR"/>
+        <result column="amount" property="amount" jdbcType="DOUBLE"/>
+        <result column="fee" property="fee" jdbcType="DOUBLE"/>
+        <result column="trans_time" property="transTime" jdbcType="DATE"/>
+        <result column="recon_date" property="reconDate" jdbcType="DATE"/>
+        <result column="code" property="code" jdbcType="BIGINT"/>
+        <result column="version" property="version" jdbcType="BIGINT"/>
+        <result column="create_time" property="createTime" jdbcType="TIMESTAMP"/>
+    </resultMap>
+
+    <!--auto generated Code-->
+    <sql id="Base_Column_List">
+        interface_info_code,
+        bank_order_code,
+        interface_order_code,
+        amount,
+        fee,
+        trans_time,
+        recon_date,
+        code,
+        version,
+        create_time
+    </sql>
+
+    <!--auto generated Code-->
+    <insert id="insert" useGeneratedKeys="true" keyProperty="baseBankChannelOrder.code">
+        INSERT INTO base_bank_channel_order (
+        interface_info_code,
+        bank_order_code,
+        interface_order_code,
+        amount,
+        fee,
+        trans_time,
+        recon_date,
+        code,
+        version,
+        create_time
+        ) VALUES (
+        #{baseBankChannelOrder.interfaceInfoCode,jdbcType=VARCHAR},
+        #{baseBankChannelOrder.bankOrderCode,jdbcType=VARCHAR},
+        #{baseBankChannelOrder.interfaceOrderCode,jdbcType=VARCHAR},
+        #{baseBankChannelOrder.amount,jdbcType=DOUBLE},
+        #{baseBankChannelOrder.fee,jdbcType=DOUBLE},
+        #{baseBankChannelOrder.transTime,jdbcType=DATE},
+        #{baseBankChannelOrder.reconDate,jdbcType=DATE},
+        #{baseBankChannelOrder.code,jdbcType=BIGINT},
+        #{baseBankChannelOrder.version,jdbcType=BIGINT},
+        #{baseBankChannelOrder.createTime,jdbcType=TIMESTAMP}
+        )
+    </insert>
+
+    <!--auto generated Code-->
+    <insert id="insertSelective" useGeneratedKeys="true" keyProperty="baseBankChannelOrder.code">
+        INSERT INTO base_bank_channel_order
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="baseBankChannelOrder.interfaceInfoCode!=null"> interface_info_code,</if>
+            <if test="baseBankChannelOrder.bankOrderCode!=null"> bank_order_code,</if>
+            <if test="baseBankChannelOrder.interfaceOrderCode!=null"> interface_order_code,</if>
+            <if test="baseBankChannelOrder.amount!=null"> amount,</if>
+            <if test="baseBankChannelOrder.fee!=null"> fee,</if>
+            <if test="baseBankChannelOrder.transTime!=null"> trans_time,</if>
+            <if test="baseBankChannelOrder.reconDate!=null"> recon_date,</if>
+            <if test="baseBankChannelOrder.code!=null"> code,</if>
+            <if test="baseBankChannelOrder.version!=null"> version,</if>
+            <if test="baseBankChannelOrder.createTime!=null"> create_time,</if>
+        </trim>
+        VALUES
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="baseBankChannelOrder.interfaceInfoCode!=null">#{baseBankChannelOrder.interfaceInfoCode,jdbcType=VARCHAR},
+            </if>
+            <if test="baseBankChannelOrder.bankOrderCode!=null">#{baseBankChannelOrder.bankOrderCode,jdbcType=VARCHAR},
+            </if>
+            <if test="baseBankChannelOrder.interfaceOrderCode!=null">#{baseBankChannelOrder.interfaceOrderCode,jdbcType=VARCHAR},
+            </if>
+            <if test="baseBankChannelOrder.amount!=null">#{baseBankChannelOrder.amount,jdbcType=DOUBLE},
+            </if>
+            <if test="baseBankChannelOrder.fee!=null">#{baseBankChannelOrder.fee,jdbcType=DOUBLE},
+            </if>
+            <if test="baseBankChannelOrder.transTime!=null">#{baseBankChannelOrder.transTime,jdbcType=DATE},
+            </if>
+            <if test="baseBankChannelOrder.reconDate!=null">#{baseBankChannelOrder.reconDate,jdbcType=DATE},
+            </if>
+            <if test="baseBankChannelOrder.code!=null">#{baseBankChannelOrder.code,jdbcType=BIGINT},
+            </if>
+            <if test="baseBankChannelOrder.version!=null">#{baseBankChannelOrder.version,jdbcType=BIGINT},
+            </if>
+            <if test="baseBankChannelOrder.createTime!=null">#{baseBankChannelOrder.createTime,jdbcType=TIMESTAMP},
+            </if>
+        </trim>
+    </insert>
+
+    <!--auto generated Code-->
+    <insert id="insertList">
+        INSERT INTO base_bank_channel_order (
+        <include refid="Base_Column_List"/>
+        )VALUES
+        <foreach collection="baseBankChannelOrders" item="baseBankChannelOrder" index="index" separator=",">
+            (
+            #{baseBankChannelOrder.interfaceInfoCode,jdbcType=VARCHAR},
+            #{baseBankChannelOrder.bankOrderCode,jdbcType=VARCHAR},
+            #{baseBankChannelOrder.interfaceOrderCode,jdbcType=VARCHAR},
+            #{baseBankChannelOrder.amount,jdbcType=DOUBLE},
+            #{baseBankChannelOrder.fee,jdbcType=DOUBLE},
+            #{baseBankChannelOrder.transTime,jdbcType=DATE},
+            #{baseBankChannelOrder.reconDate,jdbcType=DATE},
+            #{baseBankChannelOrder.code,jdbcType=BIGINT},
+            #{baseBankChannelOrder.version,jdbcType=BIGINT},
+            #{baseBankChannelOrder.createTime,jdbcType=TIMESTAMP}
+            )
+        </foreach>
+    </insert>
+
+    <!--auto generated Code-->
+    <update id="update">
+        UPDATE base_bank_channel_order
+        <set>
+            <if test="baseBankChannelOrder.interfaceInfoCode != null"> interface_info_code= #{baseBankChannelOrder.interfaceInfoCode,jdbcType=VARCHAR},</if>
+            <if test="baseBankChannelOrder.bankOrderCode != null"> bank_order_code= #{baseBankChannelOrder.bankOrderCode,jdbcType=VARCHAR},</if>
+            <if test="baseBankChannelOrder.interfaceOrderCode != null"> interface_order_code= #{baseBankChannelOrder.interfaceOrderCode,jdbcType=VARCHAR},</if>
+            <if test="baseBankChannelOrder.amount != null"> amount= #{baseBankChannelOrder.amount,jdbcType=DOUBLE},</if>
+            <if test="baseBankChannelOrder.fee != null"> fee= #{baseBankChannelOrder.fee,jdbcType=DOUBLE},</if>
+            <if test="baseBankChannelOrder.transTime != null"> trans_time= #{baseBankChannelOrder.transTime,jdbcType=DATE},</if>
+            <if test="baseBankChannelOrder.reconDate != null"> recon_date= #{baseBankChannelOrder.reconDate,jdbcType=DATE},</if>
+            <if test="baseBankChannelOrder.code != null"> code= #{baseBankChannelOrder.code,jdbcType=BIGINT},</if>
+            <if test="baseBankChannelOrder.version != null"> version= #{baseBankChannelOrder.version,jdbcType=BIGINT},</if>
+            <if test="baseBankChannelOrder.createTime != null"> create_time= #{baseBankChannelOrder.createTime,jdbcType=TIMESTAMP}</if>
+        </set>
+        WHERE code = #{baseBankChannelOrder.code,jdbcType=BIGINT}
+    </update>
+
+
+
+
+    <!--自定义start-->
+    <resultMap id="ApiBaseBankChannelOrderResultMap" type="com.yl.recon.api.core.bean.order.BaseBankChannelOrder">
+        <result column="interface_info_code" property="interfaceInfoCode" jdbcType="VARCHAR"/>
+        <result column="bank_order_code" property="bankOrderCode" jdbcType="VARCHAR"/>
+        <result column="interface_order_code" property="interfaceOrderCode" jdbcType="VARCHAR"/>
+        <result column="amount" property="amount" jdbcType="DOUBLE"/>
+        <result column="fee" property="fee" jdbcType="DOUBLE"/>
+        <result column="trans_time" property="transTime" jdbcType="DATE"/>
+        <result column="recon_date" property="reconDate" jdbcType="DATE"/>
+        <result column="code" property="code" jdbcType="BIGINT"/>
+        <result column="version" property="version" jdbcType="BIGINT"/>
+        <result column="create_time" property="createTime" jdbcType="TIMESTAMP"/>
+    </resultMap>
+
+    <sql id="findSql">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM base_bank_channel_order
+        WHERE 1=1
+        <if test="reconOrderDataQueryBean!=null">
+            <if test="reconOrderDataQueryBean.createStartTime != null  and reconOrderDataQueryBean.createEndTime != null  and reconOrderDataQueryBean.createStartTime != ''  and reconOrderDataQueryBean.createEndTime != '' ">
+                and create_time BETWEEN #{reconOrderDataQueryBean.createStartTime} AND
+                #{reconOrderDataQueryBean.createEndTime}
+            </if>
+            <if test="reconOrderDataQueryBean.createStartTime != null  and reconOrderDataQueryBean.createEndTime == null  and reconOrderDataQueryBean.createStartTime != ''">
+                and create_time &gt;= #{reconOrderDataQueryBean.createStartTime}
+            </if>
+            <if test="reconOrderDataQueryBean.createStartTime == null and reconOrderDataQueryBean.createEndTime != null and reconOrderDataQueryBean.createEndTime != ''">
+                and create_time &lt;= #{reconOrderDataQueryBean.createEndTime}
+            </if>
+            <if test="reconOrderDataQueryBean.reconDate != null">
+                AND recon_date = str_to_date(#{reconOrderDataQueryBean.reconDate,jdbcType=DATE}, '%Y-%m-%d')
+            </if>
+            <if test="reconOrderDataQueryBean.baseBankChannelOrder != null">
+                <if test="reconOrderDataQueryBean.baseBankChannelOrder.bankOrderCode != null and reconOrderDataQueryBean.baseBankChannelOrder.bankOrderCode != ''">
+                    AND bank_order_code = #{reconOrderDataQueryBean.baseBankChannelOrder.bankOrderCode}
+                </if>
+                <if test="reconOrderDataQueryBean.baseBankChannelOrder.interfaceInfoCode != null and reconOrderDataQueryBean.baseBankChannelOrder.interfaceInfoCode != ''">
+                    AND interface_info_code = #{reconOrderDataQueryBean.baseBankChannelOrder.interfaceInfoCode}
+                </if>
+                <if test="reconOrderDataQueryBean.baseBankChannelOrder.interfaceOrderCode != null and reconOrderDataQueryBean.baseBankChannelOrder.interfaceOrderCode != ''">
+                    AND interface_order_code = #{reconOrderDataQueryBean.baseBankChannelOrder.interfaceOrderCode}
+                </if>
+            </if>
+        </if>
+    </sql>
+    <!--分页-->
+    <select id="findAllBankChannelOrder" resultMap="ApiBaseBankChannelOrderResultMap">
+        <include refid="findSql"/>
+    </select>
+    <!--不分页-->
+    <select id="findBankChannelOrder" resultMap="ApiBaseBankChannelOrderResultMap">
+        <include refid="findSql"/>
+    </select>
+
+
+    <!--自定义end-->
+
+</mapper>
+

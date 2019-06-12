@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yl.dpay.core.mybatis.mapper.PayeeConfigMapper">
+	<resultMap id="payeeMap" type="com.yl.dpay.core.entity.Payee">
+		<id property="id" column="ID"></id>
+		<result property="optimistic" column="OPTIMISTIC"></result>
+		<result property="ownerId" column="OWNER_ID"></result>
+		<result property="accountNo" column="ACCOUNT_NO"></result>
+		<result property="accountName" column="ACCOUNT_NAME"></result>
+		<result property="accountType" column="ACCOUNT_TYPE"></result>
+		<result property="bankCode" column="BANK_CODE"></result>
+		<result property="sabkCode" column="SABK_CODE"></result>
+		<result property="sabkName" column="SABK_NAME"></result>
+		<result property="cnapsCode" column="CNAPS_CODE"></result>
+		<result property="cnapsName" column="CNAPS_NAME"></result>
+		<result property="openBankName" column="OPEN_BANK_NAME"></result>
+		<result property="createDate" column="CREATE_DATE"></result>
+		<result property="idCardNo" column="ID_CARD_NO"></result>
+	</resultMap>
+	<sql id="payeeColumns">
+	  ID,OPTIMISTIC,OWNER_ID,ACCOUNT_NO,ACCOUNT_NAME,ACCOUNT_TYPE,BANK_CODE,
+		SABK_CODE,SABK_NAME,CNAPS_CODE,CNAPS_NAME,OPEN_BANK_NAME,CREATE_DATE,ID_CARD_NO
+	</sql>
+	
+	<insert id="insert" parameterType="com.yl.dpay.core.entity.Payee"
+		useGeneratedKeys="true" keyProperty="id">
+		INSERT INTO PAYEE (
+		 	OPTIMISTIC,OWNER_ID,ACCOUNT_NO,ACCOUNT_NAME,ACCOUNT_TYPE,BANK_CODE,
+			SABK_CODE,SABK_NAME,CNAPS_CODE,CNAPS_NAME,OPEN_BANK_NAME,CREATE_DATE,ID_CARD_NO
+		)
+		VALUES (
+			#{optimistic},#{ownerId},#{accountNo},#{accountName},#{accountType},#{bankCode},#{sabkCode},#{sabkName},
+			#{cnapsCode},#{cnapsName},#{openBankName},#{createDate},#{idCardNo}
+		)
+	</insert>
+	
+	<select id="findById" resultMap="payeeMap" parameterType="java.lang.String">
+		SELECT
+		<include refid="payeeColumns" />
+		FROM PAYEE WHERE id = #{id}
+	</select>
+	
+	<update id="update" parameterType="com.yl.dpay.core.entity.Payee">
+		UPDATE PAYEE
+		SET 
+			ACCOUNT_NO = #{accountNo},ACCOUNT_NAME = #{accountName},ACCOUNT_TYPE = #{accountType},
+			BANK_CODE = #{bankCode},SABK_CODE = #{sabkCode},SABK_NAME = #{sabkName},CNAPS_CODE = #{cnapsCode},CNAPS_NAME = #{cnapsName},
+			OPEN_BANK_NAME = #{openBankName},ID_CARD_NO = #{idCardNo},
+			OPTIMISTIC = OPTIMISTIC + 1
+		WHERE ID = #{id} and OPTIMISTIC = #{optimistic}
+	</update>
+	
+	<delete id="delete" parameterType="int">
+		DELETE FROM PAYEE WHERE ID = #{id}
+	</delete>
+	
+	<delete id="deleteAll" parameterType="int[]">
+		DELETE FROM payee where ID IN 
+		<foreach item="ids" collection="array" open="(" separator="," close=")">
+		#{ids}
+		</foreach>
+	</delete>
+</mapper>

@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yl.payinterface.core.dao.mapper.QuickPayFilingInfoMapper">
+
+	<resultMap id="baseInfo" type="com.yl.payinterface.core.model.QuickPayFilingInfo">
+		<id 	property="id" 					column="ID"></id>
+		<result property="code" 				column="CODE"></result>
+		<result property="version" 				column="VERSION"></result>
+		<result property="createTime" 			column="CREATE_TIME"></result>
+		<result property="interfaceInfoCode" 	column="INTERFACE_INFO_CODE"></result>
+		<result property="name" 	column="NAME"></result>
+		<result property="idCardNo" 	column="ID_CARD_NO"></result>
+		<result property="phone" 	column="PHONE"></result>
+		<result property="clearBankCode" 	column="CLEAR_BANK_CODE"></result>
+		<result property="bankName" 	column="BANK_NAME"></result>
+		<result property="bankCardNo" 	column="BANK_CARD_NO"></result>
+		<result property="remitFee" 	column="REMIT_FEE"></result>
+		<result property="quickPayFee" 	column="QUICK_PAY_FEE"></result>
+		<result property="transCardNo" 	column="TRANS_CARD_NO"></result>
+		<result property="customerCode" 	column="CUSTOMER_CODE"></result>
+		<result property="channelCustomerCode" 	column="CHANNEL_CUSTOMER_CODE"></result>
+		<result property="status" 	column="STATUS"></result>
+	</resultMap>
+
+
+	<sql id="commonSql">
+		ID,CODE,VERSION,CREATE_TIME,INTERFACE_INFO_CODE,NAME,ID_CARD_NO,PHONE,CLEAR_BANK_CODE,BANK_NAME,BANK_CARD_NO,REMIT_FEE,QUICK_PAY_FEE,
+		TRANS_CARD_NO,CUSTOMER_CODE,CHANNEL_CUSTOMER_CODE,STATUS
+	</sql>
+
+
+	<insert id="save" parameterType="com.yl.payinterface.core.model.QuickPayFilingInfo"
+		useGeneratedKeys="true" keyProperty="id">
+		INSERT INTO QUICK_PAY_FILING_INFO (CODE,VERSION,CREATE_TIME,INTERFACE_INFO_CODE,NAME,ID_CARD_NO,PHONE,CLEAR_BANK_CODE,BANK_NAME,BANK_CARD_NO,REMIT_FEE,QUICK_PAY_FEE,
+		TRANS_CARD_NO,CUSTOMER_CODE,CHANNEL_CUSTOMER_CODE,STATUS)
+		VALUES
+		(#{code},#{version},#{createTime},#{interfaceInfoCode},#{name},#{idCardNo},#{phone},#{clearBankCode},#{bankName},#{bankCardNo},#{remitFee},#{quickPayFee},
+		#{transCardNo},#{customerCode},#{channelCustomerCode},#{status})
+	</insert>
+	
+	<update id="update" parameterType="com.yl.payinterface.core.model.QuickPayFilingInfo">
+		UPDATE QUICK_PAY_FILING_INFO 
+		   SET INTERFACE_INFO_CODE = #{interfaceInfoCode},
+			   NAME = #{name},
+			   ID_CARD_NO = #{idCardNo},
+			   PHONE = #{phone},
+			   CLEAR_BANK_CODE = #{clearBankCode},
+			   BANK_NAME = #{bankName},
+			   BANK_CARD_NO = #{bankCardNo},
+			   REMIT_FEE = #{remitFee},
+			   QUICK_PAY_FEE = #{quickPayFee},
+			   TRANS_CARD_NO = #{transCardNo},
+			   CUSTOMER_CODE = #{customerCode},
+			   STATUS = #{status},
+			   CHANNEL_CUSTOMER_CODE = #{channelCustomerCode}
+		WHERE CODE = #{code}
+	</update>
+	
+	<select id="find" resultMap="baseInfo" parameterType="java.lang.String">
+		SELECT
+		<include refid="commonSql" />
+		FROM QUICK_PAY_FILING_INFO
+	   WHERE BANK_CARD_NO = #{bankCardNo}
+		 AND INTERFACE_INFO_CODE = #{interfaceInfoCode}
+	</select>
+	
+	<select id="findByIdCardNo" resultMap="baseInfo" parameterType="java.lang.String">
+		SELECT
+		<include refid="commonSql" />
+		FROM QUICK_PAY_FILING_INFO
+	   WHERE ID_CARD_NO = #{idCardNo}
+		 AND INTERFACE_INFO_CODE = #{interfaceInfoCode}
+	</select>
+	
+	<select id="findByCustomerCode" resultMap="baseInfo" parameterType="java.lang.String">
+		SELECT
+		<include refid="commonSql" />
+		FROM QUICK_PAY_FILING_INFO
+	   WHERE CUSTOMER_CODE = #{customerCode}
+	</select>
+	
+
+
+</mapper> 

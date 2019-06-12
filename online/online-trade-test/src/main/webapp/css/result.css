@@ -1,0 +1,347 @@
+/*******************************************结果页面样式****************************************************/
+.result_body {
+    width: 100%;
+    height: 100%;
+    background: #0ca3d2;
+    color: #000;
+    margin: 0 auto;
+    padding: 0;
+    font: 12px/18px Helvetica,Arial,Helvetica Neue,Tahoma,Microsoft YaHei;
+}
+.result_body .result_content {
+        width: 880px;
+        height: 456px;
+        background: #fcfcfc;
+        padding: 40px;
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        margin: -248px 0 0 -440px;
+        border-radius: 5px;
+        box-shadow: 0 0 100px rgb(146, 146, 146), 0 1px 2px rgba(0,0,0,0.3);
+        border: 0px solid #c4c6ca;
+        text-shadow: 0 1px 0 #fff;
+        display: flex;
+    }
+.result_body .content_flex {
+        width: 50%;
+        position: relative;
+    }
+.result_body  .success {
+        width: 100%;
+        height: 100%;
+        background-image: url(right.png);
+        background-position: 80px center;
+        background-repeat: no-repeat;
+    }
+.result_body .result_text {
+        width: 400px;
+        height: 250px;
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        margin: -160px 0 0 -200px;
+    }
+.result_body .x-h2 {
+        position: relative;
+        padding: 0;
+        margin: 0;
+        border: 0;
+        font-size: 26px;
+        line-height: 150%;
+        margin: 5px 0;
+        text-indent: 0;
+        font-weight: normal;
+        color: #222;
+        border-bottom: 3px #b3cfee double;
+    }
+.result_body table tr td.lefttd {
+        background-color: #F2F1EF;
+        width: 25%;
+        text-align: right;
+        vertical-align: middle;
+    }
+
+.result_body table tr td {
+        border: 0;
+        border-bottom: 1px #fff solid;
+        padding: 10px;
+        vertical-align: middle;
+        line-height: 18px;
+    }
+.result_body input {
+        border: none;
+        background: transparent;
+    } 
+.green{
+    color: #8bbd50;
+}
+.red {
+    color: #f44336;
+}
+/*******************************************提交页面样式****************************************************/
+.payform {
+    width: 800px;
+    margin: auto;
+    border: solid 1px #eee;
+    box-shadow: 1px 1px 5px #aaa;
+    position: absolute;
+    top: 20%;
+    left: 50%;
+    transform: translate(-50%,-20%);
+}
+.w600 {
+    width: 600px;
+    margin: auto;
+}
+.x-bank {    
+    height: 240px;
+    padding-top: 30px;
+}
+.x-bank ul li {
+        list-style: none;
+        float: left;
+        border: solid 1px #eee;
+        margin: 5px;
+        border-radius: 5px;
+}
+.prompt {
+    margin-bottom: 20px;
+    font-size: 12px;
+}
+.money {
+    margin-bottom: 20px;
+}
+.money input {
+    border: solid 1px #bfbcbc;
+    line-height: 25px;
+    width: 200px;
+    border-radius: 3px;
+}
+.btn {
+    width: 100%;
+    text-align: center;
+    margin-bottom:30px;
+}
+.btn input{
+    background: #03A9F4;
+    border: none;
+    color: #fff;
+    width: 100px;
+    line-height: 30px;
+    border-radius: 3px;
+}
+.disable input {
+    background: #c4c6ca !important;
+    cursor: no-drop;
+}
+.bank-icon {
+    display: inline-block;
+    vertical-align: middle;
+    width: 126px;
+    height: 28px;
+    line-height: 28px;
+    background-color: #fff;
+    margin: 0;
+    padding: 0;
+    text-indent: -999em;
+    background: url(x-bank.png) left bottom transparent no-repeat;
+    border-radius: 3px;
+}
+
+    .bank-icon.other {
+        text-indent: 5px;
+        font-size: 22px;
+        color: #ccc;
+    }
+
+.ABC {
+    background-position: 0 0 !important
+}
+
+.BOB {
+    background-position: 0 -28px !important
+}
+
+.BOC {
+    background-position: 0 -56px !important
+}
+
+.BOD {
+    background-position: 0 -84px !important
+}
+
+.BOHAIB {
+    background-position: 0 -112px !important
+}
+
+.BOSH {
+    background-position: 0 -140px !important
+}
+
+.BSB {
+    background-position: 0 -168px !important
+}
+
+.CCB {
+    background-position: 0 -196px !important
+}
+
+.CEBB {
+    background-position: 0 -224px !important
+}
+
+.CIB {
+    background-position: 0 -252px !important
+}
+
+.CITIC {
+    background-position: 0 -280px !important
+}
+
+.CMB {
+    background-position: 0 -308px !important
+}
+
+.CMBC {
+    background-position: 0 -336px !important
+}
+
+.BCOM {
+    background-position: 0 -364px !important
+}
+
+.DBSCN {
+    background-position: 0 -392px !important
+}
+
+.DRCBCL {
+    background-position: 0 -420px !important
+}
+
+.GCB {
+    background-position: 0 -448px !important
+}
+
+.GDB {
+    background-position: 0 -476px !important
+}
+
+.GDRCC {
+    background-position: 0 -504px !important
+}
+
+.GHB {
+    background-position: 0 -532px !important
+}
+
+.GLBANK {
+    background-position: 0 -560px !important
+}
+
+.GRCB {
+    background-position: 0 -588px !important
+}
+
+.HSBC {
+    background-position: 0 -616px !important
+}
+
+.HXB{
+    background-position: 0 -644px !important
+}
+
+.HZCB {
+    background-position: 0 -672px !important
+}
+
+.ICBC {
+    background-position: 0 -700px !important
+}
+
+.JJBANK {
+    background-position: 0 -728px !important
+}
+
+.JSBANK {
+    background-position: 0 -756px !important
+}
+
+.NHB {
+    background-position: 0 -784px !important
+}
+
+.NYBANK {
+    background-position: 0 -812px !important
+}
+
+.PSBC {
+    background-position: 0 -840px !important
+}
+
+.RBOZ {
+    background-position: 0 -868px !important
+}
+
+.SDB {
+    background-position: 0 -896px !important
+}
+
+.SDEB {
+    background-position: 0 -924px !important
+}
+
+.SHBANK {
+    background-position: 0 -952px !important
+}
+
+.SPABANK {
+    background-position: 0 -980px !important
+}
+
+.SPDB {
+    background-position: 0 -1008px !important
+}
+
+.SRCB {
+    background-position: 0 -1036px !important
+}
+
+.XLBANK {
+    background-position: 0 -1064px !important
+}
+
+.SHSRCB {
+    background-position: 0 -1092px !important
+}
+
+.NBBANK {
+    background-position: 0 -1120px !important
+}
+
+.BJSYBANK {
+    background-position: 0 -1148px !important
+}
+
+.NJBANK {
+    background-position: 0 -1176px !important
+}
+
+.DYBANK {
+    background-position: 0 -1204px !important
+}
+
+.ZFBAO {
+    background-position: 0 -1232px !important
+}
+
+.CFTONG {
+    background-position: 0 -1260px !important
+}
+
+.YLIAN {
+    background-position: 0 -1288px !important
+}
+.active {
+    border: solid 1px red !important;
+}

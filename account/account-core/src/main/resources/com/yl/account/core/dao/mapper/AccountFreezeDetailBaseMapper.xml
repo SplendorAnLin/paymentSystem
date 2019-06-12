@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.yl.account.core.dao.mapper.AccountFreezeDetailBaseMapper">
+
+	<resultMap id="AccountFreezeDetail" type="com.yl.account.model.AccountFreezeDetail">
+		<result column="CODE" property="code" />
+		<result column="VERSION" property="version" />
+		<result column="CREATE_TIME" property="createTime" />
+		<result column="SYS_CODE" property="systemCode" />
+		<result column="SYS_TRAN_FLOW" property="transFlow" />
+		<result column="BUSI_CODE" property="bussinessCode" />
+		<result column="FRZ_NO" property="freezeNo" />
+		<result column="FRZ_DATE" property="freezeDate" />
+		<result column="ACC_NO" property="accountNo" />
+		<result column="PRE_FRZ_AMT" property="preFreezeBalance" />
+		<result column="PRE_FRZ_DATE" property="preFreezeDate" />
+		<result column="FRZ_AMT" property="freezeBalance" />
+		<result column="REQ_AMT" property="requestBalance" />
+		<result column="REQ_CNT" property="requestBalanceCount" />
+		<result column="FRZ_STATUS" property="status" />
+		<result column="FRZ_LIMIT" property="freezeLimit" />
+	</resultMap>
+
+	<!--通用的sql语句段 -->
+	<sql id="commonColumn">
+		CODE, VERSION, CREATE_TIME, SYS_CODE, SYS_TRAN_FLOW,
+		BUSI_CODE, FRZ_NO, FRZ_DATE, ACC_NO, PRE_FRZ_AMT, PRE_FRZ_DATE,
+		FRZ_AMT,
+		REQ_AMT, REQ_CNT, FRZ_STATUS, FRZ_LIMIT
+	</sql>
+
+	<!-- 记录冻结明细 -->
+	<insert id="create" parameterType="com.yl.account.model.AccountFreezeDetail">
+		INSERT INTO
+		T_FRZ_VOUC (
+		<include refid="commonColumn" />
+		)
+		VALUES
+		(#{code}, #{version}, #{createTime}, #{systemCode}, #{transFlow},
+		#{bussinessCode},
+		#{freezeNo}, #{freezeDate, jdbcType=TIMESTAMP}, #{accountNo}, #{preFreezeBalance,
+		jdbcType=DOUBLE}, #{preFreezeDate, jdbcType=TIMESTAMP},
+		#{freezeBalance},
+		#{requestBalance, jdbcType=DOUBLE}, #{requestBalanceCount, jdbcType=INTEGER},
+		#{status}, #{freezeLimit, jdbcType=TIMESTAMP})
+	</insert>
+
+	<!-- 查询冻结、解冻历史 -->
+	<select id="findAccountFzBy" resultMap="AccountFreezeDetail">
+		SELECT
+		<include refid="commonColumn" />
+		FROM T_FRZ_VOUC WHERE ACC_NO =
+		#{AccountFreezeDetailResponse.accountNo} ORDER BY CREATE_TIME desc
+	</select>
+
+	<!-- 账号、冻结状态获取冻结明细 -->
+	<select id="findAccountFreezeDetailBy" resultMap="AccountFreezeDetail">
+		SELECT
+		<include refid="commonColumn" />
+		FROM T_FRZ_VOUC WHERE ACC_NO = #{accountNo} AND FRZ_STATUS =
+		#{freezeStatus} ORDER BY CREATE_TIME desc
+	</select>
+
+	<!-- 冻结编号获取冻结明细 -->
+	<select id="findAccountFreezeDetailByFreezeNo" resultMap="AccountFreezeDetail">
+		SELECT
+		<include refid="commonColumn" />
+		FROM T_FRZ_VOUC WHERE FRZ_NO = #{freezeNo}
+	</select>
+	<!-- 冻结编号获取冻结明细 -->
+	<select id="findAccountDetailBy" resultMap="AccountFreezeDetail">
+		SELECT
+		<include refid="commonColumn" />
+		FROM T_FRZ_VOUC WHERE FRZ_NO = #{queryParams.freezeNo}
+	</select>
+
+	<!-- 批量获取冻结明细信息 -->
+	<select id="findAllAccountFreezeDetailsBy" resultMap="AccountFreezeDetail">
+		SELECT
+		<include refid="commonColumn" />
+		FROM T_FRZ_VOUC WHERE FRZ_STATUS &lt;&gt; 'UNFREEZE' AND FRZ_LIMIT
+		&lt;= #{date}
+	</select>
+
+	<!-- 冻结金额累加发生额 -->
+	<update id="addFreezeBalance">
+		UPDATE
+		T_FRZ_VOUC
+		SET
+		VERSION = #{newVersion}, FRZ_AMT = #{accountFreezeDetail.freezeBalance}
+		WHERE
+		CODE = #{accountFreezeDetail.code} AND VERSION =
+		#{accountFreezeDetail.version}
+	</update>
+
+	<!-- 冻结金额累加发生额 -->
+	<update id="preFreezeComplete">
+		UPDATE
+		T_FRZ_VOUC
+		SET
+		VERSION = #{newVersion}, FRZ_AMT = #{accountFreezeDetail.freezeBalance},
+		FRZ_STATUS = #{accountFreezeDetail.status}
+		WHERE
+		CODE = #{accountFreezeDetail.code} AND VERSION =
+		#{accountFreezeDetail.version}
+	</update>
+
+	<!-- 解冻完成 -->
+	<update id="thawComplete">
+		UPDATE
+		T_FRZ_VOUC
+		SET
+		VERSION = #{newVersion}, FRZ_STATUS = #{accountFreezeDetail.status},
+		FRZ_LIMIT = #{accountFreezeDetail.freezeLimit}
+		WHERE
+		CODE = #{accountFreezeDetail.code} AND VERSION =
+		#{accountFreezeDetail.version}
+	</update>
+
+	<!-- 请款金额增加 -->
+	<update id="addConsultBalance">
+		UPDATE
+		T_FRZ_VOUC
+		SET
+		VERSION = #{newVersion}, REQ_AMT = #{accountFreezeDetail.requestBalance},
+		REQ_CNT = #{accountFreezeDetail.requestBalanceCount},
+		FRZ_STATUS = #{accountFreezeDetail.status}
+		WHERE
+		CODE = #{accountFreezeDetail.code} AND VERSION =
+		#{accountFreezeDetail.version}
+	</update>
+
+	<select id="queryFreezeNoExists" resultType="int">
+		select count(1) from T_FRZ_VOUC where FRZ_NO = #{freezeNo}
+	</select>
+
+</mapper>

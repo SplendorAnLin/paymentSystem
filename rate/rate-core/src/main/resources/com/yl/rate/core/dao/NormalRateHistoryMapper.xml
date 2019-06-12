@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.yl.rate.core.dao.NormalRateHistoryMapper">
+    <!--auto generated Code-->
+    <resultMap id="BaseResultMap" type="com.yl.rate.core.entity.NormalRateHistory">
+        <result column="rate_rule_code" property="rateRuleCode" jdbcType="VARCHAR"/>
+        <result column="fee" property="fee" jdbcType="DOUBLE"/>
+        <result column="compute_mode" property="computeMode" jdbcType="VARCHAR"/>
+        <result column="max_fee" property="maxFee" jdbcType="DOUBLE"/>
+        <result column="min_fee" property="minFee" jdbcType="DOUBLE"/>
+        <result column="id" property="id" jdbcType="BIGINT"/>
+        <result column="code" property="code" jdbcType="VARCHAR"/>
+        <result column="create_time" property="createTime"/>
+        <result column="oper" property="oper" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        rate_rule_code,
+        fee,
+        compute_mode,
+        max_fee,
+        min_fee,
+        id,
+        code,
+        create_time,
+        oper
+    </sql>
+
+
+    <insert id="insert" parameterType="com.yl.rate.core.entity.NormalRateHistory">
+        INSERT INTO normal_rate_history (
+        rate_rule_code,
+        fee,
+        compute_mode,
+        max_fee,
+        min_fee,
+        code,
+        create_time,
+        oper
+        ) VALUES (
+        #{rateRuleCode},
+        #{fee},
+        #{computeMode},
+        #{maxFee},
+        #{minFee},
+        #{code},
+        #{createTime},
+        #{oper}
+        )
+    </insert>
+
+    <select id="queryByRateRuleCode" resultMap="BaseResultMap">
+        SELECT
+        rate_rule_code,
+        fee,
+        compute_mode,
+        max_fee,
+        min_fee,
+        code,
+        create_time,
+        oper
+        FROM normal_rate_history
+        WHERE rate_rule_code = #{rateRuleCode}
+    </select>
+
+    <select id="queryNormalRate" resultMap="BaseResultMap">
+        SELECT
+        <include refid="Base_Column_List" />
+        FROM normal_rate_history
+        WHERE rate_rule_code = #{rateRuleCode}
+        AND create_time BETWEEN #{startTime} AND #{endTime}
+    </select>
+
+</mapper>

@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yl.online.trade.dao.mapper.SalesResultReverseOrderMapper">
+
+	<resultMap id="salesResultReverseOrderMap" type="com.yl.online.model.model.SalesResultReverseOrder">
+		<id 	property="id" 					column="ID"></id>
+		<result property="code" 				column="CODE"></result>
+		<result property="version" 				column="VERSION"></result>
+		<result property="createTime" 			column="CREATE_TIME"></result>
+		<result property="interfaceRequestID" 	column="INTERFACE_REQUEST_ID"></result>
+		<result property="interfaceOrderID" 	column="INTERFACE_ORDER_ID"></result>
+		<result property="businessOrderID" 		column="BUSINESS_ORDER_ID"></result>
+		<result property="interfaceProvider" 	column="INTERFACE_PROVIDER"></result>
+		<result property="cardType" 			column="CARD_TYPE"></result>
+		<result property="transStatus" 			column="TRANS_STATUS"></result>
+		<result property="responseCode" 		column="RESPONSE_CODE"></result>
+		<result property="responseMessage" 		column="RESPONSE_MESSAGE"></result>
+		<result property="amount" 				column="AMOUNT"></result>
+		<result property="interfaceFee" 		column="INTERFACE_FEE"></result>
+		<result property="businessType" 		column="BUSINESS_TYPE"></result>
+		<result property="reverseStatus" 		column="REVERSE_STATUS"></result>
+		<result property="reverseCount" 		column="REVERSE_COUNT"></result>
+		
+	</resultMap>
+
+	<sql id="salesResultReverseOrderColumns">
+		ID,CODE,VERSION,CREATE_TIME,INTERFACE_REQUEST_ID,INTERFACE_ORDER_ID,BUSINESS_ORDER_ID,
+		INTERFACE_PROVIDER,CARD_TYPE,TRANS_STATUS,RESPONSE_CODE,RESPONSE_MESSAGE,AMOUNT,
+		INTERFACE_FEE,BUSINESS_TYPE,REVERSE_STATUS,REVERSE_COUNT
+	</sql>
+
+	<insert id="createSalesResultReverseOrder" parameterType="com.yl.online.model.model.SalesResultReverseOrder"
+		useGeneratedKeys="true" keyProperty="id">
+		INSERT INTO REVERSE_ORDER (
+		CODE,VERSION,CREATE_TIME,INTERFACE_REQUEST_ID,INTERFACE_ORDER_ID,BUSINESS_ORDER_ID,
+		INTERFACE_PROVIDER,CARD_TYPE,TRANS_STATUS,RESPONSE_CODE,RESPONSE_MESSAGE,AMOUNT,
+		INTERFACE_FEE,BUSINESS_TYPE,REVERSE_STATUS,REVERSE_COUNT)
+		VALUES
+		(#{code},#{version},#{createTime},#{interfaceRequestID},#{interfaceOrderID},#{businessOrderID},
+		#{interfaceProvider},#{cardType},#{transStatus},#{responseCode},#{responseMessage},
+		#{amount},#{interfaceFee},#{businessType},#{reverseStatus},#{reverseCount})
+	</insert>
+	
+	<select id="querySalesResultReverseOrder" resultMap="salesResultReverseOrderMap"
+		parameterType="Map">
+		SELECT
+		<include refid="salesResultReverseOrderColumns" />
+		FROM REVERSE_ORDER
+		WHERE BUSINESS_ORDER_ID = #{businessOrderID}
+	</select>
+	
+	<select id="querySalesResultReverseOrderBy" resultMap="salesResultReverseOrderMap" parameterType="Map">
+		SELECT
+		<include refid="salesResultReverseOrderColumns" />
+		FROM REVERSE_ORDER
+		WHERE REVERSE_COUNT &lt; #{maxCount}
+		AND REVERSE_STATUS = 'WAIT_REVERSE'
+		ORDER BY ID ASC
+		LIMIT #{maxNums}
+	</select>
+	
+	<update id="updateSalesResultReverseOrder">
+		update REVERSE_ORDER
+		set REVERSE_STATUS = #{salesResultReverseOrder.reverseStatus},
+		INTERFACE_REQUEST_ID = #{salesResultReverseOrder.interfaceRequestID},
+		INTERFACE_ORDER_ID = #{salesResultReverseOrder.interfaceOrderID},
+		TRANS_STATUS = #{salesResultReverseOrder.transStatus},
+		RESPONSE_CODE = #{salesResultReverseOrder.responseCode},
+		RESPONSE_MESSAGE = #{salesResultReverseOrder.responseMessage},
+		AMOUNT = #{salesResultReverseOrder.amount},
+		INTERFACE_FEE = #{salesResultReverseOrder.interfaceFee}
+		where BUSINESS_ORDER_ID = #{salesResultReverseOrder.businessOrderID}
+	</update>
+	
+	<update id="updateSalesResultReverseOrderCount">
+		update REVERSE_ORDER
+		set REVERSE_COUNT = #{salesResultReverseOrder.reverseCount} + 1
+		where BUSINESS_ORDER_ID = #{salesResultReverseOrder.businessOrderID}
+	</update>
+
+	<update id="updateSalesResultReverse">
+		update REVERSE_ORDER
+		set INTERFACE_ORDER_ID = #{salesResultReverseOrder.interfaceOrderID},
+		TRANS_STATUS = #{salesResultReverseOrder.transStatus},
+		RESPONSE_CODE = #{salesResultReverseOrder.responseCode},
+		RESPONSE_MESSAGE = #{salesResultReverseOrder.responseMessage},
+		INTERFACE_FEE = #{salesResultReverseOrder.interfaceFee},
+		REVERSE_STATUS = 'SUCC_REVERSE'
+		where BUSINESS_ORDER_ID = #{salesResultReverseOrder.businessOrderID}
+	</update>
+</mapper> 

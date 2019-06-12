@@ -1,0 +1,88 @@
+/* CSS Document */
+.wrapper{margin:0 auto;background:#fff;}
+a{ text-decoration:none;color:#666;}
+a:hover{color:#f69201;}
+.mesicon,.fstab li.select a,.fstab li a:hover,.btn1,.btn2,.btn3 a{background: url(../image//all_img.png) no-repeat;}
+
+/** header **/
+.header_bg1{background: url(../image//header_bg.gif) repeat-x;height:85px;}
+.header{width:980px;height:86px;margin:0 auto;}
+.header_bg1 .logos a{float: left; width: 320px; height: 86px; text-indent: -9999px;background:url(../image//logo.jpg) no-repeat;}
+
+/** footer **/
+.footer{text-align:center;padding:20px 0; border-top: 1px solid #e1e1e1; background: #fcfcfc; color:#666;height:96px;line-height:96px;}
+.footer p.ban{height:25px;line-height:25px;}
+.footer a{margin:5px 10px;}
+.bank_1s,.bank_2s,.bank_3s,.bank_4s,.bank_5s,.bank_6s,.bank_7s,.bank_8s,.bank_9s,.bank_10s,.bank_11s,.bank_12s{width: 27px; height: 20px; background: url(../image//bank_icon20-20.jpg) no-repeat; display: inline-block;}
+.bank_1s{background-position: 0 0;}
+.bank_2s{background-position: 0 -20px;}
+.bank_3s{background-position: 0 -40px;}
+.bank_4s{background-position: 0 -60px;}
+.bank_5s{background-position: 0 -80px;}
+.bank_6s{background-position: 0 -100px;}
+.bank_7s{background-position: 0 -120px;}
+.bank_8s{background-position: 0 -140px;}
+.bank_9s{background-position: 0 -160px;}
+.bank_10s{background-position: 0 -180px;}
+.bank_11s{background-position: 0 -200px;}
+.bank_12s{background-position: 0 -220px;}
+
+/* zhifu */
+.innerwrapper{width: 980px; padding: 10px 20px; margin: 0 0 0 10%;}
+.lc1,.lc2{width: 397px; height: 51px; background: url(../image//lcimg.png) no-repeat; display: block;}
+.lc1{background-position: 0 0;}
+.lc2{background-position: 0 -51px;}
+.mes{background: #fff8ee; height: 80px; position: relative; padding: 30px 50px;}
+.mes .t1{height: 3px; width: 936px; background: url(../image//line.png) top no-repeat; position: absolute; left: 1px; top: 0;}
+.mes .t2{height: 3px; width: 936px; background: url(../image//line.png) bottom no-repeat; position: absolute; left: 1px; bottom: 0;}
+.mesicon{float: left; width: 73px; height: 73px; background-position: 0 0; margin: 0 10px 0 50px; display: block;}
+.mestext{float: left; width: 600px; margin-left: 20px; font-size: 14px;}
+.mestext p{line-height: 26px;}
+.mestext i{color: #c00; margin: 0 2px; font-weight: bold; font-size: 18px;}
+.fstab{border: 1px solid #dedede; height: 38px; line-height: 38px; overflow: hidden; background: url(../image//tab_bg.png) repeat-x; border-bottom: 0;}
+.fstab li{float: left;}
+.fstab li a{float: left; width: 184px; height: 38px; text-indent: 55px; font-size: 14px;}
+.fstab li.select a,.fstab li a:hover{float: left; width: 184px; height: 38px; background-position: 0 -74px; display: inline-block; text-indent: 55px; font-size: 14px; font-weight: bold; margin-bottom: -1px;}
+.banklist li{float: left; width: 175px; margin: 10px 6px;}
+.btn1{width: 245px; height: 57px; background-position: 0 -113px; cursor: pointer; border: 0;}
+.btn2{width: 140px; height: 39px; background-position: 0 -171px; cursor: pointer; border: 0;}
+.btn3 a{width: 245px; height: 57px; background-position: 0 -211px; cursor: pointer; border: 0; display: block;}
+.xcon{border: 1px solid #e0e0e0; background: #f6f4f5;}
+.br1{border: 3px solid #fdad34; background: #fff; padding: 20px; border-radius: 4px;}
+.br1 span{float: left;}
+.br2{border: 1px solid #feaf38; background: #feedd9; box-shadow: 1px 1px 1px #666;}
+.meslist li label{float: left; width: 100px; text-align: right;}
+.meslist li{margin-bottom: 15px; color: #656364;}
+.input1{border:1px solid #e0ae8b; background: #fff; height: 20px; line-height: 20px; padding: 0 2px;}
+.qa p{line-height: 24px;}
+.dotted-border{border-top: 1px dotted #898788; height: 1px; line-height: 1px;}
+.mlist li{float: left; margin-right: 10px; margin-bottom: 35px;}
+.mlist li a{float: left; width: 250px; height: 40px; line-height: 40px; text-align: center; font-size: 14px; background: #d9d9d9;}
+.mlist li.select a,.mlist li a:hover{float: left; width: 250px; height: 40px; background: #f8b038; display: inline-block; text-align: center; line-height: 40px; font-size: 14px; font-weight: bold; color: #fff;}
+.table1,.table1 th,.table1 td{border: 1px solid #d7d7d7; background: #fff;}
+.table1 td{padding: 8px;}
+.table1 th{padding: 8px; background: #eee;}
+
+/* font */
+.font1{color: #fff; background: #95c1e8; padding: 2px 3px;}
+.font2 a{color: #047ae8; text-decoration: underline;}
+.font3{color: #fa0018;}
+.font3{color: #929292;}
+.font4{color: #bcb299;}
+.font4 i{font-size: 16px; font-family: "微软雅黑"; font-weight: bold; margin-right: 5px;}
+.font5{color: #939393; text-indent: 22px;}
+.font6{color: #cd0102;}
+
+/* width height */
+.w60{width: 60px;}
+.w150{width: 150px;}
+.w180{width: 180px;}
+.w300{width: 300px;}
+.w430{width: 430px;}
+.w500{width: 500px;}
+
+
+
+
+
+

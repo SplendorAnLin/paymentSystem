@@ -1,0 +1,897 @@
+@charset "UTF-8";
+/* ===主题颜色=== */
+/* 链接 */
+/* 链接悬停 */
+/* ===环境变量=== */
+/* ===公用样式== */
+.full-size {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+}
+
+textarea,
+input[type="text"],
+input[type="file"],
+input[type="number"],
+input[type="password"], .ib, .ib.middle {
+  display: inline-block;
+  zoom: 1;
+  *display: inline;
+  letter-spacing: normal;
+  word-spacing: normal;
+  vertical-align: middle;
+}
+
+.fix {
+  zoom: 1;
+}
+
+.fix:after {
+  display: block;
+  content: '.';
+  clear: both;
+  line-height: 0;
+  visibility: hidden;
+}
+
+.ellipsis {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+body,
+div,
+dl,
+dt,
+dd,
+ul,
+ol,
+li,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+body,
+html,
+pre,
+code,
+form,
+fieldset,
+legend,
+input,
+span,
+textarea,
+p,
+blockquote,
+th,
+td {
+  margin: 0;
+  padding: 0;
+  letter-spacing: 0;
+  word-spacing: 0;
+  border: 0;
+  outline: none;
+}
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+fieldset,
+img {
+  border: 0;
+}
+
+ol,
+ul {
+  list-style: none;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-size: 100%;
+  font-weight: normal;
+}
+
+input,
+button,
+select,
+textarea {
+  outline: none;
+}
+
+input[type="button"],
+input[type="rest"],
+input[type="text"],
+input[type="password"] {
+  -webkit-appearance: none;
+  outline: none;
+}
+
+* {
+  outline: 0;
+  padding: 0;
+  margin: 0;
+  border: 0;
+}
+
+html,
+body {
+  display: block;
+}
+
+/* ===主题颜色=== */
+/* 链接 */
+/* 链接悬停 */
+/* ===环境变量=== */
+/* ===公用样式== */
+.full-size {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+}
+
+textarea,
+input[type="text"],
+input[type="file"],
+input[type="number"],
+input[type="password"], .ib, .ib.middle {
+  display: inline-block;
+  zoom: 1;
+  *display: inline;
+  letter-spacing: normal;
+  word-spacing: normal;
+  vertical-align: middle;
+}
+
+.fix {
+  zoom: 1;
+}
+
+.fix:after {
+  display: block;
+  content: '.';
+  clear: both;
+  line-height: 0;
+  visibility: hidden;
+}
+
+.ellipsis {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* 
+ * base.scss 
+ * 框架基础样式
+ * 公共样式库
+*/
+/* ===基础样式覆盖=== */
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "PingFang SC", "Microsoft yahei", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 13px;
+}
+
+a {
+  color: #03a9f4;
+  text-decoration: none;
+}
+
+a:hover {
+  color: #2ebcfc;
+}
+
+a.disabled {
+  color: gainsboro;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+textarea,
+input[type="text"],
+input[type="file"],
+input[type="number"],
+input[type="password"] {
+  padding: 0 8px;
+  border: 1px solid #d3d3d3;
+  border-radius: 0.2em;
+  font-size: inherit;
+}
+
+textarea:focus,
+input[type="text"]:focus,
+input[type="file"]:focus,
+input[type="number"]:focus,
+input[type="password"]:focus {
+  border-color: rgba(46, 188, 252, 0.5);
+  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 7px rgba(46, 188, 252, 0.5);
+}
+
+textarea {
+  padding: 0.8em;
+  min-height: 100px;
+}
+
+input[type="text"],
+input[type="file"],
+input[type="number"],
+input[type="password"] {
+  height: 2.3em;
+  line-height: 2.3em;
+  color: #333;
+}
+
+textarea.disabled,
+input.disabled,
+textarea.readonly,
+input.readonly,
+textarea[disabled],
+textarea[readonly],
+input[disabled],
+input[readonly] {
+  background-color: #EBEBE4 !important;
+  pointer-events: none !important;
+}
+
+input.file-text[readonly] {
+  background-color: #fff !important;
+}
+
+select {
+  padding: 0 0.2em;
+  border: 1px solid #d3d3d3;
+  border-radius: 0.2em;
+  height: 2.3em;
+  font-size: inherit;
+}
+
+input[type="checkbox"] {
+  vertical-align: middle;
+}
+
+/* ===公共样式=== */
+.min-width {
+  min-width: 1020px;
+}
+
+.hidden {
+  display: none !important;
+}
+
+.over-hide {
+  overflow: hidden;
+}
+
+.middle.ib {
+  width: 0;
+  height: 100%;
+  vertical-align: middle;
+}
+
+.absolute {
+  position: absolute;
+  left: 0;
+  top: 0;
+}
+
+.fix-iphone-scroll {
+  -webkit-overflow-scrolling: touch;
+}
+
+.noselect {
+  /* 在 IE < 10 和Opera < 15中我们需要在需要禁止选中的元素上面添加一个属性 unselectable="on" */
+  -webkit-touch-callout: none;
+  /* iOS Safari */
+  -webkit-user-select: none;
+  /* Chrome/Safari/Opera */
+  -khtml-user-select: none;
+  /* Konqueror */
+  -moz-user-select: none;
+  /* Firefox */
+  -ms-user-select: none;
+  /* Internet Explorer/Edge */
+  user-select: none;
+  /* Non-prefixed version, currently not supported by any browser */
+}
+
+.text-left {
+  text-align: left;
+}
+
+.text-right {
+  text-align: right;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.v-m {
+  vertical-align: middle;
+}
+
+.v-t {
+  vertical-align: top !important;
+}
+
+.fl {
+  float: left;
+}
+
+.fr {
+  float: right;
+}
+
+.f-12 {
+  font-size: 1em;
+}
+
+.f-13 {
+  font-size: 1.1em;
+}
+
+.f-14 {
+  font-size: 1.2em;
+}
+
+.f-18 {
+  font-size: 1.7em;
+}
+
+.h-p-100 {
+  height: 100%;
+}
+
+.w-78 {
+  width: 78px;
+}
+
+.w-82 {
+  width: 82px;
+}
+
+.w-90 {
+  width: 90px;
+}
+
+.w-100 {
+  width: 100px;
+}
+
+.w-120 {
+  width: 120px;
+}
+
+.w-136 {
+  width: 136px;
+}
+
+.w-170 {
+  width: 170px;
+}
+
+.w-200 {
+  width: 200px;
+}
+
+.w-220 {
+  width: 220px;
+}
+
+.w-250 {
+  width: 250px;
+}
+
+.w-450 {
+  width: 450px;
+}
+
+.w-p-30 {
+  width: 30%;
+}
+
+.w-p-35 {
+  width: 35%;
+}
+
+.w-p-50 {
+  width: 50%;
+}
+
+.w-p-65 {
+  width: 65%;
+}
+
+.w-p-70 {
+  width: 70%;
+}
+
+.w-p-100 {
+  width: 100%;
+}
+
+.m-20 {
+  margin: 1.8em;
+}
+
+.mt-10 {
+  margin-top: 0.8em;
+}
+
+.mt-20 {
+  margin-top: 1.8em;
+}
+
+.mr-5 {
+  margin-right: 0.4em;
+}
+
+.mr-10 {
+  margin-right: 0.8em;
+}
+
+.mr-20 {
+  margin-right: 1.8em;
+}
+
+.ml-5 {
+  margin-left: 5px;
+}
+
+.ml-10 {
+  margin-left: 0.8em;
+}
+
+.ml-20 {
+  margin-left: 1.8em;
+}
+
+.mb-10 {
+  margin-bottom: 0.8em;
+}
+
+.pd-10 {
+  padding: 0.8em;
+}
+
+.pt-10 {
+  padding-top: 0.8em;
+}
+
+.pt-20 {
+  padding-top: 1.8em;
+}
+
+.pr-10 {
+  padding-right: 0.8em;
+}
+
+.pr-20 {
+  padding-right: 1.8em;
+}
+
+.pl-20 {
+  padding-left: 1.8em;
+}
+
+.pb-2 {
+  padding-bottom: 0.2em;
+}
+
+.pb-10 {
+  padding-bottom: 0.8em;
+}
+
+/* 
+ * config.scss
+ * 管理主题色, 主文本色, 次文本色
+ * 覆盖组件样式, 来达到特殊化
+*/
+/* ===主题管理=== */
+.theme-bg {
+  background-color: #03a9f4;
+}
+
+.theme-bg.hover {
+  background-color: #03a9f4;
+}
+
+.theme-color {
+  color: #03a9f4;
+}
+
+.theme-color.hover {
+  color: #2ebcfc;
+}
+
+.theme-bg-hover:hover {
+  background-color: #2ebcfc;
+}
+
+.bg-gray-dark {
+  background-color: #d3d3d3;
+}
+
+.bg-gray-middle {
+  background-color: #eee;
+}
+
+.bg-gray-light {
+  background-color: #f5f5f5;
+}
+
+.bg-gray-dark {
+  color: #d3d3d3;
+}
+
+.bg-gray-middle {
+  color: #eee;
+}
+
+.bg-gray-light {
+  color: #f5f5f5;
+}
+
+.text-primary {
+  color: #333;
+}
+
+.text-secondary {
+  color: #666;
+}
+
+.text-secondary {
+  color: #999;
+}
+
+/* 覆盖组件样式 */
+.toggle-drawerNav {
+  cursor: pointer;
+}
+
+.data-table {
+  font-size: inherit;
+}
+
+.data-table th {
+  padding: 1em 1.5em 1em 1.5em;
+}
+
+.data-table td {
+  padding: 0 1.5em;
+}
+
+.data-table th,
+.data-table td {
+  text-align: left;
+  font-size: inherit;
+}
+
+.data-table td.nextline {
+  word-break: keep-all;
+  white-space: normal;
+}
+
+.data-table.nextline tbody {
+  white-space: initial;
+  word-break: keep-all;
+}
+
+.message-wrap {
+  font-size: inherit;
+  padding: 0 1em;
+}
+
+.message-wrap .message-content {
+  padding: 1em 2em 1em 0.5em;
+  border-radius: 0.3em;
+}
+
+.message-wrap .icon {
+  font-size: 1.5em;
+  margin-right: 0;
+}
+
+.MyDialog-wrap .dialog-box {
+  border-radius: 0.5em;
+  min-width: 150px;
+}
+
+.MyDialog-wrap .dialog-header {
+  font-size: inherit;
+}
+
+.MyDialog-wrap .dialog-header .p-title {
+  padding: 0.8em;
+  font-size: 1.2em;
+}
+
+.MyDialog-wrap .dialog-header .close {
+  font-size: inherit;
+  right: 0.5em;
+  top: 21%;
+}
+
+.MyDialog-wrap .body {
+  border-radius: 0.5em;
+}
+
+.Alert-footer {
+  border-radius: 0 0 0.5em 0.5em;
+}
+
+.Alert-footer .btn-2 {
+  font-size: 1.2em;
+  line-height: 3em;
+  height: 3em;
+}
+
+.Alert-footer .btn-2.reverse {
+  color: #FF5722;
+}
+
+select[enumstatus="false"] + .SelectBox {
+  border-color: #F44336;
+}
+
+.SelectBox:focus {
+  background-color: #eee;
+}
+
+.item > .input-area .SelectBox {
+  height: 30px;
+  line-height: 30px;
+}
+
+.toggle-checkbox[checked] .box_outline,
+.toggle-radio[checked] .box_outline {
+  border-color: #03a9f4;
+}
+
+.toggle-checkbox[checked] .tick_outline,
+.toggle-radio[checked] .tick_outline {
+  background-color: #03a9f4;
+}
+
+.toggle-checkbox[disabled] .box_outline,
+.toggle-radio[disabled] .box_outline {
+  border-color: #ddd;
+}
+
+.toggle-switch[checked] .track {
+  background: rgba(46, 188, 252, 0.5);
+}
+
+.toggle-switch[checked] .thumb {
+  background: #03a9f4;
+}
+
+.dialog-note {
+  display: block;
+  padding: 10px 5px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  background-color: #FFF2B5;
+  box-shadow: 0 1px 5px rgba(0, 0, 0, 0.2);
+  text-align: center;
+  width: 100%;
+}
+
+.dialog-note .message {
+  font-size: 12px;
+  color: coral;
+}
+
+.dialog-note .close {
+  position: absolute;
+  right: 10px;
+  top: 10px;
+  color: #666;
+  cursor: pointer;
+}
+
+.vd-error,
+.next-error {
+  color: #F44336;
+}
+
+input.loading {
+  background-color: #EBEBE4;
+}
+
+.input-loading-ico {
+  position: absolute;
+  top: 0;
+  right: 0.3em;
+  line-height: 2.3em;
+  color: #F44336;
+}
+
+[enumstatus="false"] {
+  border: 1px solid #F44336 !important;
+}
+
+.pop-message {
+  position: absolute;
+  display: block;
+  top: 0;
+  left: 0;
+  z-index: 500;
+  border-radius: 0.3em;
+  color: coral;
+  background-color: #FFF2B5;
+  border: 1px solid #ddd;
+  background-clip: padding-box;
+}
+
+.pop-message:after, .pop-message:before {
+  position: absolute;
+  display: block;
+  content: "";
+  width: 0;
+  height: 0;
+  border: 0.8em dashed transparent;
+  z-index: 1;
+}
+
+.down:after, .down:before {
+  border-bottom-style: solid;
+  border-width: 0 0.8em 0.8em;
+}
+
+.up:after, .up:before {
+  border-bottom-style: solid;
+  border-width: 0.8em 0.8em 0;
+}
+
+.down.pop-message:before {
+  border-bottom-color: #ddd;
+  bottom: 0;
+  left: 10px;
+  top: -0.8em;
+  pointer-events: none;
+}
+
+/** 下箭头 */
+.up.pop-message {
+  top: auto;
+  bottom: 100%;
+  margin: 0 0 0.9em;
+}
+
+.down.pop-message:after {
+  border-bottom-color: #FFF2B5;
+  bottom: -0.1em;
+  top: -0.7em;
+  left: 10px;
+}
+
+.up.pop-message:before {
+  border-top-color: #ddd;
+  bottom: 0;
+  left: 10px;
+  bottom: -0.8em;
+  pointer-events: none;
+}
+
+.up.pop-message:after {
+  border-top-color: #FFF2B5;
+  bottom: -0.7em;
+  left: 10px;
+}
+
+.pop-message > .content {
+  padding: 0.8em;
+}
+
+.dropdown-content {
+  border-radius: 0.5em;
+}
+
+.switch-wrap {
+  font-size: 14px;
+}
+
+/* 覆盖样式 */
+.tabs-in {
+  font-family: "PingFang SC", "Microsoft yahei", "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+.tabs-in .tabs li.selected a.inner {
+  font-weight: bold;
+}
+
+.table-sroll {
+  border: 1px solid #e4e4e4;
+}
+
+.data-table thead {
+  background-color: #ecf0f1;
+}
+
+.data-table td {
+  border-top: none;
+  border-bottom: none;
+}
+
+.data-table th, .data-table td {
+  font-weight: normal;
+  color: #333;
+}
+
+.tabs-in .tabs a.inner {
+  background: linear-gradient(to bottom, #eff5ff 0, #e0ecff 100%) !important;
+  margin: 0 2px !important;
+}
+
+.tabs-in .tabs li.selected a.inner {
+  background: #eee !important;
+}
+
+.navigation .folder:before, .drawer-nav .folder:before {
+  font-size: 18px !important;
+}
+
+.welcome .decs .detailed {
+  font-size: 13px !important;
+}
+
+textarea, input[type="text"], input[type="file"], input[type="number"], input[type="password"] {
+  font-size: 12px !important;
+}
+
+input[type="text"], input[type="file"], input[type="number"], input[type="password"] {
+  height: 30px !important;
+  line-height: 30px !important;
+}
+
+div.gpage .jump-btn {
+  height: 30px !important;
+  line-height: 30px !important;
+}
+
+.MyDialog-wrap .dialog-header .text {
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif !important;
+}
+
+.tabs-in .tabs a.inner:hover {
+  background: #d5e1f5 !important;
+}
+
+.tabs-in .tabs li {
+  font-family: "PingFang SC", "Microsoft yahei", "Helvetica Neue", Helvetica, Arial, sans-serif !important;
+}
+
+.bulletinList .list {
+  height: 195px;
+  overflow: hidden;
+}
+
+.welcome .decs .authenticate {
+  line-height: 20px !important;
+}
+
+.welcome .decs {
+  padding: 1.5em 0.4em 0.4em 25px !important;
+}
+
+/*# sourceMappingURL=maps/config.css.map */

@@ -1,0 +1,482 @@
+@charset "UTF-8";
+/* ===主题颜色=== */
+/* 链接 */
+/* 链接悬停 */
+/* ===环境变量=== */
+/* ===公用样式== */
+.iframes .iframe-box, .iframes iframe {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.sys-header {
+  zoom: 1;
+}
+
+.sys-header:after {
+  display: block;
+  content: '.';
+  clear: both;
+  line-height: 0;
+  visibility: hidden;
+}
+
+.navigation a,
+.drawer-nav a, .navigation .folder,
+.drawer-nav .folder, .tabs-in .tabs a.inner {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* 
+ * system.scss 
+ * 页眉, 菜单栏, 窗口/标签管理器
+*/
+/* 变量 */
+/* 页眉 */
+.sys-header {
+  width: 100%;
+  height: 60px;
+  line-height: 60px;
+  color: #fff;
+}
+
+.sys-header a,
+.sys-header a:hover {
+  color: #fff;
+}
+
+.sys-header .logo {
+  height: 100%;
+  padding: 5px;
+}
+
+.sys-header .logo img {
+  height: 100%;
+}
+
+.sys-header .links {
+  display: block;
+  height: 100%;
+  margin: 0 20px;
+}
+
+.sys-header .links li {
+  float: left;
+  font-size: 0.8em;
+  margin-right: 10px;
+}
+
+@media only screen and (max-width: 1280px) {
+  .sys-header .links {
+    display: none;
+  }
+}
+
+.sys-header .control-panel {
+  position: relative;
+  height: 100%;
+  margin: 0 20px;
+}
+
+.sys-header .user-name {
+  height: 100%;
+  max-width: 500px;
+}
+
+.sys-header .faArrow {
+  font-size: 1.5em;
+  vertical-align: middle;
+}
+
+.sys-header .faArrow-down {
+  display: inline-block;
+}
+
+.sys-header .faArrow-up {
+  display: none;
+}
+
+.sys-header .control-panel .menus {
+  position: absolute;
+  visibility: hidden;
+  opacity: 0;
+  right: 0;
+  top: 60px;
+  padding: 5px 0;
+  transition: 0.3s;
+  z-index: 99;
+  pointer-events: none;
+}
+
+.sys-header .control-panel .menus a {
+  display: block;
+  font-size: 12px;
+  padding: 0 2em;
+  line-height: 3.2em;
+  word-break: keep-all;
+  cursor: pointer;
+}
+
+.sys-header .control-panel .menus .arrow-up {
+  display: block;
+  position: absolute;
+  top: -12px;
+  width: 100%;
+  height: 20px;
+  background: url("../images/arrow-blue-up.png") no-repeat 10% center;
+}
+
+.sys-header .control-panel.active .faArrow-up {
+  display: inline-block;
+  vertical-align: text-top;
+}
+
+.sys-header .control-panel.active .faArrow-down {
+  display: none;
+}
+
+.sys-header .control-panel.active .menus {
+  opacity: 1;
+  top: 71px;
+  visibility: visible;
+  pointer-events: auto;
+}
+
+/* 主体 */
+.sys-body.outer {
+  padding-top: 60px;
+}
+
+.sys-body .content-window {
+  position: relative;
+  overflow: hidden;
+  padding-top: 3.2em;
+}
+
+.sys-body .windows-out {
+  position: relative;
+  overflow: hidden;
+  height: 100%;
+}
+
+.sys-body .windows-in {
+  position: relative;
+  height: 100%;
+}
+
+.sys-body .tabs-out {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 3.2em;
+}
+
+.sys-body .tabs-out.show-arrow {
+  padding: 0 30px;
+}
+
+.sys-body .tabs-out.show-arrow .tabs-arrow {
+  display: block;
+}
+
+.sys-window {
+  max-width: 100%;
+}
+
+/* 菜单栏 */
+.menu-bar {
+  width: 200px;
+  transition: 0.3s;
+}
+
+.navigation,
+.drawer-nav {
+  width: 100%;
+  height: 100%;
+  color: #999;
+  background-color: #3b444f;
+  overflow-y: auto;
+  transition: none;
+}
+
+.navigation a,
+.drawer-nav a {
+  position: relative;
+  display: block;
+  padding-left: 2em;
+  padding-right: 1em;
+  line-height: 4em;
+  color: #d8d8d8;
+}
+
+.navigation a:hover,
+.drawer-nav a:hover {
+  background: #343e4b;
+}
+
+.navigation .open .selected,
+.drawer-nav .open .selected {
+  color: #03a9f4;
+  background: #343e4b;
+  border-left: 2px solid #03a9f4;
+}
+
+.navigation .open .selected:after,
+.drawer-nav .open .selected:after {
+  content: '';
+  display: block;
+  position: absolute;
+  right: 0;
+  top: 1.8em;
+  width: 0;
+  height: 0;
+  border-bottom: 0.5em solid transparent;
+  border-top: 0.5em solid transparent;
+  border-right: 0.7em solid whitesmoke;
+  line-height: 0;
+}
+
+.navigation .open .selected.no-folder,
+.drawer-nav .open .selected.no-folder {
+  border-left: none;
+  color: #999;
+}
+
+.navigation .folder,
+.drawer-nav .folder {
+  position: relative;
+  border-bottom: 1px solid #49515c;
+  line-height: 4em;
+  padding: 0 0 0 0.5em;
+  cursor: pointer;
+}
+
+.navigation .folder:before,
+.drawer-nav .folder:before {
+  content: "\f107";
+  display: inline-block;
+  font: normal normal normal 14px/1 FontAwesome;
+  font-size: inherit;
+  text-rendering: auto;
+  -webkit-font-smoothing: antialiased;
+  margin-right: 0.8em;
+}
+
+.navigation .open .folder:before,
+.drawer-nav .open .folder:before {
+  content: "\f106";
+}
+
+.navigation li > ul,
+.drawer-nav li > ul {
+  display: none;
+  background-color: #2c3645;
+}
+
+.navigation li.open > ul,
+.drawer-nav li.open > ul {
+  display: block;
+}
+
+.navigation .no-folder,
+.drawer-nav .no-folder {
+  border-bottom: 1px solid #49515c;
+  color: #999;
+}
+
+.drawer-wrap {
+  width: 200px;
+}
+
+.drawer-wrap .open .selected:after {
+  border-right: 0.7em solid #7c848e;
+}
+
+@media screen and (max-width: 1280px) {
+  .menu-bar {
+    overflow: hidden;
+    width: 0;
+  }
+}
+
+/* 选项卡 */
+.tabs-arrow {
+  position: absolute;
+  display: none;
+  top: 0;
+  width: 30px;
+  line-height: 1.7em;
+  font-size: 1.5em;
+  text-align: center;
+  height: 100%;
+  background-color: #f5f5f5;
+  color: #999;
+  cursor: pointer;
+  z-index: 2;
+}
+
+.tabs-arrow:hover {
+  color: #333;
+  background-color: #eee;
+}
+
+.tabs-arrow.left {
+  left: 0;
+}
+
+.tabs-arrow.right {
+  right: 0;
+}
+
+.tabs-in {
+  font-family: Tahoma, Verdana, STHeiTi, simsun, sans-serif;
+  height: 100%;
+  background: #f5f5f5;
+  overflow: hidden;
+}
+
+.tabs-in .tabs-pill {
+  position: relative;
+  width: 9999px;
+  height: 100%;
+}
+
+.tabs-in .tabs {
+  height: 100%;
+  position: absolute;
+}
+
+.tabs-in .tabs li {
+  height: 100%;
+  float: left;
+  cursor: pointer;
+}
+
+.tabs-in .tabs li.first a.inner .close,
+.tabs-in .tabs li.first a.inner:hover .close {
+  display: none;
+  opacity: 0;
+  filter: progid:DXImageTransform.Microsoft.Alpha(opacity=0);
+}
+
+.tabs-in .tabs a.inner .title {
+  color: #333;
+}
+
+.tabs-in .tabs a.inner {
+  display: block;
+  position: relative;
+  margin: 0;
+  border: none;
+  width: 140px;
+  height: 100%;
+  padding: 0 0.8em;
+  line-height: 3.2em;
+  text-align: center;
+  text-transform: uppercase;
+  color: rgba(0, 0, 0, 0.54);
+  overflow: hidden;
+  background: linear-gradient(to bottom, #e0ecff 0, #e0ecff 100%);
+  margin: 0 1px;
+}
+
+.tabs-in .tabs li.selected.first a.inner .close {
+  display: none;
+  opacity: 0;
+  filter: progid:DXImageTransform.Microsoft.Alpha(opacity=0);
+}
+
+.tabs-in .tabs li.selected a.inner {
+  border-bottom: 3px solid #4c8dee;
+  background: #eee;
+}
+
+.tabs-in .tabs li.selected a.inner .close {
+  display: block;
+  opacity: 1;
+  filter: progid:DXImageTransform.Microsoft.Alpha(opacity=100);
+}
+
+.tabs-in .tabs a.inner:hover {
+  background: #d5e1f5;
+}
+
+.tabs-in .tabs a.inner:hover .title {
+  color: #000;
+}
+
+.tabs-in .tabs a.inner:hover .close {
+  font-size: inherit;
+  display: block;
+  opacity: 1;
+  filter: progid:DXImageTransform.Microsoft.Alpha(opacity=100);
+}
+
+.tabs-in .tabs .close {
+  position: absolute;
+  display: block;
+  top: 0;
+  right: 5px;
+  opacity: 0.6;
+  width: 14px;
+  height: 100%;
+  filter: progid:DXImageTransform.Microsoft.Alpha(opacity=60);
+  background: url("../images/tabs_icons.png") -34px center no-repeat;
+}
+
+.tabs-in .tabs .close i {
+  vertical-align: baseline;
+}
+
+/* iframe窗口内容 */
+.iframes {
+  position: relative;
+  height: 100%;
+}
+
+.iframes .iframe-box.active {
+  pointer-events: auto;
+  opacity: 1;
+  filter: progid:DXImageTransform.Microsoft.Alpha(opacity=100);
+  z-index: 5;
+  visibility: visible;
+}
+
+.iframes .iframe-box {
+  pointer-events: none;
+  opacity: 0;
+  -webkit-overflow-scrolling: touch;
+  overflow: auto;
+  filter: progid:DXImageTransform.Microsoft.Alpha(opacity=0);
+  transition: 0.3s;
+  visibility: hidden;
+}
+
+.iframes iframe {
+  display: block;
+}
+
+/* 移动端 */
+@media screen and (max-width: 700px) {
+  .sys-header {
+    height: 54px;
+    line-height: 54px;
+  }
+  .sys-header .control-panel .menus {
+    top: 54px;
+  }
+  .sys-header .control-panel.active .menus {
+    top: 65px;
+  }
+  .sys-body.outer {
+    padding-top: 54px;
+  }
+}
+
+/*# sourceMappingURL=maps/system.css.map */

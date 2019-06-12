@@ -1,0 +1,241 @@
+@charset "utf-8";
+/* CSS Document */
+.LFPay{width:980px; height:auto; margin:50px auto}
+.LFPayTab{width:978px; border:1px solid #dedede; height: 37px; line-height: 38px; background:#efefef}
+.LFPayTab a{float: left; position:relative; top:0px; _top:1px; width: 184px; height: 38px; display: inline-block; text-indent: 55px; font-size: 14px; font-weight: bold;}
+.LFPayTabActive{ background-image:url(../image/all_img.png); float: left; width: 184px; height: 38px; background-position: 0 -74px; background-repeat:no-repeat}
+.LFPayTab a:hover{ background-image:url(../image/all_img.png); float: left; width: 184px; height: 38px; background-position: 0 -74px; background-repeat:no-repeat }
+.LFPayC{ width:940px; margin:20px; }
+.LFPayCC{ display:none;}
+.LFPayCC p{width:200px; margin-left:25px; _margin-left:40px; margin-top:10px; height:36px; }
+.LFPayCC p a{ display:block; width:200px; height:36px; line-height:36px; text-align:center; font-size:14px; color:#005EA7; font-weight:bold; border: 1px dotted #cccccc; overflow:hidden;}
+.LFPayCC p a:hover{border: 2px solid #cccccc;}
+.LFPayCC ul{ width:100%; height:192px; overflow:hidden}
+/*.LFPayCC ul li { width:203px; margin-left:25px; _margin-left:20px; margin-top:10px; height:39px; line-height:39px; overflow:hidden; float:left;  }
+.LFPayCC ul li input{ float:left; width:33px; height:10px; margin-top:15px; cursor: pointer;  display:none;}
+.LFPayCC ul li label{ display:block; cursor: pointer; width:200px; height:36px; border:1px solid #ddd;}
+.LFPayCC ul li span{ float:right; display:block; width:190px; margin-left:10px; height:36px;  background-image:url(../image/combo1.png); background-repeat:no-repeat; overflow:hidden}*/
+.LFPayCC ul li { width:203px; margin-left:25px; _margin-left:20px; margin-top:10px; height:39px; line-height:39px; overflow:hidden; float:left; position:relative  }/*d82119*/
+.LFPayCC ul li input{ float:left; width:33px; height:10px; margin-top:15px; cursor: pointer; position:absolute; z-index:1; top:0; left:0;}
+.LFPayCC ul li label{ display:block; position:relative; z-index:2; background:#fff; cursor: pointer; width:200px; height:36px; border:1px solid #ddd; top:0; left:0}
+.LFPayCC ul li span{ float:right; display:block; width:190px; margin-left:10px; height:36px;  background-image:url(../image/combo1.png); background-repeat:no-repeat; overflow:hidden; }
+.LFPayCC ul li span b{ float:right; display:block; background-color: red; color:#fff; width:18px; text-align:center; line-height:18px; font-weight:normal}
+.LfItTopBg{ width:100%; height:86px; background:#f3f3f3}
+.LfItTopLogo{ width:980px; height:86px; overflow:hidden; margin:0 auto}
+.LfItContent{ width:980px; margin:10px auto;}
+.LfItCCNav{ width:246px; height:51px; float:right; background:url(../image/Lflcimg.jpg) no-repeat 0 0}
+.LfItCCSucceed{ width:978px; border:1px solid #ccc; margin-top:10px}
+.LfItCCSucceedT,.LfItCCSucceedF{ width:100%; height:30px; line-height:30px; background:#f3f3f3}
+.LfItCCSucceedC{ width:100%; margin:20px 0; padding:10px 0}
+.LfItCCSucceedCL{ width:200px; height:80px; background:url(../image/LfIndentRight.jpg) no-repeat 120px 20px}
+.LfItCCSucceedCR p{ line-height:30px; line-height:30px}
+.LfItCCSucceedCRO{ line-height:40px; font-size:18px; color:#2ac81a}
+.LfItCCSucceedCR p b{color:#c00; font-size:18px}
+.LfItCCSucceedF p{ text-indent:25px}
+.LfItCCSucceedF p a{ color:#10a4d5}
+.trs{float: right;}
+
+
+#LFPayCCElse{ font-size:14px; color:#09c; text-align:center; cursor:pointer}
+.B2C_ABC-DEBIT_CARD{background-position:0 0;}
+.B2C_ABC-CREDIT_CARD{background-position:0 0;}
+.B2B_ABC{background-position:0 0;}
+.B2C_BOC-DEBIT_CARD{background-position:0 -180px}
+.B2C_BOC-CREDIT_CARD{background-position:0 -180px}
+.B2B_BOC{background-position:0 -180px}
+.B2C_CCB-DEBIT_CARD{background-position:0 -360px}
+.B2C_CCB-CREDIT_CARD{background-position:0 -360px}
+.B2B_CCB{background-position:0 -360px}
+.B2C_CEB-DEBIT_CARD{background-position:0 -432px;}
+.B2C_CEB-CREDIT_CARD{background-position:0 -432px;}
+.B2B_CEB{background-position:0 -432px;}
+.B2C_CNCB-DEBIT_CARD{background-position:0 -612px;}
+.B2C_CNCB-CREDIT_CARD{background-position:0 -612px;}
+.B2B_CNCB{background-position:0 -612px;}
+.B2C_ICBC-DEBIT_CARD{background-position:0 -1078px;}
+.B2B_ICBC{background-position:0 -1078px;}
+.B2C_ICBC-CREDIT_CARD{background-position: 0 -1078px;}
+.B2C_PSBC-DEBIT_CARD{background-position: 0 -1260px;}
+.B2C_PSBC-CREDIT_CARD{background-position: 0 -1260px;}
+.B2B_PSBC{background-position: 0 -1260px;}
+.B2C_BCM-DEBIT_CARD{background-position: 0 -36px;}
+.B2C_BCM-CREDIT_CARD{background-position: 0 -36px;}
+.B2B_BCM{background-position: 0 -36px;}
+.B2C_CGB-DEBIT_CARD{background-position: 0 -464px;}
+.B2C_CGB-CREDIT_CARD{background-position: 0 -464px;}
+.B2B_CGB{background-position: 0 -464px;}
+.B2C_CIB-DEBIT_CARD{background-position: 0 -502px;}
+.B2C_CIB-CREDIT_CARD{background-position: 0 -502px;}
+.B2B_CIB{background-position: 0 -502px;}
+.B2C_CMB-DEBIT_CARD{background-position: 0 -576px;}
+.B2C_CMB-CREDIT_CARD{background-position: 0 -576px;}
+.B2B_CMB{background-position: 0 -576px;}
+.B2C_CMBC-DEBIT_CARD{background-position: 0 -538px;}
+.B2C_CMBC-CREDIT_CARD{background-position: 0 -538px;}
+.B2B_CMBC{background-position: 0 -538px;}
+.B2C_HXB-DEBIT_CARD{background-position: 0 -1044px;}
+.B2C_HXB-CREDIT_CARD{background-position: 0 -1044px;}
+.B2B_HXB{background-position: 0 -1044px;}
+.B2C_SPDB-DEBIT_CARD{background-position: 0 -1368px;}
+.B2C_SPDB-CREDIT_CARD{background-position: 0 -1368px;}
+.B2B_SPDB{background-position: 0 -1368px;}
+.B2C_BOB-DEBIT_CARD{background-position: 0 -144px;}
+.B2B_BOB{background-position: 0 -144px;}
+.B2C_BOB-CREDIT_CARD{background-position: 0 -144px;}
+.B2C_HCCB-DEBIT_CARD{background-position: 0 -940px;}
+.B2C_HCCB-CREDIT_CARD{background-position: 0 -940px;}
+.B2B_HCCB{background-position: 0 -940px;}
+.B2C_NBCB-DEBIT_CARD{background-position: 0 -1152px;}
+.B2C_NBCB-CREDIT_CARD{background-position: 0 -1152px;}
+.B2B_NBCB{background-position: 0 -1152px;}
+.B2C_NJCB-DEBIT_CARD{background-position: 0 -1188px;}
+.B2C_PAB-DEBIT_CARD{background-position: 0 -1221px;}
+.B2C_PAB-CREDIT_CARD{background-position: 0 -1221px;}
+.B2B_PAB {background-position: 0 -1221px;}
+.B2C_BOS-DEBIT_CARD{background-position: 0 -254px;}
+.B2C_BOS-CREDIT_CARD{background-position: 0 -254px;}
+.B2B_BOS{background-position: 0 -254px;}
+.B2C_CQRCB-DEBIT_CARD{background-position: 0 -684px;}
+.B2C_LTCCB-DEBIT_CARD{background-position: 0 -1116px;}
+.B2C_BOJH-DEBIT_CARD{background-position: 0 -328px;}
+.B2C_FDB-DEBIT_CARD{background-position: 0 -792px;}
+.B2C_EGB-DEBIT_CARD{background-position: 0 -756px;}
+.B2C_CBHB-DEBIT_CARD{background-position: 0 -288px;}
+.B2C_BJRCB-DEBIT_CARD{background-position: 0 -109px;}
+.B2C_BJRCB-CREDIT_CARD{background-position: 0 -109px;}
+.B2B_BJRCB{background-position: 0 -109px;}
+.B2C_HKB-DEBIT_CARD{background-position: 0 -974px;}
+.B2C_QDB-CREDIT_CARD{background-position: 0 -1296px;}
+.B2C_BEA-CREDIT_CARD{background-position: 0 -75px;}
+.B2C_BEA-DEBIT_CARD {background-position: 0 -75px;}
+.B2B_BEA{background-position: 0 -75px;}
+.B2B_BOJS{background-position: 0 -218px;}
+.B2C_BOJS-CREDIT_CARD{background-position: 0 -218px;}
+.B2C_BOJS-DEBIT_CARD{background-position: 0 -218px;}
+.B2B_CBHB{background-position: 0 -288px;}
+.B2C_CBHB-CREDIT_CARD{background-position: 0 -288px;}
+.B2C_CBHB-DEBIT_CARD{background-position: 0 -288px;}
+.B2C_CDB-DEBIT_CARD{background-position: 0 -396px;}
+.B2B_CUP{background-position: 0 -1440px;}
+.B2C_CQCB-DEBIT_CARD{background-position: 0 -648px;}
+.B2C_CQRCB-DEBIT_CARD{background-position: 0 -684px;}
+.B2B_CZB{background-position: 0 -720px}
+.B2C_CZB-CREDIT_CARD {background-position: 0 -720px}
+.B2C_CZB-DEBIT_CARD{background-position: 0 -720px}
+.B2C_EGB-DEBIT_CARD{background-position: 0 -756px}
+.B2C_FDB-DEBIT_CARD{background-position: 0 -792px}
+.B2C_FJHX-CREDIT_CARD{background-position: 0 -828px;}
+.B2C_FJHX-DEBIT_CARD{background-position: 0 -828px;}
+.B2C_GRCBANK-CREDIT_CARD{background-position: 0 -866px}
+.B2C_GRCBANK-DEBIT_CARD{background-position: 0 -866px}
+.B2B_GRCBANK{background-position: 0 -866px}
+.B2C_GZCB-CREDIT_CARD{background-position: 0 -902px;}
+.B2C_GZCB-DEBIT_CARD{background-position: 0 -902px;}
+.B2B_GZCB{background-position: 0 -902px;}
+.B2C_HSB-CREDIT_CARD{background-position: 0 -1008px}
+.B2C_HSB-DEBIT_CARD{background-position: 0 -1008px}
+.B2B_HSB{background-position: 0 -1008px}
+.B2C_MOCK-CREDIT_CARD{background-position: 0 -1476px}
+.B2B_MOCK{background-position: 0 -1476px}
+.B2C_MOCK-DEBIT_CARD {background-position: 0 -1476px}
+.OFFLINE_LEFU{background-position: 0 -1476px}
+.B2C_NJCB-CREDIT_CARD{background-position: 0 -1188px}
+.B2C_NJCB-DEBIT_CARD{background-position: 0 -1188px}
+.B2B_NJCB{background-position: 0 -1188px}
+.B2B_SHRCB{background-position: 0 -1332px}
+.B2C_SHRCB-DEBIT_CARD{background-position: 0 -1332px}
+.B2C_SHRCB-CREDIT_CARD{background-position: 0 -1332px}
+.B2C_WZYH-DEBIT_CARD{background-position: 0 -1404px}
+.B2C_WZYH-CREDIT_CARD{background-position: 0 -1404px}
+.B2B_WZYH{background-position: 0 -1404px}
+.AUTHPAY_EPAY{background-position: 0 -1440px;}
+.AUTHPAY_EPAY{background-position: 0 -1440px;}
+.B2B_BOHB{background-position: 0 -1605px;}
+/*
+B2B_BOHB   河北银行
+B2B_HRBCB   哈尔滨银行
+B2B_SDB     深圳发展银行*/
+/* CSS Document */
+.wrapper{margin:0 auto;background:#fff;#text-align:center;}
+a{ text-decoration:none;color:#666;}
+a:hover{color:#f69201;}
+.mesicon,.fstab li.select a,.fstab li a:hover,.btn1,.btn2,.btn3 a{background: url(../image//all_img.png) no-repeat;}
+
+/** header **/
+.header_bg1{background: url(../image//header_bg.gif) repeat-x;height:85px;}
+.header{width:980px;height:86px;margin:0 auto;}
+.header_bg1 .logos a{float: left; width: 320px; height: 86px; text-indent: -9999px;background:url(../image//logo.jpg) no-repeat;}
+
+/** footer **/
+.footer{text-align:center;padding:20px 0; border-top: 1px solid #e1e1e1; background: #fcfcfc; color:#666;height:96px;line-height:96px;}
+.footer p.ban{height:25px;line-height:25px;}
+.footer a{margin:5px 10px;}
+.bank_1s,.bank_2s,.bank_3s,.bank_4s,.bank_5s,.bank_6s,.bank_7s,.bank_8s,.bank_9s,.bank_10s,.bank_11s,.bank_12s{width: 27px; height: 20px; background: url(../image//bank_icon20-20.jpg) no-repeat; display: inline-block;}
+.bank_1s{background-position: 0 0;}
+.bank_2s{background-position: 0 -20px;}
+.bank_3s{background-position: 0 -40px;}
+.bank_4s{background-position: 0 -60px;}
+.bank_5s{background-position: 0 -80px;}
+.bank_6s{background-position: 0 -100px;}
+.bank_7s{background-position: 0 -120px;}
+.bank_8s{background-position: 0 -140px;}
+.bank_9s{background-position: 0 -160px;}
+.bank_10s{background-position: 0 -180px;}
+.bank_11s{background-position: 0 -200px;}
+.bank_12s{background-position: 0 -220px;}
+
+/* zhifu */
+.innerwrapper{width: 980px; padding: 10px 20px; margin: 0 auto;#text-align:left;}
+.lc1,.lc2{width: 397px; height: 51px; background: url(../image//lcimg.png) no-repeat; display: block; float: right;}
+.Lfplay{height: 40px; line-height: 40px; font-size: 14px; font-weight: bold;}
+.lc1{background-position: 0 0;}
+.lc2{background-position: 0 -51px;}
+.mes{background: #fff8ee; height: 80px; position: relative; padding: 30px 50px;}
+.mes .t1{height: 3px; width: 936px; background: url(../image//line.png) top no-repeat; position: absolute; left: 1px; top: 0;}
+.mes .t2{height: 3px; width: 936px; background: url(../image//line.png) bottom no-repeat; position: absolute; left: 1px; bottom: 0;}
+.mesicon{float: left; width: 73px; height: 73px; background-position: 0 0; margin: 0 10px 0 50px; display: block;}
+.mestext{float: left; width: 600px; margin-left: 20px; font-size: 14px;}
+.mestext p{line-height: 26px;}
+.mestext i{color: #c00; margin: 0 2px; font-weight: bold; font-size: 18px;}
+.fstab{border: 1px solid #dedede; height: 38px; line-height: 38px; overflow: hidden; background: url(../image//tab_bg.png) repeat-x; border-bottom: 0;}
+.fstab li{float: left;}
+.fstab li a{float: left; width: 184px; height: 38px; text-indent: 55px; font-size: 14px;}
+.fstab li.select a,.fstab li a:hover{float: left; width: 184px; height: 38px; background-position: 0 -74px; display: inline-block; text-indent: 55px; font-size: 14px; font-weight: bold; margin-bottom: -1px;}
+.banklist li{float: left; width: 175px; margin: 10px 6px;}
+.btn1{width: 245px; height: 57px; background-position: 0 -113px; cursor: pointer; border: 0;}
+.btn2{width: 140px; height: 39px; background-position: 0 -171px; cursor: pointer; border: 0;}
+.btn3 a{width: 245px; height: 57px; background-position: 0 -211px; cursor: pointer; border: 0; display: block;}
+.xcon{border: 1px solid #e0e0e0; background: #f6f4f5;}
+.br1{border: 3px solid #fdad34; background: #fff; padding: 20px; border-radius: 4px;}
+.br1 span{float: left;}
+.br2{border: 1px solid #feaf38; background: #feedd9; box-shadow: 1px 1px 1px #666;}
+.meslist li label{float: left; width: 100px; text-align: right;}
+.meslist li{margin-bottom: 15px; color: #656364;}
+.input1{border:1px solid #e0ae8b; background: #fff; height: 20px; line-height: 20px; padding: 0 2px;}
+.qa p{line-height: 24px;}
+.dotted-border{border-top: 1px dotted #898788; height: 1px; line-height: 1px;}
+.mlist li{float: left; margin-right: 10px; margin-bottom: 35px;}
+.mlist li a{float: left; width: 250px; height: 40px; line-height: 40px; text-align: center; font-size: 14px; background: #d9d9d9;}
+.mlist li.select a,.mlist li a:hover{float: left; width: 250px; height: 40px; background: #f8b038; display: inline-block; text-align: center; line-height: 40px; font-size: 14px; font-weight: bold; color: #fff;}
+.table1,.table1 th,.table1 td{border: 1px solid #d7d7d7; background: #fff;}
+.table1 td{padding: 8px;}
+.table1 th{padding: 8px; background: #eee;}
+
+/* font */
+.font1{color: #fff; background: #95c1e8; padding: 2px 3px;}
+.font2 a{color: #047ae8; text-decoration: underline;}
+.font3{color: #fa0018;}
+.font3{color: #929292;}
+.font4{color: #bcb299;}
+.font4 i{font-size: 16px; font-family: "微软雅黑"; font-weight: bold; margin-right: 5px;}
+.font5{color: #939393; text-indent: 22px;}
+.font6{color: #cd0102;}
+
+/* width height */
+.w60{width: 60px;}
+.w150{width: 150px;}
+.w180{width: 180px;}
+.w300{width: 300px;}
+.w430{width: 430px;}
+
+.imgBG{max-height: 36px; max-width: 122px; border: 0;}

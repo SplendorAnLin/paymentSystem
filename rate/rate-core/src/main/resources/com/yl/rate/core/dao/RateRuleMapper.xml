@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.yl.rate.core.dao.RateRuleMapper">
+    <!--auto generated Code-->
+    <resultMap id="BaseResultMap" type="com.yl.rate.core.entity.RateRule">
+        <result column="rate_code" property="rateCode" jdbcType="VARCHAR"/>
+        <result column="id" property="id" jdbcType="BIGINT"/>
+        <result column="code" property="code" jdbcType="VARCHAR"/>
+        <result column="create_time" property="createTime"/>
+    </resultMap>
+
+    <!--auto generated Code-->
+    <sql id="Base_Column_List">
+        rate_code,
+        id,
+        code,
+        create_time
+    </sql>
+
+    <!--auto generated Code-->
+    <insert id="insert" useGeneratedKeys="true" keyProperty="rateRule.id">
+        INSERT INTO rate_rule (
+            rate_code,
+            id,
+            code,
+            create_time
+        ) VALUES (
+            #{rateRule.rateCode,jdbcType=VARCHAR},
+            #{rateRule.id,jdbcType=BIGINT},
+            #{rateRule.code,jdbcType=VARCHAR},
+            #{rateRule.createTime}
+        )
+    </insert>
+
+    <!--auto generated Code-->
+    <insert id="insertSelective" useGeneratedKeys="true" keyProperty="rateRule.id">
+        INSERT INTO rate_rule
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="rateRule.rateCode!=null"> rate_code,</if>
+            <if test="rateRule.id!=null"> id,</if>
+            <if test="rateRule.code!=null"> code,</if>
+            <if test="rateRule.createTime!=null"> create_time,</if>
+        </trim>
+        VALUES
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="rateRule.rateCode!=null">#{rateRule.rateCode,jdbcType=VARCHAR},
+            </if>
+            <if test="rateRule.id!=null">#{rateRule.id,jdbcType=BIGINT},
+            </if>
+            <if test="rateRule.code!=null">#{rateRule.code,jdbcType=VARCHAR},
+            </if>
+            <if test="rateRule.createTime!=null">#{rateRule.createTime},
+            </if>
+        </trim>
+    </insert>
+
+    <!--auto generated Code-->
+    <insert id="insertList">
+        INSERT INTO rate_rule (
+        <include refid="Base_Column_List"/>
+        )VALUES
+        <foreach collection="rateRules" item="rateRule" index="index" separator=",">
+            (
+            #{rateRule.rateCode,jdbcType=VARCHAR},
+            #{rateRule.id,jdbcType=BIGINT},
+            #{rateRule.code,jdbcType=VARCHAR},
+            #{rateRule.createTime}
+            )
+        </foreach>
+    </insert>
+
+    <!--auto generated Code-->
+    <update id="update">
+        UPDATE rate_rule
+        <set>
+            <if test="rateRule.rateCode != null"> rate_code= #{rateRule.rateCode,jdbcType=VARCHAR},</if>
+            <if test="rateRule.id != null"> id= #{rateRule.id,jdbcType=BIGINT},</if>
+            <if test="rateRule.code != null"> code= #{rateRule.code,jdbcType=VARCHAR},</if>
+            <if test="rateRule.createTime != null"> create_time= #{rateRule.createTime}</if>
+        </set>
+        WHERE id = #{rateRule.id,jdbcType=BIGINT}
+    </update>
+    <select id="queryRateRule" resultMap="BaseResultMap">
+      SELECT
+        <include refid="Base_Column_List" />
+      FROM rate_rule
+      WHERE rate_code = #{rateCode}
+    </select>
+
+    <insert id="rateRuleAdd" parameterType="com.yl.rate.core.entity.RateRule">
+        INSERT INTO rate_rule (create_time, rate_code)
+        VALUES (#{createTime}, #{rateCode})
+    </insert>
+
+    <select id="checkRateRuleByCode" resultType="java.lang.Integer" parameterType="java.lang.String">
+        SELECT COUNT(1) FROM rate_rule WHERE code = #{code}
+    </select>
+
+    <delete id="delete">
+        DELETE FROM rate_rule
+        WHERE id = #{id}
+    </delete>
+
+    <delete id="deleteByRateCode" parameterType="java.lang.String">
+        DELETE FROM rate_rule
+        WHERE rate_code = #{rateCode}
+    </delete>
+</mapper>
+

@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.yl.chat.mapper.WaitInfoMapper">
+
+    <resultMap id="waitInfo" type="com.yl.chat.wecaht.model.WaitInfo">
+        <id column="id" property="id"></id>
+        <result column="OPEN_ID" property="openId"/>
+        <result column="TEMPLE_ID" property="templeId"/>
+        <result column="URL" property="url"/>
+        <result column="INFO" property="info"/>
+        <result column="SEND_TIME" property="sendTime"/>
+        <result column="IS_DIY_COLOR" property="isDiyColor"/>
+        <result column="STATUS" property="status"/>
+        <result column="REMARK" property="remark"/>
+    </resultMap>
+
+    <sql id="commonColumn">
+		id,OPEN_ID,TEMPLE_ID,URL,INFO,SEND_TIME,IS_DIY_COLOR,STATUS,REMARK
+	</sql>
+
+    <insert id="saveWaitInfo" parameterType="com.yl.chat.wecaht.model.WaitInfo">
+		INSERT INTO
+			wait_message(OPEN_ID,TEMPLE_ID,URL,INFO,SEND_TIME,IS_DIY_COLOR,STATUS,REMARK)
+		VALUES
+			(#{openId}, #{templeId}, #{URL},#{info},#{sendTime},#{isDiyColor},#{status},#{remark})
+   </insert>
+
+    <select id="findWaitInfo" resultMap="waitInfo">
+        SELECT
+        <include refid="commonColumn"/>
+        FROM wait_message
+        WHERE STATUS = #{status} and SEND_TIME &lt;=#{time}
+    </select>
+
+    <update id="upWatiInfo">
+		update wait_message
+		set OPEN_ID = #{info.openId},
+		TEMPLE_ID = #{info.templeId},
+		URL = #{info.URL},
+		INFO = #{info.info},
+		SEND_TIME = #{info.sendTime},
+		IS_DIY_COLOR = #{info.isDiyColor},
+		STATUS = #{info.status},
+		REMARK = #{info.remark}
+		where id = #{info.id}
+	</update>
+</mapper>

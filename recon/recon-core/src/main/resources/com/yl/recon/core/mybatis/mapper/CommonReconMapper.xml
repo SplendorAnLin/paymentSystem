@@ -1,0 +1,596 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.yl.recon.core.mybatis.mapper.CommonReconMapper">
+    <!--接口-->
+    <resultMap id="PayInterfaceOrderResultMap" type="com.yl.recon.core.entity.order.PayinterfaceOrder">
+        <result column="interface_code" property="interfaceCode" jdbcType="VARCHAR"/>
+        <result column="interface_type" property="interfaceType" jdbcType="VARCHAR"/>
+        <result column="interface_order_code" property="interfaceOrderCode" jdbcType="VARCHAR"/>
+        <result column="bank_channel_code" property="bankChannelCode" jdbcType="VARCHAR"/>
+        <result column="trade_order_code" property="tradeOrderCode" jdbcType="VARCHAR"/>
+        <result column="amount" property="amount" jdbcType="DOUBLE"/>
+        <result column="fee" property="fee" jdbcType="DOUBLE"/>
+        <result column="trans_time" property="transTime" jdbcType="TIMESTAMP"/>
+        <result column="recon_date" property="reconDate" jdbcType="DATE"/>
+        <result column="remark" property="remark" jdbcType="VARCHAR"/>
+        <result column="code" property="code" jdbcType="BIGINT"/>
+        <result column="version" property="version" jdbcType="BIGINT"/>
+        <result column="create_time" property="createTime" jdbcType="TIMESTAMP"/>
+    </resultMap>
+
+
+    <!--交易订单-->
+    <resultMap id="TradeOrderResultMap" type="com.yl.recon.core.entity.order.TradeOrder">
+        <result column="trade_order_code" property="tradeOrderCode" jdbcType="VARCHAR"/>
+        <result column="trans_type" property="transType" jdbcType="VARCHAR"/>
+        <result column="pay_type" property="payType" jdbcType="VARCHAR"/>
+        <result column="interface_type" property="interfaceType" jdbcType="VARCHAR"/>
+        <result column="interface_order_code" property="interfaceOrderCode" jdbcType="VARCHAR"/>
+        <result column="amount" property="amount" jdbcType="DOUBLE"/>
+        <result column="fee" property="fee" jdbcType="DOUBLE"/>
+        <result column="trans_time" property="transTime" jdbcType="TIMESTAMP"/>
+        <result column="recon_date" property="reconDate" jdbcType="DATE"/>
+        <result column="code" property="code" jdbcType="VARCHAR"/>
+        <result column="version" property="version" jdbcType="BIGINT"/>
+        <result column="create_time" property="createTime" jdbcType="TIMESTAMP"/>
+        <result column="remark" property="remark" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <!--代付订单-->
+    <resultMap id="RemitOrderResultMap" type="com.yl.recon.core.entity.order.RemitOrder">
+        <result column="trade_order_code" property="tradeOrderCode" jdbcType="VARCHAR"/>
+        <result column="trans_type" property="transType" jdbcType="VARCHAR"/>
+        <result column="pay_type" property="payType" jdbcType="VARCHAR"/>
+        <result column="interface_type" property="interfaceType" jdbcType="VARCHAR"/>
+        <result column="interface_order_code" property="interfaceOrderCode" jdbcType="VARCHAR"/>
+        <result column="amount" property="amount" jdbcType="DOUBLE"/>
+        <result column="fee" property="fee" jdbcType="DOUBLE"/>
+        <result column="trans_time" property="transTime" jdbcType="TIMESTAMP"/>
+        <result column="recon_date" property="reconDate" jdbcType="DATE"/>
+        <result column="remark" property="remark" jdbcType="VARCHAR"/>
+        <result column="code" property="code" jdbcType="BIGINT"/>
+        <result column="version" property="version" jdbcType="BIGINT"/>
+        <result column="create_time" property="createTime" jdbcType="TIMESTAMP"/>
+    </resultMap>
+    <!--实名认证订单-->
+    <resultMap id="AuthOrderResultMap" type="com.yl.recon.core.entity.order.RealAuthOrder">
+        <result column="trade_order_code" property="tradeOrderCode" jdbcType="VARCHAR"/>
+        <result column="trans_type" property="transType" jdbcType="VARCHAR"/>
+        <result column="pay_type" property="payType" jdbcType="VARCHAR"/>
+        <result column="interface_type" property="interfaceType" jdbcType="VARCHAR"/>
+        <result column="interface_order_code" property="interfaceOrderCode" jdbcType="VARCHAR"/>
+        <result column="amount" property="amount" jdbcType="DOUBLE"/>
+        <result column="fee" property="fee" jdbcType="DOUBLE"/>
+        <result column="trans_time" property="transTime" jdbcType="TIMESTAMP"/>
+        <result column="recon_date" property="reconDate" jdbcType="DATE"/>
+        <result column="remark" property="remark" jdbcType="VARCHAR"/>
+        <result column="code" property="code" jdbcType="BIGINT"/>
+        <result column="version" property="version" jdbcType="BIGINT"/>
+        <result column="create_time" property="createTime" jdbcType="TIMESTAMP"/>
+    </resultMap>
+
+
+    <!--账户-->
+    <resultMap id="AccountOrderResultMap" type="com.yl.recon.core.entity.order.AccountOrder">
+        <result column="account_no" property="accountNo" jdbcType="VARCHAR"/>
+        <result column="trade_order_code" property="tradeOrderCode" jdbcType="VARCHAR"/>
+        <result column="trans_type" property="transType" jdbcType="VARCHAR"/>
+        <result column="amount" property="amount" jdbcType="DOUBLE"/>
+        <result column="fund_symbol" property="fundSymbol" jdbcType="VARCHAR"/>
+        <result column="trans_time" property="transTime" jdbcType="TIMESTAMP"/>
+        <result column="system_code" property="systemCode" jdbcType="VARCHAR"/>
+        <result column="bussiness_code" property="bussinessCode" jdbcType="VARCHAR"/>
+        <result column="recon_date" property="reconDate" jdbcType="DATE"/>
+        <result column="is_fee" property="isFee" jdbcType="VARCHAR"/>
+        <result column="code" property="code" jdbcType="BIGINT"/>
+        <result column="version" property="version" jdbcType="BIGINT"/>
+        <result column="create_time" property="createTime" jdbcType="TIMESTAMP"/>
+    </resultMap>
+
+
+    <!--通道-->
+    <resultMap id="BaseBankChannelOrderResultMap" type="com.yl.recon.core.entity.order.BaseBankChannelOrder">
+        <result column="interface_info_code" property="interfaceInfoCode" jdbcType="VARCHAR"/>
+        <result column="bank_order_code" property="bankOrderCode" jdbcType="VARCHAR"/>
+        <result column="interface_order_code" property="interfaceOrderCode" jdbcType="VARCHAR"/>
+        <result column="amount" property="amount" jdbcType="DOUBLE"/>
+        <result column="fee" property="fee" jdbcType="DOUBLE"/>
+        <result column="trans_time" property="transTime" jdbcType="DATE"/>
+        <result column="recon_date" property="reconDate" jdbcType="DATE"/>
+        <result column="code" property="code" jdbcType="BIGINT"/>
+        <result column="version" property="version" jdbcType="BIGINT"/>
+        <result column="create_time" property="createTime" jdbcType="TIMESTAMP"/>
+    </resultMap>
+
+
+    <resultMap id="AccountTotalOrderResultMap" type="com.yl.recon.core.entity.order.AccTotalOrder">
+        <result column="total_amount" property="totalAmount" jdbcType="VARCHAR"/>
+        <result column="total_num" property="totalNum" jdbcType="VARCHAR"/>
+    </resultMap>
+
+
+    <!--接口与订单start-->
+
+    <!--接口与订单：订单交易单边-->
+    <select id="findInterfaceAndOrderTradeSingleErr" resultMap="TradeOrderResultMap">
+        SELECT
+            t.trade_order_code,
+            t.trans_type,
+            t.pay_type,
+            t.interface_type,
+            t.interface_order_code,
+            t.amount,
+            t.fee,
+            t.trans_time,
+            t.recon_date,
+            t.code,
+            t.version,
+            t.create_time
+        FROM
+            trade_order t
+            LEFT JOIN payinterface_order d ON d.trade_order_code = t.trade_order_code
+        WHERE d.trade_order_code IS NULL
+              AND t.recon_date = str_to_date(#{params.RECON_DATE,jdbcType=DATE}, '%Y-%m-%d')
+    </select>
+    <!--接口与订单：代付单边-->
+    <select id="findInterfaceAndOrderRemitSingleErr" resultMap="RemitOrderResultMap">
+        SELECT
+            t.trade_order_code,
+            t.trans_type,
+            t.pay_type,
+            t.interface_type,
+            t.interface_order_code,
+            t.amount,
+            t.fee,
+            t.trans_time,
+            t.recon_date,
+            t.code,
+            t.version,
+            t.create_time
+        FROM
+            remit_order t
+            LEFT JOIN payinterface_order d ON d.trade_order_code = t.trade_order_code
+        WHERE d.trade_order_code IS NULL
+              AND t.recon_date = str_to_date(#{params.RECON_DATE,jdbcType=DATE}, '%Y-%m-%d')
+    </select>
+
+    <!--接口与订单：实名认证单边-->
+    <select id="findInterfaceAndOrderAuthOrderSingleErr" resultMap="AuthOrderResultMap">
+        SELECT
+            t.trade_order_code,
+            t.trans_type,
+            t.pay_type,
+            t.interface_type,
+            t.interface_order_code,
+            t.amount,
+            t.fee,
+            t.trans_time,
+            t.recon_date,
+            t.code,
+            t.version,
+            t.create_time
+        FROM
+            real_auth_order t
+            LEFT JOIN payinterface_order d ON d.trade_order_code = t.trade_order_code
+        WHERE d.trade_order_code IS NULL
+              AND t.recon_date = str_to_date(#{params.RECON_DATE,jdbcType=DATE}, '%Y-%m-%d')
+              AND t.interface_code &lt;&gt; 'REALAUTH_YL_100001'
+    </select>
+
+
+    <!--接口与订单：接口单边-->
+    <select id="findInterfaceAndOrderInterfaceSingleErr" resultMap="PayInterfaceOrderResultMap">
+        SELECT
+        t.interface_code,
+        t.interface_type,
+        t.interface_order_code,
+        t.bank_channel_code,
+        t.trade_order_code,
+        t.amount,
+        t.trans_time,
+        t.recon_date,
+        t.code,
+        t.version,
+        t.create_time
+        FROM
+        payinterface_order t
+        LEFT JOIN
+        <if test="params.ORDER_TABLE_NAME == 'trade_order'">
+            trade_order d
+        </if>
+        <if test="params.ORDER_TABLE_NAME == 'remit_order'">
+            remit_order d
+        </if>
+        <if test="params.ORDER_TABLE_NAME == 'real_auth_order'">
+            real_auth_order d
+        </if>
+        ON d.trade_order_code = t.trade_order_code
+        WHERE
+        d.trade_order_code IS NULL
+        AND t.recon_date = str_to_date(#{params.RECON_DATE,jdbcType=DATE}, '%Y-%m-%d')
+        <if test="params.ORDER_TABLE_NAME == 'trade_order'">
+            and t.interface_type not in('REMIT','REAL_AUTH')
+        </if>
+        <if test="params.ORDER_TABLE_NAME == 'remit_order'">
+            and t.interface_type in('REMIT')
+        </if>
+        <if test="params.ORDER_TABLE_NAME == 'real_auth_order'">
+            and t.interface_type in('REAL_AUTH')
+        </if>
+    </select>
+
+    <!--接口与订单：金额错误-->
+    <select id="findInterfaceAndOrderAmountErr" resultMap="PayInterfaceOrderResultMap">
+
+        SELECT
+        t.interface_code,
+        t.interface_type,
+        t.interface_order_code,
+        t.bank_channel_code,
+        t.trade_order_code,
+        t.amount,
+        t.fee,
+        t.trans_time,
+        t.recon_date,
+        CONCAT('接口金额和手续费(',IFNULL(t.amount,'0.0'),'|',IFNULL(t.fee,'0.0'),')-','订单金额和手续费(',IFNULL(d.amount,'0.0'),'|',IFNULL(d.fee,'0.0'),')')
+        AS remark,
+        t.code,
+        t.version,
+        t.create_time
+        FROM
+        payinterface_order t
+        JOIN
+        <if test="params.ORDER_TABLE_NAME == 'trade_order'">
+            trade_order d
+        </if>
+        <if test="params.ORDER_TABLE_NAME == 'remit_order'">
+            remit_order d
+        </if>
+        <if test="params.ORDER_TABLE_NAME == 'real_auth_order'">
+            real_auth_order d
+        </if>
+        ON d.trade_order_code = t.trade_order_code
+        WHERE 1 = 1
+        AND (t.fee &lt;&gt; d.fee OR t.amount &lt;&gt; d.amount)
+        AND t.recon_date = str_to_date(#{params.RECON_DATE,jdbcType=DATE}, '%Y-%m-%d')
+        <if test="params.ORDER_TABLE_NAME == 'trade_order'">
+            and t.interface_type not in('REMIT','REAL_AUTH')
+        </if>
+        <if test="params.ORDER_TABLE_NAME == 'remit_order'">
+            and t.interface_type in('REMIT')
+        </if>
+        <if test="params.ORDER_TABLE_NAME == 'real_auth_order'">
+            and t.interface_type in('REAL_AUTH')
+        </if>
+    </select>
+    <!--接口与订单end-->
+
+
+    <!--账户与订单start-->
+    <!--账户与交易：交易单边-->
+    <select id="findAccAndOrderTradeSingleErr" resultMap="TradeOrderResultMap">
+        SELECT
+            t.trade_order_code,
+            t.trans_type,
+            t.pay_type,
+            t.interface_type,
+            t.interface_order_code,
+            t.amount,
+            t.fee,
+            t.trans_time,
+            t.recon_date,
+            t.code,
+            t.version,
+            t.create_time
+        FROM
+            trade_order t
+            LEFT JOIN account_order d ON d.trade_order_code = t.trade_order_code
+        WHERE d.trade_order_code IS NULL
+              AND t.recon_date = str_to_date(#{params.RECON_DATE,jdbcType=DATE}, '%Y-%m-%d')
+    </select>
+    <!--账户与代付：代付单边-->
+    <select id="findAccAndRemitSingleErr" resultMap="RemitOrderResultMap">
+        SELECT
+            t.trade_order_code,
+            t.trans_type,
+            t.pay_type,
+            t.interface_type,
+            t.interface_order_code,
+            t.amount,
+            t.fee,
+            t.trans_time,
+            t.recon_date,
+            t.code,
+            t.version,
+            t.create_time
+        FROM
+            remit_order t
+            LEFT JOIN account_order d ON d.trade_order_code = t.trade_order_code
+        WHERE d.trade_order_code IS NULL
+              AND t.recon_date = str_to_date(#{params.RECON_DATE,jdbcType=DATE}, '%Y-%m-%d')
+    </select>
+
+    <!--账户与实名认证：实名认证单边-->
+    <select id="findAccAndOrderRealAuthOrderSingleErr" resultMap="AuthOrderResultMap">
+        SELECT
+            t.trade_order_code,
+            t.trans_type,
+            t.pay_type,
+            t.interface_type,
+            t.interface_order_code,
+            t.amount,
+            t.fee,
+            t.trans_time,
+            t.recon_date,
+            t.code,
+            t.version,
+            t.create_time
+        FROM
+            real_auth_order t
+            LEFT JOIN account_order d ON d.trade_order_code = t.trade_order_code
+        WHERE d.trade_order_code IS NULL
+              AND t.recon_date = str_to_date(#{params.RECON_DATE,jdbcType=DATE}, '%Y-%m-%d')
+    </select>
+
+
+    <!--账户与订单：账户单边-->
+    <select id="findAccAndOrderAccSingleErr" resultMap="AccountOrderResultMap">
+        SELECT
+        t.account_no,
+        t.trade_order_code,
+        t.trans_type,
+        t.amount,
+        t.fund_symbol,
+        t.trans_time,
+        t.system_code,
+        t.bussiness_code,
+        t.recon_date,
+        t.is_fee,
+        t.code,
+        t.version,
+        t.create_time
+        FROM
+        account_order t
+        LEFT JOIN
+        <if test="params.ORDER_TABLE_NAME == 'trade_order'">
+            trade_order d
+        </if>
+        <if test="params.ORDER_TABLE_NAME == 'remit_order'">
+            remit_order d
+        </if>
+        <if test="params.ORDER_TABLE_NAME == 'real_auth_order'">
+            real_auth_order d
+        </if>
+        ON d.trade_order_code = t.trade_order_code
+        WHERE
+        d.trade_order_code IS NULL
+        AND t.recon_date = str_to_date(#{params.RECON_DATE,jdbcType=DATE}, '%Y-%m-%d')
+        AND t.IS_FEE = #{params.IS_FEE}
+        AND t.system_code = #{params.ACC_SYSTEM_CODE}
+    </select>
+
+    <!--账户与交易：金额错误-->
+    <select id="findAccAndOrderAmountErr" resultMap="TradeOrderResultMap">
+        SELECT
+        t.trade_order_code,
+        t.trans_type,
+        t.pay_type,
+        t.interface_type,
+        t.interface_order_code,
+        t.amount,
+        t.fee,
+        t.trans_time,
+        t.recon_date,
+        t.code,
+        t.version,
+        <if test="params.IS_FEE == 'TRUE'">
+            CONCAT('订单(',t.fee,')-','账户(',d.amount,')') AS remark,
+        </if>
+        <if test="params.IS_FEE == 'FALSE'">
+            CONCAT('订单(',t.amount,')-','账户(',d.amount,')') AS remark,
+        </if>
+        t.create_time
+        FROM
+        trade_order t
+        JOIN account_order d ON d.trade_order_code = t.trade_order_code
+        WHERE 1 = 1
+        <if test="params.IS_FEE == 'TRUE'">
+            AND t.fee &lt;&gt; d.amount
+        </if>
+        <if test="params.IS_FEE == 'FALSE'">
+            AND t.amount &lt;&gt; d.amount
+        </if>
+        AND t.recon_date = str_to_date(#{params.RECON_DATE,jdbcType=DATE}, '%Y-%m-%d')
+        AND d.IS_FEE = #{params.IS_FEE}
+        AND d.system_code = #{params.ACC_SYSTEM_CODE}
+    </select>
+
+    <!--账户与代付：金额错误-->
+    <select id="findAccAndRemitAmountErr" resultMap="RemitOrderResultMap">
+        SELECT
+        t.trade_order_code,
+        t.trans_type,
+        t.pay_type,
+        t.interface_type,
+        t.interface_order_code,
+        t.amount,
+        t.fee,
+        t.trans_time,
+        t.recon_date,
+        t.code,
+        t.version,
+        <if test="params.IS_FEE == 'TRUE'">
+            CONCAT('订单(',t.fee,')-','账户(',d.amount,')') AS remark,
+        </if>
+        <if test="params.IS_FEE == 'FALSE'">
+            CONCAT('订单(',t.amount,')-','账户(',d.amount,')') AS remark,
+        </if>
+        t.create_time
+        FROM
+        remit_order t
+        JOIN account_order d ON d.trade_order_code = t.trade_order_code
+        WHERE 1 = 1
+        <if test="params.IS_FEE == 'TRUE'">
+            AND t.fee &lt;&gt; d.amount
+        </if>
+        <if test="params.IS_FEE == 'FALSE'">
+            AND t.amount &lt;&gt; d.amount
+        </if>
+        AND t.recon_date = str_to_date(#{params.RECON_DATE,jdbcType=DATE}, '%Y-%m-%d')
+        AND d.IS_FEE = #{params.IS_FEE}
+        AND d.system_code = #{params.ACC_SYSTEM_CODE}
+    </select>
+
+    <!--账户与实名认证：金额错误-->
+    <select id="findAccAndOrderRealAuthOrderAmountErr" resultMap="AuthOrderResultMap">
+        SELECT
+        t.trade_order_code,
+        t.trans_type,
+        t.pay_type,
+        t.interface_type,
+        t.interface_order_code,
+        t.amount,
+        t.fee,
+        t.trans_time,
+        t.recon_date,
+        t.code,
+        t.version,
+        <if test="params.IS_FEE == 'TRUE'">
+            CONCAT('订单(',t.fee,')-','账户(',d.amount,')') AS remark,
+        </if>
+        <if test="params.IS_FEE == 'FALSE'">
+            CONCAT('订单(',t.amount,')-','账户(',d.amount,')') AS remark,
+        </if>
+        t.create_time
+        FROM
+        real_auth_order t
+        JOIN account_order d ON d.trade_order_code = t.trade_order_code
+        WHERE 1 = 1
+        <if test="params.IS_FEE == 'TRUE'">
+            AND t.fee &lt;&gt; d.amount
+        </if>
+        <if test="params.IS_FEE == 'FALSE'">
+            AND t.amount &lt;&gt; d.amount
+        </if>
+        AND t.recon_date = str_to_date(#{params.RECON_DATE,jdbcType=DATE}, '%Y-%m-%d')
+        AND d.IS_FEE = #{params.IS_FEE}
+        AND d.system_code = #{params.ACC_SYSTEM_CODE}
+    </select>
+
+
+    <!--账户与订单：账户总笔数和总金额-->
+    <select id="findAccountTotal" resultMap="AccountTotalOrderResultMap">
+        SELECT
+            IFNULL(SUM(AMOUNT), '0.0') AS total_amount,
+            COUNT(1)                   AS total_num
+        FROM
+            account_order t
+        WHERE 1 = 1
+              AND t.recon_date = str_to_date(#{params.RECON_DATE,jdbcType=DATE}, '%Y-%m-%d')
+              AND t.IS_FEE = #{params.IS_FEE}
+              AND t.system_code = #{params.ACC_SYSTEM_CODE}
+        ORDER BY create_time DESC
+    </select>
+    <!--账户与订单end-->
+
+    <!--查询有效的接口编号和名称-->
+    <select id="queryInterfaceInfo" resultType="com.yl.recon.api.core.bean.MyInterfaceInfoBean">
+        SELECT
+            `CODE`,
+            `NAME`
+        FROM
+            INTERFACE_INFO
+        WHERE
+            `STATUS` = 'TRUE'
+    </select>
+
+    <!--判断对应的通道对账文件是否存在-->
+    <select id="checkInterfaceCode" resultType="java.lang.Integer">
+        SELECT count(1)
+        FROM
+            recon_file_info_extend
+        WHERE
+            interface_info_code = #{code}
+    </select>
+
+
+    <!--接口与通道：通道单边-->
+    <select id="findInterfaceAndBankBankSingleErr" resultMap="BaseBankChannelOrderResultMap">
+        SELECT
+            t.code,
+            t.version,
+            t.interface_info_code,
+            t.pay_type,
+            t.interface_order_code,
+            t.bank_order_code,
+            t.trade_order_code,
+            t.amount,
+            t.fee,
+            t.trans_time,
+            t.create_time,
+            t.recon_date
+        FROM
+            BASE_BANK_CHANNEL_ORDER T
+            LEFT JOIN PAYINTERFACE_ORDER D ON (
+            T.INTERFACE_INFO_CODE = D.INTERFACE_CODE
+            AND T.BANK_ORDER_CODE = D.BANK_CHANNEL_CODE
+            )
+        WHERE
+            d.BANK_CHANNEL_CODE IS NULL
+            AND t.recon_date = str_to_date(#{params.RECON_DATE,jdbcType=DATE}, '%Y-%m-%d')
+    </select>
+    <!--接口与通道：接口单边-->
+    <select id="findInterfaceAndBankInterfaceSingleErr" resultMap="PayInterfaceOrderResultMap">
+        SELECT
+            t.interface_code,
+            t.interface_type,
+            t.interface_order_code,
+            t.bank_channel_code,
+            t.trade_order_code,
+            t.amount,
+            t.trans_time,
+            t.recon_date,
+            t.code,
+            t.version,
+            t.create_time
+        FROM
+            PAYINTERFACE_ORDER T
+            LEFT JOIN BASE_BANK_CHANNEL_ORDER D ON (
+            T.INTERFACE_CODE = D.INTERFACE_INFO_CODE
+            AND T.BANK_CHANNEL_CODE = D.BANK_ORDER_CODE
+            )
+        WHERE
+            D.INTERFACE_INFO_CODE IS NULL
+            AND t.recon_date = str_to_date(#{params.RECON_DATE,jdbcType=DATE}, '%Y-%m-%d')
+    </select>
+
+
+    <!--接口与通道：金额错误-->
+    <select id="findInterfaceAndBankAmountErr" resultMap="PayInterfaceOrderResultMap">
+        SELECT
+            t.interface_code,
+            t.interface_type,
+            t.interface_order_code,
+            t.bank_channel_code,
+            t.trade_order_code,
+            t.amount,
+            t.trans_time,
+            t.recon_date,
+            t.code,
+            t.version,
+            CONCAT('接口金额和手续费(', t.amount, '|', t.fee, ')-', '通道金额和手续费(', d.amount, '|', d.fee, ')') AS remark,
+            t.create_time
+        FROM
+            PAYINTERFACE_ORDER T
+            LEFT JOIN BASE_BANK_CHANNEL_ORDER D ON (
+            T.INTERFACE_CODE = D.INTERFACE_INFO_CODE
+            AND T.BANK_CHANNEL_CODE = D.BANK_ORDER_CODE
+            )
+        WHERE 1 = 1
+              AND (t.fee &lt;&gt; d.fee OR t.amount &lt;&gt; d.amount)
+              AND t.recon_date = str_to_date(#{params.RECON_DATE,jdbcType=DATE}, '%Y-%m-%d')
+    </select>
+
+
+</mapper>

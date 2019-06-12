@@ -1,0 +1,29 @@
+@charset "UTF-8";
+/** 联想列表 */
+.AutoComplete-wrap {
+  /*position: absolute;
+  width: 100%;*/
+  box-sizing: border-box;
+  background-color: #fff;
+  box-shadow: 1px 1px 11px rgba(0, 0, 0, 0.5);
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  overflow: auto;
+  z-index: 50; }
+
+.AutoComplete-wrap ul {
+  list-style: none;
+  margin: 0;
+  padding: 0; }
+
+.AutoComplete-wrap li {
+  padding: 0.3em 0.5em;
+  cursor: pointer;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis; }
+
+.AutoComplete-wrap li:hover, .AutoComplete-wrap li.active {
+  background-color: #999;
+  color: #eee; }
+
+/*# sourceMappingURL=../maps/component/Auto-Complete.css.map */

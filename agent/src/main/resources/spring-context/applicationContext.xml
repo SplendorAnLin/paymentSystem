@@ -1,0 +1,102 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" ":/spring-beans.dtd">
+
+<beans>
+	<bean id="propertyPlaceholder" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+		<property name="locations"> 
+             <list>
+                 <value>classpath:/db.properties</value> 
+                 <value>classpath:/system.properties</value>
+                 <value>classpath:/redis.properties</value>
+             </list>
+         </property>		
+	</bean>
+
+		
+	<bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource" destroy-method="close">
+	    <property name="driverClass"><value>${db.driver}</value></property>
+	    <property name="jdbcUrl"><value>${db.url}</value></property>               
+	    <property name="user"><value>${db.username}</value></property>
+	    <property name="password"><value>${db.password}</value></property>
+	    
+	    <property name="minPoolSize"><value>${dbcp.initial.size}</value></property>
+	    <property name="maxPoolSize"><value>${dbcp.max.active}</value></property>
+	    <property name="maxIdleTime"><value>1800</value></property>
+	    <property name="acquireIncrement"><value>2</value></property>
+	    <property name="maxStatements"><value>0</value></property>
+	    <property name="initialPoolSize"><value>${dbcp.initial.size}</value></property>
+	    <property name="idleConnectionTestPeriod"><value>300</value></property>
+	    <property name="acquireRetryAttempts"><value>30</value></property>
+	    <property name="breakAfterAcquireFailure"><value>false</value></property>
+	    <property name="testConnectionOnCheckout"><value>false</value></property>
+    </bean> 
+	
+	<bean id="dataSourceRead" class="com.mchange.v2.c3p0.ComboPooledDataSource" destroy-method="close">
+	    <property name="driverClass"><value>${db.read.driver}</value></property>
+	    <property name="jdbcUrl"><value>${db.read.url}</value></property>               
+	    <property name="user"><value>${db.read.username}</value></property>
+	    <property name="password"><value>${db.read.password}</value></property>
+	    
+	    <property name="minPoolSize"><value>${dbcp.read.initial.size}</value></property>
+	    <property name="maxPoolSize"><value>${dbcp.read.max.active}</value></property>
+	    <property name="maxIdleTime"><value>1800</value></property>
+	    <property name="acquireIncrement"><value>2</value></property>
+	    <property name="maxStatements"><value>0</value></property>
+	    <property name="initialPoolSize"><value>${dbcp.read.initial.size}</value></property>
+	    <property name="idleConnectionTestPeriod"><value>300</value></property>
+	    <property name="acquireRetryAttempts"><value>30</value></property>
+	    <property name="breakAfterAcquireFailure"><value>false</value></property>
+	    <property name="testConnectionOnCheckout"><value>false</value></property>
+    </bean>
+
+	
+    <bean id="sessionFactory" class="org.springframework.orm.hibernate3.LocalSessionFactoryBean"> 
+        <property name="dataSource" ref="dataSource" />
+        <property name="configLocation" value="classpath:hibernate.cfg.xml" />  
+        <property name="configurationClass" value="org.hibernate.cfg.AnnotationConfiguration" />
+    </bean>
+
+    <bean id="transactionManager" class="org.springframework.orm.hibernate3.HibernateTransactionManager">
+        <property name="sessionFactory" ref="sessionFactory" />
+    </bean> 
+   
+    <bean id="transactionInterceptor"  
+        class="org.springframework.transaction.interceptor.TransactionInterceptor">  
+        <property name="transactionManager" ref="transactionManager" />           
+        <property name="transactionAttributes">  
+            <props>  
+                <prop key="get*">PROPAGATION_REQUIRED</prop>
+				<prop key="find*">PROPAGATION_REQUIRED</prop>
+				<prop key="merger*">PROPAGATION_REQUIRED</prop>
+				<prop key="query*">PROPAGATION_REQUIRED</prop>				
+				<prop key="update*">PROPAGATION_REQUIRED</prop>
+				<prop key="delete*">PROPAGATION_REQUIRED</prop>
+				<prop key="create*">PROPAGATION_REQUIRED</prop>
+				<prop key="add*">PROPAGATION_REQUIRED</prop>
+				<prop key="remove*">PROPAGATION_REQUIRED</prop>  
+				<!-- <prop key="login">PROPAGATION_REQUIRED</prop> -->
+				<prop key="request*">PROPAGATION_REQUIRED</prop>
+				<prop key="audit*">PROPAGATION_REQUIRED</prop>
+				<prop key="reset*">PROPAGATION_REQUIRED</prop>
+            </props>  
+        </property>  
+    </bean>
+      
+    <bean class="org.springframework.aop.framework.autoproxy.BeanNameAutoProxyCreator">  
+        <property name="beanNames">  
+            <list>  
+                <value>*Service</value>
+            </list>  
+        </property>  
+        <property name="interceptorNames">  
+            <list>  
+                <value>transactionInterceptor</value>  
+            </list>  
+        </property>  
+    </bean>  
+  
+	<bean id="entityDao" class="com.yl.agent.dao.impl.EntityDaoImpl">
+		<property name="sessionFactory"><ref bean="sessionFactory"/></property>
+	</bean>
+		
+</beans>

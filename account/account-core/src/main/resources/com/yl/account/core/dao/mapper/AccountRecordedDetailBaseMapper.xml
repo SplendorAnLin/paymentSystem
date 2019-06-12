@@ -1,0 +1,332 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.yl.account.core.dao.mapper.AccountRecordedDetailBaseMapper">
+
+	<resultMap id="AccountRecordedDetail" type="com.yl.account.model.AccountRecordedDetail">
+		<result column="CODE" 						property="code" />
+		<result column="VERSION" 	 				property="version" />
+		<result column="CREATE_TIME" 				property="createTime" />
+		<result column="USER_NO" 					property="userNo" />
+		<result column="USER_ROLE" 					property="userRole" />
+		<result column="SYS_FLOW_ID" 				property="systemFlowId" />
+		<result column="BUSI_CODE" 					property="bussinessCode" />
+		<result column="CURR_NO" 					property="currency" />
+		<result column="ACC_NO" 					property="accountNo" />
+		<result column="FUND_SYMBOL" 				property="symbol" />
+		<result column="SYS_CODE" 					property="systemCode" />
+		<result column="WAIT_ACC_DATE" 				property="waitAccountDate" />
+		<result column="TRANS_FLOW" 				property="transFlow" />
+		<result column="TRANS_TIME" 				property="transTime" />
+		<result column="TRANS_AMT" 					property="transAmount" />
+		<result column="REMAIN_AMT"					property="remainBalance" />
+	</resultMap>
+
+	<resultMap id="AccountDayDetail" type="com.yl.account.model.AccountDayDetail">
+		<result column="BUSI_CODE" 					property="bussinessCode" />
+		<result column="FUND_SYMBOL" 				property="symbol" />
+		<result column="TRANS_TIME" 				property="transTime" />
+		<result column="TRANS_TIME" 				property="busiDate" />
+		<result column="TRANS_AMT" 					property="dayOccu" />
+	</resultMap>
+	<!--通用的sql语句段-->
+	<sql id="commonColumn">
+		CODE, VERSION, CREATE_TIME, USER_NO, USER_ROLE, SYS_FLOW_ID, BUSI_CODE, CURR_NO, ACC_NO, FUND_SYMBOL, SYS_CODE, WAIT_ACC_DATE,
+		TRANS_FLOW, TRANS_TIME, TRANS_AMT, REMAIN_AMT
+	</sql>
+
+	<!-- 持久化入账明细 -->
+	<insert id="insert" parameterType="com.yl.account.model.AccountRecordedDetail">
+		INSERT INTO
+			T_ACC_VOUC_DET (<include refid="commonColumn"/>)
+		VALUES
+			(#{code}, #{version}, #{createTime, jdbcType=TIMESTAMP}, #{userNo}, #{userRole}, #{systemFlowId}, #{bussinessCode}, #{currency}, #{accountNo},
+			#{symbol}, #{systemCode}, #{waitAccountDate, jdbcType=DATE}, #{transFlow}, #{transTime, jdbcType=TIMESTAMP}, #{transAmount}, #{remainBalance})
+	</insert>
+
+	<!-- 账号、交易订单号、系统编码查询外账记账凭证 -->
+	<select id="findBy" resultType="int">
+		SELECT COUNT(CODE) FROM T_ACC_VOUC_DET WHERE ACC_NO = #{accountNo}
+		AND TRANS_FLOW = #{transOrder} AND SYS_CODE = #{systemCode} AND BUSI_CODE = #{bussinessCode} AND SYS_FLOW_ID = #{systemFlowId}
+	</select>
+
+	<!-- 账户每日交易汇总-->
+	<select id="findBySum" resultMap="AccountDayDetail">
+		SELECT d.BUSI_CODE, d.FUND_SYMBOL, TRUNC(d.TRANS_TIME) AS TRANS_TIME, SUM(d.TRANS_AMT) AS TRANS_AMT
+		FROM T_ACC_VOUC_DET d WHERE d.TRANS_TIME &gt;= #{dailyStart} AND d.TRANS_TIME &lt;= #{dailyEnd}
+		GROUP BY d.BUSI_CODE, d.FUND_SYMBOL, TRUNC(d.TRANS_TIME) ORDER BY TRUNC(d.TRANS_TIME) DESC
+	</select>
+
+	<!-- 根据参数查询账户历史信息  -->
+	<select id="findAllAccountHistoryBy" resultMap="AccountRecordedDetail">
+		SELECT <include refid="commonColumn" /> FROM T_ACC_VOUC_DET vouc
+		<where> 1 = 1
+			<if test="accountHistoryQueryParams != null">
+				<if test="accountHistoryQueryParams.accountNo != '' and accountHistoryQueryParams.accountNo != null">
+					and vouc.ACC_NO = #{accountHistoryQueryParams.accountNo}
+				</if>
+				<if test="accountHistoryQueryParams.transFlow != '' and accountHistoryQueryParams.transFlow != null">
+					and vouc.TRANS_FLOW = #{accountHistoryQueryParams.transFlow}
+				</if>
+				<if test="accountHistoryQueryParams.userNo != '' and accountHistoryQueryParams.userNo != null">
+					and vouc.USER_NO = #{accountHistoryQueryParams.userNo}
+				</if>
+				<if test="accountHistoryQueryParams.userRole != '' and accountHistoryQueryParams.userRole != null">
+					and vouc.USER_ROLE=#{accountHistoryQueryParams.userRole}
+				</if>
+				<if test="accountHistoryQueryParams.bussinessCode != '' and accountHistoryQueryParams.bussinessCode != null">
+					and vouc.BUSI_CODE = #{accountHistoryQueryParams.bussinessCode}
+				</if>
+				<if test="accountHistoryQueryParams.symbol != '' and accountHistoryQueryParams.symbol != null">
+					and vouc.FUND_SYMBOL = #{accountHistoryQueryParams.symbol}
+				</if>
+				<if test="accountHistoryQueryParams.systemCode != '' and accountHistoryQueryParams.systemCode != null">
+					and vouc.SYS_CODE = #{accountHistoryQueryParams.systemCode}
+				</if>
+				<if test="accountHistoryQueryParams.createStartTime != null and accountHistoryQueryParams.createEndTime == null">
+					and vouc.CREATE_TIME &gt;= #{accountHistoryQueryParams.createStartTime}
+				</if>
+				<if test="accountHistoryQueryParams.createStartTime == null and accountHistoryQueryParams.createEndTime != null">
+					and vouc.CREATE_TIME &lt;= #{accountHistoryQueryParams.createEndTime}
+				</if>
+				<if test="accountHistoryQueryParams.createStartTime != null and accountHistoryQueryParams.createEndTime != null">
+					and vouc.CREATE_TIME BETWEEN #{accountHistoryQueryParams.createStartTime} AND #{accountHistoryQueryParams.createEndTime}
+				</if>
+				<if test="accountHistoryQueryParams.transStartTime != null and accountHistoryQueryParams.transEndTime == null">
+					and vouc.TRANS_TIME &gt;= #{accountHistoryQueryParams.transStartTime}
+				</if>
+				<if test="accountHistoryQueryParams.transStartTime == null and accountHistoryQueryParams.transEndTime != null">
+					and vouc.TRANS_TIME &lt;= #{accountHistoryQueryParams.transEndTime}
+				</if>
+				<if test="accountHistoryQueryParams.transStartTime != null and accountHistoryQueryParams.transEndTime != null">
+					and vouc.TRANS_TIME BETWEEN #{accountHistoryQueryParams.transStartTime} AND #{accountHistoryQueryParams.transEndTime}
+				</if>
+				<if test="accountHistoryQueryParams.payType != null and accountHistoryQueryParams.payType != ''">
+					and vouc.PAY_TYPE = #{accountHistoryQueryParams.payType}
+				</if>
+			</if>
+		</where>
+		ORDER BY vouc.ID DESC
+	</select>
+	
+	
+	<select id="queryAccountHistoryBy" resultType="java.util.Map">
+		SELECT <include refid="commonColumn" /> FROM T_ACC_VOUC_DET vouc
+		<where> 1 = 1
+			<if test="accountHistoryQueryParams != null">
+				<if test="accountHistoryQueryParams.accountNo != '' and accountHistoryQueryParams.accountNo != null">
+					and vouc.ACC_NO = #{accountHistoryQueryParams.accountNo}
+				</if>
+				<if test="accountHistoryQueryParams.transFlow != '' and accountHistoryQueryParams.transFlow != null">
+					and vouc.TRANS_FLOW = #{accountHistoryQueryParams.transFlow}
+				</if>
+				<if test="accountHistoryQueryParams.customerNo != '' and accountHistoryQueryParams.customerNo != null">
+					and vouc.USER_NO = #{accountHistoryQueryParams.customerNo}
+				</if>
+				<if test="accountHistoryQueryParams.userRole != '' and accountHistoryQueryParams.userRole != null">
+					and vouc.USER_ROLE=#{accountHistoryQueryParams.userRole}
+				</if>
+				<if test="accountHistoryQueryParams.bussinessCode != '' and accountHistoryQueryParams.bussinessCode != null">
+					and vouc.BUSI_CODE = #{accountHistoryQueryParams.bussinessCode}
+				</if>
+				<if test="accountHistoryQueryParams.symbol != '' and accountHistoryQueryParams.symbol != null">
+					and vouc.FUND_SYMBOL = #{accountHistoryQueryParams.symbol}
+				</if>
+				<if test="accountHistoryQueryParams.systemCode != '' and accountHistoryQueryParams.systemCode != null">
+					and vouc.SYS_CODE = #{accountHistoryQueryParams.systemCode}
+				</if>
+				<if test="accountHistoryQueryParams.createStartTime != null and accountHistoryQueryParams.createEndTime == null">
+					and vouc.CREATE_TIME &gt;= #{accountHistoryQueryParams.createStartTime}
+				</if>
+				<if test="accountHistoryQueryParams.createStartTime == null and accountHistoryQueryParams.createEndTime != null">
+					and vouc.CREATE_TIME &lt;= #{accountHistoryQueryParams.createEndTime}
+				</if>
+				<if test="accountHistoryQueryParams.createStartTime != null and accountHistoryQueryParams.createEndTime != null">
+					and vouc.CREATE_TIME BETWEEN #{accountHistoryQueryParams.createStartTime} AND #{accountHistoryQueryParams.createEndTime}
+				</if>
+				<if test="accountHistoryQueryParams.transStartTime != null and accountHistoryQueryParams.transEndTime == null">
+					and vouc.TRANS_TIME &gt;= #{accountHistoryQueryParams.transStartTime}
+				</if>
+				<if test="accountHistoryQueryParams.transStartTime == null and accountHistoryQueryParams.transEndTime != null">
+					and vouc.TRANS_TIME &lt;= #{accountHistoryQueryParams.transEndTime}
+				</if>
+				<if test="accountHistoryQueryParams.transStartTime != null and accountHistoryQueryParams.transEndTime != null">
+					and vouc.TRANS_TIME BETWEEN #{accountHistoryQueryParams.transStartTime} AND #{accountHistoryQueryParams.transEndTime}
+				</if>
+				<if test="accountHistoryQueryParams.payType != null and accountHistoryQueryParams.payType != ''">
+					and vouc.PAY_TYPE = #{accountHistoryQueryParams.payType}
+				</if>
+			</if>
+		</where>
+		ORDER BY vouc.ID DESC  limit  #{accountHistoryQueryParams.pageCode},#{accountHistoryQueryParams.showCount} 
+	</select>
+	
+	<select id="findAccountHistoryExportBy" resultMap="AccountRecordedDetail">
+		SELECT <include refid="commonColumn" /> FROM T_ACC_VOUC_DET vouc
+		<where> 1 = 1
+			<if test="accountHistoryQueryParams != null">
+				<if test="accountHistoryQueryParams.accountNo != '' and accountHistoryQueryParams.accountNo != null">
+					and vouc.ACC_NO = #{accountHistoryQueryParams.accountNo}
+				</if>
+				<if test="accountHistoryQueryParams.transFlow != '' and accountHistoryQueryParams.transFlow != null">
+					and vouc.TRANS_FLOW = #{accountHistoryQueryParams.transFlow}
+				</if>
+				<if test="accountHistoryQueryParams.userNo != '' and accountHistoryQueryParams.userNo != null">
+					and vouc.USER_NO = #{accountHistoryQueryParams.userNo}
+				</if>
+				<if test="accountHistoryQueryParams.bussinessCode != '' and accountHistoryQueryParams.bussinessCode != null">
+					and vouc.BUSI_CODE = #{accountHistoryQueryParams.bussinessCode}
+				</if>
+				<if test="accountHistoryQueryParams.symbol != '' and accountHistoryQueryParams.symbol != null">
+					and vouc.FUND_SYMBOL = #{accountHistoryQueryParams.symbol}
+				</if>
+				<if test="accountHistoryQueryParams.systemCode != '' and accountHistoryQueryParams.systemCode != null">
+					and vouc.SYS_CODE = #{accountHistoryQueryParams.systemCode}
+				</if>
+				<if test="accountHistoryQueryParams.createStartTime != null and accountHistoryQueryParams.createEndTime == null">
+					and vouc.CREATE_TIME &gt;= #{accountHistoryQueryParams.createStartTime}
+				</if>
+				<if test="accountHistoryQueryParams.createStartTime == null and accountHistoryQueryParams.createEndTime != null">
+					and vouc.CREATE_TIME &lt;= #{accountHistoryQueryParams.createEndTime}
+				</if>
+				<if test="accountHistoryQueryParams.createStartTime != null and accountHistoryQueryParams.createEndTime != null">
+					and vouc.CREATE_TIME BETWEEN #{accountHistoryQueryParams.createStartTime} AND #{accountHistoryQueryParams.createEndTime}
+				</if>
+				<if test="accountHistoryQueryParams.transStartTime != null and accountHistoryQueryParams.transEndTime == null">
+					and vouc.TRANS_TIME &gt;= #{accountHistoryQueryParams.transStartTime}
+				</if>
+				<if test="accountHistoryQueryParams.transStartTime == null and accountHistoryQueryParams.transEndTime != null">
+					and vouc.TRANS_TIME &lt;= #{accountHistoryQueryParams.transEndTime}
+				</if>
+				<if test="accountHistoryQueryParams.transStartTime != null and accountHistoryQueryParams.transEndTime != null">
+					and vouc.TRANS_TIME BETWEEN #{accountHistoryQueryParams.transStartTime} AND #{accountHistoryQueryParams.transEndTime}
+				</if>
+			</if>
+		</where>
+		ORDER BY vouc.ID ASC
+	</select>
+	
+	<!-- 根据参数查询汇总信息  -->
+	<select id="findAccountSummaryBy" resultType="java.util.Map">
+		SELECT FUND_SYMBOL fundSymbol, SUM(TRANS_AMT) summaryBalance, COUNT(CODE) summaryCount FROM T_ACC_VOUC_DET vouc
+		<where> 1 = 1
+			<if test="accountHistoryQueryParams != null">
+				<if test="accountHistoryQueryParams.accountNo != '' and accountHistoryQueryParams.accountNo != null">
+					and vouc.ACC_NO = #{accountHistoryQueryParams.accountNo}
+				</if>
+				<if test="accountHistoryQueryParams.transFlow != '' and accountHistoryQueryParams.transFlow != null">
+					and vouc.TRANS_FLOW = #{accountHistoryQueryParams.transFlow}
+				</if>
+				<if test="accountHistoryQueryParams.userNo != '' and accountHistoryQueryParams.userNo != null">
+					and vouc.USER_NO = #{accountHistoryQueryParams.userNo}
+				</if>
+				<if test="accountHistoryQueryParams.userRole != '' and accountHistoryQueryParams.userRole != null">
+					and vouc.USER_ROLE=#{accountHistoryQueryParams.userRole}
+				</if>
+				<if test="accountHistoryQueryParams.bussinessCode != '' and accountHistoryQueryParams.bussinessCode != null">
+					and vouc.BUSI_CODE = #{accountHistoryQueryParams.bussinessCode}
+				</if>
+				<if test="accountHistoryQueryParams.symbol != '' and accountHistoryQueryParams.symbol != null">
+					and vouc.FUND_SYMBOL = #{accountHistoryQueryParams.symbol}
+				</if>
+				<if test="accountHistoryQueryParams.systemCode != '' and accountHistoryQueryParams.systemCode != null">
+					and vouc.SYS_CODE = #{accountHistoryQueryParams.systemCode}
+				</if>
+				<if test="accountHistoryQueryParams.createStartTime != null and accountHistoryQueryParams.createEndTime == null">
+					and vouc.CREATE_TIME &gt;= #{accountHistoryQueryParams.createStartTime}
+				</if>
+				<if test="accountHistoryQueryParams.createStartTime == null and accountHistoryQueryParams.createEndTime != null">
+					and vouc.CREATE_TIME &lt;= #{accountHistoryQueryParams.createEndTime}
+				</if>
+				<if test="accountHistoryQueryParams.createStartTime != null and accountHistoryQueryParams.createEndTime != null">
+					and vouc.CREATE_TIME BETWEEN #{accountHistoryQueryParams.createStartTime} AND #{accountHistoryQueryParams.createEndTime}
+				</if>
+				<if test="accountHistoryQueryParams.transStartTime != null and accountHistoryQueryParams.transEndTime == null">
+					and vouc.TRANS_TIME &gt;= #{accountHistoryQueryParams.transStartTime}
+				</if>
+				<if test="accountHistoryQueryParams.transStartTime == null and accountHistoryQueryParams.transEndTime != null">
+					and vouc.TRANS_TIME &lt;= #{accountHistoryQueryParams.transEndTime}
+				</if>
+				<if test="accountHistoryQueryParams.transStartTime != null and accountHistoryQueryParams.transEndTime != null">
+					and vouc.TRANS_TIME BETWEEN #{accountHistoryQueryParams.transStartTime} AND #{accountHistoryQueryParams.transEndTime}
+				</if>
+				<if test="accountHistoryQueryParams.payType != null and accountHistoryQueryParams.payType != ''">
+					and vouc.PAY_TYPE = #{accountHistoryQueryParams.payType}
+				</if>
+			</if>
+		</where>
+		GROUP BY vouc.fund_symbol
+	</select>
+	
+	<!-- 根据参数查询账户历史信息  -->
+	<select id="findAccountByTransOrder" resultMap="AccountRecordedDetail">
+		SELECT <include refid="commonColumn" /> FROM T_ACC_VOUC_DET vouc WHERE vouc.SYS_CODE = #{systemCode} AND vouc.TRANS_FLOW = #{transOrder}
+	</select>
+	
+	<!-- 查询账务历史明细 -->
+	<select id="findAccountHistoryBy" resultType="java.util.Map">
+		SELECT 
+		CREATE_TIME, USER_NO, USER_ROLE, BUSI_CODE, ACC_NO, FUND_SYMBOL, SYS_CODE, WAIT_ACC_DATE, 
+		TRANS_FLOW, TRANS_TIME, TRANS_AMT, REMAIN_AMT FROM T_ACC_VOUC_DET vouc 
+		WHERE vouc.TRANS_TIME &lt;= sysdate() -1 and vouc.TRANS_TIME &lt; sysdate() ORDER BY code ASC limit #{currentResutl},#{rowNum};
+	</select>
+	
+	<!-- 根据参数查询账户历史信息  -->
+	<select id="_findAccountHistoryBy" resultMap="AccountRecordedDetail">
+		SELECT <include refid="commonColumn" /> FROM T_ACC_VOUC_DET vouc
+		<where> 1 = 1
+			<if test="queryParams != null">
+				<if test="queryParams.transOrder != '' and queryParams.transOrder != null">
+					and vouc.TRANS_FLOW = #{queryParams.transOrder}
+				</if>
+				<if test="queryParams.fundSymbol != '' and queryParams.fundSymbol != null">
+					and vouc.FUND_SYMBOL = #{queryParams.fundSymbol}
+				</if>
+				<if test="queryParams.userNo != '' and queryParams.userNo != null">
+					and vouc.USER_NO = #{queryParams.userNo}
+				</if>
+			</if>
+		</where>
+		ORDER BY vouc.CREATE_TIME DESC
+	</select>
+	
+	<!-- 根据参数查询账户历史不带page  -->
+	<select id="findAccountHistory" resultMap="AccountRecordedDetail">
+		SELECT <include refid="commonColumn" /> FROM T_ACC_VOUC_DET vouc
+		<where> 1 = 1
+			<if test="accountHistoryQueryParams != null">
+				<if test="accountHistoryQueryParams.createStartTime != null and accountHistoryQueryParams.createEndTime == null">
+					and vouc.TRANS_TIME &gt;= #{accountHistoryQueryParams.createStartTime}
+				</if>
+				<if test="accountHistoryQueryParams.createStartTime == null and accountHistoryQueryParams.createEndTime != null">
+					and vouc.TRANS_TIME &lt;= #{accountHistoryQueryParams.createEndTime}
+				</if>
+				<if test="accountHistoryQueryParams.createStartTime != null and accountHistoryQueryParams.createEndTime != null">
+					and vouc.TRANS_TIME BETWEEN #{accountHistoryQueryParams.createStartTime} AND #{accountHistoryQueryParams.createEndTime}
+				</if>
+			</if>
+		</where>
+		ORDER BY vouc.ID DESC
+	</select>
+	
+	<!-- 根据参数查询账户历史交易笔数和金额 -->
+	<select id="findAccountHistorySum" resultType="java.util.HashMap"
+		parameterType="Map">
+		SELECT count(CODE) as count, sum(TRANS_AMT) as transSumAmount FROM T_ACC_VOUC_DET vouc
+		<where> 1 = 1
+			<if test="accountHistoryQueryParams != null">
+				<if test="accountHistoryQueryParams.createStartTime != null and accountHistoryQueryParams.createEndTime == null">
+					and vouc.TRANS_TIME &gt;= #{accountHistoryQueryParams.createStartTime}
+				</if>
+				<if test="accountHistoryQueryParams.createStartTime == null and accountHistoryQueryParams.createEndTime != null">
+					and vouc.TRANS_TIME &lt;= #{accountHistoryQueryParams.createEndTime}
+				</if>
+				<if test="accountHistoryQueryParams.createStartTime != null and accountHistoryQueryParams.createEndTime != null">
+					and vouc.TRANS_TIME BETWEEN #{accountHistoryQueryParams.createStartTime} AND #{accountHistoryQueryParams.createEndTime}
+				</if>
+			</if>
+		</where>
+	</select>
+	
+</mapper>

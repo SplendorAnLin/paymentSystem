@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" ":/spring-beans.dtd">
+
+<beans default-autowire="byName">
+
+	<!-- 交易处理 -->
+	<bean id="balanceInquiryP360001" class="com.yl.pay.pos.interfaces.P360001.BalanceInquiry"></bean>
+	<bean id="purchaseP360001" class="com.yl.pay.pos.interfaces.P360001.Purchase"></bean>
+	<bean id="purchaseReversalP360001" class="com.yl.pay.pos.interfaces.P360001.PurchaseReversal"></bean>
+	<bean id="signInP360001" class="com.yl.pay.pos.interfaces.P360001.SignIn"></bean>
+	<bean id="nccbTransUtil" class="com.yl.pay.pos.interfaces.P360001.NCCBTransUtil"></bean>
+</beans>

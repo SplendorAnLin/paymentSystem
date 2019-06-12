@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.yl.rate.core.dao.RateHistoryMapper">
+    <!--auto generated Code-->
+    <resultMap id="BaseResultMap" type="com.yl.rate.core.entity.RateHistory">
+        <result column="status" property="status" jdbcType="VARCHAR"/>
+        <result column="comp_fee_type" property="compFeeType" jdbcType="VARCHAR"/>
+        <result column="id" property="id" jdbcType="BIGINT"/>
+        <result column="owner_rate_id" property="ownerRateId" jdbcType="BIGINT"/>
+        <result column="code" property="code" jdbcType="VARCHAR"/>
+        <result column="create_time" property="createTime" />
+        <result column="oper" property="oper" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <insert id="rateAdd" parameterType="com.yl.rate.core.entity.RateHistory">
+        INSERT INTO rate_history (
+        status,
+        comp_fee_type,
+        code,
+        create_time,
+        oper,
+        owner_rate_id
+        ) VALUES (
+        #{status},
+        #{compFeeType},
+        #{code},
+        #{createTime},
+        #{oper},
+        #{ownerRateId}
+        )
+    </insert>
+
+    <select id="queryByCode" resultMap="BaseResultMap">
+        select
+        status,
+        comp_fee_type,
+        code,
+        create_time,
+        oper
+        FROM rate_history
+        WHERE code = #{code}
+        AND owner_rate_id = #{ownerRateId}
+    </select>
+</mapper>

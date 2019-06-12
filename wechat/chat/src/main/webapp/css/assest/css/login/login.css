@@ -1,0 +1,19 @@
+.content img{
+	margin: auto;
+	width: 185px;
+}
+.content div{
+	text-align: center;
+	margin-top: 15%;
+	margin-bottom: 15%;
+}
+.padding-horizontal, .padding-right {
+    padding-right: 10px;
+}
+.list {
+    position: relative;
+    padding-top: 1px;
+    padding-bottom: 1px;
+    padding-left: 0;
+    margin-bottom: 20px;
+}

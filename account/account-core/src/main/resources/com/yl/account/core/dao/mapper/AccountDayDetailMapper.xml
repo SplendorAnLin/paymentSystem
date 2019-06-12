@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.yl.account.core.dao.mapper.AccountDayDetailMapper">
+
+	<resultMap id="AccountDayDetail" type="com.yl.account.model.AccountDayDetail">
+		<result column="CODE" 						property="code" />
+		<result column="VERSION" 	 				property="version" />
+		<result column="CREATE_TIME" 				property="createTime" />
+		<result column="BUSI_DATE" 					property="busiDate" />
+		<result column="TRANS_TIME" 				property="transTime" />
+		<result column="BUSSINESS_CODE" 			property="bussinessCode" />
+		<result column="SYMBOL" 					property="symbol" />
+		<result column="DAY_OCCU" 					property="dayOccu" />
+	</resultMap>
+
+	<!-- 账户数据库模型字段 -->
+	<sql id="commonColumn">
+		CODE, VERSION, CREATE_TIME, BUSI_DATE, TRANS_TIME, BUSSINESS_CODE, SYMBOL, DAY_OCCU
+	</sql>
+
+	<!-- 持久化账户 -->
+	<insert id="create" parameterType="com.yl.account.model.AccountDayDetail">
+		INSERT INTO T_ACC_DAY_DET (<include refid="commonColumn"/>) VALUES
+    	<foreach collection="list" item="item" index="index" separator="," >  
+        	(#{item.code},#{item.version},#{item.createTime},#{item.busiDate},#{item.transTime}
+			,#{item.bussinessCode},#{item.symbol},#{item.dayOccu})
+    	</foreach>  
+	</insert>
+	
+</mapper>

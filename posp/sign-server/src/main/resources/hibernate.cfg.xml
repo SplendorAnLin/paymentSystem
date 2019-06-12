@@ -1,0 +1,24 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE hibernate-configuration PUBLIC
+          "-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+          "http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd">
+
+<hibernate-configuration>
+	<session-factory>	
+		<property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
+		<property name="hibernate.use_outer_join">true</property>
+		<property name="hibernate.jdbc.fetch_size">50</property>
+		<property name="hibernate.jdbc.batch_size">25</property>
+		<property name="hibernate.show_sql">false</property>
+		<property name="hibernate.connection.release_mode">auto</property>
+		<!-- 
+		<property name="hibernate.hbm2ddl.auto">update</property>
+		 -->
+		<mapping class="com.pay.sign.dbentity.SignPic"/>
+		<mapping class="com.pay.sign.dbentity.Order"/>
+		<mapping class="com.pay.sign.dbentity.TransResponseDict"/>
+		<mapping class="com.pay.sign.dbentity.PosRequest"/>
+		<mapping class="com.pay.sign.dbentity.Shop"/>
+		<mapping class="com.pay.sign.dbentity.SecretKey"/>
+	</session-factory>
+</hibernate-configuration>

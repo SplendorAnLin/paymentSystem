@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" ":/spring-beans.dtd">
+
+<beans default-autowire="byName">
+
+	<!-- 交易接入 -->	
+		
+	<bean id="posServer" class="com.yl.pay.pos.access.PosServer">
+		<constructor-arg index="0"><ref bean="transactionProcessService"></ref></constructor-arg>  
+	</bean> 
+	
+	<bean id="transactionProcessService" class="com.yl.pay.pos.access.TransactionProcessService"/>
+	          
+</beans>

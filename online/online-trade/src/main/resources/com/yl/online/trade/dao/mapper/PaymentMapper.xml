@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yl.online.trade.dao.mapper.PaymentMapper">
+
+	<resultMap id="paymentMap" type="com.yl.online.model.bean.Payment">
+		<id 	property="id" 					column="ID"></id>
+		<result property="code" 				column="CODE"></result>
+		<result property="orderCode" 			column="ORDER_CODE"></result>
+		<result property="payType" 				column="PAY_TYPE"></result>
+		<result property="payTime" 				column="PAY_TIME"></result>
+		<result property="status" 				column="STATUS"></result>
+		<result property="amount" 				column="AMOUNT"></result>
+		<result property="receiverFee" 			column="RECEIVER_FEE"></result>
+		<result property="payinterface" 		column="PAYINTERFACE"></result>
+		<result property="payinterfaceRequestId" column="PAYINTERFACE_REQUEST_ID"></result>
+		<result property="payinterfaceOrder" 	column="PAYINTERFACE_ORDER"></result>
+		<result property="payinterfaceFee" 		column="PAYINTERFACE_FEE"></result>
+		<result property="completeTime" 		column="COMPLETE_TIME"></result>
+		<result property="returnTradeTime" 		column="RETURN_TRADE_TIME"></result>
+		<result property="responseCode" 		column="RESPONSE_CODE"></result>
+		<result property="responseInfo" 		column="RESPONSE_INFO"></result>
+		<result property="payerFee" 		column="PAYER_FEE"></result>
+		<result property="remitFee" 		column="REMIT_FEE"></result>
+	</resultMap>
+
+	<sql id="paymentColumns">
+		CODE,ORDER_CODE,PAY_TYPE,PAY_TIME,STATUS,AMOUNT,RECEIVER_FEE,PAYINTERFACE,PAYINTERFACE_REQUEST_ID,PAYINTERFACE_ORDER,
+		PAYINTERFACE_FEE,COMPLETE_TIME,RETURN_TRADE_TIME,RESPONSE_CODE,RESPONSE_INFO,PAYER_FEE,REMIT_FEE
+	</sql>
+
+	<insert id="create" parameterType="com.yl.online.model.bean.Payment"
+		useGeneratedKeys="true" keyProperty="id">
+		INSERT INTO PAYMENT (
+		CODE,ORDER_CODE,PAY_TYPE,PAY_TIME,STATUS,AMOUNT,RECEIVER_FEE,PAYINTERFACE,PAYINTERFACE_REQUEST_ID,
+		PAYINTERFACE_ORDER,PAYINTERFACE_FEE,COMPLETE_TIME,RETURN_TRADE_TIME,RESPONSE_CODE,RESPONSE_INFO,PAYER_FEE,REMIT_FEE)
+		VALUES
+		(#{code},#{orderCode},#{payType},#{payTime},#{status},#{amount},#{receiverFee},#{payinterface},#{payinterfaceRequestId},
+		#{payinterfaceOrder},#{payinterfaceFee},#{completeTime},#{returnTradeTime},#{responseCode},#{responseInfo},#{payerFee},#{remitFee})
+	</insert>
+	
+	<update id="update">
+		update PAYMENT
+			set PAYINTERFACE_REQUEST_ID = #{payment.payinterfaceRequestId},
+			PAYINTERFACE_ORDER = #{payment.payinterfaceOrder},
+			RESPONSE_CODE = #{payment.responseCode},
+			RESPONSE_INFO = #{payment.responseInfo},
+			PAYINTERFACE_FEE = #{payment.payinterfaceFee},
+			COMPLETE_TIME = #{payment.completeTime},
+			RETURN_TRADE_TIME = #{payment.returnTradeTime},
+			RECEIVER_FEE = #{payment.receiverFee},
+			STATUS = #{payment.status}
+		where CODE = #{payment.code}
+	</update>
+
+	<select id="findByCode" resultMap="paymentMap"
+		parameterType="Map">
+		SELECT
+		<include refid="paymentColumns" />
+		FROM PAYMENT
+		WHERE CODE = #{paymentCode}
+	</select>
+	
+	<select id="findByOrderCode" resultMap="paymentMap">
+		SELECT
+		<include refid="paymentColumns" />
+		FROM PAYMENT
+		where ORDER_CODE = #{orderCode}
+		ORDER BY ID DESC
+	</select>
+	
+	<select id="findByInterfaceRequestId" resultMap="paymentMap">
+		SELECT
+		<include refid="paymentColumns" />
+		FROM PAYMENT
+		where PAYINTERFACE_REQUEST_ID = #{interfaceRequestId}
+		ORDER BY ID DESC
+	</select>
+
+	<select id="queryLastPayment" resultMap="paymentMap">
+		SELECT
+		<include refid="paymentColumns" />
+		FROM PAYMENT
+		where ORDER_CODE = #{orderCode}
+		ORDER BY ID DESC limit 1
+	</select>
+
+</mapper> 

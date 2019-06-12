@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yl.realAuth.core.dao.mapper.RealNameAuthOrderMapper">
+	<resultMap id="resultMap" type="com.yl.realAuth.model.RealNameAuthOrder">
+		<id column="ID" property="id" />
+		<result column="CODE" property="code" />
+		<result column="VERSION" property="version" />
+		<result column="CREATE_TIME" property="createTime" />
+		<result column="BUSI_TYPE" property="busiType" />
+		<result column="BUSINESS_FLAG1" property="businessFlag1" />
+		<result column="REQUEST_CODE" property="requestCode" />
+		<result column="CUSTOMER_NO" property="customerNo" />
+		<result column="FEE" property="fee" />
+		<result column="COST" property="cost" />
+		<result column="AUTH_ORDER_STATUS" property="authOrderStatus" />
+		<result column="AUTH_RESULT" property="authResult" />
+		<result column="NOTIFY_URL" property="notifyURL" />
+		<result column="IS_ACTUAL" property="isActual" />
+		<result column="COMPLETE_TIME" property="completeTime" />
+		<result column="CLOSE_TIME" property="closeTime" />
+		<result column="CLEAR_TIME" property="clearTime" />
+		<result column="TIME_OUT" property="timeOut" />
+		<result column="INTERFACE_REQUEST_ID" property="interfaceRequestId" />
+		<result column="INTERFACE_CODE" property="interfaceCode" />
+		<result column="PAYER_NAME" property="payerName" />
+		<result column="PAYER_MOB_NO" property="payerMobNo" />
+		<result column="BANK_CARD_NO" property="bankCardNo" />
+		<result column="BANK_CARD_NO_ENCRYPT" property="bankCardNoEncrypt" />
+		<result column="CERT_NO" property="certNo" />
+		<result column="CERT_NO_ENCRYPT" property="certNoEncrypt" />
+		<result column="CARD_TYPE" property="cardType" />
+		<result column="RESPONSE_MSG" property="responseMsg" />
+	</resultMap>
+	<sql id="base_Column_List">
+		CODE,VERSION,CREATE_TIME,BUSI_TYPE,BUSINESS_FLAG1,REQUEST_CODE,CUSTOMER_NO,FEE,COST,AUTH_ORDER_STATUS,AUTH_RESULT,NOTIFY_URL,IS_ACTUAL,COMPLETE_TIME
+		,CLOSE_TIME,CLEAR_TIME,TIME_OUT,INTERFACE_REQUEST_ID,INTERFACE_CODE,PAYER_NAME,PAYER_MOB_NO,BANK_CARD_NO,BANK_CARD_NO_ENCRYPT,CERT_NO
+		,CERT_NO_ENCRYPT,CARD_TYPE,RESPONSE_MSG
+	</sql>
+
+
+	<insert id="insert" parameterType="com.yl.realAuth.model.ChannelInfo"
+		useGeneratedKeys="true" keyProperty="id">
+		INSERT INTO REAL_NAME_AUTH_ORDER (
+		CODE,VERSION,CREATE_TIME,BUSI_TYPE,BUSINESS_FLAG1,REQUEST_CODE,CUSTOMER_NO,FEE,COST,AUTH_ORDER_STATUS,AUTH_RESULT,NOTIFY_URL,IS_ACTUAL,COMPLETE_TIME
+		,CLOSE_TIME,CLEAR_TIME,TIME_OUT,INTERFACE_REQUEST_ID,INTERFACE_CODE,PAYER_NAME,PAYER_MOB_NO,BANK_CARD_NO,BANK_CARD_NO_ENCRYPT,CERT_NO
+		,CERT_NO_ENCRYPT,CARD_TYPE,RESPONSE_MSG
+		) VALUES (
+		#{code},#{version},#{createTime},#{busiType},#{businessFlag1},#{requestCode},#{customerNo},
+		#{fee},#{cost},#{authOrderStatus},#{authResult},#{notifyURL},#{isActual},#{completeTime},
+		#{closeTime},#{clearTime},#{timeOut},#{interfaceRequestId},#{interfaceCode},#{payerName},
+		#{payerMobNo},#{bankCardNo},#{bankCardNoEncrypt},#{certNo},#{certNoEncrypt},#{cardType},
+		#{responseMsg}
+		)
+	</insert>
+
+	<select id="findAlldynamicRealNameAuthOrder" parameterType="Map"
+		resultMap="resultMap">
+		SELECT
+		<include refid="base_Column_List" />
+		FROM REAL_NAME_AUTH_ORDER
+		WHERE
+		1=1
+		<if test="params.requestCode !=null and params.requestCode != '' ">
+			and REQUEST_CODE=#{params.requestCode}
+		</if>
+		<if test="params.payerName !=null and params.payerName != '' ">
+			and PAYER_NAME=#{params.payerName}
+		</if>
+		<if test="params.payerMobNo !=null and params.payerMobNo != '' ">
+			and PAYER_MOB_NO=#{params.payerMobNo}
+		</if>
+		<if test="params.payerMobNo != null and params.payerMobNo != '' ">
+			and PAYER_MOB_NO=#{params.payerMobNo}
+		</if>
+		<if
+			test="params.interfaceRequestId != null and params.interfaceRequestId != '' ">
+			and INTERFACE_REQUEST_ID=#{params.interfaceRequestId}
+		</if>
+		<if test="params.interfaceCode != null and params.interfaceCode != '' ">
+			and INTERFACE_CODE=#{params.interfaceCode}
+		</if>
+		<if test="params.customerNo != null and params.customerNo != '' ">
+			and CUSTOMER_NO=#{params.customerNo}
+		</if>
+		<if test="params.busiType != null and params.busiType != '' ">
+			and BUSI_TYPE=#{params.busiType}
+		</if>
+		<if test="params.authResult != null and params.authResult != '' ">
+			and AUTH_RESULT=#{params.authResult}
+		</if>
+		<if test="params.isActual != null and params.isActual != '' ">
+			and IS_ACTUAL=#{params.isActual}
+		</if>
+		<if test="params.authOrderStatus != null and params.authOrderStatus != '' ">
+			and AUTH_ORDER_STATUS=#{params.authOrderStatus}
+		</if>
+		<if
+			test="params.startCompleteTime != null and params.startCompleteTime != '' ">
+			and COMPLETE_TIME&gt;=#{params.startCompleteTime}
+		</if>
+		<if test="params.endCompleteTime != null and params.endCompleteTime != ''">
+			and COMPLETE_TIME&lt;=#{params.endCompleteTime}
+		</if>
+		<if test="params.startClearTime != null and params.startClearTime != '' ">
+			and CLEAR_TIME&gt;=#{params.startClearTime}
+		</if>
+		<if test="params.endClearTime != null and params.endClearTime != ''">
+			and CLEAR_TIME&lt;=#{params.endClearTime}
+		</if>
+		ORDER BY ID DESC
+	</select>
+
+</mapper>
