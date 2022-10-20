@@ -12,7 +12,7 @@ import java.util.Map;
 import java.util.TreeMap;
 
 /**
- * 盛银
+ * 盛世银支付
  * 
  * @author AnLin
  * @version V1.0.0
@@ -59,7 +59,7 @@ public class Sy100001HandlerImpl implements WalletPayHandler {
     }
 
     public static String getUrlParamsByMap(Map<String, String> map, String key) {
-        logger.info("盛银下单原文：{}", map);
+        logger.info("盛世银支付下单原文：{}", map);
         if (map == null) {
             return "";
         }
@@ -72,7 +72,7 @@ public class Sy100001HandlerImpl implements WalletPayHandler {
         }
         sb.append("key=" + key);
         String s = sb.toString();
-        logger.info("盛银签名原文：{}", s);
+        logger.info("盛世银支付签名原文：{}", s);
         return MD5Util.md5(s).toUpperCase();
     }
 }
