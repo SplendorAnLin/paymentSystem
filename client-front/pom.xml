@@ -5,7 +5,7 @@
 	<packaging>war</packaging>
 	<name>客户端前置系统</name>
 	<properties>
-		<spring.version>4.3.0.RELEASE</spring.version>
+		<spring.version>5.2.7.RELEASE</spring.version>
 	</properties>
 	<dependencies>
 		<dependency>
